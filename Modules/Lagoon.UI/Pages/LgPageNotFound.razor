@@ -1,0 +1,12 @@
+﻿@namespace Lagoon.UI.Pages
+@attribute [Microsoft.AspNetCore.Components.RouteAttribute(ROUTE)]
+@inherits LgPage
+
+@if (AppComponent?.NotFound is null)
+{
+    <LgBigMessage IconName="@_iconName" Title="@_title" Description="#pgNotFoundDescription" />
+}
+else
+{
+    @AppComponent.NotFound
+}

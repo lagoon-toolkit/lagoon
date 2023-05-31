@@ -1,0 +1,40 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@using Lagoon.Helpers
+@inherits ComponentBase
+
+<div class="@GetClassAttribute()" role="columnheader"
+     @onclick="SortChangeAsync"
+     draggable="@IsMovable.ToString().ToLower()"
+     @ondragover:preventDefault
+     ondragover="event.preventDefault();"
+     @ondragstart="HandleDragStart"
+     @ondragend="HandleDragEnd"
+     @ondrop="HandleDropAsync"
+     @ondragenter="HandleDragEnter"
+     @ondragleave="HandleDragLeave"
+     aria-label="@Column.State.AriaLabel.CheckTranslate()"
+     aria-labelledby="@Column.State.AriaLabelledBy"
+     aria-sort="@AriaSort"
+     tabindex="-1"
+     aria-colindex="@Column?.State.Order"
+     data-col="@Column?.State.Index"
+     @attributes="@GetAdditionalAttributes()">
+
+    @if (Column.State.HeaderCellContent != null)
+    {
+        @Column.State.HeaderCellContent
+    }
+    else
+    {
+        <span class=@($"gridview-cell-title {(IsCustomTooltip ? "" : "text-truncate")}")>@Column.State.GetTitle()</span>
+        @if (Column.State.IsSortable() && !string.IsNullOrEmpty(SortIcon) && Column.State.SortingOrder == 1)
+        {
+            <LgIcon IconName="@SortIcon" CssClass="gridview-sort-icon" />
+        }
+        if (Column.State.IsResizable())
+        {
+            <div class="gridview-resizer" data-key="@Column.State.UniqueKey"
+                 data-min-width="@Column.State.MinWidth" data-max-width="@Column.State.MaxWidth"></div>
+        }
+    }
+</div>

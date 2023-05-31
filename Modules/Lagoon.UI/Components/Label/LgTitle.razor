@@ -1,0 +1,19 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgAriaComponentBase;
+
+@{
+    switch (TitleLevel)
+    {
+        case TitleLevel.Level1:
+            // Use the text block below to separate html elements from code
+            <h1 class="@GetClassAttribute()" aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy">@Text.CheckTranslate()</h1>
+            break;  // Always break each case
+        case TitleLevel.Level2:
+            <h2 class="@GetClassAttribute()" aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy">@Text.CheckTranslate()</h2>
+            break;
+        default:
+            <span class="@GetClassAttribute()" aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy">@Text.CheckTranslate()</span>
+            break;
+    }
+}
+

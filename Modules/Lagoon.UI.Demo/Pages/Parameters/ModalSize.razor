@@ -1,0 +1,23 @@
+﻿<LgSelect CssClass="@CssClass" Label="Modal Size" ShowSearchBox=true @bind-Value="Size" OnChange="OnChangeModalSizeAsync">
+    <Items>
+        @foreach (var size in Enum.GetValues(typeof(Lagoon.UI.Components.ModalSize)))
+        {<LgOptionListItem Text="@(Enum.GetName(typeof(Lagoon.UI.Components.ModalSize), size))" Value="@((Lagoon.UI.Components.ModalSize)size)"></LgOptionListItem>}
+    </Items>
+</LgSelect>
+
+@code {
+
+    public Lagoon.UI.Components.ModalSize Size { get; set; } = Lagoon.UI.Components.ModalSize.Small;
+
+    [Parameter]
+    public string CssClass { get; set; }
+
+    [Parameter]
+    public EventCallback<Lagoon.UI.Components.ModalSize> OnModalSizeEdition { get; set; }
+
+
+    public async Task OnChangeModalSizeAsync()
+    {
+        await OnModalSizeEdition.InvokeAsync(Size);
+    }
+}

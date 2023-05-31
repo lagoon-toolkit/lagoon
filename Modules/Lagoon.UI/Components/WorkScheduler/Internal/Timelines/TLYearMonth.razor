@@ -1,0 +1,62 @@
+﻿@namespace Lagoon.UI.Components.WorkScheduler.Internal.Timelines
+@inherits ComponentBase
+@typeparam TItem
+
+<div style="position:relative;">
+@{
+    DateTime __current = WorkScheduler.From.Value;
+    double __yearLeft = 0;
+    bool __alternanceYear = true;
+    bool __displayTwoRow = WorkScheduler.TimelineDisplayMode == TimelineDisplayMode.TwoRows;
+    @if (__displayTwoRow)
+    {
+        while (__current < WorkScheduler.To.Value)
+        {
+            int days = DaysInYear(__current.Year);
+            double yearWidth = days * 24 * WorkScheduler.ZoomLevel;
+            <div style=@($"width:{yearWidth}px; position:absolute; left:{__yearLeft}px") class=@(__alternanceYear ? "wst-group-primary" : "wst-group-secondary")>
+                @{__yearLeft += yearWidth;}
+                <div style="width:100%;" class="wst-group wst-first">
+                    <div class="m-0 p-0 d-inline-block">
+                        @if (WorkScheduler.TimelineFirstLevel != null)
+                        {
+                            @WorkScheduler.TimelineFirstLevel(__current)
+                        }
+                        else
+                        {
+                            @__current.Year;
+                        }
+                    </div>
+                </div>
+            </div>
+            __alternanceYear = !__alternanceYear;
+            __current = __current.AddYears(1);
+        }
+    }
+    __current = WorkScheduler.From.Value;
+    double __monthLeft = 0;
+    bool __alternanceMonth = true;
+    while (__current < WorkScheduler.To.Value)
+    {
+        int __days = DaysInMonth(__current.Year, __current.Month);
+        double monthWidth = __days * 24 * WorkScheduler.ZoomLevel;
+        <div style=@($"width:{monthWidth}px; position:absolute; left:{__monthLeft}px; top:{(__displayTwoRow ? WorkScheduler.TimelineHeight/2 : 0)}px; {(__displayTwoRow ? "" : ($"height:{WorkScheduler.TimelineHeight}px"))}") class=@($"wst {(IsCurrentMonth(__current) ? "wst-today" : "")} {(__alternanceMonth ? "wst-group-primary" : "wst-group-secondary")}")>
+            @{__monthLeft += monthWidth;}
+            <div style="width:100%;" class="wst-group wst-second font-weight-normal">
+                <div class="m-0 p-0 d-inline-block">
+                    @if (WorkScheduler.TimelineSecondLevel != null) 
+                    {
+                        @WorkScheduler.TimelineSecondLevel(__current)
+                    }
+                    else
+                    {
+                        @("MonthNames".Translate().Split(",")[__current.Month-1])
+                    }
+                </div>
+            </div>
+        </div>
+        __alternanceMonth = !__alternanceMonth;
+        __current = __current.AddMonths(1);
+    }
+}
+</div>

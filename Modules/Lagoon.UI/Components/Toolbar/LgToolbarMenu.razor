@@ -1,0 +1,14 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgAriaComponentBase
+
+
+<CascadingValue Value="this" IsFixed="false">
+    <div class="@GetClassAttribute()">
+        <LgButton Kind="@Kind" ButtonSize="Toolbar.ButtonSize.Value" Text="@(Text.CheckTranslate())" IconName="@IconName"
+            CssClass=@($"btn dropdown-toggle") data-toggle="dropdown" aria-expanded="false" StopPropagation="true"
+            aria-haspopup="true" role="menuitem" AriaLabel="@AriaLabel" AriaLabelledBy="@AriaLabelledBy" />
+        <div class="dropdown-menu">
+            @ChildContent
+        </div>
+    </div>
+</CascadingValue>

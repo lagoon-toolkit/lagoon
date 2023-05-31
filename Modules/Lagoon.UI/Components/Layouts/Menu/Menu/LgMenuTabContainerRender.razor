@@ -1,0 +1,11 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@inherits LgMenuRender
+
+@if (MenuService?.IsMenuDefined(MenuPosition.MenuToolbarTabContainer) ?? false)
+{
+    <ul class="navbar-nav flex-row" role="menubar">
+        @{
+            base.BuildRenderTree(__builder);
+        }
+    </ul>
+}

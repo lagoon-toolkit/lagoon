@@ -1,0 +1,61 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="Modal" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgModal @bind-Visible="@_firstMdoal"
+         Title="@ContentTitle"
+         IconName="@Icon"
+         ModalSize="@Size"
+         Draggable="@IsDraggable"
+         Centered="@IsCentered"
+         Closable="@IsClosable"
+         OnClose=@(()=> _firstMdoal = false)>
+    <Toolbar>
+        <LgToolbarButton IconName="@IconNames.All.Pdf" Text="Export" Uri="" />
+    </Toolbar>
+    <ChildContent>
+        Body Content : Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </ChildContent>
+    <FooterContent>
+        Footer Content
+        <LgButton Text="Close" OnClick="CloseModal" />
+    </FooterContent>
+</LgModal>
+
+<LgFrame Title="#lblSample">
+    <LgButton Text="Display my modal" OnClick="OpenMyModal" />
+</LgFrame>
+
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-5 d-flex justify-content-end" @bind-Value="@IsClosable" Text="@(IsClosable ? "Closable" : "Not closable")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <LgCheckBox CssClass="col-md-5 d-flex justify-content-end" @bind-Value="@IsDraggable" Text="@(IsDraggable ? "Draggable" : "Not draggable")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <LgCheckBox CssClass="col-md-5 d-flex justify-content-end" @bind-Value="@IsCentered" Text="@(IsCentered ? "Centered" : "Not centered")" CheckBoxKind="@CheckBoxKind.Toggle" />
+    </section>
+
+    <!-- section header -->
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-3 d-flex justify-content-end" @bind-Value="@HaveTitle" Text="@(HaveTitle ? "With title" : "Without title")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <LgTextBox CssClass="col-md-6 col-sm-6"
+                   Label="Title"
+                   PrefixType="InputLabelType.IconName"
+                   SuffixType="InputLabelType.IconName"
+                   @bind-Value="@ContentTitle" />
+    </section>
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-3 d-flex justify-content-end" @bind-Value="@HaveIcon" Text="@(HaveIcon ? "With icon" : "Without icon")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <IconParameter CssClass="col-md-6" @bind-Icon="Icon" />
+    </section>
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <div class="col-md-3"></div>
+        <ModalSize CssClass="col-md-6" OnModalSizeEdition="OnChangeModalSize"></ModalSize>
+    </section>
+
+</LgFrame>
+
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

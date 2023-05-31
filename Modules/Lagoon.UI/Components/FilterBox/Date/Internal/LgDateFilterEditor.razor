@@ -1,0 +1,23 @@
+@namespace Lagoon.UI.Components.Internal
+@inherits LgFilterEditorBase<TDateTime, DateFilter<TDateTime>>
+@typeparam TDateTime
+
+<LgFilterTabContainer>
+    <TabRules>
+        <LgDateBox Label="From" @bind-Value="From" OnChangeDisabled="true" />
+        <LgDateBox Label="To" @bind-Value="To" OnChangeDisabled="true" />
+    </TabRules>
+    <TabSelection>
+        <LgLoaderView IsLoading="WorkingItems is null">
+            <LgTextBox Value="@_searchValue" OnChangeDisabled="true" OnInput="OnSearchUpdateAsync" CssClass="filter-search"
+                       Placeholder="#FilterBoxSearchPlaceholder" AutoFocus="true" />
+            <LgCheckBox Value="_allSelected" Text="#FilterBoxSelectAll" TextPosition="CheckBoxTextPosition.Right" OnChange="ToggleSelectAll" />
+            <LgTreeView Nodes="_rootNodes">
+                <NodeContent>
+                    <LgCheckBox @bind-Value="context.Checked" Text='@(context.Item?.ToString() ?? "FilterEmptyValue".Translate())'
+                                Item="context" TValue="bool?" OnChanging="SelectPeriod" TextPosition="CheckBoxTextPosition.Right" />
+                </NodeContent>
+            </LgTreeView>
+        </LgLoaderView>
+    </TabSelection>
+</LgFilterTabContainer>

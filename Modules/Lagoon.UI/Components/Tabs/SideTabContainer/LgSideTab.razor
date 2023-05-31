@@ -1,0 +1,19 @@
+﻿@namespace Lagoon.UI.Components
+@using Lagoon.UI.Components.Internal
+@inherits LgCustomTab
+
+@if (ButtonContent is null)
+{
+    <a class="@GetClassAttribute()" href="#" @onclick="OnTabButtonClickAsync" @onclick:preventDefault="true"
+        @attributes="GetAdditionalAttributes()">
+        <LgIcon IconName="@Tab.IconName" />
+        <span class="change-indicator">@Tab.Title.CheckTranslate()</span>        
+    </a>
+}
+else
+{
+    <div class="@GetClassAttribute()" @onclick="OnTabButtonClickAsync"
+            @attributes="GetAdditionalAttributes()">
+        @ButtonContent
+    </div>
+}

@@ -1,0 +1,124 @@
+$big-msg-img-color: #C1C7D3;
+$error-img-color: $big-msg-img-color;
+
+#blazor-error-ui {
+    display: none;
+    color: black;
+    background: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 9999;
+
+    .big-msg {
+        //Define the --img-error css variable
+        background: imageName('Error', $error-img-color, 'error') no-repeat center 1rem;
+        background-size: 7rem;
+        padding-top: 9rem;
+
+        & > p {
+            margin-top: 1rem;
+        }
+
+        & > .lblTitle {
+            white-space: pre-line;
+        }
+    }
+
+    #btnDetail {
+        display: block;
+        position: absolute;
+        top: 1rem;
+        height: 7rem;
+        width: 7rem;
+        left: 50%;
+        transform: translate(-50%, 0);
+        opacity: 0;
+        cursor: default;
+    }
+
+    #app-critical-detail {
+        text-align: left;
+        margin: 1em;
+        display: none;
+
+        & > * {
+            display: block;
+        }
+
+        & > p {
+            text-align: center;
+        }
+
+        & span {
+            padding-left: 1em;
+        }
+    }
+}
+
+.app-loading {
+    position: absolute;
+    background: $primary;
+    color: $secondary;
+    top: 0px;
+    left: 0px;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+
+    .app-loading-detail {
+        position: absolute;
+        top: 50%;
+        font-size: 24px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.8);
+        padding-inline: 6.5em;
+        padding-block: 5em;
+        font-weight: 500;
+
+        .app-loading-detail-download-progression {
+            height: 14px;
+            border: 1px solid black;
+            border-radius: 3px;
+            margin-top: 10px;
+        }
+
+        .app-loading-detail-download-progressionbar {
+            height: 100%;
+            background: $primary;
+        }
+
+        .app-loading-detail-initialisation {
+            &:before {
+                content: "Initialisation...";
+            }
+        }
+
+        .app-loading-detail-loading {
+            &:before {
+                content: "Loading...";
+            }
+        }
+
+        .app-loading-detail-download {
+            &:before {
+                content: "Downloading...";
+            }
+        }
+    }
+}
+
+.stackTrace {
+    text-align: left;
+    white-space: pre;
+    overflow: auto;
+
+    & > .red {
+        color: var(--red);
+    }
+
+}

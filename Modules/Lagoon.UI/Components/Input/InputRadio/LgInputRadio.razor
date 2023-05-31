@@ -1,0 +1,21 @@
+﻿@namespace Lagoon.UI.Components
+@typeparam TValue
+@inherits LgAriaComponentBase
+
+@if (!Context.ReadOnly)
+{
+    <div @attributes="@GetAdditionalAttributes()" class="@GetClassAttribute()">
+        <input type="radio" name="@Context.GroupName" id="@ElementId" value="@Value"
+               checked="@(Value.Equals(Context.CurrentValue))" @onchange="Context.ChangeEventCallback"
+               class="custom-control-input @CssClass  @Context.FieldClass @CssDisplayKind" disabled="@Context.Disabled" title="@Tooltip.CheckTranslate()"
+               role="option" aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy" />
+
+        <LgLabel CssClass="custom-control-label" For="@ElementId" Text=@Text>@ChildContent</LgLabel>
+    </div>
+}
+else if (Value.Equals(Context.CurrentValue))
+{
+    <span @attributes="@GetAdditionalAttributes()" class="txtb-ro @Context.CssClass">
+        @Text.CheckTranslate()
+    </span>
+}

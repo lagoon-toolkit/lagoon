@@ -1,0 +1,276 @@
+﻿// Logo
+$header-logo: "~/images/Logo.png";
+$background-authent-image: "~/images/background-custom.jpg";
+$custom-rgaa: false;
+$custom-label-outside: false;
+
+// Color
+$primary3: #1E80A0;
+$primary2: #2DADCA;
+$primary1: #0FBBE2;
+$secondary3: #45BBA3;
+$secondary2: #5ECEC7;
+$secondary1: #36C2B9;
+$light1: #F7F7F7;
+$light2: #F3FBFD;
+$light3: #E7F8FC;
+$light1-30: rgba($light1, 0.3);
+
+@if $custom-rgaa {
+    $primary3: #103E4D;
+    $primary2: #144E61;
+    $primary1: rgb(25, 94, 117);
+    $secondary3: #06423F;
+    $secondary2: #074F4B;
+    $secondary1: #09645F;
+    $light1: #F7F7F7;
+    $light2: #F3FBFD;
+    $light3: #E7F8FC;
+    $light1-30: rgba($light1, 0.3);
+}
+
+$light0: #FFFFFF;
+$dark0: #000000;
+$dark3: #000D14;
+$dark2: #001926;
+$dark1: #002A40;
+
+$gray3: #61767B;
+$gray2: #81989C;
+$gray1: #9DB8BE;
+$gray0: #D4D4D4;
+$gray0-50: rgba($gray0, 0.5);
+$blue-gray: #DFEAF2;
+
+$primary: $primary1;
+$secondary: $secondary1;
+$dark: $dark1;
+$light: $light1;
+$success: #62AC87;
+$success-10: rgba($success, 0.1);
+$info: #299EE1;
+$warning: #DF7430;
+$danger: #CB2A55;
+$danger-10: rgba($danger, 0.1);
+
+$theme-colors: ( primary: $primary, secondary: $secondary, success: $success, info: $info, warning: $warning, danger: $danger, dark: $dark, light: $light);
+
+// Font
+$font-size-base: 0.75rem;
+
+//Header
+$header-height: 2.8rem;
+$menu-icons-color-svg: svg-color(#FFFFFF);
+$carret-height: 0.7rem;
+$menu-navlink-hover: $light0;
+//Tabs
+$lg-tabs-height: 2.2rem;
+$lg-tabs-bg: rgba($dark0, 0.1);
+
+//Scrollbar
+$scrollbarBG: $light1;
+$scrollbar-active: $primary2;
+$scrollbar-hover: $gray1;
+$scrollbar-thumbBG: $gray0;
+$scrollbarWidth: 12px;
+
+// Toastr
+$toast-bg: $light0;
+$toast-info: $info;
+$toast-success: $success;
+$toast-warning: $warning;
+$toast-error: $danger;
+$toast-text: $light0;
+
+////////////// Text ////////////
+// Heading1
+$font-size-heading1: 1rem;
+$line-height-heading1: 24px;
+$heading1-color: $dark3;
+$font-weight-heading1: 500;
+
+// Heading2 
+$font-size-heading2: 0.9rem;
+$line-height-heading2: 24px;
+$heading2-color: $dark3;
+$font-weight-heading2: 500;
+
+// Label
+$font-size-label: 0.75rem;
+$line-height-label: 15px;
+$label-color: $dark3;
+$font-weight-label: 500;
+
+// Text
+$font-size-text: 0.75rem;
+$line-height-text: 15px;
+$text-color: $dark3;
+$font-weight-text: 400;
+
+// Legend
+$font-size-legend: 0.7rem;
+$line-height-legend: 20px;
+$legend-color: $dark1;
+$font-weight-legend: 400;
+
+// Empty message title
+$font-size-title-empty-msg: 1rem;
+$line-height-title-empty-msg: 1rem;
+$color-title-empty-msg: $dark3;
+
+// Empty message description
+$font-size-desc-empty-msg: 1rem;
+$line-height-desc-empty-msg: 24px;
+$desc-empty-message-color: $dark1;
+$font-weight-desc-empty-message: 400;
+
+/////////// Components //////////////
+
+// Inputs
+$input-height: 38px;
+$placeholder-color: $gray2;
+$input-disabled-bg: $gray0-50;
+$input-disabled-text-color: $gray2;
+$input-disabled-checkbox-color: $gray3;
+$input-text-color: $dark1;
+$input-hover-bg: $light3;
+$input-border-color: $gray-400;
+$input-readonly-border-color: $gray3;
+
+$select-border-width: 1px;
+$select-search-border-color: $gray-400;
+$select-text-color: $gray2;
+$select-text-color-multiple: $dark3;
+$select-bg-color-multiple: #FFFFFF;
+$select-bg-color: #FFFFFF;
+$select-bg-selected-option: $gray-400;
+$select-font-size-text: 0.775rem;
+$select-bg-bubble: $light3;
+$select-max-height: 195px;
+
+//Toggle
+$toggle-size: 19px;
+$toggle-padding-x: 9px;
+$toggle-inside-circle-size: 17px;
+$toggle-inside-circle-color-active: $light0;
+$toggle-bg: #F1F1F1;
+$toggle-bg-checked: $secondary2;
+$toggle-bg-checked-hover: $secondary3;
+$toggle-disabled-bg: #D8D8D8;
+$toggle-disabled-color: $toggle-inside-circle-color-active;
+$toggle-disabled-inside-circle-color: #EBEBEB;
+$toggle-disabled-bg-checked: #5DCDC6;
+$toggle-disabled-inside-circle-color-checked: #D1F5F3;
+$toggle-width: 80px;
+@if $custom-rgaa {
+    $toggle-bg-checked: $secondary1;
+    $toggle-bg-checked-hover: $secondary2;
+    $toggle-disabled-bg: #757575;
+    $toggle-disabled-color: $light0;
+    $toggle-disabled-inside-circle-color: rgba(#FFFFFF,0.6);
+    $toggle-disabled-bg-checked: #557876;
+    $toggle-disabled-inside-circle-color-checked: rgba(#FFFFFF,0.6);
+}
+// Frame
+$frame-text-color: $dark1;
+$frame-title-size: $font-size-base;
+$frame-bg: $light0;
+
+// Banner
+$banner-text-color: $light0;
+$banner-text-size: 0.85rem;
+
+// Card 
+$card-border-radius: 4px;
+$card-box-shadow: 0 0 3px rgba($dark0, 0.1);
+$card-hover-bg: rgba($light1,0.3);
+$card-active-bg: $light0;
+$card-active-border: 2px solid $primary2;
+$card-border-focus: 0 0 0 2px $secondary3;
+$card-margin-b: 0.5rem; 
+
+// Ghost buttons
+$ghost-default: rgba(255, 255, 255, 0);
+$ghost-hover: rgba($gray0, 0.5);
+$ghost-active: rgba($light1, 0.3);
+$ghost-text-color: $light0;
+
+// Breadcrumb
+$breadcrumb-bg: transparent;
+$breadcrumb-text-color: $dark3;
+$breadcrumb-active-text-color: $primary3;
+$breadcrumb-focus-border-color: $secondary3;
+$breadcrumb-hover-color: $gray0-50;
+$breadcrumb-divider-img: 'All.ArrowRight';
+
+// Datagrid
+$dtg-icon-size: 14px;
+$inline-padding-title-datagrid: 0.875rem;
+$block-padding-title-datagrid: 0.625rem;
+$row-bg-hover: #DDF3F5;
+$row-selected-bg-hover: #C9EAF2;
+$dtg-row-bg-color: $light1;
+$dtg-header-bg-color: $light0;
+$dtg-border: $gray2;
+$dtg-primary-interactive-active: $dark1;
+$dtg-row-bg-hover: $row-bg-hover;
+$dtg-secondary-color-disabled: $gray1;
+$dtg-input-bg-color: $light0;
+$dtg-input-bg-hover-color: $light3;
+$dtg-input-border-focus-color: $secondary1;
+$dtg-filter-text-color: $dark1;
+$dtg-row-selected: #C9E9F2;
+$dtg-accent-text-color: $primary3;
+$dtg-border-bottom-filter: $secondary1;
+$gridview-max-width-headerFrameContent: 30%;
+$gridview-frozen-columns-border-right: 1px solid $gray0;
+$dtg-add-line-defaut-border: #DADEE1;
+$dtg-line-odd-active-background: #C3DFF1;
+$dtg-card-row-bg-color: $light0;
+$dtg-card-bg-color: $light1;
+$gdv-header-grp-bg: $light1; // Background color for Gridview group colonne
+$dtg-filter-bg: #EEF9FD;
+$dtg-filter-filled-color: #02645F;
+
+$dtg-line-odd-background: $light0;
+$dtg-line-even-background: $light1;
+$dtg-group-row-bg: rgba(25, 94, 117, 0.07);
+$dtg-line-hover-background: $row-bg-hover;
+$dtg-line-active-background: #AEE6E3;
+
+@if $custom-rgaa {
+    $gdv-header-grp-bg: $blue-gray; // Background color for Gridview group colonne
+    $dtg-filter-bg: #DDF2F9;
+    $dtg-line-odd-background: $blue-gray;
+    $dtg-line-even-background: $light0;
+    $dtg-line-hover-background: #B2D2D9;
+    $dtg-line-active-background: #A1E0D1;
+}
+
+// Page
+$page-bg-color: #F6F6F6;
+
+//Pager
+$pager-item-color: $primary3;
+$pager-item-border: $primary3;
+$pager-icon-color: $primary3;
+$pager-item-active-bg: #02645F;
+$pager-item-hover-bg: $gray0-50;
+$pager-item-hover-border: $gray0;
+$pager-item-disable-color: $gray1;
+
+// Calendar
+$cld-text-color: #707070;
+$cld-border-color: #BEBEBE;
+$cld-weekend-bg-color: #F3F3F3;
+
+//Notification
+$notif-notread-bg: $light1-30;
+$notif-bg-hover: $secondary1;
+
+// Color Picker
+$color-picker-selection-hover: $light1-30;
+$color-picker-selection-active: $secondary1;
+
+// Nesteble
+$treeview-nestable-selected: $primary3;

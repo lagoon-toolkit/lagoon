@@ -1,0 +1,4 @@
+[Policies.cs]
+
+# IDE0002: Keep the "P" alias for the "Policies" class to simplify the role definitions.
+dotnet_diagnostic.IDE0002.severity = none

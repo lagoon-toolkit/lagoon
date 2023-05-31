@@ -1,0 +1,49 @@
+﻿@namespace Lagoon.UI.Components
+@typeparam TValue
+@inherits LgSelectBase<List<TValue>, TValue>
+@using Lagoon.UI.Components.Internal
+
+@{
+    ButtonContent =
+    @<LgSelectButton TValue="List<TValue>" TItemValue="TValue">
+    @{
+        HasUnknownValues = false;
+        //List<TValue> values = GetSelectedValues();
+        System.Text.StringBuilder sb = null;
+        int remaining = 0;
+        @for (int i = 0; i < Value.Count; i++)
+        {
+            if (_selectedItemsData.TryGetValue(Value[i], out ListItemData<TValue> item))
+            {
+                if (VisibleItemCount is null || i < VisibleItemCount)
+                {
+                    <LgOptionBubble Value="@item.Value" Text="@item.Text" IsReadOnly="@(ReadOnly || Disabled)" IconName="@item.IconName" OnRemove="() => OnRemoveItemAsync(item.Value)" Tooltip="@item.Tooltip" />
+                }
+                else
+                {
+                    remaining++;
+                    if(sb is null)
+                    {
+                        sb = new();
+                    }
+                    sb.AppendLine(item.Text);
+                }
+            }
+            else
+            {
+                HasUnknownValues = true;
+                <LgSelectButtonLoading />
+                break;
+            }
+        }
+        // Display remaining values
+        if (remaining > 0)
+        {
+            <div class="d-flex select-remaining" @attributes="GetTooltipAttributes(sb.ToString(), false)" >+@remaining</div>
+        }
+    }
+</LgSelectButton>;
+    base.BuildRenderTree(__builder);
+}
+
+

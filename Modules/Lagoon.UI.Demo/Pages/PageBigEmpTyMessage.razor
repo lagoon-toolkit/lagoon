@@ -1,0 +1,22 @@
+﻿@inherits DemoPage
+
+
+<LgTitle Text="Big Message"></LgTitle>
+<LgFrame Title="#lblSample" Collapsable="true">
+    <LgBigMessage IconName="@Icon" Title="@Text" Description="@Description" />
+</LgFrame>
+
+<LgTitle Text="Empty Message"></LgTitle>
+<LgFrame Title="#lblSample" Collapsable="true">
+    <LgEmptyMessage IconName="@Icon" Title="@Text" Description="@Description" />
+</LgFrame>
+
+<DemoParameters HasText="true"
+            HasIcons="true"
+            HasDescription="true"
+            @bind-Icon="Icon"
+            OnTextEdition="TextHasChanged"
+            OnDescriptionEdition="DescriptionHasChanged">
+</DemoParameters>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

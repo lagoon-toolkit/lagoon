@@ -1,0 +1,45 @@
+﻿.finder {
+    background-color: white;
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.header-finder {
+    align-items: center;
+    padding-top: 0.2rem;
+}
+
+.header-finder .lblTitle {
+    margin-left: 1.1rem;
+    margin-bottom: 0px;
+    color: $heading2-color;
+    line-height: $line-height-heading1;
+    font-size: 0.85rem;
+    font-weight: $font-weight-heading1;
+}
+
+.header-results {
+    margin-top: 8px;
+    align-items: center;
+}
+
+.header-results .lblTitle {
+    margin-left: 1.1rem;
+    margin-bottom: 0px;
+    color: $heading2-color;
+    line-height: $line-height-heading2;
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+.content-finder {
+    padding: 0.3rem 1.1rem;
+
+    .card label {
+        padding: 0px;
+        margin: 0px;
+    }
+}
+
+
+

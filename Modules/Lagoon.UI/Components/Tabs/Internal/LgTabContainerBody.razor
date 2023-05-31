@@ -1,0 +1,29 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@inherits LgComponentBase
+
+@foreach (LgTabRenderData tab in TabContainer.GetLoadedTabs())
+{
+    <div class="@GetTabPaneCssClass(tab)" @key="tab.Key" aria-labelledby="@tab.ButtonElementId" role="tabpanel">
+        <CascadingValue Value="tab" IsFixed="true" @key="tab.DynamicRenderKey">
+            @if (tab.PreloadContent || tab.IsActive || tab.IsTabContentLoaded)
+            {
+                @if (!tab.HasRoute)
+                {
+                    @if (tab.UseIFrame)
+                    {
+                        <iframe id="@tab.Key" name="@tab.Key" src="@tab.Uri" class="lg-tab-iframe"></iframe>
+                    }
+                    else
+                    {
+                        @tab.PanelContent
+                    }
+                }
+                else
+                {
+                    <LgPageAuthorizeRouteView RouteData="tab.RouteData" />
+                }
+                tab.IsTabContentLoaded = true;
+            }
+        </CascadingValue>
+    </div>
+}

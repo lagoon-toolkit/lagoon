@@ -1,0 +1,36 @@
+﻿.tooltip {
+    font-size: $font-size-base;
+
+    .tooltip-inner {
+        // Tooltip color
+        background-color: $primary;
+    }
+
+    &.tooltip-text > .tooltip-inner {
+        // Allow multiple line breaks when tooltip is text
+        white-space: pre-wrap;
+    }
+
+}
+
+// Right arrow color
+.bs-tooltip-right .arrow::before, .bs-tooltip-auto[x-placement^=right] .arrow::before {
+    border-right-color: $primary!important;
+}
+// Bottom arrow color
+.bs-tooltip-bottom .arrow::before, .bs-tooltip-auto[x-placement^=bottom] .arrow::before {
+    border-bottom-color: $primary!important;
+}
+// Left arrow color
+.bs-tooltip-left .arrow::before, .bs-tooltip-auto[x-placement^=left] .arrow::before {
+    border-left-color: $primary!important;
+}
+// Top arrow color
+.bs-tooltip-top .arrow::before, .bs-tooltip-auto[x-placement^=top] .arrow::before {
+    border-top-color: $primary!important;
+}
+
+// Do not make tooltip blink when cursor is hover the tooltip itself
+#tooltip-container {
+    pointer-events: none;
+}

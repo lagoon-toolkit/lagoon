@@ -1,0 +1,30 @@
+﻿@inherits DemoPageForm
+
+<LgTitle Text="Radio button" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgEditForm @ref=formDemo Model=@formData ValidationErrorMessage="#ErrorFormDemo" UseValidationComplexModel="true">
+        <LgInputRadioGroup CssClass="col-md-6 col-sm-12" Disabled="@IsDisable" ReadOnly="@IsReadOnly"
+                           Label="@Label" DisplayKind="_displayKind"
+                           DisplayOrientation="_orientation"
+                           @bind-Value="formData.Option">
+            <Items>
+                @foreach (var option in ViewModel.FormData.Options)
+                {
+                    <LgInputRadio Value="@option.value" Tooltip="tooltip" Text=@option.lable />}
+            </Items>
+        </LgInputRadioGroup>
+
+    </LgEditForm>
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <CommonParameters CssClass="col-md-6" OnLabelEdition="OnChangeLabel" OnDisableEdition="OnChangeDisable" OnReadOnlyEdition="OnChangeReadOnly"></CommonParameters>
+    <RadioButtonParameters CssClass="col-md-6" OnKindEdition="OnChangeKind"></RadioButtonParameters>
+    <OrientationParameters CssClass="col-md-6" OnOrientationEdition="OnChangeOrientation"></OrientationParameters>
+</LgFrame>
+
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />
+

@@ -1,0 +1,155 @@
+﻿
+
+.form-group-toggle {
+    display: flex;
+    flex-direction: column;
+
+    .lbl {
+        position: relative;
+        order: 0;
+        padding-left: 0;
+        transform: unset;
+        margin-bottom: 0.1rem;
+    }
+}
+
+.disabled .toggle {
+    .toggle-inside-lbl {
+        background-color: $toggle-disabled-bg;
+
+        .toggle-off {
+            color: $toggle-disabled-color;
+        }
+
+        &:before {
+            background-color: $toggle-disabled-inside-circle-color;
+        }
+
+        &:hover {
+            background-color: $toggle-disabled-bg;
+
+            &:before {
+                background-color: $toggle-disabled-inside-circle-color;
+            }
+        }
+    }
+
+    input {
+        &:checked ~ .toggle-inside-lbl, &:focus:checked ~ .toggle-inside-lbl {
+            background-color: $toggle-disabled-bg-checked;
+
+            &:hover {
+                background-color: $toggle-disabled-bg-checked;
+            }
+
+            &:before {
+                background-color: $toggle-disabled-inside-circle-color-checked;
+            }
+        }
+    }
+}
+
+.readonly {
+    .toggle-inside-lbl {
+        order: 1;
+    }
+}
+
+.toggle-list {
+    order: 1;
+}
+
+.toggle {
+    order: 1;
+    user-select: none;
+
+    .toggle-text {
+        vertical-align: middle;
+    }
+
+    .toggle-inside-lbl {
+        width: $toggle-width;
+        height: $toggle-size;
+        line-height: $toggle-size;
+        background-color: $toggle-bg;
+        padding: 0px $toggle-padding-x;
+        border-radius: $toggle-inside-circle-size;
+        display: inline-block;
+        position: relative;
+        cursor: pointer;
+        @include transition(all .25s ease-in);
+        @include box-shadow(inset 0px 0px 2px rgba(0,0,0, .5));
+
+        &:hover {
+            background-color: #E9E5E5;
+        }
+
+        &:focus-visible {
+            border: 2px solid $secondary3;
+        }
+
+        &:before, &:hover:before {
+            content: ' ';
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            width: $toggle-inside-circle-size;
+            height: $toggle-inside-circle-size;
+            background: $toggle-inside-circle-color-active;
+            z-index: 2;
+            @include transition(all .25s ease-in);
+            @include border-radius(14px);
+        }
+
+        .toggle-off, .toggle-on {
+            color: $toggle-inside-circle-color-active;
+        }
+
+        .toggle-off {
+            padding-left: $toggle-size;
+            display: block;
+            color: $gray-900;
+            text-overflow: ellipsis;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .toggle-on {
+            display: none;
+            text-overflow: ellipsis;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+    }
+
+    input {
+        &:checked ~ label {
+
+            .toggle-off {
+                display: none;
+            }
+
+            .toggle-on {
+                padding-right: $toggle-size;
+                display: block;
+            }
+        }
+
+        &:checked ~ .toggle-inside-lbl, &:focus:checked ~ .toggle-inside-lbl {
+            background-color: $toggle-bg-checked;
+
+            &:hover {
+                background-color: $toggle-bg-checked-hover;
+            }
+
+            &:before, &:hover:before {
+                background-position: 0 0;
+                top: 1px;
+                left: 100%;
+                margin-left: -$toggle-size;
+            }
+        }
+    }
+}

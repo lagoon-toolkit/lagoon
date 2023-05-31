@@ -1,0 +1,18 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@inherits LgPage
+
+@if (IsAuthenticated())
+{
+    @if (AppComponent?.NotAuthorized is null)
+    {
+        <LgBigMessage IconName="@_iconName" Title="@_title" Description="#pgNotAuthorizedDescription" />
+    }
+    else
+    {
+        @AppComponent.NotAuthorized
+    }
+}
+else
+{
+    <RedirectToLogin />
+}

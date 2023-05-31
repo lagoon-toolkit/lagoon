@@ -1,0 +1,21 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+
+
+@if (_displayBanner)
+{
+    <div role="alert" class="@GetClassAttribute()">
+        @if (!string.IsNullOrEmpty(IconName))
+        {
+            <LgIcon IconName="@IconName" />
+        }
+        @if (ChildContent != null)
+        {
+            @ChildContent
+        }
+        @if (Closable)
+        {
+            <LgIcon IconName="@IconNames.Close" @onclick="CloseBanner" CssClass="close-icon" />
+        }
+    </div>
+}

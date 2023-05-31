@@ -1,0 +1,15 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="Tooltip" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+
+<LgFrame Title="#lblSample" Collapsable="true">
+    <a href="./" data-tooltip-pos="bottom" title="Tooltip at the bottom">Bottom tooltip</a>
+    <a href="./" data-tooltip-pos="right" title="Tooltip at the right">Right tooltip</a>
+    <a href="./" data-tooltip-pos="auto" title="Tooltip at the auto position">Auto tooltip</a>
+    <a href="./" data-tooltip-pos="left" title="Tooltip at the left">Left tooltip</a>
+    <a href="./" data-tooltip-pos="top" title="Tooltip at the top">Top tooltip</a>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

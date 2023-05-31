@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="" id="root">
+    <xsd:element name="string">
+      <xsd:complexType>
+        <xsd:attribute name="key" use="required" type="xsd:string"/>
+        <xsd:attribute id="fr-FR" name="fr" use="required" type="xsd:string"/>
+        <xsd:attribute id="en-US" name="en" type="xsd:string"/>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <!-- Définition des libellés -->
+  <string key="appNewVersion" fr="Une nouvelle version de l'application est disponible." en="A new version is available."/>
+  <string key="appNewVersionError" fr="Une erreur est survenue lors du téléchargement des ressources." en="An error occured when installing the new version"/>
+  <string key="appNewVersionInProgress" fr="Téléchargement des ressources pour le mode hors ligne... " en="Downloading resources for offline mode... "/>
+  <string key="appSwNotAvailable" fr="Votre navigateur n'autorise pas les services-worker. Le mode hors connexion ne sera pas disponible" en="Your browser does not support service-worker. Offline mode is unavailable"/>
+  <string key="appReload" fr="Recharger" en="Reload"/>
+  <string key="appCloseBanner" fr="Fermer" en="Close"/>
+  <string key="appConnect" fr="Se connecter" en="Connect"/>
+  <string key="appDisconnect" fr="Se déconnecter" en="Disconnect"/>
+  <string key="emptyReadonlyValue" fr="&lt;Vide>" en="&lt;Empty>"/>
+  <string key="PreparingDownload" fr="Préparation du fichier..." en="Preparing the file..."/>
+  <string key="PreparingDownloadFailed" fr="Une erreur est survenue lors de la préparation du fichier !" en="An error occurred while preparing the file!"/>
+  <!-- Menu and Sidebar  -->
+  <string key="siderbarCollapseLbl" fr="Réduire" en="Collapse"/>
+  <string key="siderbarExpandLbl" fr="Déplier" en="Expand"/>
+  <string key="menuErrorMaxLevelReached" fr="Niveau maximum de niveaux dépassé, Niveau maximum défini à {0}." en="Maximum menu level exceeded, level maximum set to {0}."/>
+  <!-- Menu -->
+  <string key="mainMenu" fr="Menu principal" en="Main menu"/>
+  <string key="mainMenuHamb" fr="Menu principal en mode mobile" en="Mobile main menu"/>
+  <string key="mainMenuAppName" fr="Lien vers la page principal" en="Link to home page"/>
+  <string key="menuSearchSetAria" fr="Rechercher" en="Search"/>
+  <!-- Toolbar -->
+  <string key="toolbarLblErrorMaxLevelReached" fr="Niveau maximum de niveaux dépassé, Niveau maximum défini à 2" en="Maximum menu level exceeded, level maximum set to 1"/>
+  <string key="toolbarMain" fr="Barre d'outils principale" en="Main toolbar"/>
+  <string key="toolbarLang" fr="Liste des langues" en="Language list"/>
+  <string key="frLang" fr="Français" en="French"/>
+  <string key="usLang" fr="Anglais" en="US english"/>
+  <string key="toolbarExport" fr="Exporter" en="Export"/>
+  <string key="changeLanguageMessage" fr="Êtes-vous sûr de vouloir changez la langue ?" en="Are you sure you want to change the language?"/>
+  <string key="changeLanguageTitle" fr="Changement de langue" en="Changing the language"/>
+  <!-- Frames -->
+  <string key="frameCollapseTooltip" fr="Plier" en="Collapse"/>
+  <string key="frameExpandTooltip" fr="Déplier" en="Expand"/>
+  <!-- Finder -->
+  <string key="finderViewResults" fr="Résultats" en="View results"/>
+  <string key="finderViewFilters" fr="Filtres" en="View filters"/>
+  <!-- Errors messages -->
+  <string key="lgNumBoxErrType" fr="Le type {0} n'est pas un type numérique suporté." en="The type {0} is not a supported numeric type."/>
+  <string key="lgNumBoxErrTypeFormat" fr="Type {0} non suporté." en="Unsupported type {0}."/>
+  <string key="lgNumBoxErrFormat" fr="Le champ {0} n'est pas un nombre valide." en="The {0} field is not a valid number."/>
+  <string key="lgDateBoxErrType" fr="Le champs doit être une date." en="The field must be a date."/>
+  <string key="lgTimeBoxErrType" fr="Le champs doit être une horaire." en="The field must be a time."/>
+  <string key="lgCheckboxErrType" fr="Le type de paramètre doit être bool ou bool?." en="The parameter type must be bool or bool?."/>
+  <string key="lgEditFormValidation" fr="Veuillez corriger les erreurs" en="Please check errors before submit"/>
+  <string key="lblSelectEmpty" fr="Sélectionner..." en="Select..."/>
+  <string key="lblParseError" fr="Imposible de parser la réponse du serveur" en="Unable to parse server response"/>
+  <!-- Progress Bar -->
+  <string key="lgProgressBarErrorMinMax" fr="La maximum doit être strictement supérieur au minimum." en="The maximum must be greater than the minimum."/>
+  <!-- Label -->
+  <string key="MandatoryLabel" fr="*" en="*"/>
+  <string key="OptionalLabel" fr="(Optionnel)" en="(Optional)"/>
+  <!-- Input File -->
+  <string key="lgFileUploadActionMessage" fr="Fichiers à envoyer :" en="Files to upload :"/>
+  <string key="lgFileUploadDragAndDropMessage" fr="Déposez vos {0}" en="Drag And Drop any {0}"/>
+  <string key="lgFileUploadFile" fr="fichiers" en="files"/>
+  <string key="lgFileUploadSelectFiles" fr="Sélectionnez vos fichiers" en="Select your files"/>
+  <string key="lgFileUploadDropMessage" fr="Déposez vos fichiers" en="Drop your files to upload"/>
+  <string key="lgFileUploadRemoveLbl" fr="Supprimer le fichier" en="Remove file"/>
+  <string key="lgFileUploadDownloadFile" fr="Télécharger le fichier" en="Download file"/>
+  <string key="lgFileUploadUploadedFailureMessage" fr="Le téléchargement a échoué" en="Upload failed"/>
+  <string key="lgFileUploadUploadedMessage" fr="Fichier déposé avec succès" en="File successfully uploaded"/>
+  <string key="lgFileUploadMaxSizeExceeded" fr="Taille maximum dépassée. Max:{0} Taille:{1}" en="Max size exceeded. Max:{0} Current:{1}"/>
+  <string key="lgFileUploadDownloadCancelled" fr="Téléchargement du fichier {0} annulé" en="Download file {0} aborted."/>
+  <string key="lgFileUploadLinkedFileList" fr="{0} fichiers envoyés" en="{0} files uploaded"/>
+  <string key="lgFileUploadLinkedFileListEmty" fr="Pas de fichier envoyé" en="No uploaded file yet"/>
+  <string key="lgFileUploadUploadingMessage" fr="Transfert des fichiers :" en="Uploading files :"/>
+  <string key="lgFileUploadBtnUpload" fr="Envoyer {0} fichiers" en="Upload {0} files"/>
+  <string key="lgFileUploadBtnCancel" fr="Annuler" en="Cancel"/>
+  <string key="lgFileDeleteConfirm" fr="Êtes-vous sûr de vouloir supprimer ce fichier ?" en="Are you sure you want to delete this file ?"/>
+  <string key="lblAcceptFormat" fr="format accepté: {0}" en="accepted format: {0}"/>
+  <string key="lblAcceptFormats" fr="format acceptés: {0}" en="accepted formats: {0}"/>
+  <string key="lgFilesNotAllowed" fr="Ces fichiers ne sont pas autorisés: {0} ({1})" en="These files are not allowed: {0} ({1})"/>
+  <string key="lgFileNotAllowed" fr="Ce fichier n'est pas autorisé: {0} ({1})" en="This file is not allowed: {0} ({1})"/>
+  <string key="lgFileDuplicated" fr="Fichier(s) dupliqué(s): {0}" en="Duplicate file name: {0}"/>
+  <!-- LgSelect -->
+  <string key="lgSelectInputTooShort" en="Please enter at least {0} character(s)" fr="Veuillez saisir au moins {0} caractère(s)"/>
+  <string key="lgSelectErrorLoading" en="An error occured while loadind data" fr="Une erreur est survenue pendant le chargement des données"/>
+  <string key="lgSelectLoadingMore" en="Load more items" fr="Charger plus de résultat"/>
+  <string key="lgSelectNoResult" en="No result" fr="Aucun résultat"/>
+  <string key="lgSelectLoading" en="Loading..." fr="Chargement..."/>
+  <string key="lgSelectSearch" en="Zone de recherche" fr="Search input"/>
+  <!-- CheckBox -->
+  <string key="lgCheckBoxCheckedText" fr="Oui" en="Yes"/>
+  <string key="lgCheckBoxUncheckedText" fr="Non" en="No"/>
+  <string key="lgCheckBoxIndeterminateText" fr="-" en="-"/>
+  <!-- Breadcrumb -->
+  <string key="lgBreadcrumbCurrent" fr="Elément actif" en="Current element"/>
+  <!-- CopyPaste -->
+  <string key="lgCopyButtonTooltip" fr="Copier vers le presse-papier" en="Copy to clipboard"/>
+  <string key="lgPasteButtonTooltip" fr="Coller depuis le presse-papier" en="Paste from clipboard"/>
+  <string key="lgPasteModalTitle" fr="Coller" en="Paste"/>
+  <string key="lgPasteModalText" fr="Appuyez sur Ctrl+V ou ⌘+V pour coller le contenu texte du presse-papier" en="Press Ctrl+V or ⌘+V to paste text from the clipboard"/>
+  <!-- Confirmation modal -->
+  <string key="lblModalClose" fr="Fermer la fenêtre" en="Close modal"/>
+  <string key="lblModalSwitchDragLeave" fr="Activer ou désactiver le déplacement hors de la fenêtre" en="Enable or disable movement out of the window"/>
+  <string key="lblModalAllowDragLeave" fr="Cliquez pour autoriser la fenêtre à sortir de l'écran" en="Click to allow window to exit the screen"/>
+  <string key="lblModalDisallowDragLeave" fr="Cliquez pour ne pas autoriser la fenêtre a sortir de l'écran" en="Click to not allow the window to exit the screen"/>
+  <string key="lblLgConfirmBtnCancel" fr="Annuler" en="Cancel"/>
+  <string key="lblLgConfirmBtnValid" fr="Confirmer" en="Confirm"/>
+  <string key="lblLgConfirmTitle" fr="Confirmation" en="Confirmation"/>
+  <!-- List view -->
+  <string key="lblSelectAll" fr="Tout sélectionner" en="Select all"/>
+  <string key="lblSelectAllParenthesis" fr="(Tout sélectionner)" en="(Select all)"/>
+  <string key="lblUnslectAll" fr="Tout déselctioner" en="Unselect all"/>
+  <string key="lblListViewNbrSelect" fr="{0} élément(s) sélectionné(s)" en="{0} item(s) selected"/>
+  <string key="lblFrmFiltersReset" fr="Vider" en="Reset"/>
+  <string key="lblFrmFiltersViewMore" fr="Plus de filtres" en="View more"/>
+  <string key="lblFrmFiltersViewLess" fr="Moins de filtres" en="View less"/>
+  <string key="lblListViewCancelSelection" fr="Annuler" en="Cancel"/>
+  <string key="lblListViewSortBy" fr="Trier par" en="Sort by"/>
+  <string key="lblListViewErrPropSort" fr="Propriété {0} non trouvée." en="Properties {0} not found"/>
+  <!-- LgGlobalSearch -->
+  <string key="lblSeeAll" fr="Voir tout..." en="See all..."/>
+  <!-- Lagoon pages -->
+  <!-- ****** Page -->
+  <string key="LgPageTitleLoading" fr="Chargement..." en="Loading..."/>
+  <!-- ****** Page error -->
+  <string key="pgErrorTitle" fr="Erreur" en="Error"/>
+  <!-- ****** Page not found -->
+  <string key="pgNotFoundTitle" fr="Non trouvée" en="Not found"/>
+  <string key="pgNotFoundDescription" fr="La ressource que vous recherchez n'a pas été trouvée !" en="The resource you are looking for has not been found !"/>
+  <!-- ****** Page unauthorise -->
+  <string key="pgNotAuthorizedTitle" fr="Non autorisé" en="Unauthorized"/>
+  <string key="pgNotAuthorizedDescription" fr="Vous n'êtes pas autorisé à accéder à cette ressource !" en="You are not authorized to access this resource !"/>
+  <!-- ****** Page Trace Logs -->
+  <string key="pgLogsTitle" fr="Journaux de trace" en="Trace logs"/>
+  <string key="lblLoading" fr="Chargement ..." en="Loading ..."/>
+  <string key="lblNoLocalError" fr="Aucune erreur à afficher" en="No error to display"/>
+  <string key="lblLocalErrorsTitle" fr="Log côté client" en="Client side log"/>
+  <string key="lblServerErrorsTitle" fr="Log côté serveur" en="Serveur side log"/>
+  <string key="lblDownload" fr="Télécharger" en="Download"/>
+  <string key="lblClear" fr="Réinitialiser" en="Clear"/>
+  <!-- ****** Page Icons -->
+  <string key="pgIconsTitle" fr="Bibliothèque d'icônes" en="Icon library"/>
+  <string key="pgIconsActionTitle" fr="Liste des alias d'icônes" en="Alias icon list"/>
+  <!-- ****** Page About -->
+  <string key="pgAboutTitle" fr="A propos" en="About"/>
+  <string key="pgAboutVersion" fr="Version : " en="Version: "/>
+  <string key="pgAboutApp" fr="Application : " en="Application: "/>
+  <string key="pgAboutDevelopedBy" fr="Développement : " en="Development: "/>
+  <!-- ****** Page Parameter -->
+  <string key="pgParameterTitle" fr="Paramètres" en="Parameters"/>
+  <!-- ****** Page Element base -->
+  <string key="pgElementBase" fr="Les éléments de base" en="Basic elements"/>
+  <!-- ****** Page Color palette -->
+  <string key="pgColorPalette" fr="La palette de couleur" en="Color palette"/>
+  <!-- ****** Page Dico Import/Export -->
+  <string key="pgDicoManagement" fr="Gestion des dictionnaires" en="Dictionnaries management"/>
+  <string key="pgDicoSelectXml" fr="Selectionner le fichier Dico.xml" en="Select your Dico.xml file"/>
+  <string key="pgDicoOnlyDebug" fr="Cette pas ne peut êre utilisée qu'en DEBUG" en="This can only be used in DEBUG mode"/>
+  <string key="pgDicoExport" fr="Exporter les dictionnaires" en="Export dictionnaries"/>
+  <string key="pgDicoExportTitle" fr="Exporter / Importer les dictionnaires" en="Export / Import dictionnaries"/>
+  <string key="pgDicoBackup" fr="Créer un backup des fichiers Dico.xml" en="Create backup for all Dico.xml files"/>
+  <!-- Date helper & dates format used by datepicker-->
+  <string key="UIDateRollingYear" fr="51" en="51"/>
+  <string key="InvalidDate" fr="Format de date invalide. Un des formats correct est jj/mm/aaaa." en="Date format is invalid. One of the correct format is dd/mm/yyyy."/>
+  <string key="InvalidDay" fr="Le jour doit etre compris entre 1 et 31." en="Day must be between 1 and 31."/>
+  <string key="InvalidMonth" fr="Le mois doit etre compris entre 1 et 12." en="Month must be between 1 and 12."/>
+  <string key="InvalidDay31" fr="Ce mois n'a pas 31 jours." en="This month haven't 31 days."/>
+  <string key="InvalidYear" fr="L'année doit être inférieure ou égale à 9999." en="Year must be lower or equal to 9999."/>
+  <string key="InvalidFebruary" fr="Le mois de fevrier n'a pas autant de jours pour l'annee saisie." en="February haven't as much days for this year."/>
+  <string key="DayNames" en="Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday" fr="Dimanche,Lundi,Mardi,Mercredi,Jeudi,Vendredi,Samedi"/>
+  <string key="DayNamesShort" en="Sun,Mon,Tue,Wed,Thu,Fri,Sat" fr="Dim,Lun,Mar,Mer,Jeu,Ven,Sam"/>
+  <string key="MonthNames" en="January,February,March,April,May,June,July,August,September,October,November,December" fr="Janvier,Février,Mars,Avril,Mai,Juin,Juillet,Août,Septembre,Octobre,Novembre,Décembre"/>
+  <string key="MonthNamesShort" en="Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec" fr="Jan,Fév,Mars,Avr,Mai,Juin,Juil,Août,Sept,Oct,Nov,Déc"/>
+  <!-- Authentication step -->
+  <string key="AuthRedirectToLogin" fr="Authentification requise" en="Authentication required"/>
+  <string key="AuthUserInfo" fr="Récupération des données de l'utilisateur ..." en="Retrieving user information ..."/>
+  <string key="AuthLoginFail" fr="Une erreur est survenue lors de l'authentification" en="An error occurred during authentication"/>
+  <string key="AuthLogOut" fr="Deconnexion ..." en="Log out in progress ..."/>
+  <string key="AuthLogOutInProgress" fr="Deconnexion en cours ..." en="Log out in progress ..."/>
+  <string key="AuthLogOutSucceeded" fr="Vous êtes maintenant déconnecté." en="You are now logged out."/>
+  <string key="AuthLogOutFailed" fr="Une erreur est survenue lors de la deconnexion" en="An error occurred during disconnection"/>
+  <string key="AuthAuthorizing" fr="Authentification ..." en="Authorizing ..."/>
+  <string key="AuthReconnect" fr="Se reconnecter" en="Reconnect"/>
+  <!-- FormTracker -->
+  <string key="LostChangesConfirmation" fr="Vous avez effectué des modifications. Si vous poursuivez, elles seront perdues.\nSouhaitez-vous poursuivre ?" en="You made modifications. If you go on they will be lost.\nDo you wish to go on ?"/>
+  <!-- Pager -->
+  <string key="PagerFirst" fr="Premier" en="First"/>
+  <string key="PagerPrevious" fr="Précédent" en="Previous"/>
+  <string key="PagerNext" fr="Suivant" en="Next"/>
+  <string key="PagerLast" fr="Dernier" en="Last"/>
+  <string key="PagerPage" fr="Page {0}" en="Page {0}"/>
+  <!-- Pager AriaLabel -->
+  <string key="PagerFirstAL" fr="Première page" en="First page"/>
+  <string key="PagerPreviousAL" fr="Page précédente" en="Previous page"/>
+  <string key="PagerNextAL" fr="Page suivant" en="Next page"/>
+  <string key="PagerLastAL" fr="Dernière page" en="Last page"/>
+  <!-- RGAA -->
+  <string key="RgaaAppLoaded" fr="Application chargée" en="Application loaded"/>
+  <string key="RgaaTabbedError" fr="Une application RGAA ne peut pas être en mode onglet." en="RGAA application must be not in tabbed mode."/>
+  <string key="RgaaMenuError" fr="Les menus de niveau 2 ne sont pas supporté en RGAA." en="Menu with level 2 are not supported in RGAA."/>
+  <string key="RgaaLangChanged" fr="La langue a été changée" en="Language changed"/>
+  <string key="RgaaErrorFormList" fr="Liste des erreurs" en="Errors list"/>
+  <string key="RgaaIndeterminateLoading" fr="Chargement à durée indeterminée" en="Indeterminate loading"/>
+  <!-- EULA -->
+  <string key="EulaTitle" fr="Condition générale d'utilisation" en="End user licence agreement"/>
+  <string key="EulaBtnAccept" fr="Accepter" en="Accept"/>
+  <string key="EulaContent" fr="Contenu des Condition Générale d'Utilsation" en="Content of End User Licence Agreement"/>
+  <string key="EulaVersion" fr="1" en="1"/>
+  <!-- ColumnOptions -->
+  <string key="ColumnOptionsTitle" fr="Option de colonnes" en="Column options"/>
+  <string key="ColumnOptionsDescription" fr="Ajouter ou supprimer des colonnes. Pour modifier l'ordre des colonnes, faites glisser et déposez un champ ou utilisez les raccourcis clavier Ctrl+Haut ou Ctrl+Bas." en="Add or remove columns. To change the column order, drag and drop a field, or use the keyboard shortcuts, Ctrl+Up or Ctrl+Down."/>
+  <string key="ColumnOptionsRemoveTooltip" fr="Supprimer cette colonne" en="Remove this column"/>
+  <string key="ColumnOptionsIrremovableTooltip" fr="Ce champ ne peut pas être supprimé" en="This field cannot be removed"/>
+  <string key="ColumnOptionsAddColumn" fr="Ajouter une colonne" en="Add column"/>
+  <string key="ColumnOptionsSelectColumn" fr="Sélectionner une colonne" en="Select a column"/>
+  <string key="ColumnOptionsSaveBtn" fr="Valider" en="Validate"/>
+  <string key="ColumnOptionsCancelBtn" fr="Annuler" en="Cancel"/>
+  <string key="ColumnOptionsPinTooltip" fr="Épingler" en="Pin"/>
+  <string key="ColumnOptionsUnpinTooltip" fr="Détacher" en="Unpin"/>
+  <!-- GroupOptions -->
+  <string key="GroupOptionsTitle" fr="Option de groupes" en="Group options"/>
+  <string key="GroupOptionsDescription" fr="Ajouter ou supprimer des groupes de colonnes. Pour modifier l'ordre des groupes, vous pouvez les glisser et déposez." en="Add or remove groups of columns. To change the groups order, you can drag and drop them."/>
+  <string key="GroupOptionsRemoveTooltip" fr="Supprimer le groupe" en="Remove this group"/>
+  <string key="GroupOptionsIrremovableTooltip" fr="Ce groupe ne peut pas être supprimé" en="This group cannot be removed"/>
+  <string key="GroupOptionsAddColumn" fr="Ajouter un groupe" en="Add group"/>
+  <string key="GroupOptionsSaveBtn" fr="Valider" en="Validate"/>
+  <string key="GroupOptionsCancelBtn" fr="Annuler" en="Cancel"/>
+  <!-- WorkScheduler -->
+  <string key="WksScrollToToday" fr="Aujourd'hui" en="Go to today"/>
+  <string key="WksMoveCancelled" fr="Mouvement invalide" en="Invalid move"/>
+  <!-- FilterBox -->
+  <string key="FilterBoxNoResult" fr="(Aucune donnée trouvée)" en="(No data found)"/>
+  <string key="FilterBoxPreview" fr="Aperçu" en="Preview"/>
+  <string key="FilterTabSelection" fr="Sélection" en="Selection"/>
+  <string key="FilterTabRules" fr="Condition" en="Condition"/>
+  <string key="FilterBoxRemove" fr="Supprimer le filtre" en="Remove filter"/>
+  <string key="FilterBoxNoSelection" fr="(aucun filtre)" en="(no filter)"/>
+  <string key="FilterBoxSearchPlaceholder" fr="Saisir un texte..." en="Enter value..."/>
+  <string key="FilterBoxValidate" fr="Filtrer" en="Filter"/>
+  <string key="FilterBoxCancel" fr="Annuler" en="Cancel"/>
+  <string key="FilterBoxReset" fr="Vider la selection" en="Reset selection"/>
+  <string key="FilterBoxAddToSelection" fr="(Ajouter à la sélection)" en="(Add to current selection)"/>
+  <string key="FilterBoxSelectAll" fr="(Tout sélectionner)" en="(Select all)"/>
+  <string key="FilterBoxTextValuePlaceholder" fr="Valeur recherchée..." en="Searched value..."/>
+  <string key="FilterBoxTextNullValue" fr="(Vide)" en="(Empty)"/>
+  <string key="FilterBoxDateRangeCondition" fr=" et " en=" and "/>
+  <string key="FilterBoxNumericEqual" fr="Egale à" en="Equal to"/>
+  <string key="FilterBoxNumericNotEqual" fr="Différent de" en="Different from"/>
+  <string key="FilterBoxNumericLesser" fr="Inférieur à" en="Less than"/>
+  <string key="FilterBoxNumericLesserOrEqual" fr="Inférieur ou égal à" en="Less than or equal to"/>
+  <string key="FilterBoxNumericGreater" fr="Supérieur à" en="Greater than"/>
+  <string key="FilterBoxNumericGreaterOrEqual" fr="Supérieur ou égal à" en="Greater than or equal to"/>
+  <string key="FilterBoxNumericValuePlaceholder" fr="Valeur recherchée..." en="Searched value..."/>
+  <!-- Tabs -->
+  <string key="lgTabToolbarCloseAllLbl" fr="Fermer tous" en="Close all"/>
+  <string key="lgTabToolbarCloseAllTooltip" fr="Fermer tous les onglets" en="Close all tabs"/>
+  <string key="lgTabPrevTabsTooltip" fr="Défiler à gauche les onglets" en="Scroll left tabs"/>
+  <string key="lgTabNextTabsTooltip" fr="Défiler à droite les inglets" en="Scroll right tabs"/>
+  <!-- LgSummaryBox -->
+  <string key="lgSummaryBoxCancel" fr="Annuler" en="Cancel"/>
+  <string key="lgSummaryBoxSave" fr="Enregistrer" en="Save"/>
+  <string key="lgSummaryBoxConfirmSave" fr="Vous avez effectué des modifications. Si vous poursuivez, elles seront perdues.\nSouhaitez-vous poursuivre ?" en="You made modifications. If you go on they will be lost.\nDo you wish to go on ?"/>
+  <!-- LgTimeBox -->
+  <string key="lgTimeBoxCancel" fr="Annuler" en="Cancel"/>
+  <string key="lgTimeBoxOk" fr="Ok" en="Ok"/>
+  <!-- LgWebPushSubscription popup -->
+  <string key="lblWebPushSubcribe" fr="S'abonner aux notifications WebPush ?" en="Subscribe to WebPush notification ?"/>
+  <string key="lblWebPushUnsubcribe" fr="Se désabonner aux notifications WebPush ?" en="Unsubscribe to WebPush notification ?"/>
+  <string key="lblWebPushUnvailable" fr="L'application n'est pas configurée pour les notifications WebPush" en="The application is not configured for WebPush notification"/>
+  <string key="lblSubcribe" fr="S'abonner" en="Subscribe"/>
+  <string key="lblUnsubcribe" fr="Se désabonner" en="Unsubscribe"/>
+  <string key="lblClose" fr="Fermer" en="Close"/>
+  <string key="lblRefuse" fr="Refuser" en="Refuse"/>
+  <string key="lblWebPushNavigatorBlocked" fr="Votre navigateur est paramétré pour refuser les notifications.\nPour autoriser les notifications, suivez les instructions suivantes:" en="Your browser is configured to refuse notifications.\nTo enable notifications, follow these instructions:"/>
+  <string key="lblWebPushNavigatorInstructionOpenSetting" fr="Etape 1: Cliquez sur l'icone a côté de la barre d'addresse" en="Step 1: Click on the icon next to the address bar"/>
+  <string key="lblWebPushNavigatorInstructionAcceptNotification" fr="Etape 2: Autoriser les notifications" en="Step 2: Allow notifications"/>
+</root>

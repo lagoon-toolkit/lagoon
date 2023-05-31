@@ -1,0 +1,17 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgAriaComponentBase
+
+<div class="@GetClassAttribute()" aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy" role="group">
+    <div class="mr-auto my-auto action-pnl-content">
+        @if (ActionContent != null)
+        {
+            @ActionContent
+        }
+    </div>
+    @if (Toolbar != null)
+    {
+        <LgToolbar ButtonSize="_buttonSize" GroupKind="ToolbarGroupKind.Ghost" ButtonKind="ButtonKind.Ghost" CssClass="action-pnl-toolbar">
+            @Toolbar
+        </LgToolbar>
+    }
+</div>

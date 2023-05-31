@@ -1,0 +1,10 @@
+﻿@using Lagoon.UI.Components.Internal
+@inherits LgGridBaseNoValueColumn
+@namespace Lagoon.UI.Components
+
+<CascadingValue Value="Commands" IsFixed="true">
+    @ChildContent
+</CascadingValue>
+@{ 
+    base.BuildRenderTree(__builder);
+}

@@ -1,0 +1,33 @@
+﻿@inherits DemoPageForm
+
+<LgTitle Text="SummaryBox" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgEditForm @ref=formDemo Model=@formData ValidationErrorMessage="#ErrorFormDemo" UseValidationComplexModel="true">
+        <LgSummaryBox @bind-Value="@formData.LongText" CssClass="col-md-6 col-sm-12" Label="@Label" Disabled="@IsDisable" ReadOnly="@IsReadOnly"
+                      Prefix="@GetPrefix()" PrefixType="InputLabelType.IconName" Suffix="@GetSuffix()" SuffixType="InputLabelType.IconName" 
+                      WrapContent="Wrapped"/>
+    </LgEditForm>
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <CommonParameters CssClass="col-md-6" OnLabelEdition="OnChangeLabel" OnDisableEdition="OnChangeDisable" OnReadOnlyEdition="OnChangeReadOnly"></CommonParameters>
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-5 d-flex justify-content-end" @bind-Value="@HasPrefix" Text="@(HasPrefix ? "With prefix" : "Without prefix")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <IconParameter CssClass="col-md-6" @bind-Icon="IconPrefix" />
+    </section>
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-5 d-flex justify-content-end" @bind-Value="@HasSuffix" Text="@(HasSuffix ? "With suffix" : "Without suffix")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <IconParameter CssClass="col-md-6" @bind-Icon="IconSuffix" />
+    </section>
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-5 d-flex justify-content-end" @bind-Value="@Wrapped" Text="@(Wrapped ? "UnWrap" : "Wrap")" CheckBoxKind="@CheckBoxKind.Toggle" />        
+    </section>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />
+

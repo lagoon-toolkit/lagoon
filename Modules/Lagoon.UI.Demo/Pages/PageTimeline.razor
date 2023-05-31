@@ -1,0 +1,72 @@
+@inherits DemoPage
+
+<LgFrame Title="Sample 1 - Simple 'Step by Step' width default style">
+    <Toolbar>
+        <LgToolbarButton Text="Reset" OnClick="ResetSample1" />
+        <LgToolbarButton Text="AddStep" OnClick="AddStepSample1" />
+        <LgToolbarButton Text="Validate (by code)" OnClick="ValidateCurrentStep" />
+    </Toolbar>
+    <ChildContent>
+        <LgTimelineContainer OnStepClicked="@StepClickSample1">
+            @foreach (var step in _steps)
+            {
+                <LgTimelineStep Id=@step.Id CssClass="@step.Css"
+                                TopLabel=@step.Label BottomLabel=@step.Message
+                                IsClickable=@step.Clickable IsValidated="@step.Validated" />
+            }
+        </LgTimelineContainer>
+    </ChildContent>
+</LgFrame>
+
+<LgFrame Title="Sample 2 - Sample1 + Custom Render" CssClass="TimelineSample3">
+    <Toolbar>
+        <LgToolbarButton Text="Reset" OnClick="ResetSample1" />
+    </Toolbar>
+    <ChildContent>
+        <LgTimelineContainer OnStepClicked="@StepClickSample1">
+            @foreach (var step in _steps)
+            {
+                <LgTimelineStep Id=@step.Id CssClass="@step.Css"
+                                IsClickable=@step.Clickable IsValidated="@step.Validated">
+                    <TopLabelContent><span>@step.Label</span></TopLabelContent>
+                    <BottomLabelContent><span>@step.Message</span></BottomLabelContent>
+                    <StepContent><LgIcon CssClass="baseTimelineIco" IconName=@step.IconName /></StepContent>
+                </LgTimelineStep>
+            }
+        </LgTimelineContainer>
+    </ChildContent>
+</LgFrame>
+
+<LgFrame Title="Sample 3 - Custom col layout + cancel step" CssClass="customTimelineCol">
+    <Toolbar>
+        <LgToolbarButton Text="Reset" OnClick="ResetSample3" />
+    </Toolbar>
+    <ChildContent>
+        <style>
+
+        </style>
+        <LgTimelineContainer OnStepClicked="@StepClickSample2">
+            @foreach (var step in _stepsSample2)
+            {
+                <LgTimelineStep Id=@step.Id CssClass="@step.Css"
+                                TopLabel=@step.Label BottomLabel=@step.Message
+                                IsClickable=@step.Clickable IsValidated="@step.Validated" />
+            }
+        </LgTimelineContainer>
+    </ChildContent>
+</LgFrame>
+
+<LgFrame Title="Sample 4 - Move forward and backward">
+    <ChildContent>
+        <LgTimelineContainer OnStepClicked="@StepClickSample4">
+            @foreach (var step in _stepsSample4)
+            {
+                <LgTimelineStep Id=@step.Id CssClass="@step.Css"
+                                TopLabel=@step.Label BottomLabel=@step.Message
+                                IsClickable=@step.Clickable IsValidated="@step.Validated" />
+            }
+        </LgTimelineContainer>
+    </ChildContent>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

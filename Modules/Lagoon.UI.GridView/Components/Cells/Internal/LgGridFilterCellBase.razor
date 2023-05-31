@@ -1,0 +1,14 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@inherits ComponentBase
+
+<div class="@GetCssClassAttribute()" role="gridcell" data-col="@Column?.State.Index" aria-colindex="@Column?.State.Order" tabindex="-1">
+        @if(RenderFilterContent is not null)
+        {
+            @RenderFilterContent(_filterContext)
+        }
+        else
+        {
+            <span>&nbsp;</span>
+        }
+
+</div>

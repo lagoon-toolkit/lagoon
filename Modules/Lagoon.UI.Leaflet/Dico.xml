@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="" id="root">
+    <xsd:element name="string">
+      <xsd:complexType>
+        <xsd:attribute name="key" use="required" type="xsd:string"/>
+        <xsd:attribute id="fr-FR" name="fr" use="required" type="xsd:string" />
+        <xsd:attribute id="en-US" name="en" type="xsd:string" />
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <!-- Labels -->
+</root>

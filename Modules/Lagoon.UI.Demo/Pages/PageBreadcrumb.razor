@@ -1,0 +1,15 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="Breadcrumb" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgBreadcrumbTrail>
+        <LgBreadcrumbTrailItem Text="Home" IconName="@IconNames.Home" Uri="./" />
+        <LgBreadcrumbTrailItem Link="PageShowcase.Link()" />
+        <LgBreadcrumbTrailItem Text="Structure the application" />
+        <LgBreadcrumbTrailItem Link="Link()" IsActive="true" />
+    </LgBreadcrumbTrail>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

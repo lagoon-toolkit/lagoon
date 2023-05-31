@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <LagoonPriority>6</LagoonPriority>
+    <HasRootableComponents>True</HasRootableComponents>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    <LangVersion>10.0</LangVersion>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.10" />
+    <PackageReference Include="Bogus" Version="34.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lagoon.Core\Lagoon.Core.csproj" />
+    <ProjectReference Include="..\Lagoon.UI.GridView\Lagoon.UI.GridView.csproj" />
+    <ProjectReference Include="..\Lagoon.UI.Leaflet\Lagoon.UI.Leaflet.csproj" />
+    <ProjectReference Include="..\Lagoon.UI\Lagoon.UI.csproj" />
+    <ProjectReference Include="..\Lagoon.Xlsx\Lagoon.Xlsx.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="resources\icons\auto\" />
+  </ItemGroup>
+
+  <!-- Publish source files -->
+  <Target Name="CopyPageSourceFiles" BeforeTargets="LagoonPrepareMainJs">
+    <Message Importance="High" Text="- Copy source files of the pages" />
+    <ItemGroup>
+      <PagesSourceFile Include="Pages\**\Page*.*" SourcesFolder="Pages" />
+    </ItemGroup>
+    <Copy SourceFiles="@(PagesSourceFile)" DestinationFiles="wwwroot\sources\%(PagesSourceFile.SourcesFolder)\%(PagesSourceFile.Filename)%(PagesSourceFile.Extension).txt" SkipUnchangedFiles="true" />
+    <ItemGroup>
+      <Content Remove="wwwroot\sources\**" />
+      <Content Include="wwwroot\sources\**" />
+    </ItemGroup>
+  </Target>
+
+  <!-- Run the Lagoon dotnet tool to consolidate resources -->
+  <Import Project="..\LagoonPreBuild.UI.targets" />
+
+</Project>

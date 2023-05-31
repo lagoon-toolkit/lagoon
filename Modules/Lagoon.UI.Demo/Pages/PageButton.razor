@@ -1,0 +1,74 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="Button" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <div class="d-inline-block mr-4">
+        <LgTitle Text="Kind primary" TitleLevel="TitleLevel.Level2" />
+        <LgButton Kind="ButtonKind.Primary" Text="Primary" IconName="@GetIcon()" Disabled="@IsDisabled" ButtonSize="@Size" />
+    </div>
+
+    <div class="d-inline-block mr-4">
+        <LgTitle Text="Kind secondary" TitleLevel="TitleLevel.Level2" />
+        <LgButton Kind="ButtonKind.Secondary" Text="Secondary" IconName="@GetIcon()" Disabled="@IsDisabled" ButtonSize="@Size" />
+    </div>
+
+    <div class="d-inline-block mr-4">
+        <LgTitle Text="Kind custom" TitleLevel="TitleLevel.Level2" />
+        <LgButton Kind="ButtonKind.Custom" Text="Custom" IconName="@GetIcon()" Disabled="@IsDisabled" ButtonSize="@Size" />
+    </div>
+
+    <div class="d-inline-block mr-4">
+        <LgTitle Text="Kind error" TitleLevel="TitleLevel.Level2" />
+        <LgButton Kind="ButtonKind.Error" Text="Error" IconName="@GetIcon()" Disabled="@IsDisabled" ButtonSize="@Size" />
+    </div>
+
+    <div class="d-inline-block mr-4">
+        <LgTitle Text="Kind success" TitleLevel="TitleLevel.Level2" />
+        <LgButton Kind="ButtonKind.Success" Text="Success" IconName="@GetIcon()" Disabled="@IsDisabled" ButtonSize="@Size" />
+    </div>
+
+    <div class="d-inline-block mr-4">
+        <LgTitle Text="Kind warning" TitleLevel="TitleLevel.Level2" />
+        <LgButton Kind="ButtonKind.Warning" Text="Warning" IconName="@GetIcon()" Disabled="@IsDisabled" ButtonSize="@Size" />
+    </div>
+
+    <div class="d-inline-block mr-4">
+        <LgTitle Text="Kind info" TitleLevel="TitleLevel.Level2" />
+        <LgButton Kind="ButtonKind.Info" Text="Info" IconName="@GetIcon()" Disabled="@IsDisabled" ButtonSize="@Size" />
+    </div>
+
+    <div class="d-inline-block mr-4">
+        <LgTitle Text="Kind link" TitleLevel="TitleLevel.Level2" />
+        <LgButton Kind="ButtonKind.Link" Text="Link" IconName="@GetIcon()" Disabled="@IsDisabled" ButtonSize="@Size" />
+    </div>
+
+    <LgActionPanel CssClass="mt-3 h-100 pb-1">
+        <ActionContent>
+            <LgTitle Text="Kind ghost" TitleLevel="TitleLevel.Level2" CssClass="text-white" />
+            <LgButton Kind="ButtonKind.Ghost" Text="Ghost" IconName="@GetIcon()" Disabled="@IsDisabled" ButtonSize="@Size" />
+        </ActionContent>
+    </LgActionPanel>
+
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <!-- section header -->
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-3 d-flex justify-content-end" @bind-Value="@IsDisabled" Text="@(IsDisabled ? "Disabled" : "Enable")" CheckBoxKind="@CheckBoxKind.Toggle" />
+    </section>
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-3 d-flex justify-content-end" @bind-Value="@HaveIcon" Text="@(HaveIcon ? "With icon" : "Without icon")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <IconParameter CssClass="col-md-6" @bind-Icon="Icon" />
+    </section>
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <ButtonParameters CssClass="col-md-6" OnButtonSizeEdition="OnChangeButtonSize" OnButtonKindEdition="OnChangeButtonKind"></ButtonParameters>
+    </section>
+
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />
+

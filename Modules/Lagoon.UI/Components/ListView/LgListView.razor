@@ -1,0 +1,133 @@
+﻿@inherits LgAriaComponentBase
+@namespace Lagoon.UI.Components
+
+@typeparam TItem
+@{
+    int _selectionCount = SelectedItems?.Count ?? 0;
+}
+<div @attributes="AdditionalAttributes" class="@GetClassAttribute()" aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy" role="group">
+    <div class="d-flex">
+        <div class="list-view-header-leftside mr-auto">
+            <LgTitle Text=@Title CssClass="list-view-title" TitleLevel="TitleLevel.Level1" />
+        </div>
+        <div class="list-view-header-rightside ml-auto d-flex">
+            <!-- Sort items -->
+            @if ((SortOptions != null) || (_sortProperties != null && _sortProperties.Count > 0))
+            {
+                <div class="list-view-sort-action d-flex">
+                    <LgEditForm Model="_sortModel" CssClass="d-flex">
+                        <LgSelect OnChange="SortListViewAsync" CssClass="d-flex mb-0 listview-sortprop" ShowSearchBox="false" ResetButton="false"
+                                  Label="@("lblListViewSortBy".Translate())"
+                                  Placeholder=@("lblListViewSortBy".Translate())
+                                  @bind-Value="_sortModel.SortProperty">
+                            <Items>
+                                @if (SortOptions != null)
+                                    {
+                                    @SortOptions
+                                    }
+                                    else
+                                    {
+                                    @foreach (string prop in _sortProperties)
+                                        {
+                                        <LgOptionListItem Text="@prop" Value="@prop" />
+                                        }
+                                    }
+                            </Items>
+                        </LgSelect>
+                        <LgButton IconName="@_sortButtonIcon" OnClick="SetSortOrderAsync" Kind="ButtonKind.Secondary" ButtonSize="ButtonSize.Small" CssClass="ml-1 list-view-button-order" />
+                    </LgEditForm>
+                </div>
+            }
+
+            @if (Toolbar is not null || HasSelection())
+            {
+                <div class="list-view-toolbar-action">
+                    <LgToolbar ButtonSize="ButtonSize.Large">
+                        @if (HasSelection())
+                        {
+                            <LgToolbarButton Text=@("lblSelectAll".Translate()) OnClick="SelectAll" />
+                        }
+                        <CascadingValue Value="_selectionCount">
+                            @Toolbar
+                        </CascadingValue>
+                    </LgToolbar>
+                </div>
+            }
+        </div>
+    </div>
+    <LgLoaderView IsLoading="_isLoading">
+        <div class="item-list" role="list">
+            @{
+                string prefixItemId = "chk-" + Guid.NewGuid().ToString("N");
+                int itemIndex = 0;
+                string groupLabel = String.Empty;
+            }
+            @foreach (var group in GetData())
+            {
+                @if (!string.IsNullOrEmpty(GroupBy))
+                {
+                    var collapsed = GetGroupState(group);
+                    groupLabel = group.Key.ToString();
+                    <div @key="@group.Key" class="list-view-group @(collapsed ? "list-view-group-closed" : string.Empty)" @onclick="() => OnChangeCollapse(group)">                        
+                        @if (GroupHeaderContent != null)
+                        {
+                            @GroupHeaderContent(group.FirstOrDefault())
+                        }
+                        else
+                        {
+                            @GroupNameRender(group)
+                        }
+                        <LgIcon IconName="@(collapsed ? IconNames.All.ChevronUp : IconNames.All.ChevronDown)"></LgIcon>
+                    </div>                           
+                }
+                <div aria-label="@groupLabel" role="rowgroup">
+                    @foreach (var item in group)
+                    {
+                        itemIndex++;
+                        string itemId = prefixItemId + "-" + itemIndex.ToString();
+                        bool _isSelected = IsSelected(item);
+                        //TItem data = item.Data;
+                        <div class="d-flex" role="listitem">
+                            @if (HasSelection())
+                            {
+                                <div class="my-auto list-view-col-chk custom-checkbox custom-control">
+                                    @if (!_isSelected)
+                                    {
+                                        <input type="checkbox" class="custom-control-input" @bind-value="@_isSelected" id=@itemId @onclick="@(() => ItemSelection(item))" />
+                                        <label class="custom-control-label" style="user-select:none" aria-hidden="true" for=@itemId></label>
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" class="custom-control-input" @bind-value="@_isSelected" id=@itemId @onclick="@(() => ItemSelection(item))" checked />
+                                        <label class="custom-control-label" style="user-select:none" aria-hidden="true" for=@itemId></label>
+                                    }
+                                </div>
+                            }
+                            <div class="my-auto list-view-col-itemtpl">
+                                @ItemTemplate(item)
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </LgLoaderView>
+
+    <!-- Selection Toolbar -->
+    @if (HasSelectedItems())
+    {
+        <CascadingValue Value="_selectionCount">
+            <LgActionPanel CssClass="list-view-selectionbar">
+                <ActionContent>
+                    <LgLabel CssClass="my-auto" Text=@("lblListViewNbrSelect".Translate(_selectionCount)) />
+                </ActionContent>
+                <Toolbar>
+                    @ToolbarSelection
+                    <LgToolbarGroup>
+                        <LgToolbarButton OnClick="UnSelectAll" Text="@("lblListViewCancelSelection".Translate())" />
+                    </LgToolbarGroup>
+                </Toolbar>
+            </LgActionPanel>
+        </CascadingValue>
+    }
+</div>

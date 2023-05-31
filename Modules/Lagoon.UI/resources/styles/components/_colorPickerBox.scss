@@ -1,0 +1,28 @@
+﻿.colorPickerBox {
+    width: 2.2rem;
+
+    .dropdown-control{
+        display: flex;
+    }
+    .selected-box {
+        display: inline-block;
+        width: 2rem;
+        height: 1.5rem;
+        margin-left: 2px;
+        margin-right: 2px;
+        border: 1px solid black;
+        vertical-align: middle;
+    }
+
+    .form-control {
+        display: inline-block !important;
+        width: 6.5rem;
+        height: auto;
+    }
+
+    .color-picker-content {
+        & > div {
+            border: solid 2px #fff;
+        }
+    }
+}

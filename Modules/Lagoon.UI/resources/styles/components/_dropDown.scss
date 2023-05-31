@@ -1,0 +1,33 @@
+﻿div.lgDropdown {
+    width: fit-content;
+
+    &.globalSearch-dropdown {
+        width: 100%;
+    }
+
+    div.dropdown-menu {
+        min-width: 100%;
+        position: fixed;
+
+        &.show {
+            display: flex;
+            flex-direction: column;
+
+            .gs-item-content {
+                padding: 0.15rem;
+            }
+        }
+    }
+}
+
+.lgDropdown.globalSearch-dropdown {
+    width: 100%;
+
+    .dropdown-menu {
+        .gs-item-content {
+            > svg {
+                margin: 0 0.3rem;
+            }
+        }
+    }
+}

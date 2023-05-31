@@ -1,0 +1,95 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="Loader" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <!-- Indeterminated loading -->
+    <LgTitle Text="#loader-title-inderterminated" TitleLevel="TitleLevel.Level2" />
+    <LgLoaderView IsLoading="_isLoading" Label="#loader-label">
+        @("loader-text".Translate())
+    </LgLoaderView>
+
+    <!-- Indeterminated loading with custom render -->
+    <LgTitle Text="#loader-title-inderterminated-customrender" TitleLevel="TitleLevel.Level2" />
+    <LgLoaderView IsLoading="_isLoading">
+        <CustomTemplate>
+            <div>
+                <LgIcon IconName="@IconNames.Loading" CssClass="demo-spinner-custom" />
+            </div>
+        </CustomTemplate>
+        <ChildContent>
+            @("loader-text".Translate())
+        </ChildContent>
+    </LgLoaderView>
+
+    <!-- Progression loading with circle progression (default) -->
+    <LgTitle Text="#loader-title-progression-circle" TitleLevel="TitleLevel.Level2" />
+    <LgLoaderView Progress="_progress">
+        @("loader-text".Translate())
+    </LgLoaderView>
+
+    <!-- Progression loading with progess bar -->
+    <LgTitle Text="#loader-title-progression-bar" TitleLevel="TitleLevel.Level2" />
+    <LgLoaderView Progress="_progress" ProgressType="ProgressType.Bar">
+        @("loader-text".Translate())
+
+    </LgLoaderView>
+    <br />
+
+    @if (!_isLoading)
+    {
+        <LgButton IconName="@IconNames.All.LightningFill" OnClick="RunAllTaskAsync" Text="Reload" CssClass="mt-3" />
+    }
+
+    <!-- Loader with sub task -->
+    <LgFrame Title="#loader-title-progression-complex" CssClass="mt-3">
+        <Toolbar>
+            @if (!_isLoadingComplex)
+            {
+                <LgToolbarButton OnClick="async () => await MyMainTaskAsync(false)" Text="Task with Sub Tasks" IconName="@IconNames.All.LightningFill" />
+                <LgToolbarButton OnClick="async () => await MyMainTaskAsync(true)" Text="Task with Sub Tasks (Parallel)" IconName="@IconNames.All.LightningFill" />
+            }
+            else
+            {
+                <LgCheckBox @bind-Value="_isCircle" CheckBoxKind="CheckBoxKind.Toggle" Text="Circle" />
+            }
+        </Toolbar>
+        <ChildContent>
+            <LgLoaderView Progress="_progressComplex" ProgressType="_isCircle ? ProgressType.Circle : ProgressType.Bar">
+                @("loader-text".Translate())
+            </LgLoaderView>
+        </ChildContent>
+    </LgFrame>
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgNumericBox CssClass="col-md-6 col-sm-12" Label="Loader delay" @bind-Value="@_loaderDelay" />
+    </section>
+</LgFrame>
+
+@if (!_isLoading)
+{
+    <LgButton IconName="@IconNames.All.LightningFill" OnClick="RunAllTaskAsync" Text="Reload" />
+}
+
+<LgFrame Title="#loader-title-progression-complex">
+    <Toolbar>
+        @if (!_isLoadingComplex)
+        {
+            <LgToolbarButton OnClick="async () => await MyMainTaskAsync(false)" Text="Task with Sub Tasks" IconName="@IconNames.All.LightningFill" />
+            <LgToolbarButton OnClick="async () => await MyMainTaskAsync(true)" Text="Task with Sub Tasks (Parallel)" IconName="@IconNames.All.LightningFill" /> }
+        else
+        {
+            <LgCheckBox @bind-Value="_isCircle" CheckBoxKind="CheckBoxKind.Toggle" Text="Circle" OnChange="(args) => ShowInformation(args.Value.ToString())" />}
+    </Toolbar>
+    <ChildContent>
+        <LgLoaderView Progress="_progressComplex" ProgressType="_isCircle ? ProgressType.Circle : ProgressType.Bar">
+            @("loader-text".Translate())
+        </LgLoaderView>
+    </ChildContent>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />
+

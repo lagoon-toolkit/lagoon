@@ -1,0 +1,65 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <LagoonPriority>2</LagoonPriority>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    <LangVersion>10.0</LangVersion>
+    <OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <Authors>Lagoon Toolkit team</Authors>
+    <Company>Lagoon Toolkit team</Company>
+    <Description>Lagoon for backend applications.</Description>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="6.0.10" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="OpenIddict.AspNetCore" Version="3.1.1" />
+    <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="OpenIddict.Quartz" Version="3.1.1" />
+    <PackageReference Include="WebPush" Version="1.0.12" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.25" />
+    <PackageReference Include="MessagePack.AspNetCoreMvcFormatter" Version="2.4.59" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\App\Pages\Shared\**" />
+    <Compile Remove="Areas\Identity\Pages\Shared\**" />
+    <Content Remove="Areas\App\Pages\Shared\**" />
+    <Content Remove="Areas\Identity\Pages\Shared\**" />
+    <EmbeddedResource Remove="Areas\App\Pages\Shared\**" />
+    <EmbeddedResource Remove="Areas\Identity\Pages\Shared\**" />
+    <None Remove="Areas\App\Pages\Shared\**" />
+    <None Remove="Areas\Identity\Pages\Shared\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lagoon.Model\Lagoon.Model.csproj" />
+    <ProjectReference Include="..\Lagoon.Services\Lagoon.Services.csproj" />
+    <ProjectReference Include="..\Lagoon.Shared\Lagoon.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Saml\Messages\Templates\SamlAuthnRequest.xml" />
+    <EmbeddedResource Include="Saml\Messages\Templates\SamlMetadataIdP.xml" />
+    <EmbeddedResource Include="Saml\Messages\Templates\SamlMetadataSP.xml" />
+    <EmbeddedResource Include="Saml\Messages\Templates\SamlResponse.html" />
+    <EmbeddedResource Include="Saml\Messages\Templates\SamlResponse.xml" />
+  </ItemGroup>
+
+  <!-- Add copies "Lagoon.Server.targets" into "build\$(TargetFramework)\" of the NuGet package -->
+  <PropertyGroup>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);LagoonServerBuildContent</TargetsForTfmSpecificContentInPackage>
+  </PropertyGroup>
+  <Target Name="LagoonServerBuildContent">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="resources\build\Lagoon.Server.targets" PackagePath="build\$(TargetFramework)\" />
+    </ItemGroup>
+  </Target>
+
+  <!-- Lagoon pre-build actions -->
+  <Import Project="..\LagoonPreBuild.targets" />
+
+</Project>

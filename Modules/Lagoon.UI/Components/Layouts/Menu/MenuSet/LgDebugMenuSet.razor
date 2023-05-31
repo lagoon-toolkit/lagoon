@@ -1,0 +1,11 @@
+@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+
+<LgMenuSet Id=@Id>
+    @if (Visible)
+    {
+        <LgDebugMenuItem>
+            @ChildContent
+        </LgDebugMenuItem>
+    }
+</LgMenuSet>

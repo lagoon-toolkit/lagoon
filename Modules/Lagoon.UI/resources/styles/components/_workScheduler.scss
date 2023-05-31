@@ -1,0 +1,301 @@
+﻿$row-bg-hightlight: #00000009;
+$weekend-bg-hightlight: #00000009;
+$today-bg-hightlight: rgba(255, 166, 0, 0.42);
+$row-border: 1px solid #00000014;
+$wst-primary: white;
+$wst-secondary: #F3FBFD;
+$ws-gripper: #00000014;
+$schedule-item-bar-color: #B8ECF6;
+$schedule-join-bar-color: #B8ECF6;
+$schedule-item-milestone-color: #06BCE3B0;
+
+.mainContainer {
+    position: relative;
+    -webkit-user-select: none;
+    user-select: none;
+    outline: $row-border;
+}
+
+.projectOuterContainer {
+    display: inline-block;
+    height: 100%;
+}
+
+.projectInnerContainer {
+    width: 100%;
+    overflow: hidden;
+    background: $wst-primary;
+    border-right: $row-border;
+}
+
+.timelineAndScheduleContainer {
+    background: $wst-primary;
+    display: inline-block;
+    position: absolute;
+    height: 100%;
+}
+
+.timelineContainer {
+    overflow: hidden;
+    border-bottom: $row-border;
+
+    .wst-primary, .wst-secondary {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+}
+
+.wst-timeline-block-separator {
+    border-right: 1px solid #00000014;
+    border-radius: 0px !important;
+}
+
+.scheduleContainer {
+    overflow: scroll;
+    position: relative;
+
+    .wk-row:hover {
+        background: $row-bg-hightlight;
+    }
+}
+
+.horizontalScrollSpace {
+    position: absolute;
+    background: $scrollbarBG;
+    bottom: 0px;
+    width: 100%;
+    height: $scrollbar-width;
+}
+
+.verticalScrollSpace {
+    position: absolute;
+    background: $scrollbarBG;
+    width: $scrollbar-width;
+    right: 0px;
+    top: 0px;
+}
+
+schedule-draw-area {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.wk-scrollToday {
+    text-align: center;
+}
+
+.wst {
+    height: 100%;
+    display: inline-block;
+    overflow: hidden;
+
+    .wks-dayname {
+        height: 20px;
+        text-transform: uppercase;
+    }
+
+    .wks-daynum {
+        font-size: larger;
+    }
+}
+
+.wst-primary, .wst-secondary {
+    font-weight: normal;
+    text-align: center
+}
+
+.wst-primary {
+    background: $wst-primary;
+}
+
+.wst-secondary {
+    background: $wst-secondary
+}
+
+.alt-bg-container {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    min-height: 100%;
+    overflow: hidden;
+}
+
+.wst-group-primary, .wst-group-secondary {
+    font-weight: 500;
+    height: initial;
+}
+
+.wst-group-primary {
+    background: $wst-primary;
+}
+
+.wst-group-secondary {
+    background: $wst-secondary;
+}
+
+.wst-group {
+    white-space: nowrap;
+}
+
+.wk-row {
+    border-bottom: $row-border;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    padding-left: 10px;
+}
+
+.wk-row-highlight {
+    background: $row-bg-hightlight;
+}
+
+.wk-row-group {
+    cursor: pointer;
+    border-right: none !important;
+}
+
+.wk-rowhour {
+    overflow: initial !important;
+    line-height: unset !important;
+    font-size: 1rem;
+}
+
+.wk-rowhour-item {
+    position: absolute;
+    top: -11px;
+    width: 100%;
+    text-align: right;
+    padding-right: 10px
+}
+
+.wk-rowhour-border {
+    display: inline-block;
+    width: 10px;
+    height: 1px;
+    vertical-align: middle;
+    background: #00000014;
+}
+
+.wk-group-default {
+    color: black;
+    padding-left: 30px;
+    white-space: nowrap;
+}
+
+.wk-column-mode {
+    display: grid;
+
+
+    .wk-group-default {
+        padding-left: 0px;
+    }
+}
+
+.wk-column-groupContent {
+    grid-column: 1;
+    display: inline-flex;
+    align-items: center;
+    overflow: hidden;
+    font-weight: bold;
+    cursor: pointer
+}
+
+
+.wk-bar {
+    z-index: 100;
+    position: absolute;
+    background: $schedule-item-bar-color;
+    overflow: hidden;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.wk-bar-join-milestone {
+    z-index: 50;
+    position: absolute;
+    background: $schedule-join-bar-color;
+    overflow: hidden;
+    border-radius: 3px;
+    height: 2px;
+    margin: 0px auto;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.wk-milestone {
+    z-index: 200;
+    position: absolute;
+}
+
+.wk-milestone-square {
+    transform: rotate(45deg);
+    background: $schedule-item-milestone-color;
+    border-radius: 3px;
+}
+
+.wk-milestone-arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 18px solid $schedule-item-milestone-color;
+    position: absolute;
+    left: -2px;
+    border-radius: 3px
+}
+
+.wk-toolbar {
+    border-bottom: $row-border;
+    border-right: $row-border;
+    background: $wst-primary;
+    position: relative;
+}
+
+.wk-toolbar-gripper {
+    height: 100%;
+    width: 4px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background: $ws-gripper;
+    cursor: col-resize;
+}
+
+.wst-today {
+    background: $today-bg-hightlight;
+    border-radius: 0px !important;
+}
+
+.wst-today-bar {
+    width: 3px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background: $today-bg-hightlight;
+}
+
+.wk-drag-indicator {
+    background: lightblue;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.wk-drag-indicator-container {
+    position: absolute;
+    top: -8px;
+    left: -65px;
+    opacity: 0.7;
+}
+
+.wk-ext-draggable {
+
+    .wk-grag-grip {
+        font-size: large;
+        cursor: grab;
+    }
+}
+
+.wk-grabbing-grip {
+    cursor: grabbing !important;
+}

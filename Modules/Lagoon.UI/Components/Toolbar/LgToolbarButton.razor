@@ -1,0 +1,21 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgButton
+
+@if (ToolbarMenuParent != null)
+{
+    <a @attributes="GetAdditionalAttributes()" class="@GetClassAttribute()" href="@(string.IsNullOrEmpty(Uri)?"#":Uri)" @onclick="OnClickInternalAsync" @onclick:preventDefault="true" @onclick:stopPropagation="true"
+       tabindex="0" aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy" role="menuitem">
+        @if (!string.IsNullOrEmpty(IconName))
+        {
+            <div class="nav-item-icon"><LgIcon IconName="@IconNameRendering" /></div>
+        }
+        @if (!string.IsNullOrEmpty(TextRendering))
+        {
+            <div class="nav-item-lbl"><span>@TextRendering</span></div>
+        }
+    </a>
+}
+else
+{
+    base.BuildRenderTree(__builder);
+}

@@ -1,0 +1,19 @@
+﻿@namespace Lagoon.UI.Components.WorkScheduler.Internal
+@inherits ComponentBase
+@typeparam TItem
+
+@for (TimeSpan __timeStep = WorkScheduler.AgendaHoursFrom; __timeStep <= WorkScheduler.AgendaHoursTo; __timeStep = __timeStep.Add(new TimeSpan(0, WorkScheduler.AgendaRowStep, 0)))
+{
+    <div style=@($"height:{WorkScheduler.RowHeight}px; line-height:{WorkScheduler.RowHeight}px;") class=@($"wk-row wk-rowhour border-0 p-0 {WorkScheduler.IsAgendaRowHighlight(__timeStep)}")>
+        <div class="wk-rowhour-item">
+            @if (WorkScheduler.AgendaHoursRender != null)
+            {
+                @WorkScheduler.AgendaHoursRender(__timeStep)
+            }
+            else
+            {
+                @TsToStr(__timeStep)
+            }
+        </div>
+    </div>
+}

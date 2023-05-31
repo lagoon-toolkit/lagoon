@@ -1,0 +1,40 @@
+﻿@inherits DemoPageForm
+
+<LgTitle Text="NumericBox" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgEditForm @ref=formDemo Model=@formData ValidationErrorMessage="#ErrorFormDemo" UseValidationComplexModel="true">
+        <LgTitle Text="#lblNumericTitleInt" TitleLevel="TitleLevel.Level2" />
+        <LgNumericBox CssClass="col-md-6 col-sm-12"
+                      Disabled="@IsDisable" ReadOnly="@IsReadOnly"
+                      IncrementStep="IncrementStep"
+                      Label="@Label" @bind-Value="formData.Year"
+                      Prefix="@PrefixSuffix.Prefix" PrefixType="PrefixSuffix.PrefixType" Suffix="@PrefixSuffix.Suffix" SuffixType="PrefixSuffix.SuffixType" />
+
+        <LgTitle Text="#lblNumericTitleDouble" TitleLevel="TitleLevel.Level2" />
+        <LgNumericBox CssClass="col-md-6 col-sm-12"
+                      Decimals="@Decimals"
+                      Disabled="@IsDisable" ReadOnly="@IsReadOnly"
+                      Label="@Label" @bind-Value="formData.DoubleValue" Placeholder="Enter double value"
+                      Prefix="@PrefixSuffix.Prefix" PrefixType="PrefixSuffix.PrefixType" Suffix="@PrefixSuffix.Suffix" SuffixType="PrefixSuffix.SuffixType" />
+    </LgEditForm>
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <CommonParameters CssClass="col-md-3" OnLabelEdition="OnChangeLabel" OnDisableEdition="OnChangeDisable" OnReadOnlyEdition="OnChangeReadOnly" />
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgNumericBox CssClass="col-md-5 col-sm-6" Label="#lblNumberIncrementation" IncrementStep="1" @bind-Value="IncrementStep" />
+    </section>
+
+    <section class="d-flex align-items-center col-md-6">
+        <LgNumericBox CssClass="col-md-5 col-sm-6" Decimals="@Decimals" Label="#lblNumberDecimal" @bind-Value="Decimals" Placeholder="#lblNumberDecimal" />
+    </section>
+
+    <PrefixSuffixParameters @bind-PrefixSuffix="PrefixSuffix" />
+
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />
+

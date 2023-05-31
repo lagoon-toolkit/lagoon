@@ -1,0 +1,121 @@
+﻿.lg-input-file {
+    border: 2px solid transparent;
+    padding: 0.5rem;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: $text-color;
+    cursor: pointer;
+    position: relative;
+    font-size: 0.75rem;
+    box-shadow: 0 1px 5px 0 rgba(00, 00, 00, 0.5);
+    border-radius: 4px;
+
+    & ~ .lbl {
+        font-size: 0.6rem;
+    }
+
+    &:hover, &.dragged-over {
+        border-color: $primary1;
+
+        & .image-icon {
+            color: $primary1;
+        }
+    }
+
+    &:focus-within {
+        box-shadow: 0 0 0 2px white, 0 0 0 4px $secondary3;
+    }
+
+    & .image-icon {
+        width: 2rem;
+        height: 2rem;
+        color: $dark3;
+    }
+
+    & .instruction-message {
+        font-weight: 400;
+    }
+
+    & .action-message {
+        color: $dark2;
+        font-weight: 400;
+
+        .upload-action-icon {
+            display: none;
+        }
+    }
+
+    & .uploaded-message {
+        font-weight: 400;
+    }
+
+    & .action-button {
+        position: relative;
+        text-decoration: underline;
+        color: $secondary1;
+    }
+
+    & input[type=file] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100% !important;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    & .input-container-hidden {
+        position: relative;
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .progress {
+        background-color: inherit;
+    }
+
+    & .card.files-list {
+        font-weight: 400;
+        box-shadow: none;
+        background-color: initial;
+        overflow-y: auto;
+        border: none;
+
+        & .card-body {
+            margin: 0;
+            flex: 1 1 auto;
+
+            & .row {
+                border-radius: 5rem;
+                background-color: $gray0;
+                margin-top: 5px;
+                color: $primary2;
+            }
+        }
+    }
+
+    & .file-container-list {
+        max-height: 150px;
+        overflow-y: auto;
+    }
+
+    .select-your-files {
+        text-align: center;
+        color: $secondary1;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    & .small-dot-download {
+    }
+
+    & .small-dot-delete {
+    }
+
+    & .small-top-bottom-padding {
+    }
+}

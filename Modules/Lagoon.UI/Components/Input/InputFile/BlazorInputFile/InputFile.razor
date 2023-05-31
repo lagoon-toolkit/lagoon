@@ -1,0 +1,9 @@
+﻿@namespace Lagoon.UI.Internal.BlazorInputFile
+@inherits LgComponentBase
+@using Lagoon.UI.Internal.BlazorInputFile
+@using Microsoft.JSInterop
+@using System.IO
+@using Microsoft.JSInterop.WebAssembly
+
+@* We use title="" to disable the "No choosen file" tooltip (selected files are managed separatly from the input element) *@
+<input type="file" @ref="_inputFileElement" @attributes="UnmatchedParameters" title="" />

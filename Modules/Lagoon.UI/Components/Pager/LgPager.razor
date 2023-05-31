@@ -1,0 +1,109 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgComponentBase;
+
+<div class="pagination @CssClass">
+    @if (IsTotalPagesUnknown)
+    {
+        var prevDisabled = CurrentPage == 1;
+        string cssClassprev = (prevDisabled ? "disabled" : "") + " previous";
+
+        <LgNavLink CssClass="@cssClassprev" OnClick="() => OnChangeAsync(CurrentPage - 1)" tabindex="@(prevDisabled ? -1 : 0)" disabled="@(prevDisabled ? "disabled" : "")"
+                   aria-label="@("#PagerPreviousAL".CheckTranslate())">
+            <ChildContent>
+                <LgIcon IconName="@IconNames.All.ArrowLeftShort"></LgIcon>
+                @if (DisplayText)
+                {
+                    <span>@("#PagerPrevious".CheckTranslate())</span>
+                }
+            </ChildContent>
+        </LgNavLink>
+
+        <LgNavLink CssClass="active" OnClick="() => OnChangeAsync(CurrentPage)" tabindex="0"
+                   aria-label="@("PagerPage".Translate(CurrentPage))" aria-current="true">
+            <ChildContent>
+                <span>@CurrentPage</span>
+            </ChildContent>
+        </LgNavLink>
+
+        string cssClassnext = (DisableNextButton ? "disabled" : "") + " next";
+        <LgNavLink CssClass="@cssClassnext" OnClick="() => OnChangeAsync(CurrentPage + 1)" tabindex="@(DisableNextButton ? -1 : 0)" disabled="@(DisableNextButton ? "disabled" : "")"
+                   aria-label="@("#PagerNextAL".CheckTranslate())">
+            <ChildContent>
+                @if (DisplayText)
+                {
+                    <span>@("#PagerNext".CheckTranslate())</span>
+                }
+                <LgIcon IconName="@IconNames.All.ArrowRightShort"></LgIcon>
+            </ChildContent>
+        </LgNavLink>
+    }
+    else
+    {
+        var prevDisabled = @PagerHelper.CurrentPage == 1;
+        string cssClassprev = (prevDisabled ? "disabled" : "") + " previous";
+        <LgNavLink CssClass="@cssClassprev" OnClick="() => OnChangeAsync(PagerHelper.CurrentPage - 1)" tabindex="@(prevDisabled ? -1 : 0)" disabled="@(prevDisabled ? "disabled" : "")"
+                   aria-label="@("#PagerPreviousAL".CheckTranslate())">
+            <ChildContent>
+                <LgIcon IconName="@IconNames.All.ArrowLeftShort"></LgIcon>
+                @if (DisplayText)
+                {
+                    <span>@("#PagerPrevious".CheckTranslate())</span>
+                }
+            </ChildContent>
+        </LgNavLink>
+        <LgNavLink CssClass="@(PagerHelper.CurrentPage == 1 ? "active" : "")" OnClick="() => OnChangeAsync(1)" tabindex="0"
+                   aria-label="@("PagerPage".Translate("1"))" aria-current="@(PagerHelper.CurrentPage == 1 ? "true" : "false")">
+            <ChildContent>
+                <span>1</span>
+            </ChildContent>
+        </LgNavLink>
+
+        @if (TotalPages > 1)
+        {
+            @if (PagerHelper.HideLeftPages)
+            {
+                <span>...</span>
+            }
+
+            @for (int i = PagerHelper.StartPage; i <= PagerHelper.EndPage; i++) 
+            {
+                var j = i;
+                if (j == 1 || j == TotalPages)
+                    continue;
+
+                <LgNavLink CssClass="@(PagerHelper.CurrentPage == i ? "active" : "")" OnClick="() => OnChangeAsync(j)" tabindex="0"
+                           aria-label="@("PagerPage".Translate(j))" aria-current="@(PagerHelper.CurrentPage == i ? "true" : "false")">
+                    <ChildContent>
+                        <span>@j</span>
+                    </ChildContent>
+                </LgNavLink>
+            }
+
+            @if (PagerHelper.HideRightPages)
+            {
+                <span>...</span>
+            }
+
+            <LgNavLink CssClass="@(PagerHelper.CurrentPage == TotalPages ? "active" : "")" OnClick="() => OnChangeAsync(TotalPages)" tabindex="0" aria-label="@("PagerPage".Translate(TotalPages))">
+                <ChildContent>
+                    <span>@TotalPages</span>
+                </ChildContent>
+            </LgNavLink>
+        }
+
+        var nextDisabled = @PagerHelper.CurrentPage == TotalPages;
+        string cssClassnext = (@nextDisabled ? "disabled" : "") + " next";
+        <LgNavLink CssClass="@cssClassnext" OnClick="() => OnChangeAsync(PagerHelper.CurrentPage + 1)" tabindex="@(nextDisabled ? -1 : 0)" disabled="@(nextDisabled ? "disabled" : "")"
+                   aria-label="@("#PagerNextAL".CheckTranslate())">
+            <ChildContent>
+                @if (DisplayText)
+                {
+                    <span>
+                        <span>@("#PagerNext".CheckTranslate())</span>
+                    </span>
+                }
+                <LgIcon IconName="@IconNames.All.ArrowRightShort"></LgIcon>
+            </ChildContent>
+        </LgNavLink>
+    }
+</div>

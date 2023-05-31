@@ -1,0 +1,58 @@
+﻿@inherits LgPage
+<!-- Search -->
+<style>
+    .card {
+        float: left;
+        width: 8rem;
+        margin-right: 0.5rem;
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        margin: .8rem .4rem;
+    }
+
+    .card * {
+        background-color: inherit; /* Fix animation flickering on chrome */
+    }
+
+    .card-title {
+        overflow: hidden;
+        width: 7.2rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: center;
+        font-size: .8rem;
+    }
+
+    .allIcons {
+        clear: both;
+        padding-top: 1rem;
+    }
+</style>
+<LgTextBox style="width:200px" Placeholder="Search" @bind-Value="SearchTerm" Prefix="@IconNames.All.Search" PrefixType="InputLabelType.IconName" OnInput="SearchIcon" />
+<!-- Results -->
+<div>
+    @if (ResultIcons != null)
+    {
+        var isAlias = true;
+        @foreach (var iconKey in ResultIcons)
+        {
+            if (isAlias && (GetAliasPrefix(iconKey) is null))
+            {
+                isAlias = false;
+                @(new MarkupString("</div>"))
+                <div class="allIcons"><LgTitle Text="All" /></div>
+                @(new MarkupString("<div>"))
+            }
+            <div class="card mt-2">
+                <div class="card-body">
+                    <h6 class="card-title">@BuildName(iconKey)</h6>
+                    <div class="text-center text-extralarge">
+                        <LgIcon IconName="@iconKey" />
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

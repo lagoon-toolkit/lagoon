@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>10.0</LangVersion>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Client\Demo.Client.csproj" />
+    <ProjectReference Include="..\Services\Demo.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Modules\Lagoon.Server\Lagoon.Server.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.10" />
+  </ItemGroup>
+
+  <!-- We add the reference to the "Batch" project to have the ".exe" in the publish output path -->
+  <ItemGroup Condition="$(Configuration.Contains('Release'))">
+    <ProjectReference Include="..\Batch\Demo.Batch.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\..\..\Modules\Lagoon.Server\resources\build\Lagoon.Server.targets" />
+
+</Project>

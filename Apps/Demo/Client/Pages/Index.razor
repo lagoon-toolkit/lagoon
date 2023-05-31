@@ -1,0 +1,130 @@
+@inherits LgPage
+@namespace  Lagoon.UI.Demo.Pages
+
+<style>
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .content ul {
+        list-style: none;
+    }
+
+    .content ul li {
+        margin: 0 0 10px 0;
+    }
+
+    .summary, .summary .lbl {
+        position: relative;
+    }
+
+    .frame-home > .frame-content {
+        min-height: 13rem;
+    }
+
+    .lagoon-logo {
+        min-width: fit-content;
+    }
+</style>
+
+<LgEditForm Model="@_settings">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <LgFrame>
+                <div class="content">
+                    <div class="col-md-1 lagoon-logo">
+                        <img src="./images/Logo_lagoon.png" height="100" />
+                    </div>
+                    <div class="col-md-10 my-auto">
+                        <LgTitle Text="#welcomeTitle" TitleLevel="TitleLevel.Level1" CssClass="color-primary1"></LgTitle>
+                        <p class="summary">
+                            <LgLabel Text="#welcomeInformation"></LgLabel>
+                        </p>
+                    </div>
+                </div>
+            </LgFrame>
+        </div>
+    </div>
+    <div class="content row">
+
+        <div class="col-4">
+            <LgFrame Title="#componentTitleHome" CssClass="frame-home">
+                <ul>
+                    <li>
+                        <LgIcon IconName="@(IconNames.All.BorderAll)" CssClass="mr-3"></LgIcon>
+                        <LgHyperlink Uri="demo/showcase/Breadcrumb"><LgLabel Text="#sideTabStructureApp"></LgLabel></LgHyperlink>
+                    </li>
+                    <li>
+                        <LgIcon IconName="@(IconNames.All.BorderOuter)" CssClass="mr-3"></LgIcon>
+                        <LgHyperlink Uri="demo/showcase/Accordion"><LgLabel Text="#sideTabStructurePage"></LgLabel></LgHyperlink>
+                    </li>
+                    <li>
+                        <LgIcon IconName="@(IconNames.All.CardHeading)" CssClass="mr-3"></LgIcon>
+                        <LgHyperlink Uri="demo/showcase/BigEmptyMsg"><LgLabel Text="#sideTabPresentationInfo"></LgLabel></LgHyperlink>
+                    </li>
+                    <li>
+                        <LgIcon IconName="@(IconNames.All.InputCursorText)" CssClass="mr-3"></LgIcon>
+                        <LgHyperlink Uri="demo/showcase/Button"><LgLabel Text="#sideTabUserInteraction"></LgLabel></LgHyperlink>
+                    </li>
+                    <li>
+                        <LgIcon IconName="@(IconNames.All.Bell)" CssClass="mr-3"></LgIcon>
+                        <LgHyperlink Uri="demo/showcase/Banner"><LgLabel Text="#sideTabFeedback"></LgLabel></LgHyperlink>
+                    </li>
+                </ul>
+            </LgFrame>
+        </div>
+
+        <div class="col-4">
+            <LgFrame Title="#basicTitleHome" CssClass="frame-home">
+                <ul>
+                    <li>
+                        <LgIcon IconName="@(IconNames.All.Palette)" CssClass="mr-3"></LgIcon>
+                        <LgHyperlink Uri="demo/elementBase/ColorPalette"><LgLabel Text="#colorPalette"></LgLabel></LgHyperlink>
+                    </li>
+                    <li>
+                        <LgIcon IconName="@(IconNames.All.Book)" CssClass="mr-3"></LgIcon>
+                        <LgHyperlink Uri="demo/showcase/Title"><LgLabel Text="#Fontbook"></LgLabel></LgHyperlink>
+                    </li>
+                    <li>
+                        <LgIcon IconName="@(IconNames.All.Grid3x2)" CssClass="mr-3"></LgIcon>
+                        <LgHyperlink Uri="demo/elementBase/Icons"><LgLabel Text="#pgIconsTitle"></LgLabel></LgHyperlink>
+                    </li>
+                    @*<li>
+                        <LgIcon IconName="@(IconNames.All.Newspaper)" CssClass="mr-3"></LgIcon>
+                        <LgHyperlink Uri="lg/trace"><LgLabel Text="#TrackingLog"></LgLabel></LgHyperlink>
+                    </li>*@
+                </ul>
+            </LgFrame>
+        </div>
+
+        <div class="col-4">
+            <LgFrame Title="#linksTitleHome" CssClass="frame-home">
+                <ul>
+                    <li>
+                        <LgIcon IconName="@(IconNames.All.FileText)" CssClass="mr-3"></LgIcon>
+                        <LgHyperlink Uri="https://doc.desirade.fr/?p=LagoonH-art~144" Target="_blank"><LgLabel Text="#startLagoon"></LgLabel></LgHyperlink>
+                    </li>
+                    <li>
+                        <LgIcon IconName="@(IconNames.All.FileText)" CssClass="mr-3"></LgIcon>
+                        <LgHyperlink Uri="https://doc.desirade.fr/?p=LagoonH-art~714" Target="_blank"><LgLabel Text="#releasenote"></LgLabel></LgHyperlink>
+                    </li>
+                    <li>
+                        <LgIcon IconName="@(IconNames.All.Globe)" CssClass="mr-3"></LgIcon>
+                        <LgHyperlink Uri="https://www.desirade.fr/methodes-techniques/lagoon/" Target="_blank"><LgLabel Text="#lgWS"></LgLabel></LgHyperlink>
+                    </li>
+                    <li>
+                        <LgIcon IconName="@(IconNames.All.Globe)" CssClass="mr-3"></LgIcon>
+                        <LgHyperlink Uri="https://www.desirade.fr/" Target="_blank"><LgLabel Text="#desiradeWS"></LgLabel></LgHyperlink>
+                    </li>
+                    <li>
+                        <LgIcon IconName="@(IconNames.All.Globe)" CssClass="mr-3"></LgIcon>
+                        <LgHyperlink Uri="https://www.infotel.com/" Target="_blank"><LgLabel Text="#infotelWS"></LgLabel></LgHyperlink>
+                    </li>
+                </ul>
+            </LgFrame>
+        </div>
+    </div>
+</LgEditForm>
+
+

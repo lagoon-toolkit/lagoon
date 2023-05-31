@@ -1,0 +1,41 @@
+﻿@using Lagoon.UI.Components.Input.Internal;
+@using Lagoon.UI.Components.Internal
+@inherits LgInputRenderBase<string>
+@namespace Lagoon.UI.Components
+@{
+    ColorPickerBox = @<LgComponentGroup>
+        <div class="form-input colorPickerBox form-group">
+            <LgDropDown @ref="DropDown" CssClass="colorPickerBox-dropdown" @bind-IsOpen="_dropdownVisible" Disabled="Disabled" ReadOnly="ReadOnly" 
+                        AriaLabel="@AriaLabel" AriaLabelledBy="@AriaLabelledBy" OpenOnFocus="OpenOnFocus">
+                <ControlContent>
+                    <LgButton style="@($"background-color:{CurrentValue};")" Kind="ButtonKind.Custom" CssClass="selected-box" />
+
+                    @if (ShowInput)
+                    {
+                        <LgTextBox CssClass="input-color" @bind-Value="CurrentValue" Disabled="Disabled" ReadOnly="ReadOnly" OnChange="InputColorChangeAsync" 
+                                   @onmousedown:stopPropagation="true" />
+                    }
+                    </ControlContent>
+                    <DropDownContent>
+                        @if (_colors.Any())
+                        {
+                            <div class="color-picker-content" tabindex="-1" aria-hidden="true">
+                                @foreach (string color in _colors)
+                                {
+                                    if (!String.IsNullOrEmpty(color))
+                                    {
+                                        <div class="@($"option-item dropdown-item {(color == CurrentValue ? "option-item-selected selected" : "")}" )"
+                             style="@($"background-color:{color};")" @onclick="(() => ItemSelectionAsync(color))" @onclick:preventDefault="true"  @onclick:stopPropagation="true" tabindex="0" aria-label="@color">
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        }
+                    </DropDownContent>
+                </LgDropDown>
+            </div>
+        </LgComponentGroup>;
+
+    base.BuildRenderTree(__builder);
+}
+

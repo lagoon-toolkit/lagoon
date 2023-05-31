@@ -1,0 +1,166 @@
+﻿$line-height-treeview: 1.6;
+
+// Base
+div.filterbox {
+    width: 100%;
+    // Display area
+    & div.dropdown-control {
+        user-select: none;
+        cursor: pointer;
+        width: inherit;
+        // Selection display
+        & > a {
+            width: inherit;
+            max-width: inherit;
+
+            & > div {
+                display: inline-block;
+                overflow-x: hidden;
+                overflow-y: visible;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                width: calc(100% - 2em);
+            }
+
+            & > span.reset {
+                margin-left: 0.3em;
+                position: absolute;
+                top: 50%;
+                transform: translate(0, -50%);
+                right: 0.5em;
+            }
+            /*& > svg {
+                margin-left: 0.3em;
+                // Center icons
+                position: absolute;
+                top: 50%;
+                transform: translate(0, -50%);
+                right: 0.5em;
+            }*/
+        }
+    }
+    // TextFilter & DateFilter
+    & > div.dropdown-menu {
+        padding: 0.3em;
+        // Hidden tab and option
+        .hide {
+            display: none !important;
+        }
+
+        div.lg-tab-header {
+            flex: content;
+        }
+        // Tab
+        .filter-tab:not(.hide) {
+            margin: 1em;
+            flex: auto;
+            display: flex;
+            flex-direction: column;
+            //Date Treeview
+            & div.treeview {
+                flex: auto;
+                overflow-y: auto;
+                max-height: $filterbox-dropdown-max-height;
+
+                .form-group-chk.form-group {
+                    margin-bottom: 0;
+                    line-height: $line-height-treeview;
+                }
+            }
+
+            .filter-adv, .filter-numeric {
+                .input-group-prepend {
+                    flex: 0;
+                }
+
+                .filter-value {
+                    flex: 1;
+                }
+            }
+
+            .filter-adv-txt-preview {
+                margin-top: 0.5rem;
+
+                span {
+                    padding-left: 1.4rem;
+                    display: block;
+                    font-size: $font-size-base;
+                    font-weight: normal;
+                }
+            }
+
+            .filter-adv {
+
+                .big-msg {
+                    svg.bi {
+                        height: 3em;
+                        margin: 0.5rem 0rem 0 0;
+                    }
+
+                    h2.lblTitle {
+                        font-size: 0.7rem;
+                        line-height: 0.8rem;
+                    }
+                }
+            }
+        }
+        // Buttons area
+        span.filterbox-buttons {
+            flex: content;
+            padding: 0.2em;
+            text-align: right;
+
+            & > button:first-child {
+                float: left;
+            }
+        }
+        // Search input
+        & div.filter-search {
+            flex: content;
+
+            & ~ div.filter-selection {
+                margin-right: 0.5em;
+
+                & svg {
+                    margin-left: 0.5em;
+                    top: 50%;
+                }
+            }
+        }
+        // List
+        .form-group-chk {
+            font-size: $font-size-base;
+
+            &.filterbox-list {
+                overflow-y: auto;
+                max-height: $filterbox-dropdown-max-height;
+            }
+        }
+
+        & .filter-tab {
+            .filter-sublist {
+                font-size: $font-size-base;
+            }
+
+            & div.filter-adv, :not(&) div.filter-numeric-item {
+                & > div.form-group.filter-value {
+                    margin-bottom: 0;
+                }
+            }
+
+            & > .form-group-chk {
+                margin: 0.3em;
+                flex: content;
+            }
+        }
+    }
+    // no tab style
+    & div.no-tab {
+        padding: 1rem 1rem 0 1rem;
+        margin-bottom: 1rem;
+
+        & > div.form-group-chk {
+            margin-bottom: 0;
+        }
+    }
+}

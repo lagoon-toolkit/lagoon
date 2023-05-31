@@ -1,0 +1,99 @@
+﻿.color-pal{
+    min-height:75px;
+}
+
+.color-pal-pr3 {
+    background-color: $primary3;
+}
+.color-pal-pr2 {
+    background-color: $primary2;
+}
+.color-pal-pr1 {
+    background-color: $primary1;
+}
+
+.color-pal-se3 {
+    background-color: $secondary3;
+}
+
+.color-pal-se2 {
+    background-color: $secondary2;
+}
+.color-pal-se1 {
+    background-color: $secondary1;
+}
+
+.color-pal-light3 {
+    background-color: $light3;
+}
+
+.color-pal-light2 {
+    background-color: $light2;
+}
+
+.color-pal-light1 {
+    background-color: $light1;
+}
+
+.color-pal-light0 {
+    background-color: $light0;
+    border: 1px solid #dedede;
+}
+
+.color-pal-light1-3 {
+    background-color: $light1-30;
+}
+
+.color-pal-dark3 {
+    background-color: $dark3;
+    color:white;
+}
+
+.color-pal-dark2 {
+    background-color: $dark2;
+    color: white;
+}
+
+.color-pal-dark1 {
+    background-color: $dark1;
+    color: white;
+}
+
+.color-pal-gray3 {
+    background-color: $gray3;
+}
+
+.color-pal-gray2 {
+    background-color: $gray2;
+}
+
+.color-pal-gray1 {
+    background-color: $gray1;
+}
+
+.color-pal-gray0 {
+    background-color: $gray0;
+}
+.color-pal-gray0-50 {
+    background-color: $gray0-50;
+}
+
+.color-pal-error {
+    background-color: $danger;
+}
+.color-pal-success {
+    background-color: $success;
+}
+.color-pal-info {
+    background-color: $info;
+}
+.color-pal-warning {
+    background-color: $warning;
+}
+.color-pal-error-10 {
+    background-color: $danger-10;
+}
+
+.color-pal-success-10 {
+    background-color: $success-10;
+}

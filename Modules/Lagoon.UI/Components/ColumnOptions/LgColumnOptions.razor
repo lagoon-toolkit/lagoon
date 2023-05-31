@@ -1,0 +1,29 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgAriaComponentBase
+
+<LgModal @ref="_lgModal" Title="@("ColumnOptionsTitle".Translate())" OnClose="OnClose"
+         CssClass="column-options-modal" Summary="@("ColumnOptionsDescription".Translate())"
+         ModalSize="ModalSize.Large">
+    <ChildContent>
+        <div class="column-options-content" role="tabpanel" tabindex="-1" data-is-scrollable="true" @ref="_elementReference">
+            <ul @key="@_keyList" class="columns" ondragover="event.preventDefault();">                
+                <CascadingValue Value="this">
+                    @foreach (ColumnOption displayedColumn in DisplayedColumnsByOrder)
+                    {                            
+                        <LgColumnOptionItem @key="displayedColumn" AllowFrozen="AllowFrozen" AllowVisibility="AllowVisibility"
+                                            DisplayedColumn="displayedColumn" />
+                    }                   
+                </CascadingValue>
+            </ul>
+        </div>
+    </ChildContent>
+    <FooterContent>
+        <div class="btn-add-column-container">
+            <LgButton CssClass="btn-add-column" ButtonSize="ButtonSize.Large" IconName="@IconNames.All.Plus" OnClick="@(()=>AddColumn())" Disabled="DisableAddButton"
+                      Kind="ButtonKind.Secondary" Text="@("ColumnOptionsAddColumn".Translate())"></LgButton>
+        </div>
+        <LgButton Text="@("ColumnOptionsCancelBtn".Translate())" Kind="ButtonKind.Secondary" CssClass="btn-lg" OnClick=@_lgModal.CloseAsync />
+        <LgButton Text="@("ColumnOptionsSaveBtn".Translate())" Kind="ButtonKind.Primary" CssClass="btn-lg" OnClick="SaveColumnOptionsAsync" Disabled="DisableSaveButton" />
+    </FooterContent>
+</LgModal>
+

@@ -1,0 +1,45 @@
+﻿@page
+@model Lagoon.Server.Areas.App.Pages.Config.ConfigModel
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <p style="color: red">@Model.ErrorMessage</p>
+}
+
+@if (Model.ShowApplyPendingMigrations)
+{
+    <form id="init" method="post">
+        <button type="submit" class="btn btn-primary px-3 py-2" asp-page-handler="ApplyPendingMigration">Apply db migration</button>
+    </form>
+}
+else if (Model.IsCurrentPublicUrlMissing)
+{
+    <form id="init" method="post">
+        <button type="submit" class="btn btn-primary px-3 py-2" asp-page-handler="OpeniddictRegistration">Registrer PublicUrl</button>
+    </form>
+}
+else
+{
+    <p>App is up to date</p>
+}
+
+@if (Model.IsUserAuthenticated && Model.RedirectUris.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Configured RedirectUris</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var redirectUri in Model.RedirectUris)
+            {
+                <tr>
+                    <td>@redirectUri</td>
+                    <td>Delete</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

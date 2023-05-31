@@ -1,0 +1,10 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@inherits LgMenuRender
+
+<div class="@GetCssClassAttribute()" id="divMainMenu">
+    <ul class="navbar-nav mr-auto" role="menubar" aria-label="@("mainMenu".Translate())">
+        @{
+            base.BuildRenderTree(__builder);
+        }
+    </ul>
+</div>

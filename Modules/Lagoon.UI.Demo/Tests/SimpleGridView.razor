@@ -1,0 +1,57 @@
+﻿@using Lagoon.UI.Components
+@inherits LgPage
+@{
+    Theme toto = new("Toto");
+}
+<LgGridView StateId="MySimpleGrid" Items="Themes" ItemModel="Theme.Model" NewItem="()=>new Theme()" WrapContent="false" Exportable="true">
+    <Columns>
+        @*<LgGridColumn @bind-Value="FixedProperty" />*@
+        <LgGridColumn @bind-Value="context" />
+        @*<LgGridColumn Field="context?.Name?.ToLowerInvariant()"  SortExpression="(d)=>d.Name" FilterExpression="(d)=>d.Name" />*@
+        <LgGridColumn @bind-Value="context.Name" />
+        <LgGridColumn @bind-Value="context.Guid" />
+        <LgGridColumn @bind-Value="context.MainColor.Name" />
+        <LgGridColumn @bind-Value='context.Dico["gold"].Name' />
+        @*        <LgGridColumn @bind-Value="Colors[context.ColorIndex].Name" />*@
+        @foreach (Color color in context.Colors)
+        {
+            <LgGridColumn Key="@($"Color-{color.Name}")" @bind-Value="color.Name" CssClass="@color.Name" />
+        }
+        @*@{
+            // THIS SYNTAX WORK
+        }
+        @for (int i = 0; i < context.Colors.Count; i++)
+        {
+            Color color = context.Colors[i];
+            <LgGridColumn Key="@($"Colors-{i}")" @bind-Value="color.Name" />
+        }*@
+
+        @*@{
+            // THIS SYNTAX DON'T WORK
+        }
+        @for (int i = 0; i < context.Colors.Count; i++)
+        {
+            <LgGridColumn Key="@($"Colors-{i}")" @bind-Value="color[i].Name" />
+        }*@
+
+        @*@{
+            // THIS SYNTAX DON'T WORK
+            Color color;
+        }
+        @for (int i = 0; i < context.Colors.Count; i++)
+        {
+            color = context.Colors[i];
+            <LgGridColumn Key="@($"Colors-{i}")" @bind-Value="color.Name" />
+        }*@
+
+
+        @*<LgGridColumn @bind-Value="toto" />
+        <LgGridColumn @bind-Value="toto.Name" />
+        <LgGridColumn @bind-Value="toto.MainColor.Name" />*@
+        @*<LgGridPivot @bind-Value="context.Colors" Index="_colors" Context="color">
+            <LgGridColumn @bind-Value="color.Name" />
+            <LgGridColumn @bind-Value="context.Name" />
+        </LgGridPivot>
+        *@
+    </Columns>
+</LgGridView>

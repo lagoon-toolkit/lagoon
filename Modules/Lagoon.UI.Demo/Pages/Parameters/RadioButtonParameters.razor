@@ -1,0 +1,25 @@
+﻿<section class="d-flex align-items-center col-md-12">
+    <LgSelect CssClass="@CssClass" Label="Kind" ShowSearchBox=true @bind-Value="Kind" OnChange="OnChangeKindAsync">
+        <Items>
+            @foreach (var kind in Enum.GetValues(typeof(RadioButtonDisplayKind)))
+            {<LgOptionListItem Text="@(Enum.GetName(typeof(RadioButtonDisplayKind), kind))" Value="@((RadioButtonDisplayKind)kind)"></LgOptionListItem>}
+        </Items>
+    </LgSelect>
+</section>
+
+@code {
+
+    public RadioButtonDisplayKind Kind { get; set; } = RadioButtonDisplayKind.Classic;
+
+    [Parameter]
+    public string CssClass { get; set; }
+
+    [Parameter]
+    public EventCallback<RadioButtonDisplayKind> OnKindEdition { get; set; }
+
+
+    public async Task OnChangeKindAsync()
+    {
+        await OnKindEdition.InvokeAsync(Kind);
+    }
+}

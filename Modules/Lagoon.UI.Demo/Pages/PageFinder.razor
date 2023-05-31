@@ -1,0 +1,63 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="Finder" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgFinder Title="@TitleComponent" ButtonResultLabel="#finderViewResults" ButtonFilterLabel="#finderViewFilters" OnFilter="FilterPerson">
+        <ResultContent>
+            <div>
+                @foreach (var person in _petsItems)
+                {
+                    <LgCard>
+                        <LgColorBar CssClass="lg-color-bar-primary" />
+                        <div class="card-body">
+                            <LgLabel CssClass="col-12" Text=@($"Name: {@person.Name}") />
+                            <LgLabel CssClass="col-12" Text=@($"Color: {@person.Color}") />
+                        </div>
+                    </LgCard>}
+            </div>
+        </ResultContent>
+        <FilterContent>
+            <LgEditForm Model=_petFilter>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <LgTextBox Label="Name" @bind-Value=_petFilter.Name />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <LgTextBox Label="Type" @bind-Value=_petFilter.Type />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <LgTextBox Label="Color" @bind-Value=_petFilter.Color />
+                        </div>
+                    </div>
+                </div>
+            </LgEditForm>
+        </FilterContent>
+    </LgFinder>
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+
+    <!--section Title-->
+    <section class="d-flex align-items-center">
+        <LgTextBox CssClass="col-md-4 col-sm-12"
+                   Label="Title"
+                   PrefixType="InputLabelType.IconName"
+                   SuffixType="InputLabelType.IconName"
+                   @bind-Value="@TitleComponent"
+                   OnInput="OnUpdateTitleComponent" />
+    </section>
+
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

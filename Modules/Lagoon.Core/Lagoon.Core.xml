@@ -1,0 +1,3069 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Lagoon.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Lagoon.Core.ApplicationInformation">
+            <summary>
+            Information about the current application.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.ApplicationInformation.Name">
+            <summary>
+            Application name.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.ApplicationInformation.Description">
+            <summary>
+            Application description.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.ApplicationInformation.Version">
+            <summary>
+            Version of the current application.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.ApplicationInformation.EnvironmentName">
+            <summary>
+            Environment context of the current application. (Ex: Production, Validation, Development, ...)
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.ApplicationInformation.EnvironmentColor">
+            <summary>
+            Color associated to the environment context of the current application. (Ex: Production, Validation, Development, ...)
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.ApplicationInformation.IsDebug">
+            <summary>
+            Indicate if the application is build with debug configuration.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.ApplicationInformation.#ctor(Lagoon.Core.Application.ApplicationManager,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Load application informations.
+            </summary>
+            <param name="appManager">Application manager.</param>
+            <param name="configuration">Configuration.</param>
+        </member>
+        <member name="T:Lagoon.Core.Application.ApplicationManager">
+            <summary>
+            Application manager.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.ApplicationManager.Current">
+            <summary>
+            Current LgApplication instance
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.ApplicationManager._isDebugEnabled">
+            <summary>
+            Gets if the running application have been existing in release or debug.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:Lagoon.Core.Application.ApplicationManager._applicationRootName">
+            <summary>
+            Contains the application root name based on the assembly name. Example : 'AppRootName.[Client|Shared|Server|...]'
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.ApplicationManager._configuration">
+            <summary>
+            Configuration from appSettings.json.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.ApplicationManager._loggerFactory">
+            <summary>
+            Logger factory to used for info / error tracing
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.ApplicationManager._appDefaultLogger">
+            <summary>
+            The default logger (with application type) used to log infos / error
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.ApplicationManager._applicationContext">
+            <summary>
+            Application type. Use to filter lagoon ressources by context type
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.ApplicationManager._appDico">
+            <summary>
+            Application dictionnary
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.ApplicationManager._assembliesWithDictionnary">
+            <summary>
+            List of all Lagoon's library with a dictionnary
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.ApplicationManager._assembliesWithRoutableComponents">
+            <summary>
+            List of all Lagoon's library with at least one routable component
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.ApplicationManager._information">
+            <summary>
+            Application information (Name, Version, ...)
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.ApplicationManager.ApplicationInformation">
+            <summary>
+            Get the current application information.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.ApplicationManager.ApplicationAssembly">
+            <summary>
+            Application assembly
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.ApplicationManager.Configuration">
+            <summary>
+            Configuration from appSettings.json.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.ApplicationManager.IsDebugEnabled">
+            <summary>
+            Check application mode (debug / release)
+            </summary>
+            <returns>true if the application is enabled, false otherwise</returns>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.#ctor(Lagoon.Core.Application.LinkedResourceModule.EnApplicationContext)">
+            <summary>
+            Application manager initialization
+            </summary>
+            <param name="appContext">Running application</param>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.Init(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Initialize the application manager
+            </summary>
+            <param name="configuration">Configuration.</param>
+            <param name="loggerFactory">Logger factory.</param>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.GetApplicationInformation(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Gets the complete application information.
+            </summary>
+            <param name="configuration">Configurattion to customize informations.</param>
+            <returns>The complete application information.</returns>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.RegisterLibraries">
+            <summary>
+            Store the list of all Lagoon's library used by the application
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.GetApplicationRootName">
+            <summary>
+            Gets the application root name (based on the assembly name). Example : 'AppRootName.[Client|Shared|Server|...]'.
+            </summary>
+            <returns>ApplicationName</returns>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.GetAssemblyName">
+            <summary>
+            Gets the application assembly name. Example : 'AppRootName.Client'.
+            </summary>
+            <returns>The application assembly name. Example : 'AppRootName.Client'.</returns>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.GetApplicationName">
+            <summary>
+            Return the application name (based on assembly name)
+            </summary>
+            <returns>ApplicationName</returns>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.GetClientApplicationVersion">
+            <summary>
+            Extract the version number from the application DLL.
+            </summary>
+            <returns>The version number from the application DLL.</returns>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.GetApplicationVersion">
+            <summary>
+            Extract the version number from the application DLL.
+            </summary>
+            <returns>The version number from the application DLL.</returns>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.GetAssembliesWithRoutableComponent">
+            <summary>
+            Return the list of assemblies with routable component linked to the application
+            </summary>
+            <returns>Assemblies with routable components</returns>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.LoadLanguages(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}})">
+            <summary>
+            Add additionnal dictionnary or overload existing key at runtime. 
+            </summary>
+            <param name="additionnalDico"></param>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.Dico(System.String,System.Object[])">
+            <summary>
+            Public accessor to the dictionnary
+            </summary>
+            <param name="key">Dico key for which we want the translation</param>
+            <param name="args">Optionnal argument used by String.Format() on a dico value</param>
+            <returns>The corresponding value if the key is found (or the key if not found)</returns>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.GetLoadedDictionnariesCulture">
+            <summary>
+            Return a list of loaded culture (fr / en / ...)
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.GetAllApplicationDicoKeys">
+            <summary>
+            Return the list of loaded languages
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.SetLanguage(System.Globalization.CultureInfo)">
+            <summary>
+            Load another language 
+            </summary>
+            <param name="culture"></param>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.SetLanguage(System.String)">
+            <summary>
+            Set current application language
+            </summary>
+            <param name="newCulture">New culture (fr-FR)</param>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.OnInitCulture(System.Globalization.CultureInfo)">
+            <summary>
+            Set culture formats
+            </summary>
+            <param name="culture">culture</param>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.TraceInfo``1(System.String,System.Object[])">
+            <summary>
+            Trace an information message associated to the type T
+            </summary>
+            <typeparam name="T">Type</typeparam>
+            <param name="message">Message to trace</param>
+            <param name="args">Messages args format</param>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.TraceException``1(System.Exception)">
+            <summary>
+            Trace an exception associated to the type T
+            </summary>
+            <typeparam name="T">Type</typeparam>
+            <param name="ex">Exception to trace</param>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.TraceException``1(Microsoft.Extensions.Logging.EventId,System.String)">
+            <summary>
+            Trace an exception associated to the type T
+            </summary>
+            <typeparam name="T">Type</typeparam>
+            <param name="eventId">Event ID.</param>
+            <param name="message">Message to trace.</param>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.TraceInfo(System.String,System.Object[])">
+            <summary>
+            Trace an information message using the default application type
+            </summary>
+            <param name="message">Message to trace</param>
+            <param name="args">Messages args format</param>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.TraceException(System.Exception)">
+            <summary>
+            Trace an exception using the default application type
+            </summary>
+            <param name="ex">Exception</param>
+        </member>
+        <member name="M:Lagoon.Core.Application.ApplicationManager.TraceException(Microsoft.Extensions.Logging.EventId,System.String)">
+            <summary>
+            Trace an exception using the default application type
+            </summary>
+            <param name="eventId">Event Id.</param>
+            <param name="message">Message to trace</param>
+        </member>
+        <member name="T:Lagoon.Core.Application.ILgApplication">
+            <summary>
+            Interface for the Lagoon application manager.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.Application.ILgApplication.GetApplicationRootName">
+            <summary>
+            Gets the application root name (based on the assembly name). Example : 'AppRootName.[Client|Shared|Server|...]'
+            </summary>
+            <returns>ApplicationName</returns>
+        </member>
+        <member name="P:Lagoon.Core.Application.ILgApplication.IsDebugEnabled">
+            <summary>
+            Check application mode (debug / release)
+            </summary>
+            <returns>true if the application is enabled, false otherwise</returns>
+        </member>
+        <member name="T:Lagoon.Core.Application.LinkedResourceModule">
+            <summary>
+            Link to Lagoon assembly containing resources.
+            </summary>
+        </member>
+        <member name="T:Lagoon.Core.Application.LinkedResourceModule.EnApplicationContext">
+            <summary>
+            Flag used inside a ResourceModule to indicate if embended ressources should be loaded
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.LinkedResourceModule.EnApplicationContext.Client">
+            <summary>
+            Should be loaded by client side
+            </summary>            
+        </member>
+        <member name="F:Lagoon.Core.Application.LinkedResourceModule.EnApplicationContext.Server">
+            <summary>
+            Should be loaded by server side
+            </summary>   
+        </member>
+        <member name="F:Lagoon.Core.Application.LinkedResourceModule.EnApplicationContext.Both">
+            <summary>
+            Should be loaded by both client and server side
+            </summary> 
+        </member>
+        <member name="P:Lagoon.Core.Application.LinkedResourceModule.ModuleAssembly">
+            <summary>
+            Type included in the root namespace of the DLL
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.LinkedResourceModule.HasDictionnary">
+            <summary>
+            True if the assembly contain a Dico.xml
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.LinkedResourceModule.HasRoutableComponents">
+            <summary>
+            True if the assembly contain at least one routable component
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.LinkedResourceModule.Priority">
+            <summary>
+            Indicate the loading order for Lagoon libraries
+            0: Lagoon.Core; 2: Lagoon.Server, Lagoon.UI; 4 : Lagoon.UI.[Component]; 6: Lagoon.Server.[Custom] Lagoon.UI.[Custom]; 7: ClientApp.Shared; 8: ClientApp.Server, ClientApp.Client, ClientApp.Console
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.LinkedResourceModule.ApplicationContext">
+            <summary>
+            Application context
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.Application.LinkedResourceModule.#ctor(System.Reflection.Assembly,System.Boolean,System.Boolean,System.Int32,Lagoon.Core.Application.LinkedResourceModule.EnApplicationContext)">
+            <summary>
+            Create a new lagoon linked module
+            </summary>
+            <param name="assembly">Type in the root namespace of the DLL</param>
+            <param name="hasDictionary">True if contains a dictionnary</param>
+            <param name="hasRoutableComponents">True if contains routable components.</param>
+            <param name="priority">Loading priority</param>
+            <param name="applicationContext">Indicate if it's a "Server", "Client" or "Shared" library.</param>
+        </member>
+        <member name="M:Lagoon.Core.Application.LinkedResourceModule.#ctor(Lagoon.Core.Application.ResourceModuleAttribute)">
+            <summary>
+            Create a new lagoon linked module from the LagoonModuleAttribute
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.Application.LinkedResourceModule.CompareTo(Lagoon.Core.Application.LinkedResourceModule)">
+            <summary>
+            LagoonLinkedModule comparison. Used to sort module by priority
+            </summary>
+            <param name="other">Another LagoonLinkedModule to compare</param>
+        </member>
+        <member name="T:Lagoon.Core.Application.Logging.LgFileLogger">
+            <summary>
+            Server-side logger. Log all exception (except UserException) to a file
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.Logging.LgFileLogger._logStreamLock">
+            <summary>
+            Lock to handle concurent file access
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.Logging.LgFileLogger._streamWriter">
+            <summary>
+            Stream used by the JSONWriter
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.Logging.LgFileLogger._logOptions">
+            <summary>
+            Logger options
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.Logging.LgFileLogger._currentFileSize">
+            <summary>
+            Current log file size
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.Logging.LgFileLogger._currentOaDate">
+            <summary>
+            Current date
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.Logging.LgFileLogger._maxFileSizeInByte">
+            <summary>
+            Max file size 
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.Logging.LgFileLogger._streamBuilder">
+            <summary>
+            String builder used to create log entry
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.Logging.LgFileLogger.LogPath">
+            <summary>
+            Path to the log file
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.Logging.LgFileLogger._currentLogger">
+            <summary>
+            Keep a reference to the instance of actual LgFileLogger
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.Application.Logging.LgFileLogger.#ctor(Lagoon.Core.Application.Logging.LgFileLoggerOptions,System.Boolean)">
+            <summary>
+            New File logger
+            </summary>
+            <param name="options">Logger options</param>
+            <param name="isDebugEnabled">The compilation mode.</param>
+        </member>
+        <member name="M:Lagoon.Core.Application.Logging.LgFileLogger.InitLogStream">
+            <summary>
+            Init log stream
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.Application.Logging.LgFileLogger.ParseLogOptions">
+            <summary>
+            Parse log options
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.Application.Logging.LgFileLogger.BackupLog">
+            <summary>
+            Remove old log files
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.Application.Logging.LgFileLogger.BackupFileName(System.Int32)">
+            <summary>
+            Return a log file name
+            </summary>
+            <param name="index">Log index</param>
+            <returns>Log file name</returns>
+        </member>
+        <member name="M:Lagoon.Core.Application.Logging.LgFileLogger.GetLogFiles">
+            <summary>
+            Return all application log files
+            </summary>
+            <returns>A list of file path</returns>
+        </member>
+        <member name="M:Lagoon.Core.Application.Logging.LgFileLogger.ExtractLogFile">
+            <summary>
+            Concatenate all application log file content into a single gzipped memory stream
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.Application.Logging.LgFileLogger.BeginScope``1(``0)">
+            <summary>
+            
+            </summary>
+            <param name="state"></param>
+            <typeparam name="TState"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Core.Application.Logging.LgFileLogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+            Check if we need to log the exception according to appSetting configuration
+            </summary>
+            <param name="logLevel">Current configuration</param>
+            <returns>True if log enable, false otherwise</returns>
+        </member>
+        <member name="M:Lagoon.Core.Application.Logging.LgFileLogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})">
+            <summary>
+            If trace is enable, write the exception in a file
+            </summary>
+            <param name="logLevel">Error type (Error, Warning, Trace, ...)</param>
+            <param name="eventId">Optional EventId</param>
+            <param name="state">Additional messages on the exception</param>
+            <param name="exception">Exception to trace</param>
+            <param name="formatter">Function to format the exception</param>
+        </member>
+        <member name="M:Lagoon.Core.Application.Logging.LgFileLogger.Dispose">
+            <summary>
+            Free resources
+            </summary>
+        </member>
+        <member name="T:Lagoon.Core.Application.Logging.LgFileLoggerOptions">
+            <summary>
+            File logger options (output path, max size, ...)
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.Logging.LgFileLoggerOptions.FolderPath">
+            <summary>
+            Path of the folder containing the log files
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.Logging.LgFileLoggerOptions.LogFilename">
+            <summary>
+            Name of the file
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.Logging.LgFileLoggerOptions.MaxFileSize">
+            <summary>
+            Max file size (supported unit K / M / G) 
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.Logging.LgFileLoggerOptions.DayToKeep">
+            <summary>
+            Number of days to keep trace files
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.Logging.LgFileLoggerOptions.FileToKeep">
+            <summary>
+            Max number of files to store per day
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.Logging.LgFileLoggerOptions.Enabled">
+            <summary>
+            Is log activated ?
+            </summary>
+        </member>
+        <member name="T:Lagoon.Core.Application.Logging.LgFileLoggerProvider">
+            <summary>
+            Custom file logger
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Application.Logging.LgFileLoggerProvider._lagoonFileLogger">
+            <summary>
+            Logger instance
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.Application.Logging.LgFileLoggerProvider.#ctor(Lagoon.Core.Application.Logging.LgFileLoggerOptions,System.Boolean)">
+            <summary>
+            Initialize a new file logger
+            </summary>
+            <param name="options">Logger options</param>
+            <param name="isDebugEnabled">The compilation mode.</param>
+        </member>
+        <member name="M:Lagoon.Core.Application.Logging.LgFileLoggerProvider.CreateLogger(System.String)">
+            <summary>
+            Create a logger
+            </summary>
+            <param name="categoryName">CategoryName</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Core.Application.Logging.LgFileLoggerProvider.Dispose">
+            <summary>
+            Dispose resources
+            </summary>
+        </member>
+        <member name="T:Lagoon.Core.Application.ResourceModuleAttribute">
+            <summary>
+            Attribute used to identify Lagoon.* libraries and specify a priority for potential library embedded resources
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.ResourceModuleAttribute.ModuleAssembly">
+            <summary>
+            Type included in the root namespace of the DLL
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.ResourceModuleAttribute.HasDictionnary">
+            <summary>
+            True if the assembly contain a Dico.xml
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.ResourceModuleAttribute.HasRoutableComponents">
+            <summary>
+            True if the assembly contain routable components
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.ResourceModuleAttribute.Priority">
+            <summary>
+            Indicate the loading order for Lagoon libraries
+            0: Lagoon.Core, 1: Lagoon.UI and Lagoon.UI.[Component], 10: Lagoon.UI.Client, 20: ClientApp.BO, 30: ClientApp 
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Application.ResourceModuleAttribute.ApplicationContext">
+            <summary>
+            Application type. Use to filter lagoon ressources by context type
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.Application.ResourceModuleAttribute.#ctor(System.Type,System.Boolean,System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Initialize a new LagoonModuleAttribute. Used to identify Lagoon libraries with resources and dictionnary
+            </summary>
+            <param name="type">Type included in the root namespace of the DLL</param>
+            <param name="_">OBSOLETE : True if the assembly contains embedded resources, false otherwise</param>
+            <param name="hasDico">True if the assembly contain a Dico.xml, false otherwise</param>
+            <param name="hasRoutableComponent">True if the assembly contains routable components</param>
+            <param name="priority">0: Lagoon.Core, 1: Lagoon.UI and Lagoon.UI.[Component], 10: Lagoon.UI.Client, 20: ClientApp.BO, 30: ClientApp </param>
+            <param name="applicationContext">EnApplicationContext enum value</param>
+        </member>
+        <member name="M:Lagoon.Core.Application.ResourceModuleAttribute.#ctor(System.Reflection.Assembly,System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Initialize a new LagoonModuleAttribute. Used to identify Lagoon libraries with resources,  dictionnary ...
+            </summary>
+            <param name="assembly">Lagoon library assembly</param>
+            <param name="hasDico">True if the assembly contain a Dico.xml, false otherwise</param>
+            <param name="hasRoutableComponent">True if this assembly contains routable component</param>
+            <param name="priority">0: Lagoon.Core, 1: Lagoon.UI and Lagoon.UI.[Component], 10: Lagoon.UI.Client, 20: ClientApp.BO, 30: ClientApp </param>
+            <param name="applicationContext">Indicate if an assembly should be loaded by Lagoon.Core</param>
+        </member>
+        <member name="T:Lagoon.Core.Helpers.ObjectWrapper">
+            <summary>
+            Defines an object wrapper.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.Helpers.ObjectWrapper.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.Helpers.ObjectWrapper.#ctor(System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Lagoon.Core.Helpers.ObjectWrapper"/> class.
+            </summary>
+            <param name="value">The value of the object.</param>
+        </member>
+        <member name="M:Lagoon.Core.Helpers.ObjectWrapper.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Lagoon.Core.Helpers.ObjectWrapper.Equals(Lagoon.Core.Helpers.ObjectWrapper,Lagoon.Core.Helpers.ObjectWrapper)">
+            <summary>
+            Determines whether the specified objects are equal.
+            </summary>
+            <param name="x">The first object of type T to compare.</param>
+            <param name="y">The second object of type T to compare.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Core.Helpers.ObjectWrapper.GetHashCode(Lagoon.Core.Helpers.ObjectWrapper)">
+            <summary>
+            Returns a hash code for the specified object.
+            </summary>
+            <param name="obj">The System.Object for which a hash code is to be returned.</param>
+            <returns>A hash code for the specified object.</returns>
+        </member>
+        <member name="T:Lagoon.Core.Language.Dico">
+            <summary>
+            Dictionary language management
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Language.Dico._assembliesWithDico">
+            <summary>
+            Application assembly
+            </summary>
+        </member>
+        <member name="F:Lagoon.Core.Language.Dico._loadedDictionnaries">
+            <summary>
+            Loaded dictionnaries (indexed by language: fr / en / ...)
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.Language.Dico.#ctor(System.Collections.Generic.List{System.Reflection.Assembly})">
+            <summary>
+            Initialization
+            </summary>
+            <param name="assemblies">Client assembly</param>
+        </member>
+        <member name="M:Lagoon.Core.Language.Dico.GetTranslation(System.String,System.String)">
+            <summary>
+            Get a string from languages dictionnary.
+            </summary>
+            <param name="languageKey">Dico language to use</param>
+            <param name="dicoKey">Dico key to translate</param>
+        </member>
+        <member name="M:Lagoon.Core.Language.Dico.GetLoadedDictionnariesCulture">
+            <summary>
+            Return the list of loaded languages
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.Language.Dico.GetAllKeys">
+            <summary>
+            Return all language keys used (or loaded by the application)
+            </summary>
+            <returns>All language</returns>
+        </member>
+        <member name="M:Lagoon.Core.Language.Dico.LoadLanguagesFromAssembly">
+            <summary>
+            Load the dictionnary in the client assembly and for all linked Lagoon.* assembly
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.Language.Dico.ExtractLanguage(System.Reflection.Assembly,System.String)">
+            <summary>
+            Open filename inseide assembly
+            </summary>
+            <param name="assembly">Assembly where dico.xml file is located</param>
+            <param name="filename">dico.xml filename</param>
+        </member>
+        <member name="M:Lagoon.Core.Language.Dico.LoadLanguage(System.String)">
+            <summary>
+            Parse the dico.xml file from assembly and add entries to the language dictionnary
+            </summary>
+            <param name="dicoXmlContent"></param>
+        </member>
+        <member name="M:Lagoon.Core.Language.Dico.LoadAdditionnalDico(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}})">
+            <summary>
+            Add additionnal dictionnary or overload existing key at runtime. 
+            </summary>
+            <param name="additionnalDico"></param>
+        </member>
+        <member name="T:Lagoon.Core.LgException.ApiError">
+            <summary>
+            Describe an exception which will be send to server
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.LgException.ApiError.Message">
+            <summary>
+            Exception message
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.LgException.ApiError.StackTrace">
+            <summary>
+            Exception stack trace
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.LgException.ApiError.UserMessage">
+            <summary>
+            Additionnal infos
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.LgException.ApiError.LogLevel">
+            <summary>
+            Exception level
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.LgException.ApiError.Count">
+            <summary>
+            The number of times the exception has been raised
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.LgException.ApiError.Date">
+            <summary>
+            Exception date
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:Lagoon.Core.LgException.ApiError.ToString">
+            <summary>
+            ToString overload to write exception 
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.LgException.ApiError.Format">
+            <summary>
+            Exception as text format
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.LgException.ApiError.Equals(Lagoon.Core.LgException.ApiError)">
+            <summary>
+            Check if two ApiError are equal
+            </summary>
+            <param name="other">ApiError to compare</param>
+            <returns></returns>
+        </member>
+        <member name="T:Lagoon.Core.LgException.AuthenticationException">
+            <summary>
+            Special exception used to display errors in the authentication workflow
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.LgException.AuthenticationException.#ctor(System.String)">
+            <summary>
+            Initialize a new authentication exception message
+            </summary>
+            <param name="message">Exception message</param>
+        </member>
+        <member name="M:Lagoon.Core.LgException.AuthenticationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initialize a new authentication exception message with it's inner exception
+            </summary>
+            <param name="message">Exception message</param>
+            <param name="inner">Inner exception</param>
+        </member>
+        <member name="T:Lagoon.Core.LgException.ErrorObjectResponse">
+            <summary>
+            Object used to describe a exception which has not been cached and send to the client
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.LgException.ErrorObjectResponse.Detail">
+            <summary>
+            Exception stacktrace
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.LgException.ErrorObjectResponse.Instance">
+            <summary>
+            Unused
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.LgException.ErrorObjectResponse.Status">
+            <summary>
+            Http status code
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.LgException.ErrorObjectResponse.Title">
+            <summary>
+            Exception message
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.LgException.ErrorObjectResponse.TraceId">
+            <summary>
+            Unused
+            </summary>
+        </member>
+        <member name="P:Lagoon.Core.LgException.ErrorObjectResponse.IsUserException">
+            <summary>
+            Flag to indicate if this exception is an UserException
+            </summary>
+        </member>
+        <member name="T:Lagoon.Core.LgException.UserException">
+            <summary>
+            An exception which not be traced
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.LgException.UserException.#ctor">
+            <summary>
+            New empty exception
+            </summary>
+        </member>
+        <member name="M:Lagoon.Core.LgException.UserException.#ctor(System.String)">
+            <summary>
+            Initialize a new user exception
+            </summary>
+            <param name="message">Message to display</param>
+        </member>
+        <member name="M:Lagoon.Core.LgException.UserException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initialize a new user exception
+            </summary>
+            <param name="message">Message to display</param>
+            <param name="innerException">Inner exception</param>
+        </member>
+        <member name="T:Lagoon.Helpers.AliasMessage">
+            <summary>
+            Information to replace a message by another.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.AliasMessage.ArgumentPattern">
+            <summary>
+            Regex pattern to extract the parameter from the message.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.AliasMessage.IsMatch">
+            <summary>
+            Method indicate if the message must be replaced by the alias.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.AliasMessage.Message">
+            <summary>
+            The new message to replace the original message.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.AliasMessage.ShortMessage">
+            <summary>
+            The new message to replace the original message when the context(fieldname) is not needed.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.AliasMessage.#ctor(System.Func{System.String,System.Boolean},System.String,System.String,System.String)">
+            <summary>
+            New instance.
+            </summary>
+            <param name="isMatch">Method indicate if the message must be replaced by the alias.</param>
+            <param name="message">The new message to replace the original message.</param>
+            <param name="shortMessage">The new message to replace the original message when the context(fieldname) is not needed.</param>
+            <param name="argPattern">Regex pattern to extract the parameter from the message.</param>
+        </member>
+        <member name="T:Lagoon.Helpers.AliasMessageCollection">
+            <summary>
+            Friendly message list to replace original messages.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.AliasMessageCollection.Add(Lagoon.Helpers.AliasMessageComparisonOperator,System.String,System.String)">
+            <summary>
+            Add a new message alias.
+            </summary>
+            <param name="comparisonOperator">The method to detect the use of the alias.</param>
+            <param name="includedText">The text that must be included in the original message.</param>
+            <param name="message">The new message to replace the original message.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.AliasMessageCollection.Add(Lagoon.Helpers.AliasMessageComparisonOperator,System.String,System.String,System.String)">
+            <summary>
+            Add a new message alias.
+            </summary>
+            <param name="comparisonOperator">The method to detect the use of the alias.</param>
+            <param name="searchedText">The text that must be included in the original message.</param>
+            <param name="message">The new message to replace the original message.</param>
+            <param name="shortMessage">The new message to replace the original message when the context(fieldname) is not needed.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.AliasMessageCollection.Add(System.Func{System.String,System.Boolean},System.String)">
+            <summary>
+            Add a new message alias.
+            </summary>
+            <param name="isMatch">Method indicate if the message must be replaced by the alias.</param>
+            <param name="message">The new message to replace the original message.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.AliasMessageCollection.Add(System.Func{System.String,System.Boolean},System.String,System.String,System.String)">
+            <summary>
+            Add a new message alias.
+            </summary>
+            <param name="isMatch">Method indicate if the message must be replaced by the alias.</param>
+            <param name="message">The new message to replace the original message.</param>
+            <param name="shortMessage">The new message to replace the original message when the context(fieldname) is not needed.</param>
+            <param name="argPattern">Regex pattern to extract the parameter from the message.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.AliasMessageCollection.GetDisplayMessage(System.String,System.Boolean)">
+            <summary>
+            Replace the message by an alias if needed and translate it if needed.
+            </summary>
+            <param name="originalMessage">The original error message.</param>
+            <param name="shortMessage">The new message to replace the original message when the context(fieldname) is not needed.</param>
+            <returns>The message to display.</returns>
+        </member>
+        <member name="T:Lagoon.Helpers.AliasMessageComparisonOperator">
+            <summary>
+            Method to detect the use of the alias.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.AliasMessageComparisonOperator.Equals">
+            <summary>
+            The original message match exactly the searched text.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.AliasMessageComparisonOperator.StartsWith">
+            <summary>
+            The original message starts with the searched text.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.AliasMessageComparisonOperator.Contains">
+            <summary>
+            The original message contains with the searched text.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.AliasMessageComparisonOperator.EndsWidth">
+            <summary>
+            The original message ends with the searched text.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.AliasMessageComparisonOperator.FromFormat">
+            <summary>
+            The orginal message response to a format.
+            </summary>
+        </member>
+        <member name="T:Lagoon.Helpers.ControlChars">
+            <summary>
+            The ControlChars module contains constants used as control characters. These constants can be used anywhere in your code.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ControlChars.Back">
+            <summary>
+            Represents a backspace character.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ControlChars.Cr">
+            <summary>
+            Represents a carriage return character.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ControlChars.CrLf">
+            <summary>
+            Represents a carriage return/linefeed character combination.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ControlChars.FormFeed">
+            <summary>
+            Represents a form feed character for print functions.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ControlChars.Lf">
+            <summary>
+            Represents a line feed character.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.ControlChars.NewLine">
+            <summary>
+            Represents a new line character for current system.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ControlChars.NullChar">
+            <summary>
+            Represents a null character.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ControlChars.Quote">
+            <summary>
+            Represents a double-quote character.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ControlChars.Tab">
+            <summary>
+            Represents a tab character.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ControlChars.VerticalTab">
+            <summary>
+            Represents a vertical tab character.
+            </summary>
+        </member>
+        <member name="T:Lagoon.Helpers.CsvDocument`1">
+            <summary>
+            Class to read or write a CSV document from a list.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:Lagoon.Helpers.CsvDocument`1._autoCloseStream">
+            <summary>
+            Close indicator
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.CsvDocument`1._stream">
+            <summary>
+            Stream object
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.CsvDocument`1._writer">
+            <summary>
+            StreamWriter from _stream object
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.CsvDocument`1._reader">
+            <summary>
+            StreamReader from _stream object
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.CsvDocument`1._options">
+            <summary>
+            Csv Option 
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvDocument`1.Properties">
+            <summary>
+            Model properties list
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.#ctor(System.String)">
+            <summary>
+            CSV file opening
+            </summary>
+            <param name="path">CSV path</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.#ctor(System.String,Lagoon.Helpers.CsvOptions,Lagoon.Helpers.ExportColumnCollection{`0})">
+            <summary>
+            CSV file opening
+            </summary>
+            <param name="path">CSV path</param>
+            <param name="options">CSV Options</param>
+            <param name="exportColumns">Export Columns</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.#ctor(System.String,System.IO.FileMode,Lagoon.Helpers.ExportColumnCollection{`0})">
+            <summary>
+            CSV file opening
+            </summary>
+            <param name="path">CCSV path</param>
+            <param name="mode">File opening mode</param>
+            <param name="exportColumns">Export Columns</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.#ctor(System.String,System.IO.FileMode,Lagoon.Helpers.CsvOptions,Lagoon.Helpers.ExportColumnCollection{`0})">
+            <summary>
+            CSV file opening
+            </summary>
+            <param name="path">CSV path</param>
+            <param name="mode">File opening mode</param>
+            <param name="options">CSV Options</param>
+            <param name="exportColumns">Export Columns</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,Lagoon.Helpers.ExportColumnCollection{`0})">
+            <summary>
+            CSV file opening
+            </summary>
+            <param name="path">CSV path</param>
+            <param name="mode">File opening mode</param>
+            <param name="access">File access type</param>
+            <param name="exportColumns">Export Columns</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,Lagoon.Helpers.CsvOptions,Lagoon.Helpers.ExportColumnCollection{`0})">
+            <summary>
+            CSV file opening
+            </summary>
+            <param name="path">CSV path</param>
+            <param name="mode">File opening mode</param>
+            <param name="access">File access type</param>
+            <param name="options">CSV Options</param>
+            <param name="exportColumns">Export Columns</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.#ctor(System.IO.Stream,Lagoon.Helpers.ExportColumnCollection{`0},System.Boolean)">
+            <summary>
+            CSV file opening
+            </summary>
+            <param name="stream">CSV stream</param>
+            <param name="exportColumns">Export Columns</param>
+            <param name="autoCloseStream">IStream must be closed when CSV document is disposed.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.#ctor(System.IO.Stream,Lagoon.Helpers.CsvOptions,Lagoon.Helpers.ExportColumnCollection{`0},System.Boolean)">
+            <summary>
+             CSV file opening
+            </summary>
+            <param name="stream">CSV stream</param>
+            <param name="options">CSV Options</param>
+            <param name="exportColumns">Export Columns</param>
+            <param name="autoCloseStream">IStream must be closed when CSV document is disposed.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.Initialize(Lagoon.Helpers.CsvOptions,System.String,System.IO.FileMode,System.IO.FileAccess,Lagoon.Helpers.ExportColumnCollection{`0})">
+            <summary>
+             CSV file opening
+            </summary>
+            <param name="options">CSV generation options</param>
+            <param name="path">CSV path</param>
+            <param name="mode">File opening mode</param>
+            <param name="access">File access type</param>
+            <param name="exportColumns">Export Columns</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.Initialize(Lagoon.Helpers.CsvOptions,System.IO.Stream,Lagoon.Helpers.ExportColumnCollection{`0},System.Boolean)">
+            <summary>
+             CSV file opening
+            </summary>
+            <param name="options">CSV Options</param>
+            <param name="stream">CSV stream</param>
+            <param name="exportColumns">Export Columns</param>
+            <param name="autoCloseStream">IStream must be closed when CSV document is disposed.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.GetFileAccess(System.IO.FileMode)">
+            <summary>
+            Returns the default access type for an opening mode
+            </summary>
+            <param name="mode">Mode d'ouverture</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.GetDefaultOptions">
+            <summary>
+            Returns the default settings for reading and CSV file generation.
+            </summary>
+            <returns>Les paramètres par défaut pour la lecture et la génération de fichier CSV.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.Load">
+            <summary>
+            Opening a file in CSV format
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.Close">
+            <summary>
+            Close stream reader and / or writer
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.ReadLine(System.Boolean,System.String)">
+            <summary>
+            Reads the current line, returns false if we are at the end of the file.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.GetString(System.Int32)">
+            <summary>
+            Returns the string corresponding to a field.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.GetDouble(System.Int32)">
+            <summary>
+            Returns the numeric value corresponding to a field.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.GetLong(System.Int32)">
+            <summary>
+            Returns the long value corresponding to a field.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.GetInt(System.Int32)">
+            <summary>
+            Returns the integer numeric value corresponding to a field.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.GetDate(System.Int32)">
+            <summary>
+            Returns the date corresponding to a field
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.GetBool(System.Int32)">
+            <summary>
+            Returns the boolean value corresponding to a field.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.GetGuid(System.Int32)">
+            <summary>
+            Returns the guid corresponding to a field.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.AddLine">
+            <summary>
+            Sends the current line on the stream
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.AddFieldRaw(System.String,System.Boolean)">
+            <summary>
+            Adds a value to the table of fields and puts it between quotes if necessary
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.AddField(System.Object,System.Boolean)">
+            <summary>
+            Adds a new value to the current line.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.AddField(System.String,System.Boolean)">
+            <summary>
+            Add a new value to the line.
+            </summary>
+            <param name="value">The value.</param>
+            <param name="alpha">Quote the value.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.AddField(System.Double)">
+            <summary>
+            Add a new value to the line.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.AddField(System.Int64)">
+            <summary>
+            Add a new value to the line.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.AddField(System.Int32)">
+            <summary>
+            Add a new value to the line.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.AddField(System.DateTime)">
+            <summary>
+            Add a new value to the line.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.AddField(System.DateTime,System.String)">
+            <summary>
+            Add a new value to the line.
+            </summary>
+            <param name="value">The value.</param>
+            <param name="format">Date format.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.AddField(System.Boolean)">
+            <summary>
+            Add a new value to the line.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.ConvertDate(System.String)">
+            <summary>
+            Tries to convert a string into a date from the value.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.ConvertBool(System.String)">
+            <summary>
+            Converts a string value to boolean
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.Encadre(System.String@)">
+            <summary>
+            Frames a character string with the string provided for this purpose
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.WriteDataText(System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Saving the text in a csv file
+            - with line break after the text if addLine
+            - not allowing to write an empty line if p_b_exitIfEmpty
+            </summary>
+            <param name="texte"></param>
+            <param name="addLine"></param>
+            <param name="exitIfEmpty"></param>
+            <param name="alpha">Indicates whether or not to frame text between quotes.</param>
+            <remarks></remarks>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.WritePreface">
+            <summary>
+            Inserts the preface text in the file if it is specified in options
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.WriteDataAsCsvWriter(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Boolean)">
+            <summary>
+            Write Data into Csv
+            </summary>
+            <param name="items">Items list (datasource)</param>
+            <param name="header">Header to write</param>
+            <param name="alpha">Fields data must be quoted</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.Serialize(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Boolean)">
+            <summary>
+            Serialize items to csv file
+            </summary>
+            <param name="items">Items list</param>
+            <param name="alpha">Fields must be quoted</param>
+            <param name="header">Header must be wirte</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.Deserialize(System.Boolean,System.Boolean)">
+            <summary>
+            Deserialize Csv file to items list
+            </summary>
+            <param name="alpha">Data framed by quotes</param>
+            <param name="header">File contains coluns header</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.Deserialize(System.Collections.Generic.IList{`0}@,System.Boolean,System.Boolean)">
+            <summary>
+            Deserialize Csv file to items list
+            </summary>
+            <param name="items">Items list</param>
+            <param name="alpha">Data framed by quotes</param>
+            <param name="header">File contains coluns header</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.FillItems(System.Boolean,System.Boolean)">
+            <summary>
+            Remplis une lisste d'items à partir des lignes du fichier CSV
+            </summary>
+            <param name="alpha">Data framed by quotes</param>
+            <param name="header">File contains coluns header</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.FieldsArray(System.Collections.Generic.List{Lagoon.Helpers.IExportColumn{`0}})">
+            <summary>
+            Returns a array list containing all the fields converted to the correct type.
+            </summary>
+            <param name="columns">cols definition from model</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvDocument`1.SerializeToByteArray(System.Collections.Generic.IEnumerable{`0},Lagoon.Helpers.ExportColumnCollection{`0},Lagoon.Helpers.CsvOptions)">
+            <summary>
+            Serialize items to xlsx file and write content into a byte array.
+            </summary>
+            <param name="items">Items list</param>
+            <param name="exportColumns">Export Columns</param>
+            <param name="options">XLSX Options</param>
+            <returns>The content of the XSLX file.</returns>
+        </member>
+        <member name="T:Lagoon.Helpers.CsvExportProvider">
+            <summary>
+            Provide an interface to export a list to a CSV file.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvExportProvider.ContentType">
+            <inheritdoc/>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvExportProvider.FileExtension">
+            <inheritdoc/>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvExportProvider.Id">
+            <inheritdoc/>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvExportProvider.DisplayName">
+            <inheritdoc/>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvExportProvider.IconName">
+            <inheritdoc/>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvExportProvider.Options">
+            <summary>
+            Gets the export options.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvExportProvider.#ctor">
+            <summary>
+            Initialise a new export provider.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvExportProvider.#ctor(Lagoon.Helpers.CsvOptions)">
+            <summary>
+            Initialise a new export provider.
+            </summary>
+            <param name="options">Export options.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.CsvExportProvider.SerializeToByteArray``1(System.Collections.Generic.IEnumerable{``0},Lagoon.Helpers.ExportColumnCollection{``0},System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Lagoon.Helpers.CsvOptions">
+            <summary>
+            Configuration for the CSV document.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvOptions.CharSet">
+            <summary>
+            Text encoding.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvOptions.FieldSeparator">
+            <summary>
+            Separator between values.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvOptions.Delimiter">
+            <summary>
+            Delimiter around text values.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvOptions.DelimiteMode">
+            <summary>
+            Delimiter mode.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvOptions.DecimalChar">
+            <summary>
+            Decimal char.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvOptions.DateFormat">
+            <summary>
+            Date format.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvOptions.Culture">
+            <summary>
+            Culture to use.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvOptions.DateSeparator">
+            <summary>
+            Date separator.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvOptions.DateOrder">
+            <summary>
+            Date parts order.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvOptions.BoolTrueFormat">
+            <summary>
+            String for true values.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvOptions.BoolFalseFormat">
+            <summary>
+            String for false values.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.CsvOptions.Preface">
+            <summary>
+            Text to write at the begining of the CSV file.
+            </summary>
+        </member>
+        <member name="T:Lagoon.Helpers.ExportColumn`2">
+            <summary>
+            Export Column
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.ExportColumn`2.ColumnTitle">
+            <summary>
+            Column title.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.ExportColumn`2.GetValue">
+            <summary>
+            Method to get an item value for the column.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.ExportColumn`2.SetValue">
+            <summary>
+            Method to get an item value for the column.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.ExportColumn`2.Lagoon#Helpers#IExportColumn{TItem}#ValueType">
+            <summary>
+            The type of value in this column.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportColumn`2.#ctor(System.String,System.Func{`0,`1},System.Action{`0,`1})">
+            <summary>
+            New instance.
+            </summary>
+            <param name="columnTitle">The column title.</param>
+            <param name="getValueMethod">The "GetValue" lambda.</param>
+            <param name="setValueMethod">The "SetValue" lambda.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportColumn`2.#ctor(System.String,System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            New instance.
+            </summary>
+            <param name="columnTitle">The column title.</param>
+            <param name="parameterizedValueExpression">The "GetValue" lambda.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportColumn`2.#ctor(System.String,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.MethodCallExpression,System.Linq.Expressions.MethodCallExpression)">
+            <summary>
+            New instance
+            </summary>
+            <param name="columnTitle">The column title.</param>
+            <param name="itemParameter">Item parameter for the lambda.</param>
+            <param name="valueParameter">Value parameter for the lambda.</param>
+            <param name="getLambdaBody">Body definition of the GetValue lambda.</param>
+            <param name="setLambdaBody">Body definition of the SetValue lambda.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportColumn`2.Lagoon#Helpers#IExportColumn{TItem}#GetValue(`0)">
+            <summary>
+            Get the value of the column.
+            </summary>
+            <param name="item">Item to get the value from.</param>
+            <returns>The value of the column.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportColumn`2.Lagoon#Helpers#IExportColumn{TItem}#SetValue(`0,System.Object)">
+            <summary>
+            Set the value of the column.
+            </summary>
+            <param name="item">Item to update.</param>
+            <param name="value">The new value.</param>
+        </member>
+        <member name="T:Lagoon.Helpers.ExportColumnCollection`1">
+            <summary>
+            Definition of column list for an export.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportColumnCollection`1.#ctor">
+            <summary>
+            Create a new instance.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportColumnCollection`1.#ctor(System.Collections.Generic.IEnumerable{Lagoon.Helpers.IExportColumn{`0}})">
+            <summary>
+            Create a new instance.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportColumnCollection`1.#ctor(System.Boolean)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="allProperties">Export all properties.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportColumnCollection`1.#ctor(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="columns">Ordered list of column field names.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportColumnCollection`1.#ctor(System.Collections.Generic.IEnumerable{System.String},System.Func{System.String,System.String})">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="getColumnTitle">Title for a field name.</param>
+            <param name="columns">Ordered list of column field names.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportColumnCollection`1.#ctor(System.Boolean,System.Collections.Generic.IEnumerable{System.String},System.Func{System.String,System.String})">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="allProperties">Export all properties.</param>
+            <param name="columns">Ordered list of column field names.</param>
+            <param name="getColumnTitle">Title for a field name.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportColumnCollection`1.Add``1(System.String,System.Func{`0,``0})">
+            <summary>
+            Add a new column to the collection.
+            </summary>
+            <param name="columnTitle">The column title.</param>
+            <param name="getValueLambda">The method returning the value for an item.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportColumnCollection`1.Add``1(System.String,System.Action{`0,``0})">
+            <summary>
+            Add a new column to the collection.
+            </summary>
+            <param name="columnTitle">The column title.</param>
+            <param name="setValueLambda">The method setting the value to an item.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportColumnCollection`1.Add``1(System.String,System.Func{`0,``0},System.Action{`0,``0})">
+            <summary>
+            Add a new column to the collection.
+            </summary>
+            <param name="columnTitle">The column title.</param>
+            <param name="getValueLambda">The method returning the value for an item.</param>
+            <param name="setValueLambda">The method setting the value to an item.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportColumnCollection`1.Add(System.String,System.String)">
+            <summary>
+            Add a new column to the collection.
+            </summary>
+            <param name="propertyName">The property name. ( Ex: "Value" or "Child.Value")</param>
+            <param name="columnTitle">The column title.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportColumnCollection`1.GetPropertyGetSetValueExpression(System.Linq.Expressions.Expression,System.String,System.Linq.Expressions.ParameterExpression@,System.Linq.Expressions.MethodCallExpression@,System.Linq.Expressions.MethodCallExpression@)">
+            <summary>
+            Get the property call value expression.
+            </summary>
+            <param name="item">Source expression</param>
+            <param name="valueParameter">The value parameter.</param>
+            <param name="propertyName">Name of the property.</param>
+            <param name="getValueExpression">Get property value expression.</param>
+            <param name="setValueExpression">Set property value expression.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportColumnCollection`1.GetExportableProperties(System.Type)">
+            <summary>
+            Return all the public property name for a type.
+            </summary>
+            <param name="itemType">The type to browse.</param>
+            <returns>The list of public properties.</returns>
+        </member>
+        <member name="T:Lagoon.Helpers.ExportDateOrder">
+            <summary>
+            Date part order
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ExportDateOrder.DayMonthYear">
+            <summary>
+            Day-Month-Year
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ExportDateOrder.MonthDayYear">
+            <summary>
+            Month-Day-Year
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ExportDateOrder.YearMonthDay">
+            <summary>
+            Year-Month-Day
+            </summary>
+        </member>
+        <member name="T:Lagoon.Helpers.ExportDelimiteMode">
+            <summary>
+            Framing type for record exports
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ExportDelimiteMode.None">
+            <summary>
+            Don't add quote around values.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ExportDelimiteMode.Alpha">
+            <summary>
+            Add quote around text values.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ExportDelimiteMode.All">
+            <summary>
+            Add quote around all values.
+            </summary>
+        </member>
+        <member name="T:Lagoon.Helpers.ExportDocument`1">
+            <summary>
+            Base class to exportable documents.
+            </summary>
+            <typeparam name="T">Value type.</typeparam>
+        </member>
+        <member name="F:Lagoon.Helpers.ExportDocument`1.m_b_disposed">
+            <summary>
+            Detect redundant calls
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.ExportDocument`1.Fields">
+            <summary>
+            Fields list
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.ExportDocument`1.Columns">
+            <summary>
+            ExportColumns
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportDocument`1.InitializeColumnList(Lagoon.Helpers.ExportColumnCollection{`0})">
+            <summary>
+            Load the PropertyInfo list for each column.
+            </summary>
+            <param name="exportColumns"></param>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportDocument`1.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportDocument`1.Dispose">
+            <summary>
+            Free resources.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportDocument`1.Load">
+            <summary>
+            Opening a file
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportDocument`1.Close">
+            <summary>
+            Close stream.
+            </summary>
+        </member>
+        <member name="T:Lagoon.Helpers.ExportIgnoreAttribute">
+            <summary>
+            Indicate if the property must be ignored when exporting object.
+            </summary>
+        </member>
+        <member name="T:Lagoon.Helpers.ExportProviderManager">
+            <summary>
+            Classe to manage export provider collection.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportProviderManager.#ctor">
+            <summary>
+            Instanciate a new export provider manager.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportProviderManager.#ctor(Lagoon.Helpers.ExportProviderManager)">
+            <summary>
+            Instanciate a new export provider manager.
+            </summary>
+            <param name="exportProviderManager">The source export provider.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportProviderManager.#ctor(Lagoon.Helpers.IExportProvider[])">
+            <summary>
+            Instanciate a new export provider manager with the specified providers.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.ExportProviderManager.Count">
+            <summary>
+            Get the number of export providers.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportProviderManager.Clear">
+            <summary>
+            Clear the providers collection.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportProviderManager.Register``1">
+            <summary>
+            Add or replace an export provider. The provider id is unique in the collection.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportProviderManager.Register(Lagoon.Helpers.IExportProvider)">
+            <summary>
+            Add or replace an export provider. The provider id is unique in the collection.
+            </summary>
+            <param name="provider">The new provider.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportProviderManager.Remove(System.String)">
+            <summary>
+            Remove the provider id.
+            </summary>
+            <param name="providerIdList">Provider Id list separated by comma.</param>
+            <returns>true if the element is successfully found and removed; otherwise, false.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportProviderManager.GetProvider(System.String)">
+            <summary>
+            Return the registred export provider corresponding to the the requested id.
+            </summary>
+            <param name="providerId">The provider Id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportProviderManager.GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="M:Lagoon.Helpers.ExportProviderManager.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="T:Lagoon.Helpers.IExportColumn`1">
+            <summary>
+            Expotable column definition.
+            </summary>
+            <typeparam name="TItem"></typeparam>
+        </member>
+        <member name="P:Lagoon.Helpers.IExportColumn`1.ColumnTitle">
+            <summary>
+            Column title.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.IExportColumn`1.ValueType">
+            <summary>
+            Get the type of the value in that column.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.IExportColumn`1.GetValue(`0)">
+            <summary>
+            Get the value of an item in the column.
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Helpers.IExportColumn`1.SetValue(`0,System.Object)">
+            <summary>
+            Set the value of an item in the column.
+            </summary>
+            <param name="item">Item to update.</param>
+            <param name="value">The new value.</param>
+        </member>
+        <member name="T:Lagoon.Helpers.IExportProvider">
+            <summary>
+            Provide an interface to export a list to a file.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.IExportProvider.ContentType">
+            <summary>
+            Get the MIME type of the export.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.IExportProvider.FileExtension">
+            <summary>
+            Get the file extension of the export.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.IExportProvider.Id">
+            <summary>
+            Get the identifier of the export.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.IExportProvider.DisplayName">
+            <summary>
+            Get the display name of the export.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.IExportProvider.IconName">
+            <summary>
+            Get the icon name of the export.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.IExportProvider.SerializeToByteArray``1(System.Collections.Generic.IEnumerable{``0},Lagoon.Helpers.ExportColumnCollection{``0},System.Threading.CancellationToken)">
+            <summary>
+            Serialize items and get content into a byte array.
+            </summary>
+            <typeparam name="T">Type of an item.</typeparam>
+            <param name="items">List of items.</param>
+            <param name="exportColumns">List of columns informations to export.</param>
+            <param name="cancellationToken">Propagates notification that operations should be canceled</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Helpers.IExportProvider.SerializeToByteArray``1(System.Collections.Generic.IEnumerable{``0},System.Threading.CancellationToken)">
+            <summary>
+            Serialize items and get content into a byte array.
+            </summary>
+            <typeparam name="T">Type of an item.</typeparam>
+            <param name="items">List of items.</param>
+            <param name="cancellationToken">Propagates notification that operations should be canceled</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Helpers.IExportProvider.SerializeToByteArray``1(System.Collections.Generic.IEnumerable{``0},Lagoon.Helpers.ExportColumnCollection{``0})">
+            <summary>
+            Serialize items and get content into a byte array.
+            </summary>
+            <typeparam name="T">Type of an item.</typeparam>
+            <param name="items">List of items.</param>
+            <param name="exportColumns">List of columns informations to export.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Helpers.IExportProvider.SerializeToByteArray``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Serialize items and get content into a byte array.
+            </summary>
+            <typeparam name="T">Type of an item.</typeparam>
+            <param name="items">List of items.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Lagoon.Helpers.Extensions">
+            <summary>
+            Helper extension methods
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.Extensions.CheckTranslate(System.String,System.String[])">
+            <summary>
+            If key start with '#' then return the corresponding value from the dico (or #key?(languageKey) if not found in the dico)
+            If not return key as value.
+            </summary>
+            <remarks>
+            This function should only be used by component projects
+            </remarks>
+            <param name="key">Key to check</param>
+            <param name="args">Replacement args for String.Format</param>
+            <returns>The corresponding value from the dico if starting with '#', else return key as value</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.Extensions.TranslationNeeded(System.String)">
+            <summary>
+            Indicate if the text must be translated.
+            </summary>
+            <param name="key">Key to check.</param>
+            <returns>If the text must be translated.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.Extensions.ReplaceNewline(System.String,System.String)">
+            <summary>
+            Replace all 'newline' characters by 'replace'
+            </summary>
+            <param name="str">String where replace newline</param>
+            <param name="replace">Replace value</param>
+            <returns>String with newline replaced</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.Extensions.GetDisplayName(System.Enum)">
+            <summary>
+            Gets the DisplayAttribute Name.
+            </summary>
+            <param name="value">The enum value.</param>
+            <returns>Return the DisplayAttribute Name if has one, else return the memeber name.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.Extensions.GetDisplayAttribute(System.Enum)">
+            <summary>
+            Gets the display attribute of an Enum.
+            </summary>
+            <param name="value">The enum value.</param>
+            <returns>Return the Display attribute or null.</returns>
+        </member>
+        <member name="T:Lagoon.Helpers.Numeric">
+            <summary>
+            Numeric methods helper.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.Numeric.CleanNumericValue(System.String)">
+            <summary>
+            Clean numeric input value
+            </summary>
+            <param name="value">Numeric value to clean.</param>
+            <returns>The cleanned value.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.Numeric.IsNumeric(System.String)">
+            <summary>
+            Check if value i numeric
+            </summary>
+            <param name="value">value to check</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Helpers.Numeric.NumToStr(System.Object)">
+            <summary>
+            Returns the string corresponding to the object passed in parameter without taking into account the
+            regional settings.
+            </summary>
+            <param name="value">value to convert</param>
+            <returns></returns>
+        </member>
+        <member name="T:Lagoon.Helpers.ProgressableStreamContent">
+            <summary>
+            Defines a progressable stream content.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ProgressableStreamContent.defaultBufferSize">
+            <summary>
+            Default buffer size
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ProgressableStreamContent._streamContent">
+            <summary>
+            The stream to Post
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ProgressableStreamContent._bufferSize">
+            <summary>
+            Actual buffer size
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ProgressableStreamContent._onProgress">
+            <summary>
+            The on progress callback (sended, totalSended, totalToSend).
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.ProgressableStreamContent.#ctor(System.IO.Stream,System.Func{System.Int64,System.Int64,System.Int64,System.Threading.Tasks.Task})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Lagoon.Helpers.ProgressableStreamContent"/> class for observable stream progression.
+            </summary>
+            <param name="content">Stream to send</param>
+            <param name="onProgress">On progress callback</param>
+        </member>
+        <member name="M:Lagoon.Helpers.ProgressableStreamContent.#ctor(System.IO.Stream,System.Func{System.Int64,System.Int64,System.Int64,System.Threading.Tasks.Task},System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Lagoon.Helpers.ProgressableStreamContent"/> class for observable stream progression.
+            </summary>
+            <param name="content">Stream to send</param>
+            <param name="onProgress">On progress callback</param>
+            <param name="bufferSize">Read buffer size used to read <paramref name="content"/> stream</param>
+        </member>
+        <member name="M:Lagoon.Helpers.ProgressableStreamContent.SerializeToStreamAsync(System.IO.Stream,System.Net.TransportContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lagoon.Helpers.ProgressableStreamContent.TryComputeLength(System.Int64@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lagoon.Helpers.ProgressableStreamContent.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Lagoon.Helpers.ProgressableStreamContent2">
+            <summary>
+            Defines a progressable stream content.
+            </summary>
+            <remarks>The base code is from https://stackoverflow.com/a/41392145/4213397</remarks>
+        </member>
+        <member name="F:Lagoon.Helpers.ProgressableStreamContent2.content">
+            <summary>
+            The wrapped <see cref="T:System.Net.Http.HttpContent"/>.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ProgressableStreamContent2.onProgress">
+            <summary>
+            The on progress callback.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Helpers.ProgressableStreamContent2.bufferSize">
+            <summary>
+            The buffer size.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.ProgressableStreamContent2.#ctor(System.Net.Http.HttpContent,System.Int64,System.Func{System.Int64,System.Int64,System.Threading.Tasks.Task})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Lagoon.Helpers.ProgressableStreamContent"/> class.
+            </summary>
+            <param name="content">The original <see cref="T:System.Net.Http.HttpContent"/> to provide progress to.</param>
+            <param name="bufferSize">The buffer size.</param>
+            <param name="onProgress">The on progress callback.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.ProgressableStreamContent2.SerializeToStreamAsync(System.IO.Stream,System.Net.TransportContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lagoon.Helpers.ProgressableStreamContent2.TryComputeLength(System.Int64@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lagoon.Helpers.ProgressableStreamContent2.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Lagoon.Helpers.Tools">
+            <summary>
+            Utilitaries
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.Tools.BytesToHumanReadable(System.Int64,System.String)">
+            <summary>
+            Convert a value in byte to human readable format
+            </summary>
+            <param name="byteToConvert">Byte number</param>
+            <param name="format">Format to apply</param>
+            <returns></returns>
+        </member>
+        <member name="T:Lagoon.Helpers.Trace">
+            <summary>
+            Simplified access for trace management
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.Trace.ToConsole(System.String,System.String,System.String)">
+            <summary>
+            Trace debug informations to the console.
+            </summary>
+            <param name="message">Message to show.</param>
+            <param name="filePath">File name set by the compiler (leave empty).</param>
+            <param name="memberName">Method name set by the compiler (leave empty).</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Trace.ToConsole(System.Object,System.String,System.String)">
+            <summary>
+            Trace debug informations to the console.
+            </summary>
+            <param name="caller">Instance calling the trace. Set "this" here.</param>
+            <param name="message">Message to show.</param>
+            <param name="memberName">Method name set by the compiler (leave empty).</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Trace.GetTypeFormattedName(System.Type)">
+            <summary>
+            Returns the type name. If this is a generic type, appends
+            the list of generic type arguments between angle brackets.
+            (Does not account for embedded / inner generic arguments.)
+            </summary>
+            <param name="type">The type.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.Trace.TraceInfo``1(System.String,System.Object[])">
+            <summary>
+            Trace an information message associated to the type T
+            </summary>
+            <typeparam name="T">Type</typeparam>
+            <param name="message">Message to trace</param>
+            <param name="args">Messages args format</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Trace.TraceException``1(System.Exception)">
+            <summary>
+            Trace an exception associated to the type T
+            </summary>
+            <typeparam name="T">Type</typeparam>
+            <param name="ex">Exception to trace</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Trace.TraceException``1(Microsoft.Extensions.Logging.EventId,System.String)">
+            <summary>
+            Trace an exception associated to the type T
+            </summary>
+            <typeparam name="T">Type</typeparam>
+            <param name="eventId">Identifies a logging event. The primary identifier is the "Id" property, with the "Name" property providing a short description of this type of event.</param>
+            <param name="message">Message to trace</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Trace.TraceInfo(System.String,System.Object[])">
+            <summary>
+            Trace an information message using the default application type
+            </summary>
+            <param name="message">Message to trace</param>
+            <param name="args">Messages args format</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Trace.TraceException(System.Exception)">
+            <summary>
+            Trace an Exception using the default application type
+            Remark: UserException are not logged 
+            </summary>
+            <param name="ex">Exception to trace</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Trace.TraceException(Microsoft.Extensions.Logging.EventId,System.String)">
+            <summary>
+            Trace an exception using the default application type
+            Remark: UserException are not logged 
+            </summary>
+            <param name="eventId">Identifies a logging event. The primary identifier is the "Id" property, with the "Name" property providing a short description of this type of event.</param>
+            <param name="message">Message to trace</param>
+        </member>
+        <member name="T:Lagoon.Helpers.XmlHelper">
+            <summary>
+            Help to manipulate XML documents.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.SelectSingleNode(System.Xml.XmlDocument,System.String)">
+            <summary>
+            Returns the nodes corresponding to the XPath.
+            </summary>
+            <param name="xml">The XML document.</param>
+            <param name="xpath">The XPath expression.</param>
+            <returns>The nodes corresponding to the XPath</returns>
+            <remarks>This method also works if an "xmlns" is defined on a node.</remarks>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.SelectSingleNode(System.Xml.XmlNode,System.String)">
+            <summary>
+            Returns the sub-node corresponding to the XPath.
+            </summary>
+            <param name="node">The XML node.</param>
+            <param name="xpath">The XPath expression.</param>
+            <returns>The sub node corresponding to the XPath.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.SelectNodes(System.Xml.XmlDocument,System.String)">
+            <summary>
+            Returns the nodes corresponding to the XPath.
+            </summary>
+            <param name="xml">The XML document.</param>
+            <param name="xpath">The XPath expression.</param>
+            <returns>Les noeuds correspondant au XPath.</returns>
+            <remarks>This method also works if an "xmlns" is defined on a node.</remarks>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.SelectNodes(System.Xml.XmlNode,System.String)">
+            <summary>
+            Returns the nodes corresponding to the XPath.
+            </summary>
+            <param name="node">The XML node.</param>
+            <param name="xpath">The XPath expression.</param>
+            <returns>Les noeuds correspondant au XPath.</returns>
+            <remarks>This method also works if an "xmlns" is defined on a node.</remarks>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.AddDzPrefix(System.String)">
+            <summary>
+            Returns the xpath path with the prefix corresponding to the namespace of the main node.
+            </summary>
+            <param name="xpath">The XPath expression.</param>
+            <returns>The xpath path with the prefix corresponding to the namespace of the main node.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.SelectGroupChildNodes(System.Xml.XmlNode,System.String)">
+            <summary>
+            Returns the list of nodes with the name passed as parameter and children of the node passed as parameter.
+            </summary>
+            <param name="node">The parent node.</param>
+            <param name="subGroupTagName">Tag of the sub node containing the elements to browse.</param>
+            <returns>The list of nodes with the name passed as parameter and children of the node passed as parameter.
+            </returns>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.AddNode(System.Xml.XmlNode,System.String,System.String[])">
+            <summary>
+            Adds a new element in the xml file.
+            </summary>
+            <param name="parent">The parent node.</param>
+            <param name="name">The node new name.</param>
+            <param name="attributes">Attributes of the new node or InnerText if there is only one value</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.AddNode(System.String,System.Xml.XmlNode,System.String,System.String[])">
+            <summary>
+            Adds a new element in the xml file.
+            </summary>
+            <param name="namespaceUri">URL of the element namespace.</param>
+            <param name="parent">The parent node.</param>
+            <param name="name">The node new name.</param>
+            <param name="attributes">Attributes of the new node or InnerText if there is only one value</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.InsertNode(System.Xml.XmlNode,System.String,System.String[])">
+            <summary>
+            Adds a new element in the xml file.
+            </summary>
+            <param name="item">Node before which to insert the element.</param>
+            <param name="name">The node new name.</param>
+            <param name="attributes">Attributes of the new node or InnerText if there is only one value</param>
+            <returns>The new node.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.InsertNode(System.String,System.Xml.XmlNode,System.String,System.String[])">
+            <summary>
+            Adds a new element in the xml file.
+            </summary>
+            <param name="namespaceUri">URL of the element namespace.</param>
+            <param name="item">Node before which to insert the element.</param>
+            <param name="name">The node new name.</param>
+            <param name="attributes">Attributes of the new node or InnerText if there is only one value</param>
+            <returns>The new node.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.InsertElement(System.Xml.XmlNode,System.Xml.XmlNode,System.Boolean,System.String,System.String[])">
+            <summary>
+            Adds a new element in the xml file.
+            </summary>
+            <param name="parent">The parent node.</param>
+            <param name="relative">Child node to position oneself in relation to.</param>
+            <param name="p_b_before">Insert before the indicated node.</param>
+            <param name="name">The node new name.</param>
+            <param name="p_as_attributes">Attributes of the new node or InnerText if there is only one value</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.InsertElement(System.String,System.Xml.XmlNode,System.Xml.XmlNode,System.Boolean,System.String,System.String[])">
+            <summary>
+            Adds a new element in the xml file.
+            </summary>
+            <param name="namespaceUri">URL of the element namespace.</param>
+            <param name="parent">The parent node.</param>
+            <param name="relative">Child node to position oneself in relation to.</param>
+            <param name="p_b_before">Insert before the indicated node.</param>
+            <param name="name">The node new name.</param>
+            <param name="p_as_attributes">Attributes of the new node or InnerText if there is only one value</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.AddComment(System.Xml.XmlNode,System.String)">
+            <summary>
+            Inserts a new comment.
+            </summary>
+            <param name="parent">The parent node.</param>
+            <param name="comment">Comment to be entered.</param>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.InsertComment(System.Xml.XmlNode,System.String)">
+            <summary>
+            Inserts a new comment.
+            </summary>
+            <param name="parent">The parent node.</param>
+            <param name="comment">Comment to be entered.</param>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.InsertComment(System.Xml.XmlNode,System.Xml.XmlNode,System.Boolean,System.String)">
+            <summary>
+            Inserts a new comment.
+            </summary>
+            <param name="parent">The parent node.</param>
+            <param name="relative">Child node to position oneself in relation to.</param>
+            <param name="p_b_before">Insert before the indicated node.</param>
+            <param name="comment">Comment to be entered.</param>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.AddNodeClone(System.Xml.XmlNode,System.Xml.XmlNode)">
+            <summary>
+            Adds a node by copying another node.
+            </summary>
+            <param name="node">Noeud source.</param>
+            <param name="dst">Destination node.</param>
+            <returns>The new cloned node.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.ChildNodeValue(System.Xml.XmlNode,System.String,System.String)">
+            <summary>
+            Returns the text contained in a child node of the node passed as parameter.
+            </summary>
+            <param name="node">The parent node.</param>
+            <param name="childName">Tag of the child node.</param>
+            <param name="default">Default value.</param>
+            <returns>The text contained in a child node of the node passed as a parameter.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.AddAttributes(System.Xml.XmlNode,System.String[])">
+            <summary>
+            Adds new attributes to a node.
+            </summary>
+            <param name="elt">The node.</param>
+            <param name="attributes">Attribute/value pairs.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.AddAttribute(System.Xml.XmlNode,System.String,System.String)">
+            <summary>
+            Adds new attributes to a node.
+            </summary>
+            <param name="node">The XML node.</param>
+            <param name="name">Nom de l'attribut</param>
+            <param name="value">Valeur de l'attribut</param>
+            <returns>Le nouvel attribut créé.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.RemoveAttribute(System.Xml.XmlNode,System.String)">
+            <summary>
+            Supprime un attribut et retourne <c>True</c> si la suppression a effectivement eu lieu.
+            </summary>
+            <param name="node">The XML node.</param>
+            <param name="attr">The attribute name.</param>
+            <returns><c>True</c> if the deletion has actually taken place.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.GetAttributeValue(System.Xml.XmlNode,System.String,System.String)">
+            <summary>
+            Retourne la valeur d'un attribut pour un noeud.
+            </summary>
+            <param name="node">The XML node.</param>
+            <param name="attr">The attribute name.</param>
+            <param name="default">Valeur par défaut si l'attribut n'existe pas.</param>
+            <returns>The value of an attribute for a node.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.XmlHelper.SetAttributeValue(System.Xml.XmlNode,System.String,System.String)">
+            <summary>
+            Saves the value of an attribute for a node.
+            </summary>
+            <param name="node">The XML node.</param>
+            <param name="attr">The attribute name.</param>
+            <param name="value">Value of the attribute.</param>
+        </member>
+        <member name="T:Lagoon.Helpers.Progress">
+            <summary>
+            Informations about the progression.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.Progress.IsIndeterminate">
+            <summary>
+            Indicate if the current position is indeterminate.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.Progress.IsEnded">
+            <summary>
+            Indicate if the progression is over
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.Progress.StartPosition">
+            <summary>
+            Start position.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.Progress.EndPosition">
+            <summary>
+            End position.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.Progress.Position">
+            <summary>
+            Current position.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Helpers.Progress.Message">
+            <summary>
+            Progression description.
+            </summary>
+        </member>
+        <member name="E:Lagoon.Helpers.Progress.OnProgress">
+            <summary>
+            Event raised when a new progression is reported.
+            </summary>
+        </member>
+        <member name="E:Lagoon.Helpers.Progress.OnEnd">
+            <summary>
+            Event raised when the progression is over.
+            </summary>
+        </member>
+        <member name="E:Lagoon.Helpers.Progress.OnReset">
+            <summary>
+            Event raised when the progression is reset.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.#ctor(System.String)">
+            <summary>
+            Initialise a new indeterminated progression state.
+            </summary>
+            <param name="message">Initial message.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.#ctor(System.Int32,System.String)">
+            <summary>
+            Initialise a new progression state starting from 0.
+            </summary>
+            <param name="endPosition">End position.</param>
+            <param name="message">Initial message.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.#ctor(System.Int32,System.Int32,System.String)">
+            <summary>
+            Initialise a new progression state.
+            </summary>
+            <param name="startPosition">Start position.</param>
+            <param name="endPosition">End position.</param>
+            <param name="message">Initial message.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.Reset(System.String)">
+            <summary>
+            Reset the current progression.
+            </summary>
+            <param name="message">Initial message.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.Reset(System.Int32,System.String)">
+            <summary>
+            Initialise a new progression state starting from 0.
+            </summary>
+            <param name="endPosition">End position.</param>
+            <param name="message">Initial message.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.Reset(System.Int32,System.Int32,System.String)">
+            <summary>
+            Initialise a new progression state.
+            </summary>
+            <param name="startPosition">Start position.</param>
+            <param name="endPosition">End position.</param>
+            <param name="message">Initial message.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.Reset(System.Int32,System.Int32,System.Boolean,System.String)">
+            <summary>
+            Reset the progression parameters.
+            </summary>
+            <param name="startPosition">Start position.</param>
+            <param name="endPosition">End position.</param>
+            <param name="updateMessage">Update the message.</param>
+            <param name="message">Initial message.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.OnResetting">
+            <summary>
+            The progression is resetting.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.Increment">
+            <summary>
+            Indicate the new running progression state.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.Increment(System.String)">
+            <summary>
+            Indicate the new running progression state.
+            </summary>
+            <param name="message">The new progression message.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.Increment(System.Int32)">
+            <summary>
+            Indicate the new running progression state.
+            </summary>
+            <param name="value">Value to add to the current position.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.Increment(System.Int32,System.String)">
+            <summary>
+            Indicate the new running progression state.
+            </summary>
+            <param name="value">Value to add to the current position.</param>
+            <param name="message">The new progression message.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.Increment(System.Int32,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Increment current position
+            </summary>
+            <param name="value">Value to add to the current position.</param>
+            <param name="message">The new progression message if <paramref name="updateMessage"/> is <c>true</c>.</param>
+            <param name="updateMessage">Indicate if the message must be updated or ignored.</param>
+            <param name="autoEnd">Indicate if the "End" state is set when the position reach the "EndPosition".</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.Report(System.Int32)">
+            <summary>
+            Indicate the new running progression state.
+            </summary>
+            <param name="position">The new progression position.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.Report(System.String)">
+            <summary>
+            Indicate the new running progression state.
+            </summary>
+            <param name="message">The new progression message.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.Report(System.Int32,System.String)">
+            <summary>
+            Indicate the new running progression state.
+            </summary>
+            <param name="position">The new progression position.</param>
+            <param name="message">The new progression message.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.Report(System.Int32,System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Indicate the new running progression state.
+            </summary>
+            <param name="position">The new progression position if <paramref name="updatePosition"/> is <c>true</c>.</param>
+            <param name="message">The new progression message if <paramref name="updateMessage"/> is <c>true</c>.</param>
+            <param name="updatePosition">Indicate if the position must be updated or ignored.</param>
+            <param name="updateMessage">Indicate if the message must be updated or ignored.</param>
+            <param name="autoEnd">Indicate if the "End" state is set when the position reach the "EndPosition".</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.ReportEnd">
+            <summary>
+            Indicates that the process is finished.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.ReportEnd(System.String)">
+            <summary>
+            Indicates that the process is finished.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.ReportEnd(System.String,System.Boolean)">
+            <summary>
+            Indicates that the process is finished.
+            </summary>
+            <param name="message">The new progression message if <paramref name="updateMessage"/> is <c>true</c>.</param>
+            <param name="updateMessage">Indicate if the message must be updated or ignored.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.Stop(System.Boolean)">
+            <summary>
+            Indicate the process is done.
+            </summary>
+            <param name="raiseOnProgress"></param>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.OnEnding">
+            <summary>
+            The progression is over.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.OpenSubProgress(System.Int32,System.Boolean)">
+            <summary>
+            Open a new sub indeterminate progression .
+            </summary>
+            <param name="subPartLength">Length of the sub-progression inside the main progression.</param>
+            <param name="ignoreMessages">Ignore the sub progress report messages.</param>
+            <returns>The new sub progress instance.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.OpenSubProgress(System.Int32,System.String,System.Boolean)">
+            <summary>
+            Open a new sub indeterminate progression .
+            </summary>
+            <param name="subPartLength">Length of the sub-progression inside the main progression.</param>
+            <param name="message">Initial message.</param>
+            <param name="ignoreMessages">Ignore the sub progress report messages.</param>
+            <returns>The new sub progress instance.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.OpenSubProgress(System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Open a new sub progression
+            </summary>
+            <param name="subPartLength">Length of the sub-progression inside the main progression.</param>
+            <param name="startPosition">Start position for the sub progression.</param>
+            <param name="endPosition">End position for the sub progression.</param>
+            <param name="ignoreMessages">Ignore the sub progress report messages.</param>
+            <returns>The new sub progress instance.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.OpenSubProgress(System.Int32,System.Int32,System.Int32,System.String,System.Boolean)">
+            <summary>
+            Open a new sub progression
+            </summary>
+            <param name="subPartLength">Length of the sub-progression inside the main progression.</param>
+            <param name="startPosition">Start position for the sub progression.</param>
+            <param name="endPosition">End position for the sub progression.</param>
+            <param name="message">Initial message.</param>
+            <param name="ignoreMessages">Ignore the sub progress report messages.</param>
+            <returns>The new sub progress instance.</returns>
+        </member>
+        <member name="M:Lagoon.Helpers.Progress.op_Increment(Lagoon.Helpers.Progress)">
+            <summary>
+            Increment progression.
+            </summary>
+            <param name="progress">Progression state</param>
+            <returns></returns>
+        </member>
+        <member name="T:Lagoon.Helpers.SubProgress">
+            <summary>
+            Sub progress state.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.SubProgress.#ctor(Lagoon.Helpers.Progress,System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Initialise a new progression state.
+            </summary>
+            <param name="parent">Parent progression.</param>
+            <param name="subPartLength">Length of the sub-progression inside the main progression.</param>
+            <param name="startPosition">Start position for the sub progression.</param>
+            <param name="endPosition">End position for the sub progression.</param>
+            <param name="ignoreMessages">Ignore the sub progress report messages.</param>
+            <param name="updateMessage">Update the message.</param>
+            <param name="message">Initial message.</param>
+        </member>
+        <member name="M:Lagoon.Helpers.SubProgress.OnResetting">
+            <summary>
+            Restore the progression start state.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.SubProgress.OnEnding">
+            <summary>
+            The progression is over.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.SubProgress.RestoreIndeterminate">
+            <summary>
+            Restore the indeterminate state for the parent.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.SubProgress.Report(System.Int32,System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Lagoon.Shared.Model.EntityBase">
+            <summary>
+            Entity base 
+            </summary>
+        </member>
+        <member name="P:Lagoon.Shared.Model.EntityBase.Id">
+            <summary>
+            Gets or sets profile identifier
+            </summary>
+        </member>
+        <member name="T:Lagoon.Shared.Model.Eula">
+            <summary>
+            Eula model used to store eula data into DB
+            </summary>
+        </member>
+        <member name="P:Lagoon.Shared.Model.Eula.Id">
+            <summary>
+            Primary key
+            </summary>
+        </member>
+        <member name="P:Lagoon.Shared.Model.Eula.Value">
+            <summary>
+            Eula value
+            </summary>
+        </member>
+        <member name="F:Lagoon.Shared.Model.Eula.VersionKey">
+            <summary>
+            Version key (used in DB)
+            </summary>
+        </member>
+        <member name="F:Lagoon.Shared.Model.Eula.ContentKey">
+            <summary>
+            Eula content key (vf. dico.xml)
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Components.DataSortDirection">
+            <summary>
+            Sort direction
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.DataSortDirection.None">
+            <summary>
+            No sort
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.DataSortDirection.Asc">
+            <summary>
+            Ascending sort
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.DataSortDirection.Desc">
+            <summary>
+            Descending sort
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Components.DataFilterOperator">
+            <summary>
+            Filter operator
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.DataFilterOperator.None">
+            <summary>
+            No filter
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.DataFilterOperator.Equal">
+            <summary>
+            Equal filter        
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.DataFilterOperator.NotEqual">
+            <summary>
+            Not equal filter        
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.DataFilterOperator.Like">
+            <summary>
+            Like filter
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.DataFilterOperator.Starts">
+            <summary>
+            Start word filter
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.DataFilterOperator.Ends">
+            <summary>
+            End word filter
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.DataFilterOperator.Less">
+            <summary>
+            Less filter        
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.DataFilterOperator.LessEqual">
+            <summary>
+            Less or equal filter        
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.DataFilterOperator.Greater">
+            <summary>
+            Greater filter        
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.DataFilterOperator.GreaterEqual">
+            <summary>
+            Greater or equal filter        
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.DataFilterOperator.In">
+            <summary>
+            Contained in list
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Components.GridViewColumnProfile">
+            <summary>
+            GridView column profile
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.GridViewColumnProfile.UniqueKey">
+            <summary>
+            Gets or sets unique column identifier
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.GridViewColumnProfile.Order">
+            <summary>
+            Gets or sets column order
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.GridViewColumnProfile.Sort">
+            <summary>
+            Gets or sets sort direction
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.GridViewColumnProfile.Filter">
+            <summary>
+            Gets or sets filter value
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.GridViewColumnProfile.Width">
+            <summary>
+            Gets or sets column width
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.GridViewColumnProfile.Hidden">
+            <summary>
+            Gets or sets column visibility
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.GridViewColumnProfile.Frozen">
+            <summary>
+            Gets or sets if the column is frozen.
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Components.GridViewFilter">
+            <summary>
+            Gridview columns filters
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.GridViewFilter.Data">
+            <summary>
+            List of the filters
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Components.GridViewFilter.SetFilter(Lagoon.UI.Components.DataFilterOperator,System.Object)">
+            <summary>
+            Add one filter
+            </summary>
+            <param name="dataFilterOperator">Filter operator</param>
+            <param name="value">Filtering value</param>
+        </member>
+        <member name="M:Lagoon.UI.Components.GridViewFilter.SetBetweenFilter(System.Object,System.Object)">
+            <summary>
+            Add plage values filter
+            </summary>
+            <param name="value"></param>
+            <param name="value2"></param>
+        </member>
+        <member name="M:Lagoon.UI.Components.GridViewFilter.GetFirstValueAsString">
+            <summary>
+            Gets the first filter value as string.
+            </summary>
+            <returns>The first filter value as string.</returns>
+        </member>
+        <member name="T:Lagoon.UI.Components.GridViewFilterValue">
+            <summary>
+            Filter parameter
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.GridViewFilterValue.Value">
+            <summary>
+            Gets or sets filter value
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.GridViewFilterValue.Operator">
+            <summary>
+            Gets or sets filter operator
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Components.GridViewGroupProfile">
+            <summary>
+            GridView group profile
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.GridViewGroupProfile.Columns">
+            <summary>
+            Gets or sets column list
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Components.GridViewProfile">
+            <summary>
+            Gridview storage profile
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.GridViewProfile.Label">
+            <summary>
+            Profile label
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.GridViewProfile.PageSize">
+            <summary>
+            Gets or sets page size
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.GridViewProfile.IsSharedProfile">
+            <summary>
+            Is shared profile
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.GridViewProfile.Columns">
+            <summary>
+            Gets or sets list of columns profiles
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.GridViewProfile.Groups">
+            <summary>
+            Gets or sets list of groups profiles
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Components.ProfileItem">
+            <summary>
+            Profile item
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.ProfileItem.Id">
+            <summary>
+            Gets or sets profile identifier
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.ProfileItem.Label">
+            <summary>
+            Profile label
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.ProfileItem.IsSharedProfile">
+            <summary>
+            Is shared profile
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Components.LinkedFile">
+            <summary>
+            Describe a file linked to a LgInputFile
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.LinkedFile.Id">
+            <summary>
+            An unique identifier for a file
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.LinkedFile.Name">
+            <summary>
+            File name
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.LinkedFile.Size">
+            <summary>
+            File size
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.LinkedFile.ContentType">
+            <summary>
+            File content type
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.LinkedFile.CanDelete">
+            <summary>
+            Can the file be deleted ?
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.LinkedFile.CanDownload">
+            <summary>
+            Can the file be donwloaded ?
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Components.NotificationBase">
+            <summary>
+            Notification data
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationBase.Id">
+            <summary>
+            Gets or sets the notification id.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationBase.Title">
+            <summary>
+            Gets or sets the notification title.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationBase.Description">
+            <summary>
+            Gets or sets the notification description.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationBase.CreationDate">
+            <summary>
+            Gets or sets the notification date.
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Components.NotificationPendingActionVm">
+            <summary>
+            Pending action view model
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationPendingActionVm.Action">
+            <summary>
+            Gets or sets the pending action.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationPendingActionVm.UpdateDate">
+            <summary>
+            Gets or sets the notification update date.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationPendingActionVm.NotificationUserId">
+            <summary>
+            Gets or sets the notification id.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationPendingActionVm.IsRead">
+            <summary>
+            Gets or sets if the notification is read.
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Components.NotificationPendingAction">
+            <summary>
+            Pending action type
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.NotificationPendingAction.Delete">
+            <summary>
+            Delete action
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.NotificationPendingAction.Update">
+            <summary>
+            Update action
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Components.NotificationUserBase`1">
+            <summary>
+            Notification user data
+            </summary>
+            <typeparam name="TNotification"></typeparam>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationUserBase`1.Id">
+            <summary>
+            Gets or sets the notification id.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationUserBase`1.NotificationId">
+            <summary>
+            Gets or sets the notification id.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationUserBase`1.Notification">
+            <summary>
+            Notification object
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationUserBase`1.IsRead">
+            <summary>
+            Gets or sets if the notification is read.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationUserBase`1.UpdateDate">
+            <summary>
+            Gets or sets the notification update date.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationUserBase`1.UserId">
+            <summary>
+            Gets or sets the user id.
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Components.NotificationVmBase">
+            <summary>
+            User notification view model base
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationVmBase.Id">
+            <summary>
+            Gets or sets the notification id.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationVmBase.Title">
+            <summary>
+            Gets or sets the notification title.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationVmBase.Description">
+            <summary>
+            Gets or sets the notification description.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationVmBase.CreationDate">
+            <summary>
+            Gets or sets the notification date.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationVmBase.UpdateDate">
+            <summary>
+            Gets or sets the notification update date.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationVmBase.TargetId">
+            <summary>
+            Gets or sets the target id.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationVmBase.NotificationUserId">
+            <summary>
+            Gets or sets the notification id.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.NotificationVmBase.IsRead">
+            <summary>
+            Gets or sets if the notification is read.
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Components.NotificationVmBase.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Components.IWorkSchedulerData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Components.IWorkSchedulerData.From">
+            <summary>
+            
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Lagoon.UI.Components.IWorkSchedulerData.To">
+            <summary>
+            
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:System.Extensions">
+            <summary>
+            Helper extension methods
+            </summary>
+        </member>
+        <member name="M:System.Extensions.Translate(System.String)">
+            <summary>
+            Return the corresponding value from the dictionnary.
+            </summary>
+            <param name="key">The key to look up in the dictionary</param>
+            <returns>The translated value.</returns>
+            <remarks>Use this method to avoid message "Client projection  contains reference to constant expression..." when used in linq select.</remarks>
+        </member>
+        <member name="M:System.Extensions.Translate(System.String,System.Object[])">
+            <summary>
+            Return the corresponding value from the dictionnary. Use <paramref name="args"/> to format the result
+            </summary>
+            <param name="key">The key to look up in the dictionary</param>
+            <param name="args">Optional <see cref="M:System.String.Format(System.String,System.Object[])"/> arguments</param>
+            <returns>The transalated value.</returns>
+        </member>
+        <member name="T:Microsoft.Extensions.Hosting.LagoonExtensions">
+            <summary>
+            Extension methods class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Hosting.LagoonExtensions.AddLagoonFileLogger(Microsoft.Extensions.Logging.ILoggingBuilder,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            File logger configuration
+            </summary>
+            <param name="loggingBuilder">ILoggingBuilder extension</param>
+            <param name="config">IConfiguration to retrieve logger config</param>
+            <returns>ILoggingBuilder to chain method</returns>
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.Extensions">
+            <summary>
+            Helper extension methods
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.Extensions.BindSectionIfExists(Microsoft.Extensions.Configuration.IConfiguration,System.String,System.Object)">
+            <summary>
+            Bind a section (if exist) to an object instance
+            </summary>
+            <param name="config">config. file</param>
+            <param name="sectionName">Section to retrieve</param>
+            <param name="instance">Object to bind if section found</param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,24 @@
+﻿@inherits DemoPage
+
+<div class="row">
+    <div class="col-10"><LgTitle Text="#grdExportTitle" /></div>
+    <div class="col-2 text-right"><LgHyperlink Uri="@DocumentationLink()" Target="_blank"><LgButton Text="#lblDoc" /></LgHyperlink></div>
+</div>
+
+<LgGridView StateId="gvDemoExport" Items="Data" TItem="GridViewData" Features="GridFeature.All" Exportable="true" ExportFileName="people" ExportableColumns="@ExportableColumns" ExportGroupName="true" ExportGroupNameTitleFormat="{1} - {0}">
+    <Columns Context="GridViewData">
+        <LgGridNumericColumn @bind-Value="GridViewData.Id" Title="Id" Resizable="false"></LgGridNumericColumn>
+        <LgGridColumn @bind-Value="GridViewData.Name" Title="#grdNameCol" GroupName="#grdGrpChar"></LgGridColumn>
+        <LgGridColumn @bind-Value="GridViewData.Surname" Title="#grdSurnameCol" GroupName="#grdGrpChar"></LgGridColumn>
+        <LgGridDateColumn @bind-Value="GridViewData.BirthDate" Title="#grdBirthDateCol" DisplayFormat="yyyy-MM-dd" GroupName="#grdGrpChar"></LgGridDateColumn>
+        <LgGridNumericColumn @bind-Value="GridViewData.Weight" Title="#grdWeightCol" GroupName="#grdGrpChar"></LgGridNumericColumn>
+        <LgGridColumn @bind-Value="GridViewData.Mail" Title="#grdMailCol" GroupName="#grdGrpInfo"></LgGridColumn>
+        <LgGridEnumColumn @bind-Value="GridViewData.HairColor" ExportFormat="ExportEnumFormat.DisplayName" ExportFormatLanguage="en" Title="#grdHairColorCol" GroupName="#grdGrpInfo"></LgGridEnumColumn>
+        <LgGridColorColumn @bind-Value="GridViewData.FavoriteColor" Title="#grdFavColorCol"></LgGridColorColumn>
+        <LgGridBooleanColumn @bind-Value="GridViewData.HasGlasses" Title="#grdGlassesCol" GroupName="#grdGrpInfo"></LgGridBooleanColumn>
+        <LgGridNumericColumn @bind-Value="GridViewData.PrefixSuffixGrid" Title="#grdNumCol" GroupName="#grdGrpInfo" PrefixType="InputLabelType.IconName" Prefix="@IconNames.About" SuffixType="InputLabelType.Text" Suffix="Texte"></LgGridNumericColumn>
+    </Columns>
+</LgGridView>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />
+

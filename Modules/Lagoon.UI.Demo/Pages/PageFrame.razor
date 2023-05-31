@@ -1,0 +1,77 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="Frame" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <div class="d-flex">
+        <div class="col-md-5 col-sm-12">
+            <LgTitle Text="Example without summary or footer" TitleLevel="TitleLevel.Level2" />
+            <LgFrame Kind="@Kind" Title="@GetTitle()" IconName="@GetIcon()" Collapsable="@HaveCollapsed">
+                <Toolbar>
+                    @if (HaveToolbar){
+                        <LgToolbarButton IconName="@IconNames.All.Pdf" Text="Export" CommandName="EXPORT" CommandArgument='"csv"' />
+                    }
+                </Toolbar>
+                <ChildContent>
+                    <div style="text-align:justify">
+                        @ContentCard
+                    </div>
+                </ChildContent>
+            </LgFrame>
+        </div>
+
+        <div class="ml-3 col-md-5 col-sm-12">
+            <LgTitle Text="Example with summary and footer" TitleLevel="TitleLevel.Level2" />
+            <LgFrame Kind="@Kind" Title="@GetTitle()" IconName="@GetIcon()" Collapsable="@HaveCollapsed">
+                <Toolbar>
+                    @if (HaveToolbar)
+                    {<LgToolbarButton IconName="@IconNames.All.Pdf" Text="Export" Uri="exportData" />}
+                </Toolbar>
+                <SummaryContent>
+                    <div style="text-align:justify">
+                        This is the summary of my frame's content
+                    </div>
+                </SummaryContent>
+                <ChildContent>
+                    <div style="text-align:justify">
+                        @ContentCard
+                    </div>
+                </ChildContent>
+                <FooterContent>
+                    <div style="text-align:justify">
+                        This is the footer of my frame
+                    </div>
+                </FooterContent>
+            </LgFrame>
+        </div>
+    </div>
+
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+
+    <!-- section header -->
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-3 d-flex justify-content-end" @bind-Value="@HaveTitle" Text="@(HaveTitle ? "With title" : "Without title")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <LgTextBox CssClass="col-md-6 col-sm-6"
+                   Label="Title"
+                   PrefixType="InputLabelType.IconName"
+                   SuffixType="InputLabelType.IconName"
+                   @bind-Value="@ContentTitle"
+                   OnInput="OnUpdateTitle" />
+    </section>
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-3 d-flex justify-content-end" @bind-Value="@HaveIcon" Text="@(HaveIcon ? "With icon" : "Without icon")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <IconParameter CssClass="col-md-6" @bind-Icon="Icon" />
+    </section>
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <KindParameter CssClass="col-md-6" OnKindEdition="OnChangeKind"></KindParameter>
+        <LgCheckBox CssClass="col-md-3 d-flex justify-content-end" @bind-Value="@HaveCollapsed" Text="@(HaveCollapsed ? "With collapse" : "Without collapse")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <LgCheckBox CssClass="col-md-3 d-flex justify-content-end" @bind-Value="@HaveToolbar" Text="@(HaveToolbar ? "With toolbar" : "Without toolbar")" CheckBoxKind="@CheckBoxKind.Toggle" />
+    </section>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

@@ -1,0 +1,27 @@
+﻿@inherits DemoPage
+
+
+<div class="row">
+    <div class="col-10"><LgTitle Text="#grdCardTitle" /></div>
+    <div class="col-2 text-right"><LgHyperlink Uri="@DocumentationLink()" Target="_blank"><LgButton Text="#lblDoc" /></LgHyperlink></div>
+</div>
+
+<LgGridView StateId="gvDemoCard" Items="Data" TItem="GridViewData" Features="GridFeature.None" GridStyleType="GridStyleType.Card">
+    <Columns Context="GridViewData">
+        <LgGridNumericColumn @bind-Value="GridViewData.Id" Title="Id" CanEdit="false" Resizable="false"></LgGridNumericColumn>
+        <LgGridSeparatorColumn Key="separator1"></LgGridSeparatorColumn>
+        <LgGridColumn @bind-Value="GridViewData.Name" Title="#grdNameCol" CanEdit="true" Resizable="false"></LgGridColumn>
+        <LgGridColumn @bind-Value="GridViewData.Surname" Title="#grdSurnameCol" CanEdit="true" Resizable="false"></LgGridColumn>
+        <LgGridDateColumn @bind-Value="GridViewData.BirthDate" Title="#grdBirthDateCol" CanEdit="true" DisplayFormat="dd/MM/yyyy" Resizable="false"></LgGridDateColumn>
+        <LgGridNumericColumn @bind-Value="GridViewData.Weight" Title="#grdWeightCol" CanEdit="true" Resizable="false"></LgGridNumericColumn>
+        <LgGridEnumColumn @bind-Value="GridViewData.HairColor" Title="#grdHairColorCol" CanEdit="true" Resizable="false"></LgGridEnumColumn>
+        <LgGridColorColumn @bind-Value="GridViewData.FavoriteColor" Title="#grdFavColorCol" CanEdit="true" Resizable="false"></LgGridColorColumn>
+        <LgGridSeparatorColumn Key="separator2"></LgGridSeparatorColumn>
+        <LgGridColumn @bind-Value="GridViewData.Mail" Title="#grdMailCol" CanEdit="true" Resizable="false"></LgGridColumn>
+        <LgGridBooleanColumn @bind-Value="GridViewData.HasGlasses" Title="#grdGlassesCol" CanEdit="true" Resizable="false"></LgGridBooleanColumn>
+        <LgGridNumericColumn @bind-Value="GridViewData.PrefixSuffixGrid" Resizable="false" Title="#grdNumCol" CanEdit="false" PrefixType="InputLabelType.IconName" Prefix="@IconNames.About" SuffixType="InputLabelType.Text" Suffix="Texte"></LgGridNumericColumn>
+    </Columns>
+</LgGridView>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />
+

@@ -1,0 +1,56 @@
+﻿@inherits DemoPage
+@using Lagoon.UI.Demo.ViewModel
+
+<LgTitle Text="ListView" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgListView TItem="Project" Items="_projectsItems" SelectedItems="_selectedProjects" DefaultSortProperty="@nameof(Pet.Name)" 
+                SortProperties="_propProjectList" Title=@($"{_projectsItems.Count()} Projects")
+                GroupBy="@_groupBy">
+        <!-- Sort options -->
+        <SortOptions>
+            <LgOptionListItem Value="@nameof(Project.Status)" Text="Project status" />
+            <LgOptionListItem Value="@nameof(Project.Name)" Text="Project name" />
+        </SortOptions>
+        <!-- Toolbar action (top) -->
+        <Toolbar>
+            <LgToolbarButton Text="Add new project" IconName="@IconNames.All.Plus" OnClick="AddProject" />
+            <LgToolbarButton Text="@(String.IsNullOrEmpty(_groupBy) ? "Group by Status" : "Cancel grouping")" IconName="@IconNames.All.ViewStacked" OnClick="GroupByStatus" />
+        </Toolbar>
+        <!-- Toolbar selection (bottom) -->
+        <ToolbarSelection>
+            <LgToolbarGroup Kind="ToolbarGroupKind.Primary">
+                <LgToolbarButton IconName="@IconNames.All.Check" OnClick="() => MarkAsDone(_selectedProjects)" Text="Mark as done" Kind="ButtonKind.Ghost"></LgToolbarButton>
+            </LgToolbarGroup>
+            <LgToolbarGroup Kind="ToolbarGroupKind.Ghost">
+                <LgToolbarButton IconName="@IconNames.Delete" OnClick="() => Delete(_selectedProjects)" Text="Delete" Kind="ButtonKind.Ghost"></LgToolbarButton>
+            </LgToolbarGroup>
+        </ToolbarSelection>
+
+        <!-- CUSTOM COMPONENT-->
+        <ItemTemplate Context="project">
+            <!-- CUSTOM COMPONENT-->
+            <div class="card">
+                <LgColorBar Color="@GetColorBar(project.Status)" />
+                <div class="card-body w-100">
+                    <div class="d-flex">
+                        <div class="mr-auto my-auto d-flex w-100">
+                            <div class="p-1">
+                                <LgLabel Text=@($"{project.Id}") />
+                            </div>
+                            <div class="p-1">
+                                <LgLabel Text=@($"{project.Name}") />
+                            </div>
+                            <div class="p-1 ml-auto">
+                                <LgLabel Text=@($"Status : {project.Status}") />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ItemTemplate>
+    </LgListView>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

@@ -1,0 +1,175 @@
+﻿@namespace Lagoon.UI.Components
+@using Lagoon.UI.Internal.BlazorInputFile
+@using Lagoon.Helpers;
+@inherits LgAriaComponentBase
+
+@if (LabelContent != null || !string.IsNullOrEmpty(Label))
+{
+    <LgLabel Text="@Label" For="@ElementId">
+        @LabelContent
+    </LgLabel>
+}
+<div class=@($"{GetClassAttribute()} {(IsDraggedOver ? "dragged-over" : "")}") role="group" aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy">
+    <div class="row no-gutters">
+        @* ============== Upload area ============== *@
+        <div class=@($"input-container col-{(VerticalDisplay ? "12" : "6 order-12")}  {(ShowUpload ? "" : "input-container-hidden")} {(HasContentAfter() && VerticalDisplay ? "input-spacer" : "")}") @ondragenter="() => IsDraggedOver = true" @ondragover="() => IsDraggedOver = true" @ondragleave="() => IsDraggedOver = false" @ondrop="() => IsDraggedOver = false">
+            <InputFile @ref=_baseInputFile id="@ElementId" name="files" multiple="@AllowMultipleFiles" style="z-index: 2" webkitdirectory="@AllowDirectories" OnChange="HandleSelectionAsync" accept="@AcceptAttribute" disabled="@((_state == State.Uploading || !ShowUpload) ? true : false)" />
+            @if (ShowUpload)
+            {
+                <p class="text-center" aria-hidden="true" role="presentation">
+                    <LgIcon IconName="@UploadIconName" CssClass="image-icon" />
+                </p>
+                <div class="select-your-files">
+                    <span class="ml-1">@ActionMessage.CheckTranslate(AllowedFileExtensions.Count > 0 ? string.Join(",", AllowedFileExtensions) : "lgFileUploadFile".Translate())</span>
+                </div>
+                var __hasFiles = _selectedFiles.Any();
+                @if (ShowFileList && __hasFiles)
+                {
+                    <div class="file-container-list">
+                        @if (FileCardTemplate != null)
+                        {
+                            @foreach (var file in _selectedFiles)
+                            {
+                                <div class="row no-gutters" role="listitem">
+                                    <div class="col-10">@FileCardTemplate(file)</div>
+                                    <div class="col-2 text-right pr-1">
+                                        <LgIcon IconName="@IconNames.Close" CssClass="dot z-index-3" OnClick="@(() => RemoveFileAsync(file))" role="button" AriaLabel="@("lgFileUploadRemoveLbl".Translate(file.Name))" />
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="card files-list">
+                                <div class="card-body container" role="list">
+                                    @foreach (var file in _selectedFiles)
+                                    {
+                                        <div class="row no-gutters" role="listitem">
+                                            <div class="col-10 pl-2 text-truncate" title=@file.Name>
+                                                @file.Name
+                                            </div>
+                                            @if (_state != State.Uploading)
+                                            {
+                                                <div class="col-2 text-right pr-1" style="z-index:3">
+                                                    <LgIcon IconName="@IconNames.Close" CssClass="dot" OnClick="@(() => RemoveFileAsync(file))" role="button" AriaLabel="@("lgFileUploadRemoveLbl".Translate(file.Name))" />
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    @if (!CheckUploadSize())
+                    {
+                        <p class="uploaded-message text-center text-danger" role="alert">
+                            @("lgFileUploadMaxSizeExceeded".Translate(Tools.BytesToHumanReadable(MaxUploadSize), Tools.BytesToHumanReadable(GetTotalSizeToUpload())))
+                        </p>
+                    }
+                    else
+                    {
+                        @if (__hasFiles && UploadMode == UploadMode.Button && _state == State.ReadyToUpload)
+                        {
+                            <div class="text-center mt-2 position-relative" style="z-index:3">
+                                <LgButton CssClass="w-100" OnClick="@DoUploadAsync">@("lgFileUploadBtnUpload".Translate(_selectedFiles.Count))</LgButton>
+                                @*<LgButton CssClass="action-button" Kind="ButtonKind.Secondary" OnClick="@CancelUploadAsync">Cancel</LgButton>*@
+                            </div>
+                        }
+                        @if (_state == State.Uploading)
+                        {
+                            <LgProgress Label=@_progressionLabel LabelPosition="ProgressLabelPosition.Left" Kind="@_progressKind" Min="0" Max="100" Value="@_currentProgress" CssClass="mt-1 mb-1" />
+
+
+                            <div class="text-center position-relative" style="z-index:3">
+                                <LgButton CssClass="w-100" OnClick="@CancelUploadAsync">Cancel</LgButton>
+                            </div>
+                        }
+                        else if (_state == State.Error)
+                        {
+                            <p class="uploaded-message text-center text-danger" role="alert">
+                                @UploadedFailureMessage
+                            </p>
+                            <div class="text-center mt-2 position-relative" style="z-index:3">
+                                <LgButton CssClass="action-button" Kind="ButtonKind.Link" OnClick="@DoUploadAsync">Try again</LgButton>
+                                <LgButton CssClass="action-button" Kind="ButtonKind.Link" OnClick="@CancelUploadAsync">Cancel</LgButton>
+                            </div>
+                        }
+                    }
+                }
+            }
+        </div>
+
+    @* =============== Download area =============== *@
+    @if (!string.IsNullOrEmpty(LinkedFilesUri))
+    {
+    <div class=@($"uploaded-files-container col-{(VerticalDisplay ? "12" : "6 pr-2")} {(_linkedFiles == null || _linkedFiles.Count() == 0 ? "align-self-center" : "")}")>
+        @if (_linkedFiles != null && _linkedFiles.Count() > 0)
+        {
+            @if (!string.IsNullOrEmpty(FileListLabel))
+            {
+                <p class="action-message mb-0 pb-0" role="alert">
+                    @FileListLabel.CheckTranslate(_linkedFiles?.Count().ToString() ?? "0")
+                </p>
+            }
+            <div class="file-container-list">
+                <div class="card files-list">
+                    <div class="card-body container" role="list">
+                        @foreach (var file in _linkedFiles)
+                        {
+                            var __downloadInProgress = _downloadInProgress.ContainsKey(file.Id.ToString());
+                            <div class="row no-gutters small-top-bottom-padding" role="listitem">
+                                <div class=@($"col-12 position-relative text-truncate pl-2") style="padding-right:30px">
+                                    @if (__downloadInProgress)
+                                    {
+                                        <LgProgress LabelPosition="ProgressLabelPosition.Left" Kind="@_progressKind" Min=0 Max=100 Value=@_downloadInProgress[file.Id.ToString()] Label=@($"{_downloadInProgress[file.Id.ToString()]}%") />
+                                        <div class="action-message position-absolute" style="top:-2px; right:0">
+                                            <span class="dot">
+                                                <LgIcon IconName="@IconNames.Cancel" role="button" AriaLabel="@("lgFileUploadBtnCancel".Translate(file.Name))" data-tooltip-pos="top" Tooltip=@("lgFileUploadBtnCancel".Translate(file.Name)) OnClick=@(async () => await CancelDownload(file)) />
+                                            </span>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span title=@file.Name data-tooltip-pos="left" @onclick="@(async () => await SendDownloadFileRequestAsync(file))" style="text-decoration:underline; cursor:pointer" class="action-message">
+                                            @file.Name
+                                        </span>
+                                        <div class="action-message position-absolute" style="top:0; right: 5px">
+                                            @if (file.CanDownload)
+                                            {
+                                                <span class="dot">
+                                                    <LgIcon CssClass="small-dot-download" IconName="@IconNames.All.Download" OnClick=@(async () => await SendDownloadFileRequestAsync(file)) role="button" AriaLabel="@("lgFileUploadDownloadFile".Translate(file.Name))" Tooltip="@("lgFileUploadDownloadFile".Translate(file.Name))" />
+                                                </span>
+                                            }
+                                            @if (file.CanDelete)
+                                            {
+                                                <span class="dot">
+                                                    <LgIcon CssClass="small-dot-delete" IconName="@IconNames.Delete" OnClick=@(async () => await SendDeleteFileRequestAsync(file)) role="button" AriaLabel="@("lgFileUploadRemoveLbl".Translate(file.Name))" Tooltip=@("lgFileUploadRemoveLbl".Translate(file.Name)) />
+                                                </span>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        else if (_linkedFiles != null && _linkedFiles.Count() == 0)
+        {
+            <p class="text-center" aria-hidden="true" role="presentation">
+                <LgIcon IconName="@IconNames.Empty" CssClass="image-icon" />
+            </p>
+            <p class=" text-center empty-file-message" role="presentation">
+                @("lgFileUploadLinkedFileListEmty".Translate())
+            </p>
+        }
+        else if (_linkedFiles == null)
+        {
+            <span class="font-italic">@("LgPageTitleLoading".Translate())</span>
+        }
+    </div>       
+    }
+    </div>
+</div>

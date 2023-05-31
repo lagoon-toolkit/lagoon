@@ -1,0 +1,57 @@
+﻿@namespace Lagoon.UI.Components.WorkScheduler.Internal
+@inherits ComponentBase
+@typeparam TItem
+
+@if (WorkScheduler.GroupBy != null && WorkScheduler.GroupBy.Count() > 0)
+{
+    @if (GroupByLevel < WorkScheduler.GroupBy.Count())
+    {
+        IEnumerable<TItem> __currentGroup = (IEnumerable<TItem>)CurrentGroup ?? WorkScheduler.GetVisibleItems(false);
+        @foreach (var __group in __currentGroup.GroupBy(WorkScheduler.GroupBy.Skip(GroupByLevel).First()))
+        {
+            var __groupKey = GroupKey + "¤" + __group.Key.ToString();
+            var __isGroupOpen = WorkScheduler.IsGroupOpen(__groupKey);
+            @if (WorkScheduler.GroupDisplayMode == GroupDisplayMode.Row)
+            {
+                <div style=@($"height:{RowHeight}px; line-height:{RowHeight}px;") class=@($"wk-row wk-row-group wk-group-level-{GroupByLevel}") @onclick=@(() => WorkScheduler.CollapseGroup(__groupKey))>
+                    @if (WorkScheduler.SchedulerItemsGroup != null)
+                    {
+                        @WorkScheduler.SchedulerItemsGroup(new GroupItem<TItem>() { Key = __group.Key.ToString(), Closed = !__isGroupOpen, GroupLevel = GroupByLevel, Items = __group })
+                    }
+                </div>
+                if (__isGroupOpen)
+                {
+                    <SchedulerViewGroup TItem=TItem GroupByLevel=GroupByLevel+1 CurrentGroup=__group GroupKey=@__groupKey />
+                }
+            }
+            else
+            {
+                if (!__isGroupOpen)
+                {
+                    <div style=@($"height:{RowHeight}px; line-height:{RowHeight}px;") class=@($"wk-row wk-row-group wk-group-level-{GroupByLevel}") @onclick=@(() => WorkScheduler.CollapseGroup(__groupKey))>
+                        @if (WorkScheduler.SchedulerItemsGroup != null)
+                        {
+                            @WorkScheduler.SchedulerItemsGroup(new GroupItem<TItem>() { Key = __group.Key.ToString(), Closed = !__isGroupOpen, GroupLevel = GroupByLevel, Items = __group })
+                        }
+                    </div>
+                }
+                else //if (__isGroupOpen)
+                {
+                    <SchedulerViewGroup TItem=TItem GroupByLevel=GroupByLevel+1 CurrentGroup=__group GroupKey=@__groupKey />
+                }
+            }
+        }
+    }
+    else if (GroupByLevel == WorkScheduler.GroupBy.Count())
+    {
+        var __isGroupOpen = WorkScheduler.IsGroupOpen(GroupKey);
+        if (__isGroupOpen)
+        {
+            <SchedulerViewItems TItem=TItem Data=CurrentGroup.GroupBy(WorkScheduler.RowField) />
+        }
+    }
+}
+else
+{
+    <SchedulerViewItems TItem=TItem Data=WorkScheduler.GetVisibleItems(false).GroupBy(WorkScheduler.RowField) />
+}

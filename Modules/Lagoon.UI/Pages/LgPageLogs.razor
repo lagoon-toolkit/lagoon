@@ -1,0 +1,55 @@
+﻿@using Lagoon.Core.Application.Logging
+@inherits LgPage
+
+<p>
+    <h3>@("lblServerErrorsTitle".Translate())</h3>
+    <LgButton Text="#lblDownload" OnClick="DownloadServerLogAsync" />
+</p>
+
+<p>
+    <h3>@("lblLocalErrorsTitle".Translate())</h3>
+    @if (_localErrors == null)
+    {
+        <p>@("lblLoading".Translate())</p>
+    }
+    else if (_localErrors.Count == 0)
+    {
+        <p>@("lblNoLocalError".Translate())</p>
+    }
+    else
+    {
+        <p>
+            <span>
+                <LgButton Text="#lblDownload" OnClick="DownloadLog" />
+            </span>
+            <span>
+                <LgButton Text="#lblClear" OnClick="ClearErrorAsync" />
+            </span>
+        </p>
+        <table border="1" width="100%">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Level</th>
+                    <th>Category</th>
+                    <th>Message</th>
+                    <th>Stack</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ClientLogData error in _localErrors)
+                {
+                    <tr>
+                        <td>@error.Time</td>
+                        <td>@error.LogLevel</td>
+                        <td>@(error.Category ?? App.ApplicationInformation.RootName)</td>
+                        <td>@error.Message</td>
+                        <td>@error.StackTrace</td>
+                        <td>@error.Count</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</p>

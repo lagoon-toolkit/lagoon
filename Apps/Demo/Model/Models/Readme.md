@@ -1,0 +1,1 @@
+﻿Put all DB model classes in this folder

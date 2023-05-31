@@ -1,0 +1,39 @@
+﻿@inherits DemoPageForm
+
+<LgTitle Text="Select" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgEditForm @ref=formDemo Model=@formData ValidationErrorMessage="#ErrorFormDemo" UseValidationComplexModel="true">
+        <LgSelect ResetButton="true" CssClass="col-md-6 col-sm-12" Disabled="@IsDisable" ReadOnly="@IsReadOnly"
+                  Label="Select simple" Placeholder="Choose an option" ShowSearchBox="@ShowSearchBox"
+                  @bind-Value="formData.Color">
+            <Items>
+                @foreach (var item in formData.Colors)
+                {
+                    <LgOptionListItem IconName="@IconNames.All.Palette" Tooltip="@item.Label" Text="@item.Label" Value="@item.value" Disabled="@item.Disabled" />}
+            </Items>
+        </LgSelect>
+
+        <LgSelectMultiple ResetButton="true" CssClass="col-md-6 col-sm-12" Disabled="@IsDisable" ReadOnly="@IsReadOnly"
+                          Label="Select Multiple" Placeholder="Select Multiple" ShowSearchBox="@ShowSearchBox"
+                          @bind-Value="formData.ColorsMultiple" VisibleItemCount="@VisibleItemCount">
+            <Items>
+                @foreach (var item in formData.Colors)
+                {
+                    <LgOptionListItem IconName="@IconNames.All.Palette" Text="@item.Label" Value="@item.value" />}
+            </Items>
+        </LgSelectMultiple>
+    </LgEditForm>
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <CommonParameters CssClass="col-md-6" OnLabelEdition="OnChangeLabel" OnDisableEdition="OnChangeDisable" OnReadOnlyEdition="OnChangeReadOnly"></CommonParameters>
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-6 d-flex justify-content-end" @bind-Value="@ShowSearchBox" Text="@(ShowSearchBox ? "Show search box" : "Hide search box")" CheckBoxKind="@CheckBoxKind.Toggle" />
+    </section>
+    <LgNumericBox @bind-Value="@VisibleItemCount" CssClass="col-md-6" Label="Select multiple displayed elements"></LgNumericBox>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

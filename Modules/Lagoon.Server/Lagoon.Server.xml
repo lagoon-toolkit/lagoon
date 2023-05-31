@@ -1,0 +1,2610 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Lagoon.Server</name>
+    </assembly>
+    <members>
+        <member name="T:Lagoon.Server.Controllers.QueryableAttribute">
+            <summary>
+            This action must be added on controllers that should allow the use of OData filters.
+            The controller must return an <see cref="T:System.Linq.IQueryable"/> object 
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Controllers.QueryableAttribute.ODataTotalCountHeader">
+            <summary>
+            Key of the header used to return the total number of result
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Controllers.QueryableAttribute.DisableCount">
+            <summary>
+            Disable items count.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.QueryableAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.QueryableAttribute.OnResultExecuted(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext)">
+            <summary>
+            Check if the http request contains "$count=true" in uri and if so add an header to the response
+            with the total count of the current query
+            </summary>
+            <param name="context">Current <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext"/></param>
+        </member>
+        <member name="T:Lagoon.Server.Controllers.LgConfigurationController">
+            <summary>
+            Shared configuration controller.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Controllers.LgConfigurationController._config">
+            <summary>
+            To access application configuration file
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgConfigurationController.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initialisation
+            </summary>
+            <param name="config">Configuration accessor</param>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgConfigurationController.Get">
+            <summary>
+            Return the 'App' node from the appsettings[.development].json
+            </summary>
+            <returns>A json string representing the app node</returns>
+        </member>
+        <member name="T:Lagoon.Server.Controllers.ConfigurationConverter">
+            <summary>
+            JSon converter used to serialize an IConfigurationSection to JSON string
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.ConfigurationConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            IConfigurationSection deserialization
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.ConfigurationConverter.Write(System.Text.Json.Utf8JsonWriter,Microsoft.Extensions.Configuration.IConfigurationSection,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            IConfigurationSection serialization
+            </summary>
+        </member>
+        <member name="T:Lagoon.Server.Controllers.LgControllerBase">
+            <summary>
+            Base controller with error handling.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Controllers.LgControllerBase.ContextUserId">
+            <summary>
+            Gets the current user ID.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgControllerBase.Problem(System.Exception)">
+            <summary>
+            Trace the underlying exception and return an error object to the client
+            </summary>
+            <param name="ex">Exception</param>
+            <returns>ErrorResponse</returns>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgControllerBase.Problem(System.String)">
+            <summary>
+            Return an error response
+            </summary>
+            <param name="message">Error message</param>
+            <returns>Error response</returns>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgControllerBase.FileContent(System.String,System.Boolean,System.String)">
+            <summary>
+            Send a file to client
+            </summary>
+            <param name="filePath">File path</param>
+            <param name="attachment">True if the navigator should take the file as an attachment</param>
+            <param name="clientFileName">Filename used on client side</param>
+            <returns>Stream ready to be sent</returns>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgControllerBase.FileContent(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Send a file to client
+            </summary>
+            <param name="filePath">File path</param>
+            <param name="contentType">Type mime to use when sending response</param>
+            <param name="clientFileName">Filename used on client side</param>
+            <param name="attachment">True if the navigator should take the file as an attachment</param>
+            <returns>Stream ready to be sent</returns>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgControllerBase.FileContent(System.Byte[],System.String,System.String,System.Boolean)">
+            <summary>
+            Send a file to client
+            </summary>
+            <param name="content">File content</param>
+            <param name="contentType">Type mime to use when sending response</param>
+            <param name="clientFileName">Filename used on client side</param>
+            <param name="attachment">True if the navigator should take the file as an attachment</param>
+            <returns>Stream ready to be sent</returns>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgControllerBase.FileContent(System.IO.Stream,System.String,System.String,System.Boolean)">
+            <summary>
+            Send a file to client
+            </summary>
+            <param name="fileStream">File stream. Disposed after sending file content</param>
+            <param name="contentType">Type mime to use when sending response</param>
+            <param name="clientFileName">Filename used on client side</param>
+            <param name="attachment">True if the navigator should take the file as an attachment</param>
+            <returns>Stream ready to be sent</returns>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgControllerBase.AddContentDispositionHeader(System.Boolean,System.String)">
+            <summary>
+            Add a content disposition header to the response
+            </summary>
+            <param name="attachment">True if navigator should take the file as an attachement, oterwise fale</param>
+            <param name="clientFileName">Downloaded file name</param>
+        </member>
+        <member name="T:Lagoon.Server.Controllers.LgErrorLogProviderController">
+            <summary>
+            Error log files controller.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Controllers.LgErrorLogProviderController._logger">
+            <summary>
+            Retrieve the logger to trace error
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Controllers.LgErrorLogProviderController._app">
+            <summary>
+            Access to application manager for signin user.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgErrorLogProviderController.#ctor(Microsoft.Extensions.Logging.ILogger{Lagoon.Server.Controllers.LgErrorLogProviderController},Lagoon.Core.Application.ILgApplication)">
+            <summary>
+            Initialization
+            </summary>
+            <param name="logger">DI Ilogger</param>
+            <param name="app">Lagoon application manager.</param>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgErrorLogProviderController.Add(Lagoon.Core.LgException.ApiError)">
+            <summary>
+            Trace an error
+            </summary>
+            <param name="apiError">Error to trace</param>
+            <returns>True if the error successfully logged, false otherwise</returns>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgErrorLogProviderController.Add(System.Collections.Generic.List{Lagoon.Core.LgException.ApiError})">
+            <summary>
+            Trace an error list
+            </summary>
+            <param name="apiErrors">List of ApiError</param>
+            <returns>True if the error successfully logged, false otherwise</returns>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgErrorLogProviderController.DownloadLog">
+            <summary>
+            Export application (server) logs file
+            </summary>
+            <returns>A zip file with all application logs</returns>
+        </member>
+        <member name="T:Lagoon.Server.Controllers.LgEulaController">
+            <summary>
+            Controller used to send EULA data.
+            Not intended to be accessed directly. To add/update eula use ILgEulaManager service
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Controllers.LgEulaController._eulaManager">
+            <summary>
+            LgEulaManager interface
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgEulaController.#ctor(Lagoon.Server.Application.ILgEulaManager)">
+            <summary>
+            Initialisation
+            </summary>
+            <param name="eulaManager"></param>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgEulaController.Get(System.String)">
+            <summary>
+            Return the list of configured eula (or a single entry with the last date update if there is no version change)
+            </summary>
+        </member>
+        <member name="T:Lagoon.Server.Controllers.LgGridViewProfileController">
+            <summary>
+            GridView profile controller.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Controllers.LgGridViewProfileController._repository">
+            <summary>
+            Repository
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgGridViewProfileController.#ctor(Lagoon.Server.Application.IRepository{Lagoon.UI.Components.GridViewProfile})">
+            <summary>
+            Constructor 
+            </summary>
+            <param name="repository"></param>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgGridViewProfileController.ListGridViewProfiles(System.String)">
+            <summary>
+            Return the shared profiles of the given gird view
+            </summary>
+            <param name="gridViewId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgGridViewProfileController.GetGridViewProfile(System.String)">
+            <summary>
+            Get the profile with the given id.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgGridViewProfileController.SaveGridViewProfile(Lagoon.UI.Components.GridViewProfile)">
+            <summary>
+            Save the shared profile
+            </summary>
+            <param name="gridViewProfile"></param>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgGridViewProfileController.DeleteGridViewProfile(System.String)">
+            <summary>
+            Delete the shared profile
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Lagoon.Server.Controllers.LgNotificationBaseController`2">
+            <summary>
+            Notification controller.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Controllers.LgNotificationBaseController`2._notificationManager">
+            <summary>
+            Repository
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgNotificationBaseController`2.#ctor(Lagoon.Server.Application.ILgNotificationManager{`1,`0})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="notificationManager"></param>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgNotificationBaseController`2.GetNotificationsAsync">
+            <summary>
+            Retrieve notifications for current user
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgNotificationBaseController`2.GetNotificationsAsync(`1)">
+            <summary>
+            Retrieve notifications for current user since item update date 
+            </summary>
+            <param name="item">notification user object</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgNotificationBaseController`2.UpdateNotificationReadStateAsync(System.Guid,System.Boolean)">
+            <summary>
+            Set read flag for a notification user
+            </summary>
+            <param name="userNotificationId">User notification Id</param>
+            <param name="isRead">Is read indicator</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgNotificationBaseController`2.UpdateNotificationReadStateAsync(System.Collections.Generic.List{System.Guid},System.Boolean)">
+            <summary>
+            Set read flag for a notification user list
+            </summary>
+            <param name="userNotificationIds">List of User notification Id</param>
+            <param name="isRead">Is read indicator</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgNotificationBaseController`2.SendPendingActionsAsync(System.Collections.Generic.List{Lagoon.UI.Components.NotificationPendingActionVm})">
+            <summary>
+            Send pending actions
+            </summary>
+            <param name="pendingActions">List of pending actions</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgNotificationBaseController`2.DeleteUserNotificationAsync(System.Guid)">
+            <summary>
+            Delete one notification
+            </summary>
+            <param name="userNotificationId">User notification Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgNotificationBaseController`2.DeleteUserNotificationAsync(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            Delete multiple notification user
+            </summary>
+            <param name="userNotificationIds">List of User notification Ids</param>
+            <returns></returns>
+        </member>
+        <member name="T:Lagoon.Server.Controllers.LgNotificationController">
+            <summary>
+            Notification controller.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgNotificationController.#ctor(Lagoon.Server.Application.ILgNotificationManager{Lagoon.UI.Components.NotificationVmBase,Lagoon.UI.Components.NotificationBase})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="notificationManager">notification manager</param>
+        </member>
+        <member name="T:Lagoon.Server.Controllers.LgUnhandleErrorsController">
+            <summary>
+            Controller used to catch all unhandled exception
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Controllers.LgUnhandleErrorsController._app">
+            <summary>
+            Access to application manager for signin user.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgUnhandleErrorsController.#ctor(Lagoon.Core.Application.ILgApplication)">
+            <summary>
+            Initialize a new instance.
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.LgUnhandleErrorsController.Error">
+            <summary>
+            Catch unhandled exception and return error message in DEBUG
+            </summary>
+            <returns>Error message in DEBUG, generic message in RELEASE</returns>
+        </member>
+        <member name="T:Lagoon.Server.Controllers.OidcConfigurationController">
+            <summary>
+            Class to send OpenIdConnect configuration to clients.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.OidcConfigurationController.#ctor(Microsoft.AspNetCore.ApiAuthorization.IdentityServer.IClientRequestParametersProvider)">
+            <summary>
+            New instance
+            </summary>
+            <param name="clientRequestParametersProvider">OAuth/OpenID parameter values for configured clients.</param>
+        </member>
+        <member name="M:Lagoon.Server.Controllers.OidcConfigurationController.GetClientRequestParameters(System.String)">
+            <summary>
+            Send client parameters.
+            </summary>
+            <param name="clientId">Client ID.</param>
+            <returns>The parameters.</returns>
+        </member>
+        <member name="T:Lagoon.Server.Application.AuthenticationOptions">
+            <summary>
+            Describe Lagoon authentication option
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.AuthenticationOptions.AllowWindowsAuthentication">
+            <summary>
+            Enable / Disable Windows authentication
+            (False by default)
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.AuthenticationOptions.AllowFormAuthentication">
+            <summary>
+            Enable / Disable Forms authentication
+            (False by default)
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.AuthenticationOptions.MultiFactorAuthenticationRequired">
+            <summary>
+            Force user to enable MFA before login
+            False by default. Currently working with Form authentication
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.AuthenticationOptions.LoginUrl">
+            <summary>
+            Login URL page
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.AuthenticationOptions.RegisterUrl">
+            <summary>
+            Register URL page
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Lagoon.Server.Application.AuthenticationOptions.ForgotPasswordUrl">
+            <summary>
+            Forgot password URL page
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Lagoon.Server.Application.AuthenticationOptions.IssuerUri">
+            <summary>
+            Gets or sets the unique name of this server instance, e.g. https://myissuer.com.
+            If not set, the issuer name is inferred from the request    
+            </summary>
+            <value>Unique name of this server instance, e.g. https://myissuer.com</value>
+        </member>
+        <member name="P:Lagoon.Server.Application.AuthenticationOptions.PublicOrigin">
+            <summary>
+             Gets or sets the origin of this server instance, e.g. https://myorigin.com. If
+             not set, the origin name is inferred from the request Note: Do not set a URL
+             or include a path.
+            </summary>
+            <value>Origin of this server instance, e.g. https://myorigin.com</value>
+        </member>
+        <member name="P:Lagoon.Server.Application.AuthenticationOptions.AllowOfflineAccess">
+            <summary>
+            Gets or sets a value indicating whether [allow offline access]. Defaults to false.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.AuthenticationOptions.AuthenticationCookieLifeTime">
+            <summary>
+            Controls how much time the authentication ticket stored in the cookie will remain
+             valid from the point it is created The expiration information is stored in the
+             protected cookie ticket. Because of that an expired cookie will be ignored even
+             if it is passed to the server after the browser should have purged it.
+             This is separate from the value of Microsoft.AspNetCore.Http.CookieOptions.Expires,
+             which specifies how long the browser will keep the cookie.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.AuthenticationOptions.AccessTokenLifetime">
+            <summary>
+            Lifetime of access token in seconds (defaults to 3600 seconds / 1 hour)
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.AuthenticationOptions.CustomClaims">
+            <summary>
+            Additional claims to include in user information profile
+            (Alls claims added with AddInfo("ClaimName", "ClaimValue") must be declared here)
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.AuthenticationOptions.PasswordOptions">
+            <summary>
+            Password options (password length, strenght etc)
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.AuthenticationOptions.SignInOptions">
+            <summary>
+            SignIn options (email / phone / ... confirmation)
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.AuthenticationOptions.AdditionnalClients">
+            <summary>
+            Optional additional client
+            (Use this to allow external(s) application(s) to access to your api)
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.AuthenticationOptions.SSOUniqueIdentifier">
+            <summary>
+            Claims type wich will be used a primary identifier. ClaimTypes.Email by default
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.AuthenticationOptions.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initialize default authentication options
+            </summary>
+            <param name="config">Configuration file</param>
+        </member>
+        <member name="T:Lagoon.Server.Application.AuthenticationOptionsExtension">
+            <summary>
+            Helper extension methods
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.AuthenticationOptionsExtension.AddClientWithCredential(Lagoon.Server.Application.AuthenticationOptions,System.String,System.String,System.String,System.String[])">
+            <summary>
+            Helper for adding an external client to application.
+            Use this method to allow an external application to authenticate to the application without a user account
+            </summary>
+            <param name="options">AuthenticationOptions extension</param>
+            <param name="clientId">ClientID</param>
+            <param name="clientSecret">ClientSecret</param>
+            <param name="scope">Project scope</param>
+            <param name="roles">Role associated to the client</param>
+            <returns>this for chaining</returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.AuthenticationOptionsExtension.AddClientWithCredentialAndCode(Lagoon.Server.Application.AuthenticationOptions,System.String,System.String,System.String,System.String)">
+            <summary>
+            Helper for adding client to application requiring code grant
+            Use this method to allow an external application to authenticate to the application with a user account
+            </summary>
+            <param name="options">AuthenticationOptions extension</param>
+            <param name="clientId">ClientID</param>
+            <param name="clientSecret">ClientSecret</param>
+            <param name="scope">Project scope</param>
+            <param name="redirectUri">URIs to return tokens or authorization codes to</param>
+            <returns>this for chaining</returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.AuthenticationOptionsExtension.AddSwaggerAccess(Lagoon.Server.Application.AuthenticationOptions,System.String,System.String,System.String)">
+            <summary>
+            Open access for Swagger
+            </summary>
+            <param name="options">AuthenticationOptions extension method</param>
+            <param name="basePath">Application base url</param>
+            <param name="scope">Application scode</param>
+            <param name="clientId">Optional. Client ID used by swagger client</param>
+            <returns></returns>
+        </member>
+        <member name="T:Lagoon.Server.Application.EulaManager.EulaFile">
+            <summary>
+            Used to deserialize 'Lagoon:EulaFiles' appsettings node in a typed collection
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.EulaManager.EulaFile.LanguageKey">
+            <summary>
+            Get or set a language key (fr, en, ...)
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.EulaManager.EulaFile.FilePath">
+            <summary>
+            Get or set the path to the file which contain EULA text
+            </summary>
+        </member>
+        <member name="T:Lagoon.Server.Application.ILgEulaManager">
+            <summary>
+            Interface for LgEulaManager component used to get/set eula data
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgEulaManager.GetEula(System.String)">
+            <summary>
+            Return the eula from DB for the given language key
+            </summary>
+            <param name="languageKey">Language key to retrieve</param>
+            <returns>Eula data for the given language key</returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgEulaManager.GetAllEula">
+            <summary>
+            Return the list of configured eula
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgEulaManager.SetEula(System.String,System.String,System.Boolean)">
+            <summary>
+            Create or update the EULA text for the given language key
+            </summary>
+            <param name="languageKey">Language key to create or update</param>
+            <param name="eula">EULA text</param>
+            <param name="updateVersion"><c>true</c> by default, users must revalidate eula. if <c>false</c> eula last modification version will not be updated</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgEulaManager.GetEulaVersion">
+            <summary>
+            Return the last update date for eula
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgEulaManager.ForceEulaRevalidation">
+            <summary>
+            Force eula revalidation (last update date will invalid accepted eula made by users)
+            </summary>
+        </member>
+        <member name="T:Lagoon.Server.Application.LgEulaManager`1">
+            <summary>
+            Service used to manage eula data
+            </summary>
+            <typeparam name="TUser">Because of the dbContext we must have the IdentityUser type used by the application</typeparam>
+        </member>
+        <member name="F:Lagoon.Server.Application.LgEulaManager`1.EulaVersion">
+            <summary>
+            Last EULA update ticks (used to avoid requesting DB if no eula changes)
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Application.LgEulaManager`1._eulaFiles">
+            <summary>
+            List of configured eula file in appsettings.json
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Application.LgEulaManager`1._logger">
+            <summary>
+            Application logger
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.LgEulaManager`1.Mode">
+            <summary>
+            Help to check if we are in Databse or File mode
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgEulaManager`1.#ctor(Lagoon.Server.Application.LgApplicationDbContext{`0},Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{Lagoon.Server.Application.LgEulaManager{`0}})">
+            <summary>
+            Service used to manage EULA data
+            </summary>
+            <param name="db">Database context</param>
+            <param name="config">Application configuration settings</param>
+            <param name="logger">Application logger</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgEulaManager`1.GetEula(System.String)">
+            <summary>
+            Return the End User Licence Agreement (E.U.L.A) for the specified language key
+            </summary>
+            <param name="languageKey">Language key (en, fr, ...)</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgEulaManager`1.GetAllEula">
+            <summary>
+            Return the list of configured eula
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgEulaManager`1.SetEula(System.String,System.String,System.Boolean)">
+            <summary>
+            Create or update the EULA text for the given language key
+            </summary>
+            <param name="languageKey">Language key to create or update</param>
+            <param name="eula">EULA text</param>
+            <param name="updateVersion"><c>true</c> by default, users must revalidate eula. if <c>false</c> eula last modification date will not be updated</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgEulaManager`1.ForceEulaRevalidation">
+            <summary>
+            Force user to re-validate eula
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgEulaManager`1.GetEulaVersion">
+            <summary>
+            Return the last update date for eula
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgEulaManager`1.EnsureDbMode(System.String)">
+            <summary>
+            Throw an exception if we are in db mode (no eula file configured)
+            </summary>
+            <param name="caller">Caller name</param>
+        </member>
+        <member name="T:Lagoon.Server.Application.GridViewProfileConfiguration">
+            <summary>
+            GridView profile configuration
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.GridViewProfileConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Lagoon.UI.Components.GridViewProfile})">
+            <inheritdoc/>
+        </member>
+        <member name="T:Lagoon.Server.Application.IdentitySources.ApplicationUserClaimsPrincipalFactory`1">
+            <summary>
+            Used to build and refresh user claims
+            </summary>
+            <typeparam name="TUser">Application user</typeparam>
+        </member>
+        <member name="F:Lagoon.Server.Application.IdentitySources.ApplicationUserClaimsPrincipalFactory`1._httpAccessor">
+            <summary>
+            Used to access Request HttpContext
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Application.IdentitySources.ApplicationUserClaimsPrincipalFactory`1._app">
+            <summary>
+            Access to application manager for signin user.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.IdentitySources.ApplicationUserClaimsPrincipalFactory`1.#ctor(Microsoft.AspNetCore.Identity.UserManager{`0},Microsoft.AspNetCore.Identity.RoleManager{Microsoft.AspNetCore.Identity.IdentityRole},Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions},Microsoft.AspNetCore.Http.IHttpContextAccessor,Lagoon.Core.Application.ILgApplication)">
+            <summary>
+            Application ClaimsPrincipal factory
+            </summary>
+            <param name="userManager">User manager</param>
+            <param name="roleManager">Role manager</param>
+            <param name="optionsAccessor">Identity options</param>
+            <param name="httpAccessor">Http accessor used to retrieve current HttpContext</param>
+            <param name="application">Application manager.</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.IdentitySources.ApplicationUserClaimsPrincipalFactory`1.GenerateClaimsAsync(`0)">
+            <summary>
+            Generate claims for "user"
+            </summary>
+            <param name="user">User for which we want to generate claims</param>
+            <returns></returns>
+        </member>
+        <member name="T:Lagoon.Server.Application.IdentitySources.LgAuthenticationState">
+            <summary>
+            Authentication result for OnSignIn Workflow
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Application.IdentitySources.LgAuthenticationState.Success">
+            <summary>
+            Authentication workflow as successfully complete
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Application.IdentitySources.LgAuthenticationState.RequireMfaActivation">
+            <summary>
+            User is authenticated but must enable an MFA before complete login
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Application.IdentitySources.LgAuthenticationState.RequireMfaValidation">
+            <summary>
+            User is authenticated and have a MFA configured but require a valid MFA code complete login
+            </summary>
+        </member>
+        <member name="T:Lagoon.Server.Application.IdentitySources.FormsIdentitySource">
+            <summary>
+            Describe a form authentication in the authentication workflow
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.IdentitySources.FormsIdentitySource.UserPassword">
+            <summary>
+            Gets the user password.
+            </summary>
+            <value>
+            The user password.
+            </value>
+        </member>
+        <member name="P:Lagoon.Server.Application.IdentitySources.FormsIdentitySource.PasswordRequired">
+            <summary>
+            Indicate if the password is mandatory
+            </summary>
+            <value>
+            True if required, false otherwise
+            </value>
+        </member>
+        <member name="M:Lagoon.Server.Application.IdentitySources.FormsIdentitySource.#ctor(System.String,Lagoon.Server.Application.LoginFormat,System.String,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Lagoon.Server.Application.IdentitySources.FormsIdentitySource" /> class.
+            </summary>
+            <param name="login">User login</param>
+            <param name="loginFormat">Login format</param>
+            <param name="password">User password</param>
+            <param name="name">IdentitySource name</param>
+            <param name="rememberMe">IdentitySource remember me</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.IdentitySources.FormsIdentitySource.CheckUserAccessAsync``1(``0,Microsoft.AspNetCore.Identity.UserManager{``0})">
+            <summary>
+            Checks the user access.
+            </summary>
+            <param name="user">The identity user.</param>
+            <param name="userManager">UserManager used to manipulate application user</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.IdentitySources.FormsIdentitySource.Impersonate(System.String)">
+            <summary>
+            User impersonation: User the identity supplied and don't check user password
+            </summary>
+            <param name="login">Identity to impersonate</param>
+        </member>
+        <member name="T:Lagoon.Server.Application.IdentitySources.GroupChoice">
+            <summary>
+            Used in the authentication workflow to build application profile (a profile is a group of application role)
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.IdentitySources.GroupChoice.Description">
+            <summary>
+            Group description
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.IdentitySources.GroupChoice.Roles">
+            <summary>
+            Associated roles
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.IdentitySources.GroupChoice.#ctor(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            GroupChoice intialisation
+            </summary>
+            <param name="description">Group name</param>
+            <param name="roles">Associated roles</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.IdentitySources.GroupChoice.#ctor">
+            <summary>
+            Initalize an empty GroupChoice 
+            </summary>
+        </member>
+        <member name="T:Lagoon.Server.Application.IdentitySources.IdentitySource">
+            <summary>
+            Base class to describe an user which attempt to connect
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.IdentitySources.IdentitySource.Claims">
+            <summary>
+            Gets the claims.
+            </summary>
+            <value>
+            The claims.
+            </value>
+        </member>
+        <member name="P:Lagoon.Server.Application.IdentitySources.IdentitySource.AuthenticationMode">
+            <summary>
+            Gets the kind.
+            </summary>
+            <value>
+            The kind.
+            </value>
+        </member>
+        <member name="P:Lagoon.Server.Application.IdentitySources.IdentitySource.SourceName">
+            <summary>
+            Gets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:Lagoon.Server.Application.IdentitySources.IdentitySource.UserLogin">
+            <summary>
+            Gets the user login.
+            </summary>
+            <value>
+            The user login.
+            </value>
+        </member>
+        <member name="P:Lagoon.Server.Application.IdentitySources.IdentitySource.IsCustomRolesEnabled">
+            <summary>
+            Must be enabled if user roles must be updated during singin process
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.IdentitySources.IdentitySource.UserLoginFormat">
+            <summary>
+            Gets the login format.
+            </summary>
+            <value>
+            The login format.
+            </value>
+        </member>
+        <member name="F:Lagoon.Server.Application.IdentitySources.IdentitySource.GroupChoices">
+            <summary>
+            Custom list of roles (cf. AddRoleChoice(...))
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Application.IdentitySources.IdentitySource._customsRoles">
+            <summary>
+            List of role to apply to the sigin process
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.IdentitySources.IdentitySource.CustomsClaims">
+            <summary>
+            List of additional claims that must be inclued in token
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.IdentitySources.IdentitySource.RememberMe">
+            <summary>
+            If true the authentication ticket will be stored in Cookie,
+            if false authentication tocket will be store in Session
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.IdentitySources.IdentitySource.#ctor(Lagoon.Server.Application.AuthenticationMode,System.String,Lagoon.Server.Application.LoginFormat,System.Collections.Generic.IEnumerable{System.Security.Claims.Claim},System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Lagoon.Server.Application.IdentitySources.IdentitySource" /> class.
+            </summary>
+            <param name="authenticationMode">The authentication mode.</param>
+            <param name="login">The login.</param>
+            <param name="loginFormat">The login format.</param>
+            <param name="claims">The claims.</param>
+            <param name="sourceName">The name.</param>
+            <param name="rememberMe">IdentitySource remember me</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.IdentitySources.IdentitySource.Impersonate(System.String)">
+            <summary>
+            For debug purpose
+            </summary>
+            <param name="login">User login to impersonate</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.IdentitySources.IdentitySource.AddRoleChoice(System.String,System.String[])">
+            <summary>
+            Create roles profile.
+            </summary>
+            <param name="description">Profile description</param>
+            <param name="roles">Applicable for this profile</param>
+            <returns>this for chainning</returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.IdentitySources.IdentitySource.AddCustomRole(System.String)">
+            <summary>
+            Add role to user
+            IsCustomRole MUST BE ENABLED BEFORE calling this  method
+            </summary>
+            <param name="role">Role name</param>
+            <returns>this for chainning</returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.IdentitySources.IdentitySource.AddCustomRoles(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Add role to user
+            IsCustomRole MUST BE ENABLED BEFORE calling this  method
+            </summary>
+            <param name="roles">List of role name</param>
+            <returns>this for chainning</returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.IdentitySources.IdentitySource.AddCustomClaim(System.String,System.String)">
+            <summary>
+            Add custom claims to user
+            </summary>
+            <param name="key">Claim key</param>
+            <param name="value">Claim value</param>
+            <returns>this for chainning</returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.IdentitySources.IdentitySource.GetGroupChoices">
+            <summary>
+            Get list group choices
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.IdentitySources.IdentitySource.CheckUserAccessAsync``1(``0,Microsoft.AspNetCore.Identity.UserManager{``0})">
+            <summary>
+            No validation required.
+            </summary>
+            <typeparam name="TUser">User application type</typeparam>
+            <param name="user">User to check</param>
+            <param name="userManager">Application user management</param>
+        </member>
+        <member name="T:Lagoon.Server.Application.ILgServerAuthApplication">
+            <summary>
+            Interface for application core
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgServerAuthApplication.SignInAsync(System.String,Lagoon.Server.Application.LoginFormat,System.String,System.Boolean)">
+            <summary>
+            SignIn user from login / password screen
+            </summary>
+            <param name="p_s_login">User login</param>
+            <param name="loginFormat">Password</param>
+            <param name="password">User password</param>
+            <param name="rememberMe">If true, store authentication claims, else the user have to login every time</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgServerAuthApplication.SignInAsync(Lagoon.Server.Application.IdentitySources.IdentitySource)">
+            <summary>
+            SignIn an user
+            </summary>
+            <param name="identitySource">User identity</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgServerAuthApplication.SignOutAsync">
+            <summary>
+            Signout the current user
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgServerAuthApplication.GetExternalAuthenticationSchemes">
+            <summary>
+             Return the list of authentication method configured in the application
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgServerAuthApplication.ConfigureExternalAuthenticationProperties(System.String,System.String)">
+            <summary>
+            Return the authentication properties for a specific external provider
+            </summary>
+            <param name="providerName">External provider name</param>
+            <param name="redirectUrl">SSO page redirection when successfully authentified</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgServerAuthApplication.GetExternalLoginInfoAsync">
+            <summary>
+            Retrieve the data (claims) provided by an external authentication provider (depending on SSO provider)
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgServerAuthApplication.GenerateMfaAuthenticationUriAsync(System.Security.Claims.ClaimsPrincipal,System.Text.Encodings.Web.UrlEncoder)">
+            <summary>
+            Generate a (OTP) link for an authenticator app 
+            </summary>
+            <param name="user">User for which we want to create an OTP uri</param>
+            <param name="urlEncoder">Encoder user to generate the link</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgServerAuthApplication.EnableMfaAsync(System.Security.Claims.ClaimsPrincipal,System.String)">
+            <summary>
+            Enable MFA for the specified user
+            </summary>
+            <param name="user">User for which we want to validate the MFA</param>
+            <param name="code">Authenticator code</param>
+            <returns>A list of codes (to be able to login without the authenticator app)</returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgServerAuthApplication.TwoFactorAuthenticatorSignInAsync(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Log an user with MFA
+            </summary>
+            <param name="authenticatorCode">An authenticator code</param>
+            <param name="persistent">true is the authentication cookie must be persisted, false otherwise</param>
+            <param name="rememberMachine">true is we want to allow the user to remember the browser to bypass MFA check</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgServerAuthApplication.Protect(System.String,System.String)">
+            <summary>
+            Encrypt a value
+            </summary>
+            <param name="value">Value to encrypt</param>
+            <param name="purpose">The purpose to be assigned to the newly-created Microsoft.AspNetCore.DataProtection.IDataProtector.</param>
+            <remarks>
+             The purpose parameter must be unique for the intended use case; two different
+             Microsoft.AspNetCore.DataProtection.IDataProtector instances created with two
+             different purpose values will not be able to decipher each other's payloads.
+             The purpose parameter value is not intended to be kept secret.
+            </remarks>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgServerAuthApplication.Unprotect(System.String,System.String)">
+            <summary>
+            Decrypt a value
+            </summary>
+            <param name="value">Value to decrypt</param>
+            <param name="purpose">The purpose to be assigned to the newly-created Microsoft.AspNetCore.DataProtection.IDataProtector.</param>
+        </member>
+        <member name="T:Lagoon.Server.Application.AuthenticationMode">
+            <summary>
+            Accepted authentication mode
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Application.AuthenticationMode.None">
+            <summary>
+            No authentication
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Application.AuthenticationMode.Refresh">
+            <summary>
+            Silent claims refresh
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Application.AuthenticationMode.Forms">
+            <summary>
+            Form authentication
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Application.AuthenticationMode.SSO">
+            <summary>
+            SSO Authentication
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Application.AuthenticationMode.Windows">
+            <summary>
+            Windows authentication
+            </summary>
+        </member>
+        <member name="T:Lagoon.Server.Application.LoginFormat">
+            <summary>
+            Key to identify an user
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Application.LoginFormat.None">
+            <summary>
+            No authentication
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Application.LoginFormat.Email">
+            <summary>
+            Email as unique identifier
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Application.LoginFormat.Name">
+            <summary>
+            UserLogin as unique identifier
+            </summary>
+        </member>
+        <member name="T:Lagoon.Server.Application.LgApplication">
+            <summary>
+            Application core on server side
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.LgApplication.ServiceScopeFactory">
+            <summary>
+            Service provider
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgApplication.#ctor">
+            <summary>
+            Initialze Lagoon on server side
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgApplication.Init(Lagoon.Server.Application.LgApplicationInitOptions)">
+            <summary>
+            Initialise the Lagoon context.
+            </summary>
+            <param name="options">Informations needed to initialisation.</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgApplication.Init(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgApplication.Protect(System.String,System.String)">
+            <summary>
+            Encrypt a value
+            </summary>
+            <param name="value">Value to encrypt</param>
+            <param name="purpose">The purpose to be assigned to the newly-created Microsoft.AspNetCore.DataProtection.IDataProtector.</param>
+            <remarks>
+             The purpose parameter must be unique for the intended use case; two different
+             Microsoft.AspNetCore.DataProtection.IDataProtector instances created with two
+             different purpose values will not be able to decipher each other's payloads.
+             The purpose parameter value is not intended to be kept secret.
+            </remarks>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgApplication.Unprotect(System.String,System.String)">
+            <summary>
+            Decrypt a value
+            </summary>
+            <param name="value">Value to decrypt</param>
+            <param name="purpose">The purpose to be assigned to the newly-created Microsoft.AspNetCore.DataProtection.IDataProtector.</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgApplication.GetKeyStoreDirectoryPath">
+            <summary>
+            Return the path to the directory wich contains generated keys
+            </summary>
+            <returns>Path to the directory</returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgApplication.GetApplicationIdentifier">
+            <summary>
+            Return the application name configured in appSettings.json or project Assembly name if not defined
+            </summary>
+            <returns>Application name from appsettings.json or assemblt name</returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgApplication.GetDataProtectionProvider(System.String)">
+            <summary>
+            Create a DataProtectionProvider for the desired purpose
+            </summary>
+            <param name="purpose">The purpose to be assigned to the newly-created Microsoft.AspNetCore.DataProtection.IDataProtector.</param>
+            <returns>The IDataProtector initialized</returns>
+        </member>
+        <member name="T:Lagoon.Server.Application.LgApplicationDbContext`1">
+            <summary>
+            Application Database Context
+            </summary>
+            <typeparam name="T">Application user</typeparam>
+        </member>
+        <member name="P:Lagoon.Server.Application.LgApplicationDbContext`1.Eulas">
+            <summary>
+            Get or set the Eula table
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.LgApplicationDbContext`1.GridViewProfiles">
+            <summary>
+            Get or set the girdview profiles table
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgApplicationDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions,Microsoft.Extensions.Options.IOptions{IdentityServer4.EntityFramework.Options.OperationalStoreOptions})">
+            <summary>
+            Databse context initialisation
+            </summary>
+            <param name="options">DbContextOptions</param>
+            <param name="operationalStoreOptions">OperationalStoreOptions</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgApplicationDbContext`1.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="P:Lagoon.Server.Application.LgApplicationInitOptions.ServiceScopeFactory">
+            <summary>
+            Service provider
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.LgApplicationInitOptions.Configuration">
+            <summary>
+            Configuration.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Application.LgApplicationInitOptions.LoggerFactory">
+            <summary>
+            Logger factory.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgApplicationInitOptions.#ctor(Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Initialise a new instance.
+            </summary>
+            <param name="configuration">Configuration.</param>
+            <param name="ssf">Service scope factory.</param>
+            <param name="loggerFactory">Logger factory.</param>
+        </member>
+        <member name="T:Lagoon.Server.Application.LgAuthApplication`1">
+            <summary>
+            Lagoon core application with authentication
+            </summary>
+            <typeparam name="TUser">Application user type</typeparam>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.OnImpersonate(Lagoon.Server.Application.IdentitySources.IdentitySource)">
+            <summary>
+            Authentication impersonation endpoint
+            </summary>
+            <param name="identity">User currently login</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.OnSignIn(Lagoon.Server.Application.IdentitySources.IdentitySource,`0)">
+            <summary>
+            Authentication endpoint
+            </summary>
+            <param name="identity">User currently login</param>
+            <param name="user">Application user </param>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.SignInAsync(System.String,Lagoon.Server.Application.LoginFormat,System.String,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.SignInAsync(Lagoon.Server.Application.IdentitySources.IdentitySource)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.SignInTwoFactorAsync(`0,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="user"></param>
+            <param name="loginProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.StoreTwoFactorInfo(System.String,System.String)">
+            <summary>
+            Creates a claims principal for the specified 2fa information.
+            </summary>
+            <param name="userId">The user whose is logging in via 2fa.</param>
+            <param name="loginProvider">The 2fa provider.</param>
+            <returns>A <see cref="T:System.Security.Claims.ClaimsPrincipal"/> containing the user 2fa information.</returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.SignOutAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.GetExternalAuthenticationSchemes">
+            <inheritdoc />
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.ConfigureExternalAuthenticationProperties(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.GetExternalLoginInfoAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.OnUnknownUser(Lagoon.Server.Application.IdentitySources.IdentitySource)">
+            <summary>
+            Give the possibility to create an user at login time
+            </summary>
+            <param name="identitySource">User information provided by authentication provider (Windows, external SSO providers)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.GetIdentityUserAsync(Lagoon.Server.Application.IdentitySources.IdentitySource)">
+            <summary>
+            Find the corresponding user with identitySource information
+            </summary>
+            <param name="identitySource">User info to find</param>
+            <returns>Application user if found, null otherwise</returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.GenerateMfaAuthenticationUriAsync(System.Security.Claims.ClaimsPrincipal,System.Text.Encodings.Web.UrlEncoder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.EnableMfaAsync(System.Security.Claims.ClaimsPrincipal,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.TwoFactorAuthenticatorSignInAsync(System.String,System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.CreateUser(`0,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.Security.Claims.Claim})">
+            <summary>
+            Add an user in application database
+            </summary>
+            <param name="user">User to add</param>
+            <param name="roles">User roles</param>
+            <param name="claims">Optional user claims</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.CreateUserAsync(`0,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.Security.Claims.Claim})">
+            <summary>
+            Add an user in application database
+            </summary>
+            <param name="user">User to add</param>
+            <param name="roles">User roles</param>
+            <param name="claims">Optional user claims</param>
+            <returns>Application user</returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.UpdateUser(`0,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.Security.Claims.Claim})">
+            <summary>
+            Update an user in application database
+            </summary>
+            <param name="user">User to update</param>
+            <param name="roles">User's roles</param>
+            <param name="claims">User's claims</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.UpdateUserAsync(`0,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.Security.Claims.Claim})">
+            <summary>
+            Update user roles and claims in application database
+            </summary>
+            <param name="user">User to update</param>
+            <param name="roles">User's roles</param>
+            <param name="claims">User's claims</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.GetUserRoles(`0)">
+            <summary>
+            Return the role list for an user
+            </summary>
+            <param name="user">Application user</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgAuthApplication`1.GetUserRolesAsync(`0)">
+            <summary>
+            Return the role list for an user
+            </summary>
+            <param name="user">Application user</param>
+            <returns></returns>
+        </member>
+        <member name="T:Lagoon.Server.Application.ILgNotificationManager`2">
+            <summary>
+             Interface for LgNotificationManager component used to get/set notifications data
+            </summary>
+            <typeparam name="TVmNotification">User notification view model</typeparam>
+            <typeparam name="TNotification">Notification model</typeparam>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgNotificationManager`2.SendNotificationAsync(`1,System.Guid)">
+            <summary>
+            Send a notification to a user
+            </summary>
+            <param name="notification">Notification object</param>
+            <param name="userId">User Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgNotificationManager`2.SendNotificationAsync(`1,System.Collections.Generic.IEnumerable{System.Guid})">
+            <summary>
+             Send a notification to a list of users
+            </summary>
+            <param name="notification">Notification</param>
+            <param name="userIds">User Id list</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgNotificationManager`2.UpdateNotificationReadStateAsync(System.Guid,System.Boolean,System.Guid,System.Nullable{System.DateTime})">
+            <summary>
+            Update read indicator for a notification user id
+            </summary>
+            <param name="notificationUserId">Notification User Id</param>
+            <param name="isRead">Notification is read flag</param>
+            <param name="userId">User Id</param>
+            <param name="updateDate">Notification update date</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgNotificationManager`2.UpdateNotificationReadStateAsync(System.Guid,System.Boolean,System.Guid)">
+            <summary>
+            Update read indicator for a notification user id
+            </summary>
+            <param name="notificationUserId">Notification User Id</param>
+            <param name="isRead">Notification is read flag</param>
+            <param name="userId">User Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgNotificationManager`2.UpdateNotificationReadStateAsync(System.Collections.Generic.List{System.Guid},System.Boolean,System.Nullable{System.DateTime})">
+            <summary>
+            Update read indicator for a list of notification user id
+            </summary>
+            <param name="notificationUserIds">Notification User Id</param>
+            <param name="isRead">Notification is read flag</param>
+            <param name="updateDate">Notification update date</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgNotificationManager`2.SyncNotificationsFromPendingActions(Lagoon.UI.Components.NotificationPendingActionVm,System.Guid)">
+            <summary>
+            Synchronize notificaton with pending action received
+            </summary>
+            <param name="pendingAction">pending action</param>
+            <param name="userId">User Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgNotificationManager`2.DeleteUserNotificationAsync(System.Guid,System.Guid)">
+            <summary>
+            Delete a notification
+            </summary>
+            <param name="notificationUserId">Notificaton User Id</param>
+            <param name="userId">User Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgNotificationManager`2.DeleteUserNotificationAsync(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            Delete a list of notification user
+            </summary>
+            <param name="notificationUserIds">List of notificaton User Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgNotificationManager`2.GetNotificationsAsync(System.Guid)">
+            <summary>
+            Retrieve a list of notification for one user
+            </summary>
+            <param name="userId">User Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.ILgNotificationManager`2.GetNotificationsAsync(System.Guid,System.DateTime)">
+            <summary>
+            Get notifications updated / added after the last notification update date
+            </summary>
+            <param name="userId">user Id</param>
+            <param name="lastNotificationUpdt">last notification update date</param>
+            <returns></returns>
+        </member>
+        <member name="T:Lagoon.Server.Application.LgNotificationManager`3">
+            <summary>
+            Service used to manage eula data
+            </summary>
+            <typeparam name="TUser">Because of the dbContext we must have the IdentityUser type used by the application</typeparam>
+            <typeparam name="TVmNotification">User notification view model</typeparam>
+            <typeparam name="TNotification">Notification model</typeparam>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.#ctor(Lagoon.Server.Application.LgApplicationDbContext{`0},Microsoft.AspNetCore.SignalR.IHubContext{Lagoon.Hubs.NotificatiobHub})">
+            <summary>
+            Contructor
+            </summary>
+            <param name="db"> Application db context</param>
+            <param name="hub">Hub (signalr)</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.SaveNotificationAsync(`2)">
+            <summary>
+            Save a notification
+            </summary>
+            <param name="notification">notification </param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.SaveNotificationUserAsync(System.Guid,System.Guid)">
+            <summary>
+            Save a notification user 
+            </summary>
+            <param name="notificationId">Notification Id</param>
+            <param name="userId">User Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.SendNotificationAsync(`2,System.Guid)">
+            <summary>
+            Send a notification to a user
+            </summary>
+            <param name="notification">Notification object</param>
+            <param name="userId">User Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.SendNotificationAsync(`2,System.Collections.Generic.IEnumerable{System.Guid})">
+            <summary>
+             Send a notification to a list of users
+            </summary>
+            <param name="notification">Notification</param>
+            <param name="userIds">User Id list</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.UpdateNotificationReadStateAsync(System.Guid,System.Boolean,System.Guid,System.Nullable{System.DateTime})">
+            <summary>
+            Update read indicator for a notification user
+            </summary>
+            <param name="notificationUserId">Notification User Id</param>
+            <param name="isRead">Notification is read flag</param>
+            <param name="updateDate">Notification update date</param>
+            <param name="userId">User Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.UpdateNotificationReadStateAsync(System.Guid,System.Boolean,System.Guid)">
+            <summary>
+            Update read indicator for a notification user
+            </summary>
+            <param name="notificationUserId">Notification User Id</param>
+            <param name="isRead">Notification is read flag</param>
+            <param name="userId">User Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.UpdateNotificationReadStateAsync(System.Collections.Generic.List{System.Guid},System.Boolean,System.Nullable{System.DateTime})">
+            <summary>
+            Update read indicator for a notification user
+            </summary>
+            <param name="notificationUserIds">List of notification User Id</param>
+            <param name="isRead">Notification is read flag</param>
+            <param name="updateDate">Notification update date</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.Lagoon#Server#Application#ILgNotificationManager{TVmNotification,TNotification}#SyncNotificationsFromPendingActions(Lagoon.UI.Components.NotificationPendingActionVm,System.Guid)">
+            <summary>
+            Synchronize notificaton with pending action received
+            </summary>
+            <param name="pendingAction">pending action</param>
+            <param name="userId">User Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.DeleteUserNotificationAsync(System.Guid,System.Guid)">
+            <summary>
+            Delete a notification for a user
+            </summary>
+            <param name="notificationUserId">Notificaton User Id</param>
+            <param name="userId">User Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.DeleteUserNotificationAsync(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            Delete a list of notification user
+            </summary>
+            <param name="notificationUserIds">list of notificaton User Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.DeleteNotificationUnassignedAsync(System.Guid,System.Boolean)">
+            <summary>
+            Remove unassigned notification one or many users
+            Check if some notification users are already linked to the notification, otherwise remove noitifcation from database
+            </summary>
+            <param name="notificationId">notification id</param>
+            <param name="saveChangesAsync">Save must be done</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.DeleteNotificationUnassignedAsync(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            Remove unassigned notification to one or many users
+            Check if some notification users are already linked to the notification, otherwise remove noitifcation from database
+            </summary>
+            <param name="notificationIds">List ofnotification id</param>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.GetNotificationAsync(System.Guid)">
+            <summary>
+            Retrieve notificaton from user notification id
+            </summary>
+            <param name="userNotificationId">User Notification Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.GetNotificationAsync(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            Retrieve notificatons from a list of user notification id
+            </summary>
+            <param name="userNotificationIds">List of User Notification Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.GetNotificationsAsync(System.Guid)">
+            <summary>
+            Retrieve a list of notification for one user
+            </summary>
+            <param name="userId">User Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.GetNotificationsAsync(System.Guid,System.DateTime)">
+            <summary>
+            Get notifications updated / added after the last notification update date
+            </summary>
+            <param name="userId">user Id</param>
+            <param name="lastNotificationUpdt">last notification update date</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.GetMappedVmNotification(Lagoon.UI.Components.NotificationUserBase{`2})">
+            <summary>
+            Create the view model class initialized with the model values.
+            </summary>
+            <param name="userNotification">User's notification model.</param>
+            <returns>The view model class initialized with the model values.</returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.LgNotificationManager`3.MapViewModel(`1,Lagoon.UI.Components.NotificationUserBase{`2})">
+            <summary>
+            Method to map custom notification model fields to the view model class.
+            </summary>
+            <param name="vmNotification">The view model class</param>
+            <param name="userNotification"></param>
+        </member>
+        <member name="T:Lagoon.Server.Application.DbContextExtension">
+            <summary>
+            DbContext Extension
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.DbContextExtension.DetachLocal``1(Microsoft.EntityFrameworkCore.DbContext,``0,System.String)">
+            <summary>
+            https://stackoverflow.com/questions/36856073/the-instance-of-entity-type-cannot-be-tracked-because-another-instance-of-this-t
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="context"></param>
+            <param name="t"></param>
+            <param name="entryId"></param>
+        </member>
+        <member name="T:Lagoon.Server.Application.IRepository`1">
+            <summary>
+            Generic repository interface
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Lagoon.Server.Application.IRepository`1.GetById(System.String)">
+            <summary>
+            Get the entity with the given id.
+            </summary>
+            <param name="id">Id</param>
+            <returns>Entity</returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.IRepository`1.List">
+            <summary>
+            Returns all instances of the type T.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.IRepository`1.List(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Returns all instances of the type T that matche the conditions defined by the specified predicate.
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Application.IRepository`1.Insert(`0)">
+            <summary>
+            Insert the entity
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:Lagoon.Server.Application.IRepository`1.Update(`0)">
+            <summary>
+            Update the entity
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Application.IRepository`1.Delete(`0)">
+            <summary>
+            Remove the entity
+            </summary>
+        </member>
+        <member name="T:Lagoon.Server.Application.Repository`2">
+            <summary>
+            Generic Repository Implementation
+            </summary>
+            <typeparam name="TUser"></typeparam>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Lagoon.Server.Application.Repository`2.#ctor(Lagoon.Server.Application.LgApplicationDbContext{`0})">
+            <summary>
+            Generic Repository Implementation
+            </summary>
+            <param name="dbContext"></param>
+        </member>
+        <member name="M:Lagoon.Server.Application.Repository`2.GetById(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Lagoon.Server.Application.Repository`2.List">
+            <inheritdoc/>
+        </member>
+        <member name="M:Lagoon.Server.Application.Repository`2.List(System.Linq.Expressions.Expression{System.Func{`1,System.Boolean}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Lagoon.Server.Application.Repository`2.Insert(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Lagoon.Server.Application.Repository`2.Update(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Lagoon.Server.Application.Repository`2.Delete(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Lagoon.Server.Areas.Identity.Pages.Account.EnableAuthenticatorModel">
+            <summary>
+            Page to enable an authenticator app for MFA
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Pages.Account.EnableAuthenticatorModel.SharedKey">
+            <summary>
+            Authenticator code (to use without scanning the QRCode)
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Pages.Account.EnableAuthenticatorModel.AuthenticatorUri">
+            <summary>
+            Authenticator link
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Pages.Account.EnableAuthenticatorModel.RememberMe">
+            <summary>
+            Flag to persist or not the authentication cookie
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Pages.Account.EnableAuthenticatorModel.Input">
+            <summary>
+            Model binding
+            </summary>
+        </member>
+        <member name="T:Lagoon.Server.Areas.Identity.Pages.Account.EnableAuthenticatorModel.InputModel">
+            <summary>
+            Model binded to the view
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Pages.Account.EnableAuthenticatorModel.InputModel.Code">
+            <summary>
+            Verification code
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Pages.Account.EnableAuthenticatorModel.#ctor(System.Text.Encodings.Web.UrlEncoder,Lagoon.Core.Application.ILgApplication,Microsoft.Extensions.Logging.ILogger{Lagoon.Server.Areas.Identity.Pages.Account.EnableAuthenticatorModel})">
+            <summary>
+            Page intialisation
+            </summary>
+            <param name="urlEncoder">Url encoder</param>
+            <param name="application">Lagoon application manager</param>
+            <param name="logger">Application logger</param>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Pages.Account.EnableAuthenticatorModel.OnGetAsync(System.Boolean)">
+            <summary>
+            On page load, generate a new authenticator link for the current user
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Pages.Account.EnableAuthenticatorModel.OnPostAsync(System.Boolean,System.String)">
+            <summary>
+            Form submission
+            </summary>
+            <param name="rememberMe">RememberMe flag</param>
+            <param name="returnUrl">Application return url</param>
+        </member>
+        <member name="T:Lagoon.Server.Areas.Identity.Pages.Account.LoginWithMfaModel">
+            <summary>
+            Page to login with MFA
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Pages.Account.LoginWithMfaModel.Input">
+            <summary>
+            Binded data
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Pages.Account.LoginWithMfaModel.RememberMe">
+            <summary>
+            The remember flag
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Pages.Account.LoginWithMfaModel.ReturnUrl">
+            <summary>
+            The returnUrl after a successfull login attempt
+            </summary>
+        </member>
+        <member name="T:Lagoon.Server.Areas.Identity.Pages.Account.LoginWithMfaModel.InputModel">
+            <summary>
+            Inputs binding
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Pages.Account.LoginWithMfaModel.InputModel.TwoFactorCode">
+            <summary>
+            MFA code
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Pages.Account.LoginWithMfaModel.InputModel.RememberMachine">
+            <summary>
+            Flag to remember or not the browser (and not ask for MFA again)
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Pages.Account.LoginWithMfaModel.#ctor(Lagoon.Core.Application.ILgApplication,Microsoft.Extensions.Logging.ILogger{Lagoon.Server.Areas.Identity.Pages.Account.LoginWithMfaModel})">
+            <summary>
+            Page initialisation
+            </summary>
+            <param name="application"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Pages.Account.LoginWithMfaModel.OnGet(System.Boolean)">
+            <summary>
+            Store remember parameter
+            </summary>
+            <param name="rememberMe">true if the application cookie must be persisted, false otherwise</param>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Pages.Account.LoginWithMfaModel.OnPostAsync(System.Boolean,System.String)">
+            <summary>
+            MFA code submission
+            </summary>
+            <param name="rememberMe">RemeberMe flag</param>
+            <param name="returnUrl">The returnUrl page</param>
+        </member>
+        <member name="T:Lagoon.Server.Areas.Identity.Account.ExternalProvidersLoginModel">
+            <summary>
+            Page used as endpoint for SSO login response
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Areas.Identity.Account.ExternalProvidersLoginModel._app">
+            <summary>
+            Access to application manager for signin user.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Areas.Identity.Account.ExternalProvidersLoginModel._logger">
+            <summary>
+            Application logger
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Account.ExternalProvidersLoginModel.ErrorMessage">
+            <summary>
+            Potential error message to display
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Account.ExternalProvidersLoginModel.#ctor(Lagoon.Server.Application.AuthenticationOptions,Lagoon.Core.Application.ILgApplication,Microsoft.Extensions.Logging.ILogger{Lagoon.Server.Areas.Identity.Account.ExternalProvidersLoginModel})">
+            <summary>
+            Create a new instance.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Account.ExternalProvidersLoginModel.OnGetCallbackAsync(System.String)">
+            <summary>
+            Called when an external authentication provider log an user for the application
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Account.ExternalProvidersLoginModel.LogInformation(System.String)">
+            <summary>
+            Additionnal log for the external authentication workflow
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="T:Lagoon.Server.Areas.Identity.Account.GroupChoiceModel">
+            <summary>
+            Page used to show group choice (if some group choice has been set for a particular user)
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Areas.Identity.Account.GroupChoiceModel._app">
+            <summary>
+            Access to application manager for signin user.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Account.GroupChoiceModel.GroupChoices">
+            <summary>
+            List of group choice for connected user
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Account.GroupChoiceModel.DefaultChoice">
+            <summary>
+            Default choice
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Account.GroupChoiceModel.#ctor(Lagoon.Core.Application.ILgApplication)">
+            <summary>
+            Initialize instance.
+            </summary>
+            <param name="application">Application manager.</param>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Account.GroupChoiceModel.OnGet">
+            <summary>
+            Initialization
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Account.GroupChoiceModel.OnPost(System.String,System.String)">
+            <summary>
+            On group selection
+            </summary>
+            <param name="groupChoice">Group value choosed by the user</param>
+            <param name="returnUrl">Applicaiton return url</param>
+        </member>
+        <member name="T:Lagoon.Server.Areas.Identity.Account.LoginModel">
+            <summary>
+            Default connection page
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Areas.Identity.Account.LoginModel._app">
+            <summary>
+            Access to application manager for signin user.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Account.LoginModel.ShowLogin">
+            <summary>
+            Show login input ?
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Account.LoginModel.ShowPassword">
+            <summary>
+            Show password input ?
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Account.LoginModel.UserLogin">
+            <summary>
+            User login
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Account.LoginModel.UserPassword">
+            <summary>
+            User password
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Account.LoginModel.RememberMe">
+            <summary>
+            Should remember user ?
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Account.LoginModel.ShowWindowsAuth">
+            <summary>
+            If windows authentication is configured, show access 
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Account.LoginModel.AllowFormAuthentication">
+            <summary>
+            Is form authentication allowed ?
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Account.LoginModel.DirectExternalSSOProvider">
+            <summary>
+            List of external provider with no direct pattern
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Account.LoginModel.ReturnUrl">
+            <summary>
+            Application return url
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Account.LoginModel.ErrorMessage">
+            <summary>
+            Error message
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Account.LoginModel.RegisterUrl">
+            <summary>
+            To show/hide register button
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Account.LoginModel.ForgotPasswordUrl">
+            <summary>
+            To show/hide forgot password button
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Areas.Identity.Account.LoginModel._authenticationOptions">
+            <summary>
+            Retrieve configured authentication options
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Areas.Identity.Account.LoginModel.ExternalAuth">
+            <summary>
+            List of all external authentication provider registered
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Areas.Identity.Account.LoginModel.IsWindowsAuth">
+            <summary>
+            Windows authentication activted ?
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Areas.Identity.Account.LoginModel.IsFormAuth">
+            <summary>
+            Form authentication activated ?
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Areas.Identity.Account.LoginModel.IsOnlyOneSso">
+            <summary>
+            Only one external authentication provider registered ?
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Areas.Identity.Account.LoginModel.IsNoSSO">
+            <summary>
+            No external authentication provider registered ?
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Areas.Identity.Account.LoginModel.IsOnlyExplicitSso">
+            <summary>
+            Only explicit authentication provider registered ?
+            (explicit = we must not check username to retrieve a potential external provider
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Areas.Identity.Account.LoginModel.ApplicationName">
+            <summary>
+            Application name
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Areas.Identity.Account.LoginModel.ApplicationVersion">
+            <summary>
+            Application version
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Account.LoginModel.#ctor(Lagoon.Server.Application.AuthenticationOptions,Lagoon.Core.Application.ILgApplication)">
+            <summary>
+            Initialization
+            </summary>
+            <param name="authenticationOptions">Application authentication parameters</param>
+            <param name="application">Lagoon application manager.</param>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Account.LoginModel.OnGetAsync(System.String)">
+            <summary>
+            Launch OAuth authentication flow directly if sso provider is supplied in url
+            Remark: SSO Provider must be know by the application (.AddGoogle, .AddFededation, .AddSaml2, ...)
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Account.LoginModel.LaunchExternalAuthentication(System.String,System.String,System.Boolean)">
+            <summary>
+            Launch authentication process with the selected provider
+            </summary>
+            <param name="providerName">Provider name</param>
+            <param name="returnUrl">Application returnUrl</param>
+            <param name="rememberMe">Should store cookie when the browser is closed</param>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Account.LoginModel.OnPostAsync(System.String,System.String)">
+            <summary>
+            On form submission
+            </summary>
+            <param name="returnUrl">Applicatioin return url</param>
+            <param name="userLogin">User login</param>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Account.LoginModel.OnPostExternalAuthentication(System.String,System.String,System.Boolean)">
+            <summary>
+            Launch authentication with external SSO
+            </summary>
+            <param name="provider">SSO Provider name</param>
+            <param name="returnUrl">Application return URL</param>
+            <param name="rememberMe">Indicate if authentication persists through navigator sessions.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Account.LoginModel.InitConfigAsync">
+            <summary>
+            Init auth helpers variables
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Lagoon.Server.Areas.Identity.Account.WindowsLoginModel">
+            <summary>
+            Windows login page model.
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Areas.Identity.Account.WindowsLoginModel._authenticationOptions">
+            <summary>
+            Application authentication configuration
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Areas.Identity.Account.WindowsLoginModel._app">
+            <summary>
+            Access to application manager for signin user.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Areas.Identity.Account.WindowsLoginModel.ErrorMessage">
+            <summary>
+            Potential error message to display
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Account.WindowsLoginModel.#ctor(Lagoon.Server.Application.AuthenticationOptions,Lagoon.Core.Application.ILgApplication)">
+            <summary>
+            Initialize instance.
+            </summary>
+            <param name="authenticationOptions">Options.</param>
+            <param name="application">Application manager.</param>
+        </member>
+        <member name="M:Lagoon.Server.Areas.Identity.Account.WindowsLoginModel.OnGetAsync(System.String)">
+            <summary>
+            Windows authentication endpoint
+            </summary>
+            <param name="returnUrl">Application returnUrl</param>
+        </member>
+        <member name="T:Lagoon.Server.Helpers.ConfigureJwtBearerOptions">
+            <summary>
+            Configure the SignalR Hub JWT Token.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Helpers.ConfigureJwtBearerOptions.PostConfigure(System.String,Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)">
+            <summary>
+            Invoked to configure a JwtBearerOptions instance.
+            </summary>
+            <param name="name">The name of the options instance being configured.</param>
+            <param name="options">The options instance to configured.</param>
+        </member>
+        <member name="T:Lagoon.Server.Helpers.CustomUserIdProvider">
+            <summary>
+            Service to get the context User ID.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Helpers.CustomUserIdProvider.GetUserId(Microsoft.AspNetCore.SignalR.HubConnectionContext)">
+            <summary>
+            Gets the user identifiant.
+            </summary>
+            <param name="connection">Hub connection context.</param>
+            <returns>The user identifiant.</returns>
+        </member>
+        <member name="T:Lagoon.Server.Middlewares.RequestCultureMiddleware">
+            <summary>
+            Middleware used to set the Culture to use for response
+            To enable this feature the HttpRequest must have a cookie named 'x-lang' with the culture to set (en-US, fr-FR, ...)
+            Enabled by default a call to UseLagoon() extension
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Middlewares.RequestCultureMiddleware._next">
+            <summary>
+            Next middleware to execute
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Middlewares.RequestCultureMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Lagoon.Core.Application.ILgApplication)">
+            <summary>
+            RequestCultureMiddleware intialization
+            </summary>
+            <param name="next">Next middleware in the pipeline to execute</param>
+            <param name="app">Application manager</param>
+        </member>
+        <member name="M:Lagoon.Server.Middlewares.RequestCultureMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Check if the request have an 'x-lang' header and if so try to apply the requested culture
+            </summary>
+            <param name="context">Current http context</param>
+            <returns>Next middleware in the pipeline</returns>
+        </member>
+        <member name="T:Lagoon.Server.Models.Notification`1">
+            <summary>
+            The notification data base class.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Models.Notification`1.NotificationUser">
+            <summary>
+            Gets or sets list of columns profiles
+            </summary>
+        </member>
+        <member name="T:Lagoon.Server.Models.NotificationUserWithUser`2">
+            <summary>
+            The notification data base class.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Models.NotificationUserWithUser`2.UserId">
+            <summary>
+            Gets or sets the notification id.
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Models.NotificationUserWithUser`2.User">
+            <summary>
+            User object
+            </summary>
+        </member>
+        <member name="T:Lagoon.Server.Services.BackgroundTask">
+            <summary>
+            Background task 
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Services.BackgroundTask.BackgroundTaskService">
+            <summary>
+            Gets background task service
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Services.BackgroundTask.CancellationTokenSource">
+            <summary>
+            Gets cancellation token source
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Services.BackgroundTask.Guid">
+            <summary>
+            Gets background task guid
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Services.BackgroundTask.HubConnectionId">
+            <summary>
+            Gets hub connection id
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Services.BackgroundTask.Progress">
+            <summary>
+            Gets Progress
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Services.BackgroundTask.Task">
+            <summary>
+            Gets Task
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Services.BackgroundTask.#ctor(System.Func{System.Threading.CancellationToken,Lagoon.Helpers.Progress,System.Threading.Tasks.Task},Lagoon.Server.Services.BackgroundTaskService,System.Guid,System.String)">
+            <summary>
+            Background task initialization
+            </summary>
+            <param name="func">background task function</param>
+            <param name="bgtService">Background task service</param>
+            <param name="taskId">TaskId</param>
+            <param name="hubConnectionId">Hub connection id</param>
+        </member>
+        <member name="M:Lagoon.Server.Services.BackgroundTask.Run">
+            <summary>
+            Run task
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Services.BackgroundTask.OnTaskEnded(System.Threading.Tasks.Task)">
+            <summary>
+            End task callback
+            </summary>
+            <param name="task">Task</param>
+        </member>
+        <member name="T:Lagoon.Server.Services.BackgroundTaskService">
+            <summary>
+            Background Task Service
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Services.BackgroundTaskService._hub">
+            <summary>
+            Hub (signalr)
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Services.BackgroundTaskService._app">
+            <summary>
+            Lg applicaton
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Services.BackgroundTaskService.#ctor(Microsoft.AspNetCore.SignalR.IHubContext{Lagoon.Hubs.BackgroundTaskHub},Lagoon.Core.Application.ILgApplication)">
+            <summary>
+            Contructor
+            </summary>
+            <param name="hub">Background task hub</param>
+            <param name="app">LgApplication</param>
+        </member>
+        <member name="M:Lagoon.Server.Services.BackgroundTaskService.RunTask(Microsoft.AspNetCore.Mvc.ControllerBase,System.Func{System.Threading.CancellationToken,Lagoon.Helpers.Progress,System.Threading.Tasks.Task})">
+            <summary>
+            Run task with progress
+            </summary>
+            <param name="controller">Calling Controller</param>
+            <param name="task">Task to exec</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Services.BackgroundTaskService.OnResetProgressAsync(Lagoon.Server.Services.RemoteProgress)">
+            <summary>
+            On progress event 
+            </summary>
+            <param name="progress">Progress</param>
+        </member>
+        <member name="M:Lagoon.Server.Services.BackgroundTaskService.SendProgressioAsync(System.String,System.Guid,System.Int32,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Send progression with signalR 
+            </summary>
+            <param name="hubConnectionId">Hub connection id</param>
+            <param name="taskId">TaskId</param>
+            <param name="position">Progress position</param>
+            <param name="message">Progress message</param>
+            <param name="updatePosition">Progress must update position</param>
+            <param name="updateMessage">Progress must update message</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lagoon.Server.Services.BackgroundTaskService.OnTaskEndedAsync(Lagoon.Server.Services.BackgroundTask)">
+            <summary>
+            On ending task
+            </summary>
+            <param name="backgroundTask">Background task</param>
+        </member>
+        <member name="M:Lagoon.Server.Services.BackgroundTaskService.CancelTask(System.Guid)">
+            <summary>
+            Cancel runing task
+            </summary>
+            <param name="taskId">taskId</param>
+        </member>
+        <member name="M:Lagoon.Server.Services.BackgroundTaskService.UpdateTaskStateAsync(System.String,System.Guid)">
+            <summary>
+            Update a task state after hub reconnection
+            </summary>
+            <param name="hubConnectionId">Hub connection id</param>
+            <param name="taskId">Task Id</param>
+        </member>
+        <member name="T:Lagoon.Server.Services.RemoteProgress">
+            <summary>
+            Remote progress
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Services.RemoteProgress.HubConnectionId">
+            <summary>
+            Gets hub connection id
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Services.RemoteProgress.TaskId">
+            <summary>
+            Gets task id
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Services.RemoteProgress.#ctor(Lagoon.Server.Services.BackgroundTask)">
+            <summary>
+            Remote progress  initialization
+            </summary>
+            <param name="bgt">Background task</param>
+        </member>
+        <member name="T:Lagoon.Server.Services.EmailSender">
+            <summary>
+            ISmtp implementation
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Services.EmailSender._host">
+            <summary>
+            Smtp address
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Services.EmailSender._port">
+            <summary>
+            Smtp port
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Services.EmailSender._enableSSL">
+            <summary>
+            Use secure connexion to access smtp server
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Services.EmailSender._userName">
+            <summary>
+            Username if smtp secured
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Services.EmailSender._password">
+            <summary>
+            User password for smtp secure
+            </summary>
+        </member>
+        <member name="F:Lagoon.Server.Services.EmailSender._defaultSender">
+            <summary>
+            Default sender address used if no sender specified
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Services.EmailSender.DefaultSender">
+            <summary>
+            Default sender mail address.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Services.EmailSender.#ctor(System.String,System.Int32,System.Boolean,System.String,System.String,System.String)">
+            <summary>
+            Initialize a new email smtp
+            </summary>
+            <param name="host">Smtp address</param>
+            <param name="port">Smtp port</param>
+            <param name="enableSSL">Use secure connexion to access smtp server</param>
+            <param name="userName">Username if smtp secured</param>
+            <param name="password">User password for smtp secure</param>
+            <param name="defaultSender">A defaut address used if no sender specified</param>
+        </member>
+        <member name="M:Lagoon.Server.Services.EmailSender.CreateClient">
+            <summary>
+            Initialize a new SmtpClient with configured options
+            </summary>
+            <returns>A configured SmtpClient</returns>
+        </member>
+        <member name="M:Lagoon.Server.Services.EmailSender.SendEmailAsync(System.String,System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Send email (with html support) to the specified recipient with a particular sender address
+            </summary>
+            <param name="from">From address</param>
+            <param name="to">To address</param>
+            <param name="subject">Message subject</param>
+            <param name="htmlMessage">Message content</param>
+            <param name="files">Attachments : list that contains file paths</param>
+        </member>
+        <member name="T:Lagoon.Server.Services.ISmtp">
+            <summary>
+            Interface used by email sender implementation
+            </summary>
+        </member>
+        <member name="P:Lagoon.Server.Services.ISmtp.DefaultSender">
+            <summary>
+            Default sender mail address.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Server.Services.ISmtp.SendEmailAsync(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Send an email to a recipient with html support.
+            The sender (from) will be retrieved from appsettings.json
+            </summary>
+            <param name="to">Recipient address</param>
+            <param name="subject">Email subject</param>
+            <param name="htmlMessage">Email body content with html support</param>
+            <param name="files">Attachments : list that contains file paths</param>
+            <returns>Async</returns>
+        </member>
+        <member name="M:Lagoon.Server.Services.ISmtp.SendEmailAsync(System.String,System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Send an email to a recipient with html support.
+            The sender (from) will be retrieved from appsettings.json
+            </summary>
+            <param name="from">Sender  address</param>
+            <param name="to">Recipient address</param>
+            <param name="subject">Email subject</param>
+            <param name="htmlMessage">Email body content with html support</param>
+            <param name="files">Attachments : list that contains file paths</param>
+            <returns>Async</returns>
+        </member>
+        <member name="T:Lagoon.Helpers.Extensions">
+            <summary>
+            Extension methods class.
+            </summary>
+        </member>
+        <member name="M:Lagoon.Helpers.Extensions.AddModelErrorList(Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}})">
+            <summary>
+            Add the errorsList to the model errors
+            </summary>
+            <param name="model">Model where append the errors</param>
+            <param name="errorsList">Errors to append</param>
+        </member>
+        <member name="M:Lagoon.Helpers.Extensions.EnsureSuccess(Microsoft.AspNetCore.Identity.IdentityResult,System.String)">
+            <summary>
+            Check if result is Succeeded. if not throw an exception message with details
+            </summary>
+            <param name="result">IdentityResult to validate</param>
+            <param name="exceptionMessage">Exception message header if result not Succeeded</param>
+        </member>
+        <member name="T:Lagoon.Helpers.UpdateDataParameters`1">
+            <summary>
+            Class used to deserialize data on the server.
+            </summary>
+            <typeparam name="TItem"></typeparam>
+        </member>
+        <member name="P:Lagoon.Helpers.UpdateDataParameters`1.Data">
+            <summary>
+            Gets object of the row
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Lagoon.Helpers.UpdateDataParameters`1.ColumnKey">
+            <summary>
+            Gets field name
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Lagoon.Helpers.UpdateDataParameters`1.Value">
+            <summary>
+            Gets new value of the cell
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Lagoon.Helpers.UpdateDataParameters`1.PreviousValue">
+            <summary>
+            Gets previous value of the cell
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Lagoon.Helpers.UpdateDataParameters`1.FieldName">
+            <summary>
+            Gets field name
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:Lagoon.Helpers.UpdateDataParameters`1.#ctor">
+            <summary>
+            New instance used by JSon deserialization.
+            </summary>
+        </member>
+        <member name="T:Lagoon.Hubs.BackgroundTaskHub">
+            <summary>
+            Notification hub
+            </summary>
+        </member>
+        <member name="F:Lagoon.Hubs.BackgroundTaskHub._bgts">
+            <summary>
+            Background task service
+            </summary>
+        </member>
+        <member name="M:Lagoon.Hubs.BackgroundTaskHub.#ctor(Lagoon.Server.Services.BackgroundTaskService)">
+            <summary>
+            Hub initialization
+            </summary>
+            <param name="bgts">Backgroudn task service</param>
+        </member>
+        <member name="M:Lagoon.Hubs.BackgroundTaskHub.CancelTask(System.Guid)">
+            <summary>
+            Call cancel running task into server service
+            </summary>
+            <param name="taskId">Task Id</param>
+        </member>
+        <member name="M:Lagoon.Hubs.BackgroundTaskHub.UpdateTaskState(System.Guid)">
+            <summary>
+            Call update task sate into server service
+            </summary>
+            <param name="taskId">TaskId</param>
+        </member>
+        <member name="T:Lagoon.Hubs.NotificatiobHub">
+            <summary>
+            Notification hub
+            </summary>
+        </member>
+        <member name="T:LagoonDemo.Server.Application.SameSiteCookiesServiceCollectionExtensions">
+            <summary>
+            MUST BE TESTED / REWORKED
+            </summary>
+        </member>
+        <member name="F:LagoonDemo.Server.Application.SameSiteCookiesServiceCollectionExtensions.Unspecified">
+            <summary>
+            -1 defines the unspecified value, which tells ASPNET Core to NOT
+            send the SameSite attribute. With ASPNET Core 3.1 the
+            <seealso cref="T:Microsoft.AspNetCore.Http.SameSiteMode" /> enum will have a definition for
+            Unspecified.
+            </summary>
+        </member>
+        <member name="M:LagoonDemo.Server.Application.SameSiteCookiesServiceCollectionExtensions.ConfigureNonBreakingSameSiteCookies(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures a cookie policy to properly set the SameSite attribute
+            for Browsers that handle unknown values as Strict. Ensure that you
+            add the <seealso cref="T:Microsoft.AspNetCore.CookiePolicy.CookiePolicyMiddleware" />
+            into the pipeline before sending any cookies!
+            </summary>
+            <remarks>
+            Minimum ASPNET Core Version required for this code:
+              - 2.1.14
+              - 2.2.8
+              - 3.0.1
+              - 3.1.0-preview1
+            Starting with version 80 of Chrome (to be released in February 2020)
+            cookies with NO SameSite attribute are treated as SameSite=Lax.
+            In order to always get the cookies send they need to be set to
+            SameSite=None. But since the current standard only defines Lax and
+            Strict as valid values there are some browsers that treat invalid
+            values as SameSite=Strict. We therefore need to check the browser
+            and either send SameSite=None or prevent the sending of SameSite=None.
+            Relevant links:
+            - https://tools.ietf.org/html/draft-west-first-party-cookies-07#section-4.1
+            - https://tools.ietf.org/html/draft-west-cookie-incrementalism-00
+            - https://www.chromium.org/updates/same-site
+            - https://devblogs.microsoft.com/aspnet/upcoming-samesite-cookie-changes-in-asp-net-and-asp-net-core/
+            - https://bugs.webkit.org/show_bug.cgi?id=198181
+            </remarks>
+            <param name="services">The service collection to register <see cref="T:Microsoft.AspNetCore.Builder.CookiePolicyOptions" /> into.</param>
+            <returns>The modified <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.</returns>
+        </member>
+        <member name="T:Microsoft.Extensions.Hosting.LagoonExtensions">
+            <summary>
+            Extension methods class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Hosting.LagoonExtensions.AddLagoonPart``1(Microsoft.Extensions.DependencyInjection.IMvcBuilder)">
+            <summary>
+            Add Lagoon.Server as application part and ODATA.
+            </summary>
+            <param name="builder">An interface for configuring MVC services.</param>
+            <returns>An interface for configuring MVC services.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Hosting.LagoonExtensions.AddLagoonApplication``3(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Add ILgApplication as service.
+            </summary>
+            <typeparam name="TApplication">Main class.</typeparam>
+            <typeparam name="TUser">Main class.</typeparam>
+            <typeparam name="TDbContext">Main class.</typeparam>
+            <param name="services">Service list.</param>
+            <returns>The update service list.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Hosting.LagoonExtensions.InitLagoonApplication(Microsoft.Extensions.Hosting.IHost)">
+            <summary>
+            Initialialise the Lagoon context for the application.
+            </summary>
+            <param name="host">The host.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Hosting.LagoonExtensions.AddLagoonAuthentication``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.Action{Lagoon.Server.Application.AuthenticationOptions},System.Boolean)">
+            <summary>
+            Secure application with authentication
+            </summary>
+            <typeparam name="TUser">Application user type</typeparam>
+            <typeparam name="TDBContext">Application DBContext</typeparam>
+            <param name="services">IServiceCollection extension method</param>
+            <param name="config">AppSettings.json provider</param>
+            <param name="configureAuthentication">Authentication configuration</param>
+            <param name="useDefaultDataProtection">Use the default data protection service</param>
+            <returns>IServiceCollection to chain methods</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Hosting.LagoonExtensions.AddSmtp(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Register a service to send email
+            </summary>
+            <param name="services">IServiceCollection extension method</param>
+            <param name="config">Configuration file</param>
+            <returns>IServiceCollection to chain methods</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Hosting.LagoonExtensions.AddNotification``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Register a service to activate notifications
+            </summary>
+            <param name="services">IServiceCollection extension method</param>
+            <returns>IServiceCollection to chain methods</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Hosting.LagoonExtensions.AddBackgroundTasks(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Register a service to activate background tasks
+            </summary>
+            <param name="services">IServiceCollection extension method</param>
+            <returns>IServiceCollection to chain methods</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Hosting.LagoonExtensions.UseLagoon(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Add lagoon configuration
+            </summary>
+            <param name="builder">ApplicationBuilder</param>
+            <returns>IApplicationBuilder for chaining method</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Hosting.LagoonExtensions.MapLagoonNotifications(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)">
+            <summary>
+            Add Lagoon pre-required handlers
+            </summary>
+            <param name="endpoints">A contract for a route builder in an application.</param>
+            <returns>The endpoints.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Hosting.LagoonExtensions.MapLagoonRemoteTasks(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)">
+            <summary>
+            Add Lagoon pre-required handlers
+            </summary>
+            <param name="endpoints">A contract for a route builder in an application.</param>
+            <returns>The endpoints.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Hosting.LagoonExtensions.MapApiNotFound(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)">
+            <summary>
+            Add handler to return HTTP 404 when api is not found.
+            </summary>
+            <param name="endpoints">A contract for a route builder in an application.</param>
+            <returns>The endpoints.</returns>
+        </member>
+        <member name="T:Microsoft.Extensions.DependencyInjection.LagoonExtensions">
+            <summary>
+            Extension methods class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.LagoonExtensions.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String,System.Boolean)">
+            <summary>
+            Add swagger integration
+            </summary>
+            <param name="services">IServiceCollection extension method</param>
+            <param name="basePath">Application base path</param>
+            <param name="assemblyName">Application assembly name</param>
+            <param name="useXmlDocumentation">If true, xml documentation will be used to show method and parameters comments</param>
+        </member>
+        <member name="T:Microsoft.Extensions.DependencyInjection.AuthorizeCheckOperationFilter">
+            <summary>
+            Authorize filter for Swagger UI
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.AuthorizeCheckOperationFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            Handle unauthorized status code
+            </summary>
+            <param name="operation">Operation response</param>
+            <param name="context">Requestion context</param>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Http.LagoonExtensions">
+            <summary>
+            Extension methods class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Http.LagoonExtensions.GetUserId(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Extract the user id from the claims of httpContext user.
+            </summary>
+            <param name="httpContext">The HTTP context.</param>
+            <returns>The user ID found.</returns>
+            <exception cref="T:System.Exception">If the user ID is not found.</exception>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Http.LagoonExtensions.TryGetUserId(Microsoft.AspNetCore.Http.HttpContext,System.Guid@)">
+            <summary>
+            Try to extract the user id from the claims of httpContext user.
+            </summary>
+            <param name="httpContext">The HTTP context.</param>
+            <param name="userId">The user ID.</param>
+            <returns><c>true</c> if the user ID is found.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Http.LagoonExtensions.AddCookie(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String,System.Boolean,System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Add a new cookie to the Http response
+            </summary>
+            <param name="httpContext">Extension for HttpContext</param>
+            <param name="name">Cookie name</param>
+            <param name="value">Cookie value</param>
+            <param name="httpOnly">Only http transport ?</param>
+            <param name="path">Cookie applicable path</param>
+            <param name="expiration">Expiration date for cookie</param>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Http.LagoonExtensions.GetCookieValue(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String)">
+            <summary>
+            Retrieve a cookie value (or defaultValue if unknow cookie name)
+            </summary>
+            <param name="httpContext">HttpContext extension method</param>
+            <param name="name">Cookie name to retrieve</param>
+            <param name="defaultValue">Default value returned if cookie does not exist</param>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Http.LagoonExtensions.RemoveCookie(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String)">
+            <summary>
+            Remove an http cookie
+            </summary>
+            <param name="httpContext">HttpContext extension method</param>
+            <param name="name">Name of cookie to delete</param>
+            <param name="path">Cookie path applicable</param>
+        </member>
+        <member name="T:System.IO.ToolsIO">
+            <summary>
+            Helpers class to improve system.io
+            </summary>
+        </member>
+        <member name="M:System.IO.ToolsIO.FileMIME(System.String)">
+            <summary>
+            Return a mime type based on file extension
+            </summary>
+            <param name="filename">File name</param>
+            <returns>Mime type</returns>
+        </member>
+    </members>
+</doc>

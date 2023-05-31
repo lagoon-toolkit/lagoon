@@ -1,0 +1,35 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+@typeparam TItem
+
+<CascadingValue Value="this" IsFixed="true">
+    <LgMenuItem Text="@Text" IconName="@IconName" Tag="@GetTag()">
+        <ChildContent>
+            <form>
+                <div class="lg-notif-item-content">
+                    <div class="lg-notif-itemlist">
+                        @if (_items is not null && _items.Count > 0)
+                        {
+                            @foreach (TItem item in _items)
+                            {
+                                <LgNotificationItem @key="item" Item="item" TItem="TItem" OnClick="() => ClickItemAsync(item)" IconName="@GetItemIconName(item)" CssClass="@GetItemCssClass(item)" /> 
+                            }
+                        }
+                        else
+                        {
+                            <div class="m-2 lg-notif-empty">
+                                <LgEmptyMessage IconName="@IconName" Description="#NotificationLblNoResult" />
+                            </div>
+                        }
+                    </div>
+                    @if (ChildContent is not null)
+                    {
+                        <div class="lg-notif-bottom">
+                            @ChildContent
+                        </div>
+                    }
+                </div>
+            </form>
+        </ChildContent>
+    </LgMenuItem>
+</CascadingValue>

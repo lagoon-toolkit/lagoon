@@ -1,0 +1,18 @@
+﻿@inherits DemoPageForm
+
+<LgTitle Text="TimeBox" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgEditForm @ref=formDemo Model=@formData ValidationErrorMessage="#ErrorFormDemo" UseValidationComplexModel="true">
+        <LgTimeBox CssClass="col-md-6 col-sm-12" Disabled="@IsDisable" ReadOnly="@IsReadOnly"
+                   Label="LgTimeBox" @bind-Value="formData.Time" />
+    </LgEditForm>
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <CommonParameters CssClass="col-md-6" OnLabelEdition="OnChangeLabel" OnDisableEdition="OnChangeDisable" OnReadOnlyEdition="OnChangeReadOnly"></CommonParameters>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />
+

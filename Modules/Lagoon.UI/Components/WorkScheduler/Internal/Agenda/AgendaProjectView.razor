@@ -1,0 +1,12 @@
+@namespace Lagoon.UI.Components.WorkScheduler.Internal
+@inherits ComponentBase
+@typeparam TItem
+
+@foreach (TItem item in WorkScheduler.Items)
+{
+    <div style=@($"position:absolute; padding:2px; {WorkScheduler.GetAgendaTaskPosition(item)}")
+         data-move=@WorkScheduler.GetDataMove(item)
+         @onmousedown="@(async () => await WorkScheduler.OnStartDragItemAsync(item))">
+        @WorkScheduler.SchedulerItems(item)
+    </div>
+}

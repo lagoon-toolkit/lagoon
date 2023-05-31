@@ -1,0 +1,26 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@inherits LgComponentBase
+@typeparam TValue
+@typeparam TItemValue
+
+<LgLoaderView Progress="_loadState.Progress">
+    <CascadingValue Value="SelectionGuid">
+        @if (Select.Items is not null)
+        {
+            <LgSelectItemsLoader Select="Select" />
+        }
+        else if (Select.WorkingDataSource is not null)
+        {
+            @foreach (IListItemData<TItemValue> item in Select.GetRenderingDataItems())
+            {
+                <LgOptionListItem @key="item.GetValue()" Text="@item.GetText()" Value="item.GetValue()" Disabled="item.GetDisabled()"
+                                  Tooltip="@item.GetTooltip()" CssClass="@item.GetCssClass()" />
+            }
+        }
+        @if (Select.HasCheckBoxes)
+        {
+            <LgSelectAll Select="Select" />
+        }
+    </CascadingValue>
+</LgLoaderView>
+<LgEmptyMessage IconName="@_msgIconName" Description="@_msgDescription" />

@@ -1,0 +1,16 @@
+﻿@namespace Lagoon.UI.Demo.Pages
+@attribute [Microsoft.AspNetCore.Components.RouteAttribute(ROUTE)]
+@inherits LgPage
+
+@* TODO GM TO BE REMOVED AFTER TITLE PART ADDED INTO SHOWCASE*@
+<LgTitle Text="@Link().Title" />
+<LgFrame Title="Headings" Collapsable="true">
+    <LgTitle TitleLevel="TitleLevel.Level1" Text="Heading 1 : Poppins - 16px - Medium"></LgTitle>
+    <LgTitle TitleLevel="TitleLevel.Level2" Text="Heading 2 : Poppins - 14px - Medium"></LgTitle>
+</LgFrame>
+<LgFrame Title="Body & legend" Collapsable="true">
+    <LgLabel Text="Body : Poppins - 12px - Regular" CssClass="body-policy"></LgLabel>
+    <br />
+    <LgLabel Text="Legend : Poppins - 10px - Regular" CssClass="legend-policy"></LgLabel>
+    <LgLabel Text="@_uneVar"></LgLabel>
+</LgFrame>

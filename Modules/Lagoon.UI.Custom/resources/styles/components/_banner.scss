@@ -1,0 +1,61 @@
+﻿.alert {
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 0;
+    font-size: $banner-text-size;
+    font-weight: 400;
+
+    & .bi {
+        width: 1.15rem;
+        height: 1.15rem;
+        margin-right: 0.9rem;
+    }
+
+    & a {
+        text-decoration: underline;
+        margin-right: 0.9rem;
+    }
+
+    & .close-icon {
+        float: right;
+        font-weight: 700;
+        width: 1.15rem;
+        height: 1.15rem;
+    }
+}
+
+.alert-info {
+    background-color: $info;
+    color: $banner-text-color;
+
+    & a {
+        color: $banner-text-color;
+    }
+}
+
+.alert-success {
+    background-color: $success;
+    color: $banner-text-color;
+
+    & a {
+        color: $banner-text-color;
+    }
+}
+
+.alert-warning {
+    background-color: $warning;
+    color: $banner-text-color;
+
+    & a {
+        color: $banner-text-color;
+    }
+}
+
+.alert-danger {
+    background-color: $danger;
+    color: $banner-text-color;
+
+    & a {
+        color: $banner-text-color;
+    }
+}

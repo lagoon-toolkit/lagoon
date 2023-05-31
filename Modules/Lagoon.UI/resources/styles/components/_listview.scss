@@ -1,0 +1,29 @@
+﻿$list-view-group-bc: rgba(25, 94, 117, 0.07);
+$list-view-group-mb: 0.5rem;
+$list-view-group-p: 1rem;
+
+.list-view-sort-action {
+    .lbl, .cbo-opt-lbl {
+        white-space: nowrap;
+    }
+}
+// Collapse group management
+.list-view-content {
+    .item-list {
+        .list-view-group-closed + div[role="rowgroup"] {
+            display: none;
+        }
+    }
+
+    .list-view-group {
+        width: 100%;
+        cursor: pointer;
+        padding: $list-view-group-p;
+        margin: 0 0 $list-view-group-mb 0;
+        background-color: $list-view-group-bc;
+
+        > svg {
+            margin-left: 0.1rem;
+        }
+    }
+}

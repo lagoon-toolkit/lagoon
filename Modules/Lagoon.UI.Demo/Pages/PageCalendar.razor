@@ -1,0 +1,11 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="Calendar" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgCalendar Indicators="RangesSource" OnDayClick="OnClickDay" CssClass="col-8" StartDate="_startDate" EndDate="_endDate">
+    </LgCalendar>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <LagoonPriority>2</LagoonPriority>
+    <HasRootableComponents>True</HasRootableComponents>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    <LangVersion>10.0</LangVersion>
+    <Authors>Lagoon Toolkit team</Authors>
+    <Company>Lagoon Toolkit team</Company>
+    <Description>Lagoon module for WebAssembly components.</Description>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- https://learn.microsoft.com/fr-fr/aspnet/core/fundamentals/target-aspnetcore?view=aspnetcore-7.0&tabs=visual-studio#support-both-hosting-models -->
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="Microsoft.JSInterop.WebAssembly" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="6.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
+    <PackageReference Include="MessagePack" Version="2.4.59" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="resources\build\service-worker.published.js" PackagePath="content\" />
+    <Content Include="resources\build\load-resources.updt" PackagePath="content\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lagoon.Core\Lagoon.Core.csproj" />
+    <ProjectReference Include="..\Lagoon.Shared\Lagoon.Shared.csproj" />
+  </ItemGroup>
+
+  <!-- Add copies "Lagoon.UI.targets" into "build\$(TargetFramework)\" of the NuGet package -->
+  <PropertyGroup>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);LagoonUIBuildContent</TargetsForTfmSpecificContentInPackage>
+  </PropertyGroup>
+  <Target Name="LagoonUIBuildContent">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="resources\build\Lagoon.UI.targets" PackagePath="build\$(TargetFramework)\" />
+    </ItemGroup>
+  </Target>
+
+  <!-- Run the Lagoon dotnet tool to consolidate resources -->
+  <Import Project="..\LagoonPreBuild.UI.targets" />
+
+</Project>

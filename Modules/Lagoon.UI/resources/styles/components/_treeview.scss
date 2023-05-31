@@ -1,0 +1,226 @@
+﻿// Default style variables
+$treeview-border-color: $primary;
+$treeview-icon-backcolor: #FFF;
+// Nestable style variables
+$treeview-nestable-border: $card-border-width solid $card-border-color;
+$treeview-nestable-shadow: 0px 2px 8px 0px rgba(#000, .14);
+$treeview-nestable-height: 3em;
+$treeview-nestable-back: #FFF;
+$treeview-nestable-iconsize: 1.5em;
+$treeview-nestable-icontop: 0.5em;
+$treeview-nestable-selected: $primary;
+
+@mixin media-minmax($min-width, $max-width) {
+    @media screen and (min-width: $min-width) and (max-width: $max-width) {
+        & {
+            @content;
+        }
+    }
+}
+
+@mixin media-min($min-width) {
+    @media screen and (min-width: $min-width) {
+        & {
+            @content;
+        }
+    }
+}
+
+/*
+    Common style
+*/
+div.treeview {
+    overflow-y: auto;
+    // Root list
+    ul {
+        list-style: none;
+        box-sizing: border-box;
+        //All child node
+        li {
+            box-sizing: border-box;
+
+            > svg {
+                cursor: pointer;
+                z-index: 1;
+                color: $primary;
+                background-color: $treeview-icon-backcolor;
+            }
+            // Content vertical center
+            div.trv-node-content {
+                display: flex !important;
+                align-items: center;
+            }
+        }
+    }
+}
+/*
+    Style nestable
+*/
+div.treeview.trv-nestable {
+    // List left offset
+    > ul {
+        padding: 0 0.5em;
+
+        ul {
+            padding-left: $treeview-nestable-height;
+        }
+    }
+    // List
+    ul {
+        //All child node
+        li {
+            padding: 0;
+            line-height: 1.2;
+            position: relative;
+            // Icon
+            > svg.bi {
+                background: transparent;
+                display: block;
+                position: absolute;
+                left: 0.5em;
+                top: $treeview-nestable-icontop;
+                font-size: $treeview-nestable-iconsize;
+                // Offset to display icon
+                + div {
+                    padding-left: $treeview-nestable-height;
+                }
+            }
+            // Content
+            > div {
+                position: relative;
+                display: block;
+                margin: 0.5em 0 0.7em 0;
+                padding-left: 1em;
+                height: $treeview-nestable-height;
+                overflow: hidden;
+                border: $treeview-nestable-border;
+                box-shadow: $treeview-nestable-shadow;
+                border-radius: 0.25rem;
+                background-color: $treeview-nestable-back;
+                // Selected
+                &.trv-node-selected {
+                    background-color: $treeview-nestable-selected;
+                }
+            }
+        }
+    }
+}
+/*
+    Style used in date filterbox
+*/
+div.treeview.trv-default {
+    ul {
+        padding: 0;
+
+        li {
+            line-height: 1.2;
+            position: relative;
+            padding: 1em 0 0 1em;
+
+            & > div {
+                position: relative;
+                display: inline-block;
+            }
+
+            > svg {
+                cursor: pointer;
+                position: absolute;
+                top: 1em;
+                left: -1em;
+                z-index: 1;
+            }
+
+            &:before {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: -0.5em;
+                display: block;
+                width: 0;
+                border-left: 1px solid $treeview-border-color;
+                content: '';
+                box-sizing: content-box;
+            }
+
+            &.treeview-open {
+
+                & > div:after {
+                    border-radius: 0 .3em 0 0;
+                    border-top: 1px solid $treeview-border-color;
+                    border-right: 1px solid $treeview-border-color;
+                    border-bottom: 0;
+                    border-left: 0;
+                    bottom: 0;
+                    top: 0.5em;
+                    height: auto;
+                    // Fix chrome zoom offset
+                    left: -1.5em;
+
+                    @include media-minmax(768px, 1980px) {
+                        left: calc(-1.5em - 0.1px);
+                    }
+
+                    @include media-minmax(1090px, 1100px) {
+                        left: calc(-1.5em - 0.3px);
+                    }
+                    // Firefox don't need fix
+                    @-moz-document url-prefix() {
+                        left: -1.5em !important;
+                    }
+
+                    box-sizing: content-box;
+                }
+            }
+
+            & > div:after {
+                position: absolute;
+                top: 0;
+                left: -1.5em;
+                display: block;
+                height: 0.5em;
+                width: 1em;
+                border-bottom: 1px solid $treeview-border-color;
+                border-left: 1px solid $treeview-border-color;
+                border-radius: 0 0 0 .3em;
+                content: '';
+                box-sizing: content-box;
+            }
+
+            &:last-child {
+                padding-bottom: 0;
+
+                &:before {
+                    height: 1em;
+                    bottom: auto;
+                }
+            }
+        }
+    }
+
+    & > ul {
+        margin: 1em;
+
+        & > li {
+            padding: 0 0 1em 1em;
+
+            &:last-child:before {
+                display: none;
+            }
+
+            &:not(.treeview-open):first-child {
+                &:before {
+                    top: 0.5em;
+                }
+
+                & > div:after {
+                    border-left: none;
+                    border-radius: unset;
+                }
+            }
+
+            > svg {
+                top: 0;
+            }
+        }
+    }
+}

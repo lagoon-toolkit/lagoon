@@ -1,0 +1,19 @@
+﻿@inherits DemoPageForm
+
+<LgTitle Text="Toggle" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgEditForm @ref=formDemo Model=@formData ValidationErrorMessage="#ErrorFormDemo" UseValidationComplexModel="true">
+        <LgToggle CssClass="col-md-6 col-sm-12" @bind-Value="@formData.Toggle" Label="@Label" TextOff="@TextOff" TextOn="@TextOn" TextPosition="@ToggleTextPosition" ReadOnly="@IsReadOnly" Disabled="@IsDisable" />
+    </LgEditForm>
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <CommonParameters CssClass="col-md-6" OnLabelEdition="OnChangeLabel" OnDisableEdition="OnChangeDisable" OnReadOnlyEdition="OnChangeReadOnly"></CommonParameters>
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+    <ToggleParameters CssClass="col-md-6" OnTextPositionEdition="OnChangeTextPosition"  OnChangeTextOnAsync="OnChangeTextOnAsync" OnChangeTextOffAsync="OnChangeTextOffAsync"></ToggleParameters>
+    </section>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

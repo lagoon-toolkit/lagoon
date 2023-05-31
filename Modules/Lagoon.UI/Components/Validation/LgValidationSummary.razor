@@ -1,0 +1,20 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgValidationBase
+
+@if (ActualErrorsDisplayOptions.HasFlag(EditFormErrorsDisplayOptions.Summary))
+{
+    <div class="@GetClassAttribute()" role="list">
+        @if (!string.IsNullOrEmpty(Title))
+        {
+            <LgTitle Text=@Title />
+        }
+        <ul>
+            @foreach (var message in EditContext.GetValidationMessages())
+            {
+                <li class="validation-error-label" role="alert">
+                    @App.BehaviorConfiguration.AliasMessages.GetDisplayMessage(message, false)
+                </li>
+            }
+        </ul>
+    </div>
+}

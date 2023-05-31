@@ -1,0 +1,280 @@
+﻿$default-background-color: $light0;
+$disable-background-color: $gray0-50;
+$hover-checked-background-color: #002981;
+$padding-left-checkbox: 0.6rem;
+
+.form-group-chk {
+    display: flex;
+    flex-direction: column;
+
+    .lbl {
+        position: relative;
+        order: 0;
+    }
+
+    .form-input {
+        order: 1;
+    }
+
+    .custom-control {
+        order: 1;
+        padding-left: $custom-control-gutter + $custom-control-indicator-size + $padding-left-checkbox;
+    }
+
+    .custom-control-ro {
+        order: 1;
+        padding-left: 0;
+    }
+
+    & div.custom-control-right {
+        padding-left: $padding-left-checkbox;
+    }
+
+    .validation-error-label {
+        padding-left: $padding-left-checkbox;
+    }
+}
+
+.custom-radio {
+    .custom-control-input {
+        &:indeterminate ~ .custom-control-label::before {
+            border-color: $secondary1;
+            background-color: $secondary1;
+        }
+
+        &:hover:not(:disabled) {
+            &:indeterminate {
+                + .custom-control-label {
+                    &::before {
+                        background-color: $secondary2 !important;
+                    }
+                }
+            }
+        }
+
+        + .custom-control-label {
+            &::before, &::after {
+                margin-top: 0.1em;
+            }
+        }
+    }
+}
+
+.form-group:not(.form-group-ro) {
+    .custom-checkbox, .custom-radio {
+
+        .custom-control-input {
+            + .custom-control-label {
+                font-weight: normal;
+
+                &::before {
+                    background-color: $default-background-color;
+                    border-color: $dark2;
+                }
+            }
+
+            &:checked {
+                + .custom-control-label {
+                    &::before {
+                        background-color: $secondary1;
+                        border-color: $secondary1;
+                    }
+                }
+            }
+
+            &:hover:not([disabled]), &:hover:not(:disabled) {
+                &:not(:checked), &:not(:indeterminate) {
+                    + .custom-control-label {
+                        &::before {
+                            background-color: $light3;
+                        }
+
+                        &::after {
+                            filter: brightness(0) invert(95%) sepia(3%) saturate(365%) hue-rotate(191deg) brightness(104%) contrast(91%); // #EFF1F4
+                        }
+                    }
+                }
+
+                &:checked {
+                    + .custom-control-label {
+                        &::before {
+                            background-color: $secondary2;
+                        }
+
+                        &::after {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+
+            &:focus, &.focus {
+                + .custom-control-label {
+                    &::before {
+                        box-shadow: none !important;
+                    }
+                }
+            }
+
+            &[disabled], &:disabled, &[disabled]:checked, &:disabled:checked, &[disabled]:indeterminate, &:disabled:indeterminate {
+                + .custom-control-label {
+                    &::before {
+                        background-color: $gray0-50;
+                        border-color: 1px solid $gray0;
+                    }
+
+                    &::after {
+                        filter: brightness(0) invert(78%) sepia(9%) saturate(268%) hue-rotate(182deg) brightness(103%) contrast(88%); // #C1C7D3
+                    }
+                }
+            }
+
+            &.rbtModern + .custom-control-label {
+                margin-left: -1.5rem;
+
+                &::before, &::after {
+                    content: none;
+                }
+            }
+
+            &:checked {
+                &.rbtModern + .custom-control-label {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    .custom-switch {
+
+        .custom-control-input {
+
+            &:hover:not([disabled]), &:hover:not(:disabled) {
+                &:not(:checked) {
+                    + .custom-control-label {
+                        &::before {
+                            background-color: $gray0-50 !important;
+                        }
+
+                        &::after {
+                            background-color: $gray1 !important;
+                        }
+                    }
+                }
+
+                &:checked, &:indeterminate {
+                    + .custom-control-label {
+                        &::before {
+                            background-color: $secondary1 !important;
+                        }
+
+                        &::after {
+                            opacity: 1;
+                            background-color: $secondary3 !important;
+                        }
+                    }
+                }
+            }
+
+            + .custom-control-label {
+                &::before {
+                    background-color: $gray0-50;
+                    border: none;
+                    height: 0.75rem;
+                    margin-top: 2px;
+                    margin-top: 0.1em;
+                }
+
+                &::after {
+                    background-color: $light1;
+                    width: 1.1rem;
+                    height: 1.1rem;
+                    margin-top: -4px;
+                    right: -1.65rem;
+                    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.35);
+                }
+            }
+
+            &:checked {
+                + .custom-control-label {
+                    &::before {
+                        background-color: $secondary1;
+                    }
+
+                    &::after {
+                        background-color: $secondary2;
+                    }
+                }
+            }
+
+
+            &:focus, &.focus {
+                + .custom-control-label {
+                    &::before {
+                        box-shadow: none !important;
+                    }
+                }
+            }
+
+            &[disabled], &:disabled, &[disabled]:checked, &:disabled:checked, &[disabled]:indeterminate, &:disabled:indeterminate {
+                + .custom-control-label {
+                    &::before {
+                        background-color: $gray0-50;
+                    }
+
+                    &::after {
+                        background-color: $gray0;
+                    }
+                }
+            }
+
+            &.rbtModern + .custom-control-label {
+                margin-left: -1.5rem;
+
+                &::before, &::after {
+                    content: none;
+                }
+            }
+
+            &:checked {
+                &.rbtModern + .custom-control-label {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+
+//Readonly render
+.form-group-chk.form-group-ro {
+
+    .chk-ro, .rbg-ro {
+        order: 1;
+    }
+
+    .chk-ro {
+        padding-left: 0;
+    }
+
+
+    .custom-switch {
+        padding-left: 0;
+    }
+
+    .custom-control-label {
+        &::after, &::before {
+            display: none;
+        }
+    }
+}
+
+.form-group:not(.form-group-ro) .custom-switch.custom-switch-noLbl .custom-control-input + .custom-control-label {
+    &::before {
+        right: unset;
+    }
+
+    &::after {
+        right: -1rem;
+    }
+}

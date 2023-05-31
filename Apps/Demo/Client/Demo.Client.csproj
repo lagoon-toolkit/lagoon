@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <Version>1.0.0</Version>
+    <TargetFramework>net6.0</TargetFramework>
+    <ServiceWorkerEnabled>false</ServiceWorkerEnabled>
+    <LangVersion>10.0</LangVersion>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Demo.Shared.csproj" />
+    <ProjectReference Include="..\..\..\Modules\Lagoon.UI\Lagoon.UI.csproj" />
+    <ProjectReference Include="..\..\..\Modules\Lagoon.UI.Custom\Lagoon.UI.Custom.csproj" />
+    <ProjectReference Include="..\..\..\Modules\Lagoon.UI.GridView\Lagoon.UI.GridView.csproj" />
+    <ProjectReference Include="..\..\..\Modules\Lagoon.UI.Notifications\Lagoon.UI.Notifications.csproj" />
+    <ProjectReference Include="..\..\..\Modules\Lagoon.UI.Demo\Lagoon.UI.Demo.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.10" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="6.0.10" />
+  </ItemGroup>
+
+  <Import Project="..\..\..\Modules\Lagoon.UI\resources\build\Lagoon.UI.targets" />
+
+</Project>

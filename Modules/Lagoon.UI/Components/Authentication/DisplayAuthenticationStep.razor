@@ -1,0 +1,13 @@
+﻿@namespace Lagoon.UI.Components
+
+<div class="authentication-step-container">
+    <div class="authentication-step" role="alert" aria-live="assertive">
+        <div>
+            @((MarkupString)_loadingAnimation) @(Step.CheckTranslate())
+        </div>
+        @if (ShowReconnect)
+        {
+            <LgButton Uri="authentication/login" Text="#AuthReconnect" CssClass="reconnect-auth" />
+        }
+    </div>
+</div>

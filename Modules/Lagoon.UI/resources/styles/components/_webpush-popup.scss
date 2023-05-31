@@ -1,0 +1,31 @@
+﻿.wp-popup {
+    position: absolute;
+    top: 10px;
+    left: 40%;
+    z-index: 9999;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 8px 16px 2px rgba(#000, .2);
+    padding: 15px;
+}
+
+.wp-logo {
+    content: url(#{$toolbar-logo});
+    width: 100%;
+    max-width: 100px;
+}
+
+.wp-help {
+    content: url('~/images/help_notification.png');
+    width: 100%;
+}
+
+.wp-instruction-container {
+    border-top: 1px solid #00000017;
+    margin-top: 15px;
+}
+
+.wp-instruction {
+    white-space: pre-line;
+    font-weight: bold !important;
+}

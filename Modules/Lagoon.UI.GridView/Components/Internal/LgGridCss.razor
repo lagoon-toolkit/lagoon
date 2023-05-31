@@ -1,0 +1,13 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@typeparam TItem
+
+<style>
+    :root {
+        @GridView.CssVariables
+    }
+        @GridView.RowsStyle
+        @foreach (var rowCellStyle in @GridView.ColumnsStyle)
+    {
+        @rowCellStyle
+    }
+</style>

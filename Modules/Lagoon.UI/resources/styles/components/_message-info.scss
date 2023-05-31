@@ -1,0 +1,31 @@
+﻿.new-application-version {
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: space-around;
+    background-color: $primary;
+    padding: 10px;
+    // margin: 10px 30px;
+    // box-shadow: 9px 5px 5px grey;
+    // position: absolute;
+    position: fixed;
+    bottom: 0px;
+    // width: 400px;
+    width: 100%;
+    text-align: center;
+    color: $secondary;
+
+    a {
+        text-decoration: underline;
+        font-weight: bold;
+    }
+
+}
+
+.new-application-version-error {
+    color: $danger;
+}
+
+/* Class used by LgValidationMessage */
+.validation-error-label {
+    color: red;
+}

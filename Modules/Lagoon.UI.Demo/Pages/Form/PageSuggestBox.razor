@@ -1,0 +1,31 @@
+﻿@inherits DemoPageForm
+
+<LgTitle Text="SuggestBox" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgEditForm @ref=formDemo Model=@formData ValidationErrorMessage="#ErrorFormDemo" UseValidationComplexModel="true">
+        <LgSuggestBox @bind-Value="@formData.FirstName" CssClass="col-md-6 col-sm-12" Label="@Label" Disabled="@IsDisable" ReadOnly="@IsReadOnly"
+                      Items="_items" BindedProperty="color => color.Label" FilterProperty="color => color.Label"
+                    SeeAllEnabled="SeeAllEnabled" MinSearchCharacter="MinSearchCharacter" MaxItemsInView="MaxItemsInView" FilterTextSearchMode="ModeFilterTextSearch" HighlightText="HighlightText" />
+    </LgEditForm>
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <CommonParameters CssClass="col-md-6" OnLabelEdition="OnChangeLabel" OnDisableEdition="OnChangeDisable" OnReadOnlyEdition="OnChangeReadOnly"></CommonParameters>
+    
+    <div class="row">
+        <LgCheckBox CssClass="col-md-3 col-sm-12" @bind-Value="@SeeAllEnabled" Text="#lblSeeAllParam" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <LgCheckBox CssClass="col-md-3 col-sm-12" @bind-Value="@HighlightText" Text="#lblHighlightText" CheckBoxKind="@CheckBoxKind.Toggle" />
+    </div>
+    <div class="row">
+        <LgSelect CssClass="col-md-3 col-sm-12" @bind-Value="@ModeFilterTextSearch" Label="#lblModeFilterSearch" DataSourceItems="_filterTextSearchModes" />
+        <LgNumericBox CssClass="col-md-3 col-sm-12" @bind-Value="@MinSearchCharacter" Label="#lblMinSearchCharactere" />
+    </div>
+    <div class="row">
+        <LgNumericBox CssClass="col-md-3 col-sm-12" @bind-Value="@MaxItemsInView" Label="#lblMaxItemsInView" />
+    </div>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />
+

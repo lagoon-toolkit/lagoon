@@ -1,0 +1,55 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgAriaComponentBase
+
+<LgModal @ref="_lgModal" Title="@("GroupOptionsTitle".Translate())" OnClose="OnClose"
+         CssClass="group-options-modal" Summary="@("GroupOptionsDescription".Translate())"
+         ModalSize="ModalSize.Large">
+    <ChildContent>
+        <div class="group-options-content" role="tabpanel" tabindex="-1" data-is-scrollable="true">
+            <ul class="groups" ondragover="event.preventDefault();" role="tablist">
+                @foreach (var group in GroupsByOrder)
+                {
+                    var availableColumnsList = GetAvailableColumns(group.Columns);
+
+                    <li class="@GetItemCssClass(group)" 
+                        draggable="true"
+                        @ondragover:preventDefault="true"
+                        ondragover="event.preventDefault();"
+                        @ondragstart="(e) => HandleDragStart(e, group)"
+                        @ondrop="(e) => HandleDrop(group)" role="presentation">
+                        <div id="@group.ElementId" class="row row-container" tabindex="0"
+                             @ondragstart="() => _draggedGroup = group"
+                             @ondragend="()=> _draggedGroup = null" 
+                             draggable="true">
+                            <LgIcon IconName="@IconNames.All.GripVertical" CssClass="icon drag-icon"></LgIcon>
+                            <LgSelectMultiple Disabled="!group.IsRemovable" ResetButton=false Value="group.Columns" @onchange="(e) => ChangeColumn(e, group.Columns)">
+                                <Items>
+                                    @foreach (var column in availableColumnsList)
+                                    {
+                                        <LgOptionListItem Text="@column.Title" Value="@column.Key"></LgOptionListItem>
+                                    }
+                                </Items>
+                            </LgSelectMultiple>
+                            @if (group.IsRemovable)
+                            {
+                                <LgIcon IconName="@IconNames.All.X" CssClass="icon" OnClick="@(() => RemoveGroup(group))" title="@("GroupOptionsRemoveTooltip".Translate())" tabindex="0" />
+                            }
+                            else
+                            {
+                                <LgIcon IconName="@IconNames.Info" CssClass="icon" title="@("GroupOptionsIrremovableTooltip".Translate())" tabindex="0" />
+                            }
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </ChildContent>
+    <FooterContent>
+        <div class="btn-add-group-container">
+            <LgButton CssClass="btn-add-group" ButtonSize="ButtonSize.Large" IconName="@IconNames.All.Plus" OnClick="@(()=>AddGroup())" Disabled="DisableAddButton" Kind="ButtonKind.Secondary" Text="@("GroupOptionsAddColumn".Translate())"></LgButton>
+        </div>
+        <LgButton Text="@("GroupOptionsCancelBtn".Translate())" Kind="ButtonKind.Secondary" CssClass="btn-lg" OnClick=@_lgModal.CloseAsync />
+        <LgButton Text="@("GroupOptionsSaveBtn".Translate())" Kind="ButtonKind.Primary" CssClass="btn-lg" OnClick="SaveGroupOptionsAsync" Disabled="DisableSaveButton" />
+    </FooterContent>
+</LgModal>
+

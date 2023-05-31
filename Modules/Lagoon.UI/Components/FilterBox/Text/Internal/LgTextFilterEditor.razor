@@ -1,0 +1,52 @@
+@namespace Lagoon.UI.Components.Internal
+@inherits LgFilterEditorBase<string, TextFilter>
+
+<LgFilterTabContainer>
+    <TabRules>
+        <div class="input-group filter-adv">
+            <div class="input-group-prepend">
+                <LgButton Kind="ButtonKind.Secondary" ButtonSize="ButtonSize.Small" Text="@_filterOperator.GetDisplayName()"
+                          CssClass="btn dropdown-toggle" data-toggle="dropdown" data-boundary="window"
+                          aria-expanded="false" StopPropagation="true" aria-haspopup="true" role="menuitem" />
+                <div class="dropdown-menu filter-sublist">
+                    <a class="dropdown-item d-flex" href="#" tabindex="-1" role="menuitem"
+                       @onclick="_ => SetOperator(FilterTextSearchMode.Contains)" @onclick:preventDefault="true">@FilterTextSearchMode.Contains.GetDisplayName()</a>
+                    <a class="dropdown-item d-flex" href="#" tabindex="-1" role="menuitem"
+                       @onclick="_ => SetOperator(FilterTextSearchMode.StartsWith)" @onclick:preventDefault="true">@FilterTextSearchMode.StartsWith.GetDisplayName()</a>
+                    <a class="dropdown-item d-flex" href="#" tabindex="-1" role="menuitem"
+                       @onclick="_ => SetOperator(FilterTextSearchMode.EndsWith)" @onclick:preventDefault="true">@FilterTextSearchMode.EndsWith.GetDisplayName()</a>
+                </div>
+            </div>
+            <LgTextBox Value="@_filterText" CssClass="filter-value" Placeholder="#FilterBoxTextValuePlaceholder" OnChangeDisabled="true"
+                       OnInput="OnInputFilterText" @attributes="_filterTextAdditionalAttributes" />
+        </div>
+        @if (_preview is not null)
+        {
+            <LgBanner Kind="Kind.Info" IconName="@IconNames.Info" CssClass="filter-adv-txt-preview">
+                @("FilterBoxPreview".Translate())
+                <div>
+                    @if (_preview.Count == 0)
+                    {
+                        <span>@("FilterBoxNoResult".Translate())</span>
+                    }
+                    else
+                    {
+                        @foreach (string __entry in _preview)
+                        {
+                            <span>&bull;&nbsp;&nbsp;&nbsp;@__entry</span>
+                        }
+                        @if (_preview.Count > PREVIEW_COUNT)
+                        {
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&bull;&nbsp;&bull;</span>
+                        }
+                    }
+                </div>
+            </LgBanner>
+        }
+    </TabRules>
+    <TabSelection>
+        <LgLoaderView IsLoading="WorkingItems is null">
+            <LgSearchableList @ref="_searchableList" Items="WorkingItems" SelectedItems="_selectedValues" FormatValue="FilterBox.FormatFilterValue" />
+        </LgLoaderView>
+    </TabSelection>
+</LgFilterTabContainer>

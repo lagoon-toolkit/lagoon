@@ -1,0 +1,48 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgToolbarButton
+
+@if (ToolbarMenuParent != null)
+{
+    bool __hasRigthButton = OnSave.HasDelegate || OnRemove.HasDelegate;
+    <a @attributes="GetAdditionalAttributes()" class="@GetClassAttribute()" href="@(string.IsNullOrEmpty(Uri)?"#":Uri)" @onclick="OnClickInternalAsync"
+        @onclick:preventDefault="true" @onclick:stopPropagation="true"
+        tabindex="0" aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy" role="menuitem">
+
+        @if (!string.IsNullOrEmpty(IconName))
+        {
+            <div class="nav-item-icon"><LgIcon IconName="@IconNameRendering" /></div>
+        }
+
+        @if (!string.IsNullOrEmpty(TextRendering))
+        {
+            <div class="nav-item-lbl"><span>@TextRendering</span></div>
+        }
+
+        @if (__hasRigthButton)
+        {
+            <div class="nav-item-right">
+
+                @if (OnSave.HasDelegate)
+                {
+                    <div class="nav-item-icon">
+                        <LgButton Kind="ButtonKind.Secondary" IconName="@IconNames.All.Save2Fill" OnClick="@OnSave" PreventDefault="true"
+                      Tooltip="@SaveButtonTooltip" ConfirmationMessage="@OnSaveConfirmationMessage" AriaLabel="@SaveButtonAria" />
+                    </div>
+                }
+
+                @if (OnRemove.HasDelegate)
+                {
+                    <div class="nav-item-icon">
+                        <LgButton Kind="ButtonKind.Secondary" IconName="@IconNames.Delete" OnClick="@OnRemove"
+                      PreventDefault="true" Tooltip="@RemoveButtonTooltip" AriaLabel="@RemoveButtonAria"
+                      ConfirmationMessage="@OnRemoveConfirmationMessage" />
+                    </div>
+                }
+            </div>
+        }
+    </a>
+}
+else
+{
+    base.BuildRenderTree(__builder);
+}

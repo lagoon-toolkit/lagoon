@@ -1,0 +1,20 @@
+﻿@page
+@model Lagoon.Server.Areas.Identity.Account.GroupChoiceModel
+@using Lagoon.Helpers
+
+<div class="group-choice-area">
+    <form method="post">
+        <h1 class="title-authent">@("lblGroupChoice".Translate())</h1>
+        <div role="radiogroup">
+            @foreach (var group in Model.GroupChoices)
+            {
+                <div class="custom-control custom-radio d-block " role="radiogroup">
+                    <input type="radio" class="custom-control-input rbtClassic" id="@group.Description" name="groupChoice" value="@string.Join(",", group.Roles)" @(group.Description == Model.DefaultChoice ? "checked" : "") />
+                    <label for="@group.Description" class="lbl custom-control-label">@group.Description</label>
+                </div>
+            }
+        </div>
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">Select</button>
+    </form>
+</div>

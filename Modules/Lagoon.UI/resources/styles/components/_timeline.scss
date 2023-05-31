@@ -1,0 +1,86 @@
+﻿
+.stepContainer {
+    display: grid;
+    text-align: center;
+    grid-template-rows: auto 35px auto;
+}
+
+.stepCircle {
+    transition: $timelineAnimation;
+    width: 30px;
+    height: 30px;
+    line-height: 25px;
+    border-radius: 50%;
+    background: $timelineBaseColor;
+    display: inline-block;
+    position: absolute;
+    border: 3px solid $timelineSecondaryColor;
+    top: calc(50% - 15px);
+    margin: 0;
+    padding: 0;
+    margin-left: -15px;
+    user-select: none;
+}
+
+.stepClick {
+    &.stepCircle {
+        transition: $timelineAnimation;
+        border: 2px groove $timelineValidated;
+
+        &:hover {
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+    }
+
+    &.topLabel {
+        text-decoration: underline;
+        font-weight: bold;
+    }
+}
+
+.stepSeparatorRight {
+    transition: $timelineAnimation;
+    position: absolute;
+    height: 4px;
+    width: 50%;
+    background: $timelineBaseColor;
+    top: 49%;
+    right: 0;
+}
+
+.stepSeparatorLeft {
+    transition: $timelineAnimation;
+    left: 0;
+}
+
+.stepValid {
+    transition: $timelineAnimation;
+
+    &.topLabel, &.bottomLabel {
+        color: $timelineValidated;
+        font-weight: bold;
+    }
+
+    &.stepCircle {
+        color: $timelineSecondaryColor;
+        background: $timelineValidated;
+    }
+
+    &.stepSeparatorRight, &.stepSeparatorLeft {
+        background: $timelineValidated;
+    }
+
+    &.stepSeparatorLeft {
+        background: $timelineValidated;
+    }
+}
+
+.topLabel, .bottomLabel {
+    white-space: break-spaces;
+}
+
+.bottomLabel {
+    display: flex;
+    justify-content: center;
+}

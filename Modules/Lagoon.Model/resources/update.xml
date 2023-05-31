@@ -1,0 +1,27 @@
+﻿<!--
+
+- Actions
+	* "replace"
+	* "delete"
+
+- Simple text replacement syntax :
+
+MyOldText ¤ MyNewText
+
+- RegEx replacement syntax (https://regexr.com/):
+
+regex/gims=<MyOldText([^>]*)> ¤ <MyNewTag$1>
+
+-->
+<Updates>
+	<Version From="2.99.99">
+		<Action Type="Replace" File="*.cs">
+		<![CDATA[
+regex/g=(\s*)(builder)\.(DisableCascadingDeletionBehavior\()\) ¤ $1$3$2)
+regex/g=(\s*)(builder)\.(HasIdentityRoles<Roles>\()\) ¤ $1$3$2)
+regex=(.*Lagoon\.Model\.Context;)(\s*) ¤ $1$2global using Lagoon.Model.Models;$2
+: IdentityUser ¤ : Lagoon.Model.Models.LgIdentityUser
+		]]>
+		</Action>
+	</Version>
+</Updates>

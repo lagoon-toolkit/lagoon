@@ -1,0 +1,44 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="#lblCopyPaste" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+
+    <div class="row">
+        <div class="col-6 row">
+            <LgTextBox @bind-Value="TextValue" Label="#lblCopyTextBox" CssClass="col-md-9"/>
+            <div class="col-md-3  my-auto">
+                <LgCopyButton Value="@TextValue"/>
+            </div> 
+            
+            <LgNumericBox @bind-Value="DoubleValue" Label="#lblCopyNumericBox" CssClass="col-md-9"/>
+            <div class="col-md-3  my-auto">
+                <LgCopyButton Value="@DoubleValue" />
+            </div>
+            <LgDateBox @bind-Value="DateValue" Label="#lblCopyDateBox" CssClass="col-md-9"/>
+            <div class="col-md-3  my-auto">
+                <LgCopyButton Text="#lblCopyInformation" OnCopy="OnCopyDate" />
+            </div>
+        </div>
+        <div class="col-6 row">
+            <LgTextBox @bind-Value="PastedTextValue" Label="#lblPasteTextBox" CssClass="col-md-9"/>
+            <div class="col-md-3  my-auto">
+                <LgPasteButton OnPaste="OnPasteText"/>
+            </div>
+
+            <LgNumericBox @bind-Value="PastedDoubleValue" Label="#lblPasteTextBox" CssClass="col-md-9"/>
+            <div class="col-md-3  my-auto">
+                <LgPasteButton OnPaste="OnPasteDoubleValue"/>
+            </div>            
+            
+            <LgDateBox @bind-Value="PastedDateValue" Label="#lblPasteTextBox" CssClass="col-md-9"/>
+            <div class="col-md-3  my-auto">
+                <LgPasteButton Text="#lblPasteInformation" OnPaste="OnPasteDate"/>
+            </div>
+        </div>
+    </div>  
+    
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

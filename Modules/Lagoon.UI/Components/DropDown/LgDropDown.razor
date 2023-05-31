@@ -1,0 +1,31 @@
+﻿@namespace Lagoon.UI.Components
+@using Lagoon.UI.Components.Input.Internal;
+@inherits LgAriaComponentBase
+
+<div class="@GetClassAttribute()" id="@ElementId" @ref="ElementRef" role="@Role"
+     aria-controls="@($"dropdown-{ElementId}")" aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy"
+     aria-haspopup="listbox" aria-expanded="@(_isOpen ? "true" : "false")" aria-describedby="@($"select-{ElementId}-label")"
+     aria-disabled="@(Disabled ? "true" : "false")">
+    @if (!Disabled && !ReadOnly)
+    {
+        <div class="dropdown-menu @(_isOpen ? "" : "hide")"
+             id=@($"dropdown-{ElementId}") role="listbox"
+             aria-multiselectable="@(Multiple ? "true" : "false")"
+             aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy" tabindex="-1">
+            @DropDownContent(_isOpen)
+        </div>
+    }
+    @if (AutoOpen)
+    {
+        <div class="dropdown-control" @onmousedown="ToggleListAsync" @onmousedown:preventDefault="true" @onmousedown:stopPropagation="true">
+            @ControlContent
+        </div>
+
+    }
+    else
+    {
+        <div class="dropdown-control" >
+            @ControlContent
+        </div>
+    }
+</div>

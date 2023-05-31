@@ -1,0 +1,80 @@
+﻿$list-view-group-p: 0.4rem 0.6rem;
+$list-view-group-bc: $dtg-group-row-bg;
+$list-view-group-mb: 0.5rem;
+
+.list-view-col-itemtpl {
+    width: calc(100% - 2rem);
+    padding-top: 0.3rem;
+}
+
+.list-view-header-rightside {
+    form {
+        .form-group {
+            .lbl {
+                padding-right: 0.5rem;
+                margin-top: 0.4rem;
+            }
+        }
+    }
+
+    .list-view-sort-action {
+        .lblActive {
+            position: relative;
+            order: -1;
+        }
+
+        .select2-selection__rendered {
+            line-height: normal;
+        }
+
+        .select-dropdown button.dropdown-toggle .select-dropdown-content .select-dropdown-value {
+            padding-top: 0rem;
+        }
+    }
+
+    .list-view-toolbar-action {
+        padding-left: 2rem;
+    }
+}
+
+.list-view-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3rem 1fr 3rem;
+
+    .list-view-header-leftside {
+        margin-top: auto;
+        margin-bottom: auto;
+        padding-left: 2rem;
+    }
+
+    .item-list {
+        overflow-y: auto;
+    }
+
+    .list-view-col-chk {
+        margin-right: 0.35rem;
+    }
+}
+.listview-sortprop {
+    .select2-container--lagoon .select2-selection--single {
+        height: 28px;
+        padding-top: 0.15rem;
+    }
+}
+.list-view-sort-action {
+    // margin-top: 0.5rem;
+
+    .list-view-button-order {
+        height: 29px;
+    }
+}
+
+// remove label outside input for sortby
+@if $custom-label-outside {
+    .listview-sortprop {
+        flex-direction: row;
+    }
+
+}
+

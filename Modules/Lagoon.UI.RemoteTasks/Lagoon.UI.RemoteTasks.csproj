@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    <LangVersion>10.0</LangVersion>
+    <Authors>Lagoon Toolkit team</Authors>
+    <Company>Lagoon Toolkit team</Company>
+    <Description>Lagoon remote tasks module.</Description>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="6.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lagoon.Core\Lagoon.Core.csproj" />
+    <ProjectReference Include="..\Lagoon.UI\Lagoon.UI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="resources\icons\auto\" />
+    <Folder Include="resources\javascripts\" />
+    <Folder Include="resources\styles\components\" />
+  </ItemGroup>
+
+  <!-- Run the Lagoon dotnet tool to consolidate resources -->
+  <Import Project="..\LagoonPreBuild.UI.targets" />
+
+</Project>

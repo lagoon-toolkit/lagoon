@@ -1,0 +1,20 @@
+﻿@inherits DemoPageForm
+
+<LgTitle Text="TextBox" CssClass="d-inline-block" />
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgEditForm @ref=formDemo Model=@formData ValidationErrorMessage="#ErrorFormDemo" UseValidationComplexModel="true">
+        <LgTextBox @bind-Value="@formData.FirstName" CssClass="col-md-6 col-sm-12" Label="@Label" Disabled="@IsDisable" ReadOnly="@IsReadOnly"
+                   Prefix="@PrefixSuffix.Prefix" PrefixType="PrefixSuffix.PrefixType" Suffix="@PrefixSuffix.Suffix" SuffixType="PrefixSuffix.SuffixType" />
+        <LgTextBox @bind-Value="@formData.Multiline" CssClass="col-md-6 col-sm-12" Label="Textarea" TextMode="TextBoxMode.Multiline" Disabled="@IsDisable" ReadOnly="@IsReadOnly" />
+        <LgTextBox @bind-Value="@formData.Password" CssClass="col-md-6 col-sm-12" Label="Password" TextMode="TextBoxMode.Password" Disabled="@IsDisable" ReadOnly="@IsReadOnly" />
+    </LgEditForm>
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <CommonParameters CssClass="col-md-6" OnLabelEdition="OnChangeLabel" OnDisableEdition="OnChangeDisable" OnReadOnlyEdition="OnChangeReadOnly" />
+    <PrefixSuffixParameters @bind-PrefixSuffix="PrefixSuffix" />
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

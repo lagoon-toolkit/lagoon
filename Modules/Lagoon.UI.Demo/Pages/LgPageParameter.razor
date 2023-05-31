@@ -1,0 +1,11 @@
+﻿@inherits LgPage
+
+<style>
+    .tab-toggle-menu {
+        padding-left: 2rem;
+        padding-top: 4px;
+    }
+</style>
+
+<LgCheckBox @bind-Value="@_settings.IsTabbed" Text="#ToggleNavigation" CheckBoxKind="@CheckBoxKind.Toggle" OnChange="ChangeNavigationHandler" TextPosition="CheckBoxTextPosition.Right" CssClass="tab-toggle-menu" />
+

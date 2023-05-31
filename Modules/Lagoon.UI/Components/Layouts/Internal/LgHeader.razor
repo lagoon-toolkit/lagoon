@@ -1,0 +1,31 @@
+﻿@namespace Lagoon.UI.Components.Layouts.Internal
+@using Lagoon.UI.Components.Internal
+@inherits LgComponentBase
+
+<CascadingValue Value="this" IsFixed="true">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="d-flex">
+                <button class="navbar-toggler" @onclick="ToggleNavMenu" aria-label="@("mainMenuHamb".Translate())" aria-expanded="@(CollapsedNavMenu ? "false" : "true")">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                @if (!String.IsNullOrEmpty(_environmentName))
+                {
+                    <div class="divEnvironnement my-auto" style="background-color:@_environmentColor">
+                        @_environmentName
+                    </div>
+                }
+                <div id="brand-logo" class="navbar-brand my-auto"></div>
+                <div class="vertical-separator my-auto">
+                    <div class="header-separator"></div>
+                </div>
+                <a class="navbar-brand my-auto" href="./" aria-label="@("mainMenuAppName".Translate())">@_applicationName</a>
+            </div>
+            <LgMenuTopRender Collapsed="CollapsedNavMenu" />
+            <div class="order-2 order-lg-3 d-flex">
+                <LgMenuToolbarRender />
+                <div class="divRightLogo"></div>
+            </div>
+        </nav>
+    </header>
+</CascadingValue>

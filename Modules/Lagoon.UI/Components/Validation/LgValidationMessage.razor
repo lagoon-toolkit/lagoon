@@ -1,0 +1,16 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgValidationBase
+@typeparam TValue
+@using Microsoft.AspNetCore.Components.Forms;
+
+@if (ActualErrorsDisplayOptions.HasFlag(Components.EditFormErrorsDisplayOptions.InlineValidation))
+{
+    <div class="@GetClassAttribute()">
+        @foreach (var message in EditContext.GetValidationMessages(_fieldIdentifier))
+        {
+            <div class="validation-error-label" role="alert">
+                @App.BehaviorConfiguration.AliasMessages.GetDisplayMessage(message, true)
+            </div>
+        }
+    </div>
+}

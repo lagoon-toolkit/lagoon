@@ -1,0 +1,85 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@using Lagoon.UI.Components
+@inherits LgBaseGridViewRowManager
+@typeparam TItem
+
+@{
+    int __index;
+
+    RenderFragment BuildGroup(GridGroupLevel<TItem> level, string parentKey)
+    {
+        var groupStateKey = parentKey is null ? level.Key : parentKey + "-" + level.Key;
+        var groupState = GetGroupRowState(groupStateKey);
+        groupState.ItemsNumber = level.GetItemsCount();
+        string groupLabel = GroupLabel(level.Params);
+
+        return @<LgComponentGroup>
+                <LgGridGroupRow GroupData="level" Count="@groupState.ItemsNumber" IsCollapsed="groupState.IsCollapsed"
+                                 OnChangeCollapse="(s) => ChangeGroupCollapse(groupStateKey, s)"></LgGridGroupRow>
+
+                @if (level.HasItems)
+                        {
+                    <div class="gridview-row-group" aria-label="@groupLabel" role="rowgroup">
+                        @foreach (var tItem in level.Items)
+                                {
+                            <LgGridRow @key="tItem" Item="tItem" Index="__index" />
+                                    __index++;
+                                }
+                    </div>
+                        }
+
+                @if (level.HasSubLevels)
+                        {
+                    <div class="gridview-row-group" aria-label="@groupLabel" role="rowgroup">
+                        @foreach (GridGroupLevel<TItem> subLevel in level.SubLevels)
+                                {
+                            @BuildGroup(subLevel, groupStateKey)
+                                }
+                    </div>
+                        }
+            </LgComponentGroup>;
+}
+
+}
+
+@if (AddItem is not null && AddItemOnTop)
+    {
+        <LgGridRowAdd Item="AddItem" IsTop="true" />
+    }
+@if (Data is not null && Data.Any())
+{
+    _rowProvider = new GridViewRowProvider<TItem>(Data);
+    __index = (GridView.PaginationState.PageSize * (GridView.PaginationState.CurrentPage - 1)) + 1;
+    if (_groupRowData is not null && _groupRowData.Any())
+    {
+        List<GridGroupLevel<TItem>> groupLevels = GetGroupsLevels();
+
+        foreach (GridGroupLevel<TItem> level in groupLevels)
+        {
+            @BuildGroup(level, "")
+        }
+    }
+    else
+    {
+        while (_rowProvider.TryGetRow(out TItem item))
+        {
+            __index++;
+            <LgGridRow @key="item" Item="item" Index="__index" />
+        }
+    }
+}
+else
+{
+    @* Display the information that the grid is empty if not in add row mode*@
+    @if (AddItem is null)
+    {
+        <LgBigMessage IconName="@IconNames.All.BoxOpen" Title="@GridView.NoDataTitle" Description="@GridView.EmptyDescription" />
+        // Hidden empty line to have horizontal scroll
+        <LgGridEmptyRow Item="GridView.EmptyItem" />
+    }
+}
+@if (AddItem is not null && !AddItemOnTop)
+{
+    <div class="gridview-prev-add"></div>
+    <LgGridRowAdd Item="AddItem" />
+}

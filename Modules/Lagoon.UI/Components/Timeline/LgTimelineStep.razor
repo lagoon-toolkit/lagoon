@@ -1,0 +1,49 @@
+@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+
+<div class=@($"topLabel {CssClass} {(IsValidated ? "stepValid":null)} {(IsClickable ? "stepClick":null)}") style="grid-column-start: @GetStepPosition(); grid-row-start: 1">
+    @if (TopLabelContent is null)
+    {
+        @TopLabel
+    }
+    else
+    {
+        @TopLabelContent
+    }
+</div>
+<div class=@($"bottomLabel {(IsValidated ? "stepValid":null)} {(IsClickable ? "stepClick":null)} {CssClass}") style="grid-column-start: @GetStepPosition(); grid-row-start: 3">
+    @if (BottomLabelContent is null)
+    {
+        @BottomLabel
+    }
+    else
+    {
+        @BottomLabelContent
+    }
+</div>
+<div class=@($"{CssClass} ") style="grid-column-start: @GetStepPosition(); grid-row-start: 2; position: relative">
+    @if (!IsLastStep())
+    {
+        <div class=@($"stepSeparatorRight {(IsValidated && IsNextStepValidated() ? "stepValid" : null)} {CssClass}")></div>
+    }
+    @if (!IsFirstStep())
+    {
+        <div class=@($"stepSeparatorRight stepSeparatorLeft {(IsValidated && IsPreviousStepValidated() ? "stepValid" : null)} {CssClass}")></div> @*{(IsPreviousStepValidated() ? "stepValid" : null)]*@
+    }
+    <div class=@($"stepIcon stepCircle {(IsValidated ? "stepValid":null)} {(IsClickable ? "stepClick":null)} {CssClass}") @onclick=@OnChildClickAsync> @*(async () => await TimelineContainer.OnChildClickAsync(this))*@
+        @if (StepContent is null)
+        {
+            @GetStepNumber()
+        }
+        else
+        {
+            @StepContent
+        }
+    </div>
+</div>
+@if (!IsLastStep())
+{
+    <div style="grid-column-start: @(GetStepPosition()+1); grid-row-start: 2; position: relative">
+        <div class=@($"w-100  stepSeparatorRight stepSeparatorLeft {(IsValidated && IsNextStepValidated() ? "stepValid" : null)} {CssClass}")></div> @*{(IsValidated ? "stepValid":null)}*@
+    </div>
+}

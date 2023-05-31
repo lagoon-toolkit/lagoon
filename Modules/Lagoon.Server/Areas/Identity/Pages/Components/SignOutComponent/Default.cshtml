@@ -1,0 +1,28 @@
+﻿@model Lagoon.Server.Areas.Identity.Pages.Components.SignOutComponent
+<script src="@Url.Content("~/_content/Microsoft.AspNetCore.Components.WebAssembly.Authentication/AuthenticationService.js")"></script>
+<script>
+    async function completeLogOut() {
+        var sessionKey = 'Microsoft.AspNetCore.Components.WebAssembly.Authentication.CachedAuthSettings';
+        var options = JSON.parse(sessionStorage.getItem(sessionKey));
+        await AuthenticationService.init(options);
+        await AuthenticationService.completeSignOut(location.href);
+        sessionStorage.removeItem(sessionKey);
+        @if (!string.IsNullOrEmpty(Model.PostLogoutUri)) {
+            if ("XHR".Equals(Model.PostLogoutMode, StringComparison.OrdinalIgnoreCase)) {
+        @:fetch('@Model.PostLogoutUri', { mode: 'no-cors' });
+        @:history.pushState(null, '', '@Url.Content("~/")');
+            }
+            else {
+        @:window.location = '@Model.PostLogoutUri';
+            }
+        }
+        else {
+        @:history.pushState(null, '', '@Url.Content("~/")');
+        }
+    }
+    completeLogOut().catch(err => console.log(err));
+</script>
+
+<div style="color:red">
+    @Model.PostLogoutUri
+</div>

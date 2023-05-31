@@ -1,0 +1,14 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+
+@if (!string.IsNullOrEmpty(IconName))
+{
+    <div class="@GetClassAttribute()" style="@GetStyleAttribute()">
+        <LgIcon IconName="@IconName" @attributes="GetTooltipAttributes(Tooltip, TooltipIsHtml)" />
+    </div>
+}
+else
+{
+    <div @attributes="GetTooltipAttributes(Tooltip, TooltipIsHtml)" class="@GetClassAttribute()" style="@GetStyleAttribute()"></div>
+}
+

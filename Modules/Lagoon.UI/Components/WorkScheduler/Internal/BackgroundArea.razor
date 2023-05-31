@@ -1,0 +1,34 @@
+﻿@namespace Lagoon.UI.Components.WorkScheduler.Internal
+@inherits ComponentBase
+@typeparam TItem
+
+@if (AgendaMode)
+{
+    for (TimeSpan __step = WorkScheduler.AgendaHoursFrom; __step < WorkScheduler.AgendaHoursTo; __step = __step.Add(new TimeSpan(0, WorkScheduler.AgendaRowStep, 0)))
+    {
+        <div style=@($"height:{WorkScheduler.RowHeight}px;") class=@($"wk-row wk-rowhour {WorkScheduler.IsAgendaRowHighlight(__step)}")
+             data-row-id="@__step.Ticks"
+             onclick="Lagoon.LgWorkScheduler.OnEmptyAreaClick(event, null)" />
+    }
+    <!-- Draw a fake task to show an indicator of the actual date/time-->
+    <div class="wst-today" style=@($"position:absolute; {WorkScheduler.GetAgendaTaskPosition(DateTime.Now, DateTime.Now.AddMinutes(1))}") />
+}
+else
+{
+    <!-- Alternance background (not using a repeating-linear-background because timeline diff) -->
+    <div style=@($"width:{WorkScheduler.TotalTimelineWidth}px; height:{WorkScheduler.TotalHeight};") class="alt-bg-container">
+        @for (int __col = 0; __col <= WorkScheduler.AlternanceColumnCount; __col++)
+        {<!--          
+            --><div style=@($"width:{WorkScheduler.DayWidth(__col)}px;") class=@($"wst {((__col%2==0) ? "wst-primary" : "wst-secondary")} {WorkScheduler.GetSeparator(__col)}")></div><!--
+     -->}
+        @if (WorkScheduler.DisplayMode == DisplayMode.Timeline)
+        {
+            <!-- Draw a vertical line to indicate current date/time-->
+            double __todayLeft = WorkScheduler.GetDatePosition(DateTime.Now);
+            @if (__todayLeft <= WorkScheduler.TotalTimelineWidth)
+            {
+                <div style=@($"left:{__todayLeft}px") class="wst-today-bar">&nbsp;</div>
+            }
+        }
+    </div>
+}

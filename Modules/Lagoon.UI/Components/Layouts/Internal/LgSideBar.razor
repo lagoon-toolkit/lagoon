@@ -1,0 +1,27 @@
+﻿@namespace Lagoon.UI.Components
+@using Lagoon.UI.Components.Internal
+@inherits LgComponentBase
+
+<CascadingValue Value="this" IsFixed="true">
+    <nav id="sidebar-container" class="@GetClassAttribute()" aria-orientation="vertical">
+        <ul class="navbar-nav">
+            <LgMenuSidebarRender Collapsed="Collapsed" />
+            <li class="nav-item mt-lg-1 mr-1">
+                <a href="#top" data-toggle="sidebar-colapse" class="" @onclick="@OnCollapseAsync" @onclick:stopPropagation="true" @onclick:preventDefault="true"
+                   aria-label="@((Collapsed ? "siderbarExpandLbl" : "siderbarCollapseLbl").Translate())">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        @if (Collapsed)
+                        {
+                            <LgIcon IconName="@IconNames.All.CaretRightFill" />
+                        }
+                        else
+                        {
+                            <LgIcon IconName="@IconNames.All.CaretLeftFill" CssClass="mr-3" />
+                            <span id="collapse-text" class="menu-collapsed">@("siderbarCollapseLbl".Translate())</span>
+                        }
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</CascadingValue>

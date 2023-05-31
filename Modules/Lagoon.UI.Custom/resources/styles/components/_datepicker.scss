@@ -1,0 +1,104 @@
+﻿$datepicker-icons-color-svg: svg-color($input-text-color);
+$date-picker-size-text: 0.75rem;
+$date-picker-sel-text-color: $light0;
+$date-picker-sel-bg-color: $primary2;
+$date-picker-hover-bg: $light3;
+$date-picker-hover-text-color: $input-text-color;
+
+.datepicker {
+    border: none !important;
+    border-radius: 0;
+    box-shadow: 0 1px 4px 0 rgba(00, 00, 00, 0.2);
+
+    .prev, .next {
+        visibility: hidden;
+
+        &::after {
+            visibility: visible;
+            position: absolute;
+            top: 0.55rem;
+            display: block;
+            width: 1rem;
+            height: 1rem;
+            content: "";
+        }
+    }
+
+    .next::after {
+        background-image: imageName('All.ChevronRight', $dark0);
+        right: 0.8rem;
+    }
+
+    .prev::after {
+        background-image: imageName('All.ChevronLeft', $dark0);
+        left: 0.8rem;
+    }
+
+    & .datepicker-switch {
+        width: 192px;
+        color: $input-text-color;
+        font-size: $date-picker-size-text;
+        font-weight: 400;
+
+        &:hover {
+            background-color: $date-picker-hover-bg !important;
+        }
+    }
+
+    & .dow {
+        color: $gray3;
+        font-size: $date-picker-size-text;
+        font-weight: 400;
+    }
+
+    & .day {
+        color: $input-text-color;
+        font-size: $date-picker-size-text;
+        font-weight: 400;
+        border-radius: 3px;
+        height: 34px;
+        width: 32px;
+
+        &:hover {
+            background-color: $date-picker-hover-bg !important;
+        }
+    }
+
+    & .old.day, & .new.day {
+        color: $gray0;
+    }
+
+    & table tr td.today:not(:disabled):not(.disabled).today, table tr td span.current {
+        box-shadow: inset 0 0 0 1px $gray1;
+        border-radius: 3px;
+        background-color: $light0;
+        color: $input-text-color;
+
+        &:hover {
+            background-color: $date-picker-hover-bg !important;
+            color: $date-picker-hover-text-color !important;
+        }
+    }
+
+    & table tr td.active:not(:disabled):not(.disabled).active, table tr td.today.active:not(:disabled):not(.disabled).today.active,
+    table tr td span.active.active:not(:disabled):not(.disabled),
+    &.week-picker tbody tr .active ~ td {
+        color: $date-picker-sel-text-color;
+        background-color: $date-picker-sel-bg-color;
+        border-radius: 3px;
+
+        &:hover {
+            background-color: $dark1 !important;
+            color: $light0 !important;
+        }
+    }
+}
+
+.datepicker-orient-top:before, .datepicker-orient-top:after {
+    border: none;
+}
+
+.datepicker-dropdown:before, .datepicker-dropdown:after {
+    visibility: hidden;
+}
+

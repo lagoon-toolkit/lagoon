@@ -1,0 +1,64 @@
+﻿@namespace Lagoon.UI.Components.WorkScheduler.Internal.Timelines
+@inherits ComponentBase
+@typeparam TItem
+
+<div style="position:relative;">
+@{
+    DateTime __current = WorkScheduler.From.Value;
+
+    bool __alternanceDay = true;
+    bool __alternanceMonth = true;
+    bool __displayOnTwoRow = WorkScheduler.TimelineDisplayMode == TimelineDisplayMode.TwoRows;
+    @if (__displayOnTwoRow)
+    {
+        while (__current < WorkScheduler.To.Value)
+        {
+            int __days = DaysInMonth(__current.Year, __current.Month);
+            int __weekendCount = LgWorkScheduler<TItem>.NbWeekend(__current.Year, __current.Month, __current.Day);
+            if (!WorkScheduler.ShowWeekend) __days -= __weekendCount;
+            double monthWidth = __days * 24 * WorkScheduler.ZoomLevel;
+            <div style=@($"width:{monthWidth}px; display: inline-block; vertical-align:top") class=@(__alternanceMonth ? "wst-group-primary" : "wst-group-secondary")>
+
+                <div style="width:100%;" class="wst-group">
+                    <div class="m-0 p-0 d-inline-block">
+                        @if (WorkScheduler.TimelineFirstLevel != null)
+                        {
+                            @WorkScheduler.TimelineFirstLevel(__current)
+                        }
+                        else
+                        {
+                            @("MonthNames".Translate().Split(",")[__current.Month-1] + " " + @__current.Year);
+                        }
+                    </div>
+                </div>
+            </div>
+            __alternanceMonth = !__alternanceMonth;
+            __current = __current.AddDays(__days + (!WorkScheduler.ShowWeekend ? __weekendCount : 0));
+        }
+    }
+    <br />
+    DateTime __current2 = WorkScheduler.From.Value;
+    int __dayCount = 0;
+    @while (__current2 < WorkScheduler.To.Value)
+    {
+        __dayCount = (7 - (int)__current2.DayOfWeek + 1);
+        if (!WorkScheduler.ShowWeekend) __dayCount -= 2;
+        if (__dayCount > 0)
+        {
+            <div style=@($"width:{__dayCount * 24 * WorkScheduler.ZoomLevel}px; height:{(__displayOnTwoRow ? WorkScheduler.TimelineHeight/2 : WorkScheduler.TimelineHeight)}px;") class=@($"wst {(IsCurrentWeek(__current2) ? "wst-today" : "")} {(__alternanceDay ? "wst-primary" : "wst-secondary")}")>
+            @if (WorkScheduler.TimelineSecondLevel != null) 
+            {
+                @WorkScheduler.TimelineSecondLevel(__current2)
+            }
+            else
+            {
+                @($"S{System.Globalization.ISOWeek.GetWeekOfYear(__current2)}")
+            }
+            </div>
+        }
+        if (__dayCount == 0) __dayCount = 2;
+        else __alternanceDay = !__alternanceDay;
+        __current2 = __current2.AddDays(__dayCount);
+    }
+}
+</div>

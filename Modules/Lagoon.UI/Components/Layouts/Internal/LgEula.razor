@@ -1,0 +1,23 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@using Lagoon.Shared.Model
+@using Lagoon.UI.Helpers
+@inherits LgPage
+@page "/LgEula/{DisplayOnly:bool}"
+
+<LgModal Title="#EulaTitle" @bind-Visible=_eulaToAccept ModalSize=ModalSize.ExtraLarge Closable="false">
+    <Toolbar>
+        @if (App.GetSupportedLanguages().Count() > 1)
+        {
+            @foreach (var lng in JS.GetCguSupportedLanguage(_eulaDicoKey))
+            {
+                <LgToolbarButton IconName=@($"i-flag-{lng}") Text="" OnClick=@(() => App.SetLanguage(lng)) />
+            }
+        }
+    </Toolbar>
+    <ChildContent>
+        <iframe style="border:none; width:100%" srcdoc="@((MarkupString)(Eula.ContentKey.Translate()))" onload="javascript:(function(o){o.style.height=(o.contentWindow.document.body.scrollHeight+50)+'px';}(this));" />
+    </ChildContent>
+    <FooterContent>
+        <LgButton OnClick=AcceptCguAsync Text="#EulaBtnAccept" Kind=ButtonKind.Success />
+    </FooterContent>
+</LgModal>

@@ -1,0 +1,19 @@
+﻿@namespace Lagoon.UI.Components.WorkScheduler.Internal
+@inherits ComponentBase
+@typeparam TItem
+
+@if (WorkScheduler.JoinMilestone)
+{
+    IEnumerable<DateTime> __milestones = Data.Where(x => !x.To.HasValue).Select(x => x.From);
+    if (__milestones.Count() > 1)
+    {
+        DateTime __min = __milestones.Min();
+        DateTime __max = __milestones.Max();
+        if (__min <= __max)
+        {
+            <div style=@($"width:{WorkScheduler.GetDurationWidth(__min, __max)}px; left:{WorkScheduler.GetDatePosition(__min)}px;") class="wk-bar-join-milestone">
+                &nbsp;
+            </div>
+        }
+    }
+}

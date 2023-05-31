@@ -1,0 +1,96 @@
+﻿.group-options-modal {
+    .modal-lg {
+        width: 34.5rem;
+        height: 34.75rem;
+    }
+
+    .modal-body {
+        margin-right: 0.625rem;
+        margin-left: 0.25rem;
+        padding-left: 1.25rem !important;
+        padding-right: 0.3125rem !important;
+        padding-top: 0rem !important;
+        margin-top: 0.25rem;
+    }
+
+    .modal-footer {
+        margin-top: 1.25rem;
+
+        .btn-add-group {
+            height: 2rem;
+            width: 26.5rem;
+        }
+
+        .btn-save-cancel-container {
+            display: flex;
+        }
+
+        .btn-add-group-container {
+            flex-grow: 1;
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+    }
+
+    .group-options-content {
+        .groups {
+            list-style-type: none;
+            padding: 0rem;
+
+
+            .group {
+                margin: 0.375rem 0rem 0.375rem 0rem;
+
+                .row-container {
+                    width: 30.5rem;
+                    height: 2.5rem;
+                    padding-top: 0.375rem;
+                    padding-bottom: 0.375rem;
+
+                    .icon {
+                        width: 1.75rem;
+                        height: 1.75rem;
+                        margin: 0.125rem 0.125rem 0.125rem 0.125rem;
+                    }
+
+                    .i-a-Info {
+                        margin-left: .45rem;
+                        width: 1.2rem;
+                    }
+
+                    .i-grip-vertical:hover {
+                        cursor: grab;
+                    }
+
+                    .i-x:hover {
+                        cursor: pointer;
+                    }
+
+                    .dropdown {
+                        display: inline-block;
+                        height: 1.75rem;
+                        width: 26.5rem;
+                        margin-bottom: 0.125rem;
+                    }
+
+                    .btn-options {
+                        height: 1rem;
+                        width: 1rem;
+                    }
+                }
+
+                &[draggable="false"] {
+                    & .row > svg.drag-icon {
+                        visibility: hidden;
+                    }
+                }
+
+                &[draggable="true"] {
+                    .row-container:hover:focus {
+                        cursor: grab;
+                    }
+                }
+            }
+        }
+    }
+}

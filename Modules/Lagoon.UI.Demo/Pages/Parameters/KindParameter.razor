@@ -1,0 +1,23 @@
+﻿<LgSelect CssClass="@CssClass" Label="Kind" ShowSearchBox=true @bind-Value="Kind" OnChange="OnChangeKindAsync">
+    <Items>
+        @foreach (var kind in Enum.GetValues(typeof(Kind)))
+        {<LgOptionListItem Text="@(Enum.GetName(typeof(Kind), kind))" Value="@((Kind)kind)"></LgOptionListItem>}
+    </Items>
+</LgSelect>
+
+@code {
+
+    public Kind Kind { get; set; } = Kind.Default;
+
+    [Parameter]
+    public string CssClass { get; set; }
+
+    [Parameter]
+    public EventCallback<Kind> OnKindEdition { get; set; }
+
+
+    public async Task OnChangeKindAsync()
+    {
+        await OnKindEdition.InvokeAsync(Kind);
+    }
+}

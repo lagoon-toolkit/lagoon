@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# IDE0063: Utiliser une instruction 'using' simple
+csharp_prefer_simple_using_statement = false

@@ -1,0 +1,9 @@
+﻿@inherits LgPage
+
+@for (int i = 0; i < 2000; i++)
+{
+    <SpeedTestComponent />
+}
+
+<LgNumericBox @bind-Value="_loopCount" />
+<LgButton OnClick="DoLoop" Text="DoLoop" />

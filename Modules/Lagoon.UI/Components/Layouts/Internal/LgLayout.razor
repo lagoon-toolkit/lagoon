@@ -1,0 +1,49 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+@using Lagoon.UI.Components.Internal
+@using Lagoon.UI.Components.Layouts.Internal
+@using Lagoon.UI.Components.Toastr.Internal
+
+<CascadingValue Value="this">
+    @TopContent
+    <div class="wrapper @_cssClassWrapper @_cssClassSidebar">
+        @if (ShowHeader)
+        {
+            <LgHeader />
+        }
+        <div class="content-main">
+            @if (_isSideBarVisible)
+            {
+                <LgSideBar OnToggleSidebar="ToggleSidebarHandler" DefaultCollapsed="false" />
+            }
+            <div class="@GetClassAttribute()" role="main">
+                @if (IsTabbed)
+                {
+                    <LgAppTabContainerLayout DefaultLayout="AppComponent?.DefaultLayout" />
+                }
+                else
+                {
+                    <LgSimpleLayout />
+                }
+            </div>
+        </div>
+        @if (ShowFooter)
+        {
+            <LgFooter>
+                @FooterContent
+            </LgFooter>
+        }
+    </div>
+</CascadingValue>
+<LgToastr />
+<LgEula />
+<LgConfirm />
+<LgModalContainer />
+<LgSrInformation />
+<CascadingAuthenticationState>
+    <AuthorizeView>
+        <LgWebPushSubcription />
+    </AuthorizeView>
+</CascadingAuthenticationState>
+
+@ChildContent

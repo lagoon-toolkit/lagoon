@@ -1,0 +1,37 @@
+﻿@namespace Lagoon.UI.Components.WorkScheduler.Internal.Timelines
+@inherits ComponentBase
+@typeparam TItem
+
+<div>
+@for (var __day = WorkScheduler.From.Value; __day <= WorkScheduler.To.Value; __day = __day.AddDays(1))
+{
+    @if (WorkScheduler.ShowWeekend || (!WorkScheduler.ShowWeekend && !LgWorkScheduler<TItem>.IsWeekend(__day)))
+    {<!--
+--><div style=@($"{DayWidth} {TimelineRowHeight} display:inline-block; text-align:center") class=@($"{(IsToday(__day) ? "wst-today" : "")}")>
+       <div class="w-100 h-50 wst-timeline-block-separator">
+           @if (WorkScheduler.TimelineFirstLevel != null)
+           {
+               @WorkScheduler.TimelineFirstLevel(__day)
+           }
+           else
+           {
+               @__day.ToShortDateString()
+           }
+       </div>
+       @for (var __hourStep=WorkScheduler.HourStep; __hourStep <= 24; __hourStep += WorkScheduler.HourStep)
+       {<!--
+         --><div style=@($"width:{((24 * WorkScheduler.ZoomLevel)/8)}px") class=@($"h-50 d-inline-block wst wst-primary {(__hourStep==24 ? "wst-timeline-block-separator" : "")}  {(IsToday(__day) ? "wst-today" : "")}")>
+            @if (WorkScheduler.TimelineFirstLevel != null)
+            {
+                @WorkScheduler.TimelineFirstLevel(new DateTime(__day.Year, __day.Month, __day.Day, __hourStep, 0, 0))
+            }
+            else
+            {
+                @(__hourStep == 24 ? 0 : __hourStep)
+            }
+            </div><!--
+    -->}
+    </div><!--
+-->}
+} 
+</div>

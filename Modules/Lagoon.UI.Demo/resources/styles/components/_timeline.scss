@@ -1,0 +1,55 @@
+.redStep {
+    .stepCircle {
+        background: red !important;
+        border: 3px double red;
+        color: white;
+    }
+
+    &.topLabel, &.bottomLabel {
+        color: red;
+    }
+}
+
+
+.canceledStep {
+    opacity: 0.8;
+
+    &.topLabel {
+        text-decoration: line-through;
+    }
+
+    .stepCircle {
+        background: lightgray !important;
+    }
+}
+
+.customTimelineCol {
+    .stepContainer {
+        grid-template-columns: auto 10% auto 10% auto 10% auto 30% auto !important;
+    }
+}
+
+.TimelineSample3 {
+    .baseTimelineIco {
+        font-size: 36px;
+        color: #cfeffa;
+        background: white;
+        position: relative;
+        border: 2px solid white;
+    }
+
+    .stepCircle {
+        width: initial !important;
+        height: initial !important;
+        line-height: initial !important;
+        border-radius: initial !important;
+        background: initial !important;
+        border: initial !important;
+    }
+
+    .stepValid {
+        .baseTimelineIco {
+            color: #117d9f;
+        }
+    }
+}

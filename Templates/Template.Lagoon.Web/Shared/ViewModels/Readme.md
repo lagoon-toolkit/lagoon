@@ -1,0 +1,1 @@
+﻿This folder contains the "view models" classes.

@@ -1,0 +1,297 @@
+﻿<!--
+
+- Actions
+	* "replace"
+	* "delete"
+
+- Simple text replacement syntax :
+
+MyOldText ¤ MyNewText
+
+- RegEx replacement syntax (https://regexr.com/):
+
+regex/gims=<MyOldText([^>]*)> ¤ <MyNewTag$1>
+
+-->
+<Updates>
+	<Version From="2.99.99">
+		<Action Type="Replace" File="Program.cs">
+			<![CDATA[
+regex/g=(LagoonWebApplication\.Run<[^,>]*),[^>]*(>) ¤ $1$2
+		]]>
+		</Action>
+		<Action Type="Replace" File="Main.cs">
+			<![CDATA[
+OnConfigure(WebApplication app) ¤ OnConfigure(IApplicationBuilder app)
+regex=(\s)OnGetIdentityUserAsync\([^)]*\) ¤ $1GetIdentityUserAsync(AuthenticationContext context)
+regex=(\s)OnUnknownUser\([^)]*\) ¤ $1OnUnknownUserAsync(AuthenticationContext context)
+regex=(\s)OnSignIn\([^)]*\) ¤ $1OnSignInAsync(AuthenticationContext context, ApplicationUser user)
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.cs">
+			<![CDATA[
+Lagoon.UI.Components.LagoonSettings ¤ Lagoon.Model.Models.LagoonSettings
+: IdentityUser ¤ : Lagoon.Model.Models.LgIdentityUser
+: NotificationBase ¤ : Lagoon.Model.Models.NotificationBase
+NotificationUserBase< ¤ INotificationUser<
+NotificatiobHub ¤ NotificationHub
+regex=NotificationUserBase<([^>]*)>\suserNotification ¤ $1 notification
+userNotification.Notification. ¤ notification.
+regex/s=\s*\[Route\([^)]*\)\](.*\s*:\s*LgNotificationBaseController) ¤ $1
+		]]>
+		</Action>
+	</Version>
+	<Version From="2.5.1">
+		<Action Type="Replace" File="../NuGet.Config">
+			<![CDATA[
+pkg.desirade.fr/nuget/Lagoon-beta ¤ pkg.desirade.fr/nuget/Lagoon
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.cs">
+			<![CDATA[
+Lagoon.Server.Models.NotificationUserWithUser ¤ Lagoon.Model.Models.NotificationUserWithUser
+		]]>
+		</Action>
+	</Version>
+	<Version From="2.2.9">
+		<Action Type="Replace" File="*Context*.cs">
+			<![CDATA[
+using Lagoon.Server.Application; ¤ using Lagoon.Model.Context;
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.cs">
+			<![CDATA[
+Lagoon.Server.Models ¤ Lagoon.Model.Models
+regex=(using\s*Lagoon\.Server\.Services;)(\s*) ¤ $1$2using Lagoon.Services;$2
+		]]>
+		</Action>
+	</Version>
+	<Version From="2.1.0">
+		<Action Type="Replace" File="Main.cs">
+			<![CDATA[
+regex=(\s*)[^\s]*\s*Main\([^)]*\) ¤ $1protected override void OnConfigure(IServiceProvider services)
+regex=([^_])activeDirectorySettings\.Value ¤ $1services.GetRequiredService<IOptions<ActiveDirectorySettings>>().Value
+regex=(<param\s*name=")activeDirectorySettings("\s*>)[^<]*(<) ¤ $1services$2The System.IServiceProvider that provides access to the application's service container.$3
+regex=readonly\s*(ActiveDirectorySettings\s*_activeDirectorySettings;) ¤ $1
+		]]>
+		</Action>
+		<Action Type="Replace" File="Program.cs">
+			<![CDATA[
+regex=(AddLagoonFileLogger\()[^)]*(\)) ¤ $1$2
+		]]>
+		</Action>
+		<Action Type="Replace" File="Startup.cs">
+			<![CDATA[
+regex=MapFallbackToFile\("index\.[^)]*\) ¤ MapLagoonFallback(false)
+regex=MapAuthenticatedFallbackToFile\([^)]*\) ¤ MapLagoonFallback(false)
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.cs">
+			<![CDATA[
+regex=(NotificationManager\()LgApplicationDbContext<ApplicationUser>(\sdb) ¤ $1ApplicationDbContext$2
+ApplicationInformation.EnvironmentName ¤  Environment.EnvironmentDisplayName
+regex/g=([^:\s]\s*)LgApplicationDbContext<ApplicationUser> ¤ $1ApplicationDbContext
+		]]>
+		</Action>
+	</Version>
+	<Version From="2.0.0">
+		<Action Type="Replace" File="*.cs">
+			<![CDATA[
+.MapFallbackToFile( ¤ .MapAuthenticatedFallbackToFile(
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.23.9">
+		<Action Type="Replace" File="ApplicationDbContext.cs">
+			<![CDATA[
+regex=(public\sApplicationDbContext\(DbContextOptions\soptions),\sIOptions<OperationalStoreOptions>\soperationalStoreOptions(\)\s:\sbase\(options),\soperationalStoreOptions(\)) ¤ $1$2$3
+regex=(\s*)(return\snew\sApplicationDbContext) ¤ $1builder.UseOpenIddict();$1$2
+regex=return\snew\sApplicationDbContext\(builder\.Options,\snew OperationalStoreOptionsMigrations\(\)\) ¤ return new ApplicationDbContext(builder.Options)
+regex=\s*public\sclass\sOperationalStoreOptionsMigrations[^}]*}[^}]*}
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.csproj">
+			<![CDATA[
+regex=\s*<PackageReference\sInclude="Microsoft\.AspNetCore\.ApiAuthorization\.IdentityServer"\sVersion="[^"]*"\s\/>
+		]]>
+		</Action>
+		<Action Type="Replace" File="Startup.cs">
+			<![CDATA[
+regex=\s*app\.UseIdentityServer\(\)\;
+regex=(\n[\t ]*)(services.AddDbContext<ApplicationDbContext>\(options => )([^;]*)\) ¤ $1$2{$1    $3;$1    options.UseOpenIddict();$1})
+regex/gs=(\s)([\t ]*)(#region[^#]*services\.AddLagoonAuthentication.*)(\s*services\.AddLagoonApplication<Main,\sApplicationUser,\sApplicationDbContext>\(\);) ¤ $1$2$4$1$1$2$3
+regex=\s*\/\/\s*Add\s*Lagoon\s*configuration
+		]]>
+		</Action>
+		<Action Type="Replace" File="appsettings*.json">
+			<![CDATA[
+regex/s=([\t ]*"Lagoon":\s{)(\s*)(.*?)\s*([\/]*\s*)"IssuerUri"(:\s*"[^"]*",)(\s*) ¤ $1$2$4"PublicUrl"$5$2$3$6
+regex=[^,{]*"PublicOrigin":\s*"[^"]*",
+regex/s=([\t ]*"Authentication":\s{)(\s*)(.*?)\s*([\/]*\s*)"FilePath"(:\s*"[^"]*",)(\s*) ¤ $1$2$4"OpendIdCertificate"$5$2$3$6
+regex/s=(\s*"IdentityServer":\s*{[^}]*)({[^}]*})([^}]*}) ¤ $1"TODEL_1"$3
+regex/s=(\s*"IdentityServer":\s*{[^}]*)({[^}]*})([^}]*}) ¤ $1"TODEL_2"$3
+regex/s=(\s*"IdentityServer":\s*{[^}]*)({[^}]*})([^}]*}) ¤ $1"TODEL_3"$3
+regex/s=(\s*"IdentityServer":\s*{[^}]*)({[^}]*})([^}]*}) ¤ $1"TODEL_4"$3
+regex/s=(\s*"IdentityServer":\s*{[^}]*)({[^}]*})([^}]*}) ¤ $1"TODEL_5"$3
+regex=[,\s]*"IdentityServer":\s*{[^}]*}
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.cs">
+			<![CDATA[
+regex/gs=\susing\sIdentityServer4[^;]*;
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.22.0">
+		<Action Type="Replace" File="Startup.cs">
+			<![CDATA[
+.AddControllersWithViews()
+.AddLagoonPart<Main>()
+.AddRazorPages()
+regex/g=\s*services;
+regex/g=\s*#region\ Blazor\ pages\s*#endregion
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.18.9">
+		<Action Type="Replace" File="Main.cs">
+			<![CDATA[
+public override void OnInitCulture( ¤ protected override void OnInitCulture(
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.17.9">
+		<Action Type="Replace" File="Startup.cs">
+			<![CDATA[
+regex/g=(MapFallbackToFile\([^)]*)(\.html[^)]*\)) ¤ $1.auto$2
+			]]>
+		</Action>
+	</Version>
+	<Version From="1.16.0">
+		<Action Type="Replace" File="Main.cs">
+			<![CDATA[
+public override async Task OnSignIn ¤ protected override async Task OnSignIn
+public override Task OnSignIn ¤ protected override Task OnSignIn
+public override void OnImpersonate ¤ protected override void OnImpersonate
+			]]>
+		</Action>
+	</Version>
+	<Version From="1.7.0">
+		<Action Type="Replace" File="*Controller.cs">
+			<![CDATA[
+regex/g=HttpContext\.User\.FindFirstValue\(JwtClaimTypes\.Subject\) ¤ ContextUserId
+			]]>
+		</Action>
+	</Version>
+	<Version From="1.5.0">
+		<Action Type="Replace" File="Startup.cs">
+			<![CDATA[
+regex/g=\s*\.AddNewtonsoftJson\(o\s*=>\s*o\.UseCamelCasing\(false\)\.UseMemberCasing\(\)\)
+			]]>
+		</Action>
+	</Version>
+	<Version From="1.4.9">
+		<Action Type="Replace" File="*.csproj">
+			<![CDATA[
+regex/g=\s*<PackageReference\sInclude="Microsoft\.AspNetCore\.OData"\sVersion="7[^"]*"\s\/>
+			]]>
+		</Action>
+		<Action Type="Replace" File="*.cs">
+			<![CDATA[
+regex/g=\[TotalCount\({0,1}\){0,1}\] ¤ [Queryable]
+			]]>
+		</Action>
+		<Action Type="Replace" File="Startup.cs">
+			<![CDATA[
+regex/g=\s*app\.UseODataBatching\(\);
+regex/gm=^.*\/\/ Use\ lagoon\ middleware\(s\)
+regex/gs=\s*\/{3}\s<summary>[^}]*EDM\ in\ order\ to\ use\ the\ Odata.*private ¤ private
+regex/gs=\s*private\ IEdmModel\ GetEdmModel.*;\s*}
+regex/g=\s*endpoints\.Select\(\)\.Filter\(\)\.OrderBy\(\)\.Count\(\)\.MaxTop\(null\);
+regex/g=\s*endpoints\.MapODataRoute\("api", "api", GetEdmModel\(\), new DefaultODataBatchHandler\(\)\);
+regex/g=\s*endpoints\.EnableDependencyInjection\(\);
+regex/g=\s*\/\/\ Don't\ match\ paths\ which\ start\ with\ \/api\/ \(and return 404\)
+regex/gm=\s*\/\/endpoints\.MapFallbackToFile.*$
+regex/g=(\s*)endpoints\.MapFallbackToFile ¤ $1endpoints.MapApiNotFound();$1endpoints.MapFallbackToFile
+regex/g=\.AddControllersWithViews\([^)]*\) ¤ .AddControllersWithViews().AddLagoonPart<Main>()
+regex/g=\s*\.AddApplicationPart\(typeof\(LgApplication\)\.Assembly\)
+regex/g=\s*\/\/\ Required\ by\ OData\ lib
+regex/gs=(\s*#region\ OData\ support.*?)\s*#endregion ¤ $1
+regex/g=\s*#region\ OData\ support
+regex/g=\s*services\.AddOData\(\);
+regex/g=\s*services\.AddODataQueryFilter\(\);
+regex/g=\s*using\ Microsoft\.AspNet\.OData[^;]*;
+regex/g=\s*using\ Microsoft\.OData\.Edm;
+			]]>
+		</Action>
+	</Version>
+	<Version From="1.3.9">
+		<Action Type="Replace" File="Startup.cs">
+			<![CDATA[
+regex/g=AddLaggonApplication<Main> ¤ AddLagoonApplication<Main, ApplicationUser, ApplicationDbContext>
+			]]>
+		</Action>
+		<Action Type="Replace" File="*.cs">
+			<![CDATA[
+regex/g=ApiAuthorizationDbContext ¤ LgApplicationDbContext
+			]]>
+		</Action>
+	</Version>
+	<Version From="1.0.10">
+		<Action Type="Replace" File="Startup.cs">
+			<![CDATA[
+public static IConfiguration Configuration { get; private set; } ¤ private IConfiguration Configuration { get; set; }
+private static void BuildContext ¤ private static void BuildContext
+private static DatabaseConfig GetDbConfig ¤ private DatabaseConfig GetDbConfig
+			]]>
+		</Action>
+		<Action Type="Replace" File="Program.cs">
+			<![CDATA[
+CreateHostBuilder(args).Build().Run() ¤ CreateHostBuilder(args).Build().InitLagoonApplication().Run()
+			]]>
+		</Action>
+	</Version>
+	<Version From="1.0.9">
+		<Action Type="Replace" File="*.csproj">
+			<![CDATA[
+"Microsoft.AspNetCore.OData" Version="7.5.2" ¤ "Microsoft.AspNetCore.OData" Version="7.5.8"
+			]]>
+		</Action>
+		<Action Type="Replace" File="Startup.cs">
+			<![CDATA[
+// Keep a reference to the logger factory
+ApplicationManager.LoggerFactory = logger;
+			]]>
+		</Action>
+		<Action Type="Replace" File="Program.cs">
+			<![CDATA[
+logging.AddLagoonFileLogger(Startup.Configuration); ¤ logging.AddLagoonFileLogger(hostBuilderContext.Configuration);
+			]]>
+		</Action>
+	</Version>
+	<Version From="1.0.8">
+		<Action Type="Replace" File="Startup.cs">
+			<![CDATA[
+AddSingleton<Main> ¤ AddLaggonApplication<Main>
+regex=,\s*Main\ lgApp
+			]]>
+		</Action>
+		<Action Type="Replace" File="Program.cs">
+			<![CDATA[
+CreateHostBuilder(args).Build(); ¤ CreateHostBuilder(args).Build().InitLagoonApplication();
+			]]>
+		</Action>
+		<Action Type="Replace" File="Main.cs">
+			<![CDATA[
+regex/m=Main(\(IServiceScopeFactory.*)\ :\ base.*$ ¤ Main$1
+			]]>
+		</Action>
+	</Version>
+	<Version From="1.0.7">
+		<Action Type="Replace" File="Main.cs">
+			<![CDATA[
+void OnSignIn ¤ Task OnSignIn
+			]]>
+		</Action>
+	</Version>
+</Updates>

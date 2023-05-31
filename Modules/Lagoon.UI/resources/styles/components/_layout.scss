@@ -1,0 +1,54 @@
+﻿.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    header {
+        top: 0;
+        position: sticky;
+    }
+
+    footer {
+        bottom: 0;
+        position: sticky;
+    }
+
+    .content-main {
+        display: flex;
+    }
+
+    .content-page, .content-main {
+        flex-grow: 1;
+        overflow-y: hidden;
+    }
+
+    .sidebar-expanded {
+        display: flex;
+        width: $sidebar-width;
+    }
+
+    .sidebarCollapsed {
+        display: flex;
+        width: $sidebar-width-collapsed;
+    }
+}
+
+.content-page {
+    padding: 1rem;
+}
+
+.content-page-tabbed {
+    padding: 0;
+}
+
+.content-page.d-noHeader {
+    padding-top: 20px !important;
+}
+
+.navbar-vertical-fixed.d-noHeader {
+    top: 0px !important;
+}
+
+body {
+    overflow-x: hidden;
+}

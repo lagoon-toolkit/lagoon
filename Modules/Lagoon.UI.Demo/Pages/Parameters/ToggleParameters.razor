@@ -1,0 +1,55 @@
+﻿
+<LgTextBox CssClass="col-md-3 col-sm-12"
+           Label="#lblParamTxtOn"
+           @bind-Value="@TextOn"
+           OnChange="OnTextOnAsync" />
+<LgTextBox CssClass="col-md-3 col-sm-12"
+           Label="#lblParamTxtOff"
+           @bind-Value="@TextOff"
+           OnChange="OnTextOffAsync" />
+
+<LgSelect CssClass="@CssClass" Label="#lblParamTxtPos" ShowSearchBox=true @bind-Value="TextPosition" OnChange="OnChangeTextPositionAsync">
+    <Items>
+        @foreach (var position in Enum.GetValues(typeof(ToggleTextPosition)))
+        {
+            <LgOptionListItem Text="@(Enum.GetName(typeof(ToggleTextPosition), position))" Value="@((ToggleTextPosition)position)"></LgOptionListItem>
+        }
+    </Items>
+</LgSelect>
+
+@code {
+
+    [Parameter]
+    public string CssClass { get; set; }
+    [Parameter]
+    public string TextOn { get; set; }
+    [Parameter]
+    public string TextOff { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnChangeTextOnAsync { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnChangeTextOffAsync { get; set; }
+    
+    [Parameter]
+    public EventCallback<ToggleTextPosition> OnTextPositionEdition { get; set; }
+
+
+    public ToggleTextPosition TextPosition { get; set; } = ToggleTextPosition.Left;
+    public async Task OnTextOnAsync()
+    {
+        await OnChangeTextOnAsync.InvokeAsync(TextOn);
+    }
+    public async Task OnTextOffAsync()
+    {
+        await OnChangeTextOffAsync.InvokeAsync(TextOff);
+    }
+
+    public async Task OnChangeTextPositionAsync()
+    {
+        await OnTextPositionEdition.InvokeAsync(TextPosition);
+    }
+
+
+}

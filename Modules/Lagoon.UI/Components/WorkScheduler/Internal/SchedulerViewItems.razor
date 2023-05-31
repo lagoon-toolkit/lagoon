@@ -1,0 +1,52 @@
+@namespace Lagoon.UI.Components.WorkScheduler.Internal
+@inherits ComponentBase
+@typeparam TItem
+
+@foreach (var __groupRowField in Data)
+{
+    <div style=@($"height:{RowHeight}px;") class="wk-row" onclick="Lagoon.LgWorkScheduler.OnEmptyAreaClick(event, @__groupRowField.Key)"
+         data-row-id="@__groupRowField.Key">
+        @foreach (var __task in __groupRowField)
+        {
+            if (__task.To.HasValue)
+            {
+                @* Bar *@
+                double __width = WorkScheduler.GetTaskWidth(__task);
+                if (__width > 0)
+                {
+                    <div style=@($"width:{__width}px; line-height:{RowHeight - (WorkScheduler.PaddingRow * 2)}px; left:{WorkScheduler.GetTaskPosition(__task)}px; margin-top:{WorkScheduler.PaddingRow}px; margin-bottom:{WorkScheduler.PaddingRow}px; height:calc({RowHeight}px - {WorkScheduler.PaddingRow*2}px)")
+                         class="wk-bar"
+                         data-move=@WorkScheduler.GetDataMove(__task)
+                         @onmousedown="@(async () => await WorkScheduler.OnStartDragItemAsync(__task))">
+                        @if (WorkScheduler.SchedulerItems != null)
+                        {
+                            @WorkScheduler.SchedulerItems(__task)
+                        }
+                        else
+                        {
+                            @__task.ToString()
+                        }
+                    </div>
+                }
+            }
+            else
+            {
+                @* Milestone *@
+                <div style=@($"width:{RowHeight/2}px; height:{RowHeight/2}px; left:{WorkScheduler.GetTaskPosition(__task)-(RowHeight/4)}px; top:{RowHeight/4}px")
+                     class=@($"wk-milestone {(WorkScheduler.SchedulerItems == null ? WorkScheduler.DefaultJalonCssClass : "")}")
+                     data-move=@WorkScheduler.GetDataMove(__task)
+                     @onmousedown="@(async () => await WorkScheduler.OnStartDragItemAsync(__task))">
+                    @if (WorkScheduler.SchedulerItems != null)
+                    {
+                        @WorkScheduler.SchedulerItems(__task)
+                    }
+                </div>
+            }
+        }
+        <!-- Tested inside the LinkMilestones component but want to avoid a new Blazor component instanciation  -->
+        @if (WorkScheduler.JoinMilestone)
+        {
+            <LinkMilestones TItem=TItem Data=__groupRowField />
+        }
+    </div>
+}

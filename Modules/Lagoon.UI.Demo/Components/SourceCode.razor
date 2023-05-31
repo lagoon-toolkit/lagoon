@@ -1,0 +1,26 @@
+﻿@inherits LgComponentBase
+
+<LgFrame Title="Sources" Collapsable="true" @bind-Collapsed="_collapsed">
+    <Toolbar>
+        <LgButton CssClass="mb-2 d-inline-block float-right" Text="C# Code" IconName="@IconNames.All.FileCode"
+                  Kind="!_collapsed && _showCSharp ? ButtonKind.Primary : ButtonKind.Secondary"
+                  OnClick="() => ShowCode(true)" />
+        <LgButton CssClass="mb-2 d-inline-block float-right" Text="Blazor Code" IconName="@IconNames.All.FileCode"
+                  Kind="!_collapsed && !_showCSharp ? ButtonKind.Primary : ButtonKind.Secondary"
+                  OnClick="() => ShowCode(false)" />
+    </Toolbar>
+    <ChildContent>
+        <div @ref="_divCode">
+            <LgLoaderView IsLoading="_isLoading" Label="#loader-label">
+                @if (_showCSharp)
+                {
+                    <pre><code class="language-csharp">@SourceCodeProvider.CSharpContent</code></pre>
+                }
+                else
+                {
+                    <pre><code class="language-xml">@SourceCodeProvider.BlazorContent</code></pre>
+                }
+            </LgLoaderView>
+        </div>
+    </ChildContent>
+</LgFrame>

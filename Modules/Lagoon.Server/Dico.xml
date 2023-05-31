@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="" id="root">
+    <xsd:element name="string">
+      <xsd:complexType>
+        <xsd:attribute name="key" use="required" type="xsd:string"/>
+        <xsd:attribute id="fr-FR" name="fr" use="required" type="xsd:string" />
+        <xsd:attribute id="en-US" name="en" type="xsd:string" />
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+
+  <!-- Définition des libellés -->
+  <string key="GroupChoiceEmpty" fr="Le GroupChoice '{0}' doit posseder au moins un role" en="The GroupChoice '{0}' must contain at least one role" />
+  <string key="AuthenticationRequired" fr="L'utilisateur doit être authentifié pour choisir un groupe" en="User must be authenticated to choose a group" />
+  <string key="WinAuthNoUser" fr="[WindowAuthentication] Pas d'utilisateur trouvé dans HttpContext" en="[WindowAuthentication] No user found in HttpContext" />
+  <string key="InvalidLoginAttempt" fr="Utilisateur ou mot de passe invalide." en="Invalid login or password." />
+  <string key="AuthExUnknowUser" fr="[IdentitySource] Vous n'êtes pas autorisé à acceder à cette application." en="[IdentitySource] You are not allowed to use this application" />
+  <string key="AuthCustomRole" fr="Vous n'êtes pas autorisé à utiliser cette application." en="You are not authorized to use this application." />
+  <string key="AuthOneRoleAtLeast" fr="Vous n'êtes pas autorisé à utiliser cette application." en="You are not authorized to use this application."/>
+  <string key="AuthCantCreateUser" fr="[IdentitySource] Une erreur est survenue lors de la création de l'utilisateur" en="[IdentitySource] Unable to create user"/>
+  <string key="AuthCantAddUserRoles" fr="[IdentitySource] Une erreur est survenue lors de l'ajout ou la mise à jour des roles de l'utilisateur" en="[IdentitySource] Unable to add role to user"/>
+  <string key="AuthCantAddUserClaims" fr="[IdentitySource] Une erreur est survenue lors de l'ajout ou mise à jour des claims de l'utilisateur" en="[IdentitySource] Unable to add claims to user"/>
+  <string key="AuthCantDeleteUser" fr="Une erreur est survenue lors de la tentative de suppression de l'utilisateur" en="[IdentitySource] Unexpected error when deleting user"/>
+  <string key="AuthLogOutSucceeded" fr="Vous êtes maintenant déconnecté." en="You are now logged out."/>
+
+  <string key="lblNext" fr="Suivant" en="Next" />
+  <string key="lblLogIn" fr="Connecter" en="Log in" />
+  <string key="lblBnWindowConnect" fr="Window" en="Window" />
+  <string key="lblBtnSSOConnect" en="Use {0} authentication" fr="Utiliser l'authentification {0}" />
+  <string key="lblRememberMe" fr="Se rappeler de moi ?" en="Remember me ?"/>
+  <string key="lblLoginField" fr="Login" en="Login" />
+  <string key="lblPwdField" fr="Mot de passe" en="Password" />
+  <string key="lblLogIn" fr="Connecter" en="Log in" />
+  <string key="lblRegister" fr="Créer un compte" en="Create an account" />
+  <string key="lblForgotPassword" fr="Mot de passe oublié ?" en="Forgot password ?" />
+  <string key="lblLoginHeader" fr="formulaire d'authentification" en="Authentification form" />
+  <string key="lblGroupChoice" fr="Sélectionner un rôle" en="Select role" />
+  <string key="lblLoginErrors" fr="Liste d'erreur" en="Error list" />
+  <string key="lblWelcome" fr="Bienvenue" en="Welcome" />
+
+  <!-- MFA messages -->
+  <string key="lblMfaTitle" fr="Vous devez configurer un MFA pour accéder à l'application" en="You must configure MFA to complete login" />
+  <string key="lblMfaAuthStep" fr="Suivez les instructions ci dessous pour configurer le MFA" en="To use an authenticator app go through the following steps below" />
+  <string key="lblMfaAuthStepOne" fr="Téléchargez une application d'authentification à deux facteurs comme Microsoft Authenticator pour" en="Download a two-factor authenticator app like Microsoft Authenticator for" />
+  <string key="lblMfaAuthStepOne_And" fr="et" en="and" />
+  <string key="lblMfaAuthStepOne_Or" fr="ou" en="or" />
+  <string key="lblMfaAuthStepOne_OrGoogle" fr="ou Google Authenticator pour" en="or Google Authenticator for" />
+  <string key="lblMfaAuthStepTwo" fr="Scanner le QRCode ou entrer la clef " en="Scan the QR Code or enter this key " />
+  <string key="lblMfaAuthStepTwo_into" fr="dans votre application MFA. " en="into your two factor authenticator app. Spaces and casing do not matter." />
+  <string key="lblMfaAuthStepThree" fr="Une fois l'application paramétré, utilisez la pour générer un code unique et saisissez le dans la zone de confirmation ci-dessous." en="Once you have scanned the QR code or input the key above, your two factor authentication app will provide you with a unique code." />
+  <string key="lblMfaAuthStepFour" fr="Entrer le code de confirmation dans la zone de saisie ci dessus." en="Enter the code in the confirmation box below." />
+  <string key="lblMfaWriteCode" fr="Entrer votre code" en="Write your code here" />
+  <string key="lblMfaAuthCodeCheck" fr="Code de vérification" en="Verification Code" />
+  <string key="lblMfaAuthVerify" fr="Valider" en="Verify" />
+  <string key="lblMfaAuthApp" fr="Votre compte est protégé par une application d'authentification" en="Your login is protected with an authenticator app" />
+  <string key="lblMfaAuthAppCode" fr="Saisissez un code d'authentification ci-dessous" en="Enter your authenticator code below" />
+
+  <!-- Reset password page & message-->
+  <string key="msgResetPwdObject" fr="{0} - Changement de mot de passe" en="{0} - Reset password" />
+  <string key="msgResetPwdBody" fr="&lt;p&gt;Bonjour,&lt;/p&gt;&lt;p&gt;Veuillez cliquer sur le lien suivant pour changer votre mot de passe&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;{0}&quot;&gt;Changer mon mot de passe&lt;/a&gt;&lt;/p&gt;" en="&lt;p&gt;Hello,&lt;/p&gt;&lt;p&gt;Click on the link below to update your password:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;{0}&quot;&gt;Update password&lt;/a&gt;&lt;/p&gt;" />
+  <string key="lblResetPasswordLinkSended" fr="Un email contenant un lien de changement de mot de passe vous a été envoyé" en="An email with a link to change your password has been sent" />
+  <string key="lblResetPwdSuccess" fr="Votre mot de passe a été mis à jour" en="Your password has been successfully updated" />
+  <string key="lblResetPassword" fr="Réinitialiser mon mot de passe" en="Reset password" />
+  <string key="lblWrongPasswordConfirm" fr="Le mot de passe ne correspond pas" en="The password does not match the confirmed password." />
+  <string key="lblIdentifier" fr="Veuillez saisir votre identifiant" en="Please enter your identifier" />
+  <string key="lblPwdResetConfirm" fr="Un lien de changement de mot de passe vient de vous être envoyé sur votre adresse mail" en="A reset link as been sent to your email adress" />
+  <string key="lblActualPassword" fr="Mot de passe actuel" en="Actual password" />
+  <string key="lblNewPassword" fr="Nouveau mot de passe" en="New password" />
+  <string key="lblUpdatePassword" fr="Changez votre mot de passe" en="Update your password" />
+  <string key="lblUpdatePasswordConfirm" fr="Confirmer votre mot de passe" en="Confirm your password" />
+  <string key="lblUpdatePasswordSuccess" fr="Modification de votre mot de passe réussie" en="Password successfully updated" />
+  <string key="btnResetPwd" fr="Réinitialiser" en="Reset" />
+  <string key="btnUpdatePwd" fr="Mettre à jour" en="Update" />
+  <string key="btnReturnPwd" fr="Retour" en="Return" />
+  <string key="lblAuthErr" fr="Une erreur s'est produite. Contactez votre administrateur." en="An error occured. Please contact your administrator" />
+
+
+</root>

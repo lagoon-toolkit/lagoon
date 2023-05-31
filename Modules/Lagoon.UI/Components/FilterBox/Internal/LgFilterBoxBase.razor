@@ -1,0 +1,25 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@inherits LgComponentBase
+@typeparam TValue
+@typeparam TFilter
+
+<LgDropDown @bind-IsOpen="IsOpen" CssClass="@GetClassAttribute()" OnKeyUp="OnKeyUpAsync">
+    <ControlContent>
+        <a class="form-control" @attributes="GetTooltipAttributes(_summary, false)" tabindex="0">
+            <div>@_summary</div>
+        </a>
+    </ControlContent>
+    <DropDownContent Context="__isOpen">
+        @if (__isOpen)
+        {
+            <CascadingValue Value="this" IsFixed="true">
+                @GetFilterEditorContent()
+            </CascadingValue>
+            <span class="filterbox-buttons">
+                <LgButton IconName="@IconNames.All.FilterOff" Tooltip="#FilterBoxReset" Kind="ButtonKind.Secondary" OnClick="ResetAsync" />
+                <LgButton Text="#FilterBoxCancel" Kind="ButtonKind.Secondary" OnClick="Cancel" />
+                <LgButton Text="#FilterBoxValidate" OnClick="ValidateAsync" />
+            </span>
+        }
+    </DropDownContent>
+</LgDropDown>

@@ -1,0 +1,143 @@
+﻿$body-bg: #fff;
+
+/* Modify default bootstrap z-index to fix tooltip issue 
+    and modal under application header problem
+*/
+$zindex-modal-backdrop: 1080;
+$zindex-modal: 1090;
+$zindex-popover: 1100;
+$zindex-tooltip: 1110;
+
+/* brand colors */
+$primary: #117d9f;
+$secondary: white;
+$success: #51a351;
+$info: #2f96b4;
+$warning: #f89406;
+$danger: #bd362f;
+$theme-colors: ( primary: $primary, secondary: $secondary, success: $success, info: $info, warning: $warning, danger: $danger);
+
+$gray-base: #000;
+$gray-darker: lighten($gray-base,13.5%);
+$gray-dark: lighten($gray-base,20%);
+$gray: lighten($gray-base,33.5%);
+$gray-light: lighten($gray-base,46.7%);
+$gray-lighter: lighten($gray-base,93.5%);
+/*#region Général */
+
+$text-color: #495057;
+$link-color: darken(#428bca,6.5%);
+$link-hover-color: darken($link-color,15%);
+$link-hover-decoration: underline;
+$font-family-base: "Helvetica Neue",Helvetica,Arial,sans-serif;
+$font-size-base: 0.775rem;
+
+/*#region Menu */
+
+/*#region Navbar */
+$header-logo: "";
+$toolbar-logo: "";
+$header-height: 35px;
+$navbar-link-border-color: #0085AD;
+$dropdown-divider-bg: $navbar-link-border-color;
+$nav-divider-margin-y: 0.25rem;
+$navbar-dark-color: white;
+$nav-tabs-link-active-color: white;
+$navbar-default-link-hover-bg: $primary;
+$navbar-item-hover: #b1cdd6;
+$navbar-default-link-active-bg: $primary;
+$dropdown-spacer: 0;
+$dropdown-border-radius: 0;
+$dropdown-header-padding: 0 0.5rem;
+$banner-height: 0px; 
+$navbar-height: 75px; 
+$navbar-toolbar-height: $navbar-height;
+$navbar-small-toolbar-height: $navbar-height; 
+$navbar-logo-width: 123px; 
+$navbar-logo: url('');
+$navbar-logo-padding-top: 0px; 
+$navbar-padding-y: 0;
+$margin-global-left-right: 7px;
+$navbar-brand-font-size: 1rem;
+$banner-menu-font-size: 0.775rem; 
+$dropdown-padding-y: .50rem;
+$dropdown-bg: $primary;
+$dropdown-font-size: $banner-menu-font-size;
+$dropdown-header-color:#90c2d2; 
+$nav-link-padding-y: 0.1rem;
+$dropdown-min-width: fit-content !important;
+
+/*#region Sidebar */
+$sidebar-bg: #333;
+$sidebar-width: 10rem;
+$sidebar-width-collapsed: 2.8rem;
+$sidebar-menuItem-color: #fff;
+$sidebar-menuItemTitle-color: #0085AD;
+$sidebar-menuItemSeparator-color: 0085AD;
+
+/*#region Frame */
+$frame-primary-title-bg: $primary;
+$frame-primary-title-color: white;
+$frame-default-title-bg: #e8e8e8;
+$frame-default-title-color: $text-color;
+$frame-danger-title-bg: $danger;
+$frame-danger-title-color: white;
+$frame-info-title-bg: $info;
+$frame-info-title-color: white;
+$frame-success-title-bg: $success;
+$frame-success-title-color: white;
+$frame-warning-title-bg: $warning;
+$frame-warning-title-color: white;
+
+/*#region Toolbar */
+$toolbar-bg: white; 
+$toolbar-border-color: lightgrey;
+
+/*#region Datepicker*/
+$datepicker-bg: #fff;
+$border-radius-base: 4px;
+$dropdown-border: #ccc;
+$state-info-bg : #fff;
+$btn-primary-color: #fff;
+$btn-primary-bg: $primary;
+$btn-primary-border: darken($btn-primary-bg, 5%);
+$datepicker-dropdown-bg: $dropdown-border;
+
+/* Form elements */
+$input-font-size: $font-size-base;
+$btn-padding-x:0.3rem;
+$btn-padding-y:0.1rem;
+
+/* Select */
+$select-dropdown-value-max-height: 70px;
+$select2-arrow-width:20px;
+$select2-clear-link: false;
+
+/* GridView */
+$input-border-focus-color: #255FCC;
+
+/* Modal */
+$modal-xxl: 1600px !default;
+
+/* FilterBox */
+$filterbox-dropdown-max-height: 200px;
+$filterbox-dropdown-min-width: 100px;
+
+/* Tab unsaved change indicator */
+$unsavedchange-icon: 'All.Asterisk';
+$unsavedchange-color: orange;
+
+/* Highlight text */
+$txt-highlight: yellow;
+
+/* Inputs */
+$input-disabled-text-color: #777;
+//prefix-suffix
+$input-presuffix-text-color:$primary;
+$input-presuffix-size: .8rem;
+
+/* Timeline */
+$timelineBaseColor: lighten($primary, 55%);
+$timelineSecondaryColor: $secondary;
+$timelineValidated: $primary;
+$timelineAnimation: all .2s ease-in-out;

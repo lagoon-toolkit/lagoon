@@ -1,0 +1,42 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="Big Message" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgBigMessage IconName="@GetIcon()" Title="@GetTitle()" Description="@GetDescription()" />
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+
+    <!-- section Icon -->
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-3 d-flex justify-content-end" @bind-Value="@HaveIcon" Text="@(HaveIcon ? "With icon" : "Without icon")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <IconParameter CssClass="col-md-9" @bind-Icon="Icon" />
+    </section>
+
+    <!--section Title-->
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-3 d-flex justify-content-end" @bind-Value="@HaveTitle" Text="@(HaveTitle ? "With title" : "Without title")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <LgTextBox CssClass="col-md-9"
+                   Label="Title"
+                   PrefixType="InputLabelType.IconName"
+                   SuffixType="InputLabelType.IconName"
+                   @bind-Value="@TitleMessage"
+                   OnInput="OnUpdateTitle" />
+    </section>
+
+    <!-- section Description -->
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-3 d-flex justify-content-end" @bind-Value="@HaveDescription" Text="@(HaveDescription ? "With description" : "Without description")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <LgTextBox CssClass="col-md-9"
+                   Label="Description"
+                   PrefixType="InputLabelType.IconName"
+                   SuffixType="InputLabelType.IconName"
+                   @bind-Value="@Description"
+                   OnInput="OnUpdateDescription" />
+    </section>
+
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

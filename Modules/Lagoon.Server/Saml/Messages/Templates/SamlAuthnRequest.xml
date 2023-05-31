@@ -1,0 +1,7 @@
+﻿<samlp:AuthnRequest
+    ID="{ID}"
+    Version="2.0" IssueInstant="{IssueInstant}"
+    xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol">
+  <Issuer xmlns="urn:oasis:names:tc:SAML:2.0:assertion">{SpEntityId}</Issuer>
+  <samlp:NameIDPolicy Format="{NameIdFormat}" />
+</samlp:AuthnRequest>

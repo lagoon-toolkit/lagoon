@@ -1,0 +1,13 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@inherits LgComponentBase
+@typeparam TValue
+@typeparam TItemValue
+
+<LgCheckBox TValue="bool?"
+            Value="GetSelectAllState()"
+            Text=@("lblSelectAllParenthesis".Translate())
+            AllowIndeterminateState="true"
+            TextPosition="CheckBoxTextPosition.Right"
+            CheckBoxKind="CheckBoxKind.Check"
+            OnChange="ToggleSelectAllAsync"
+            CssClass="@($"select-all {(GetSelectAllState().Equals(true) ? "select-all-selected" : "")}")"/>

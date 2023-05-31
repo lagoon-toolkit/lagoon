@@ -1,0 +1,19 @@
+﻿@namespace Lagoon.UI.Components
+@using Lagoon.UI.Components.Internal
+@inherits LgCustomTabContainer
+
+
+<div class="@GetClassAttribute()">
+    <CascadingValue Value="this" IsFixed="true">
+        <LgTabContainerLoader>@ChildContent</LgTabContainerLoader>
+        <div class="lg-tab-header">
+            @BeforeHeaderContent
+            <LgTabContainerHeader AllowClose="AllowClose" AllowDragDrop="AllowDragDrop" ShowTabList="ShowTabList"
+                                  OnDropTab="DropTabAsync" OnPinTab="PinTab" />
+            @AfterHeaderContent
+        </div>
+    </CascadingValue>
+    @{ base.BuildRenderTree(__builder); }
+</div>
+
+

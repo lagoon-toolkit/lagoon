@@ -1,0 +1,205 @@
+﻿@namespace Lagoon.UI.Components
+@using Lagoon.UI.Components.Internal
+@using Lagoon.UI.GridView.Components.Internal
+@inherits LgBaseGridView
+@typeparam TItem
+
+@{
+#if DEBUG //TOCLEAN
+    if (_chronoCount > 0)
+    {
+        Lagoon.Helpers.Trace.ToConsole(this, $"ZZZ RENDER [{++_renderCount}] CHRONO ALREADY RUNNING !!!");
+    }
+    else
+    {
+        Lagoon.Helpers.Trace.ToConsole(this, $"ZZZ RENDER [{++_renderCount}] CHRONO START !");
+        _chrono.Reset();
+        _chrono.Start();
+    }
+    _chronoCount++;
+#endif
+
+    base.HeaderContent = ShowFiltersSummary == true ? (@<LgGridSummaryFilter GridView="this" />) : null;
+base.ChildContent = @<div id="gridview-@StateId" class="gridview-container @(WrapContent ? "" : "")" role="grid" aria-colcount="@GetVisibleColumnsNumber()"
+                          aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy" data-grouplvl="@_maxGroupLevel">
+    <LgGridCss @ref="GridViewCss" GridView="this" TItem="TItem"></LgGridCss>
+
+    @if (Features.HasFlag(GridFeature.Paging) && _data != null && PagerOnTop == true)
+    {
+        <LgAuthorizeView PolicyEdit="*" PolicyVisible="*" AllowAnnonymous="true">
+            <LgGridViewPager @key="ColumnsLayoutState" OnChange="OnPagerChangeAsync" OnPageSizeChangeAsync="OnPageSizeChangeAsync" CurrentPage="@PaginationState.CurrentPage"
+                             MaxPagesToDisplay="@PaginationButtonCount" PageSize="@PaginationState.PageSize" PaginationSizeSelector="@PaginationSizeSelector"
+                             TotalPages="@PaginationState.TotalPages" IsTotalPagesUnknown="@PaginationState.IsTotalPagesUnknown" DisableNextButton="@PaginationState.IsLastPage" DisplayInputPager="@((bool)DisplayInputPageSelector)" />
+        </LgAuthorizeView>
+    }
+    <CascadingValue Value="this" IsFixed="true">
+        <div role="presentation">
+            <div class="gridview-header-scroll" role="rowgroup">
+                <LgAuthorizeView PolicyEdit="*" PolicyVisible="*" AllowAnnonymous="true">
+                        @if (HeaderGroup)
+                        {
+                            <div class="gridview-row gridview-header-group" role="row">
+                                <div class="sr-only" role="rowheader" tabindex="-1">@("GridViewHeaderGroupRow".Translate())</div>
+                                @RenderColumns(_itemModel, GridRenderContext.HeaderGroup)
+                            </div>
+                        }
+                        <div class="gridview-row gridview-header @(ShowFilters ? "gridview-has-filter" : "")" role="row" ondragover="event.preventDefault();">
+                            <div class="sr-only" role="rowheader" tabindex="-1">@("GridViewHeaderRow".Translate())</div>
+                            @RenderColumns(_itemModel, GridRenderContext.Header)                            
+                        </div>
+                        @if (HasFilter)
+                        {
+                            <div class="gridview-row gridview-filter" role="row">
+                                <div class="sr-only" role="rowheader" tabindex="-1">@("GridViewFilterRow".Translate())</div>
+                                @RenderColumns(_itemModel, GridRenderContext.Filter)
+                            </div>
+                        }
+                </LgAuthorizeView>
+            </div>
+            <div class="gridview-body-container" role="rowgroup" aria-label="@("GridViewBodyRow".Translate())">
+                <LgLoaderView IsLoading="_data is null">
+                    <CascadingValue @key="ColumnsLayoutState" Value="GridRenderContext.Body" IsFixed="true">
+                        <CascadingValue Value="@_selectionState">
+                            <LgGridRowsManager RefreshState="RebuildRows" Data="_data" Columns="Columns" AddItem="_addItem" AddItemOnTop="AddItemOnTop.Value" />
+                        </CascadingValue>
+                    </CascadingValue>
+                </LgLoaderView>
+            </div>
+        </div>
+    </CascadingValue>
+    @*Columns calculations row*@
+    @if (HasCalculation)
+    {
+        <div class="gridview-calc-scroll" role="rowgroup">
+            <div class="gridview-row gridview-calc" role="row">
+                <div class="sr-only" role="rowheader" tabindex="-1">@("GridViewCalculationRow".Translate())</div>
+                @foreach (GridColumnState col in ColumnList.Where(c => c.Visible).OrderBy(c => c.Order))
+                {
+                    <div class="@col.GetCellCssClass() @((col.ColumnBoundType == GridColumnType.Numeric)  ? "gridview-col-num" : "")"
+                         role="gridcell" tabindex="-1" data-order="@col.Order">
+                        @if (CalculationValues.TryGetValue(col.UniqueKey, out object calculatedValue))
+                        {
+                            @if (col.HasPrefixSuffixValue())
+                            {
+                                <div class="grid-numeric-content">
+
+                                    @if (!string.IsNullOrEmpty(col.PrefixCalculation))
+                                    {
+                                        <span class="grid-numeric-prefix">
+                                            @if (col.PrefixCalculationType == InputLabelType.IconName)
+                                            {
+                                                <LgIcon IconName="@col.PrefixCalculation"></LgIcon>
+                                            }
+                                            else
+                                            {
+                                                @col.PrefixCalculation
+                                            }
+                                        </span>
+                                    }
+
+
+                                    @if (calculatedValue is IFormattable value)
+                                    {
+                                        <span class="grid-numeric-text text-truncate">@GetValueFormatted(value, col)</span>
+                                    }
+
+                                    else
+                                    {
+                                        <span class="grid-numeric-text text-truncate">@calculatedValue?.ToString()</span>
+                                    }
+
+                                    @if (!string.IsNullOrEmpty(col.SuffixCalculation))
+                                    {
+                                        <span class="grid-numeric-suffix">
+                                            @if (col.SuffixCalculationType == InputLabelType.IconName)
+                                            {
+                                                <LgIcon IconName="@col.SuffixCalculation"></LgIcon>
+                                            }
+                                            else
+                                            {
+                                                @col.SuffixCalculation
+                                            }
+                                        </span>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                if (calculatedValue is IFormattable value)
+                                {
+                                    <span class="text-truncate">@GetValueFormatted(value, col)</span>
+                                }
+                                else
+                                {
+                                    <span class="text-truncate">@calculatedValue?.ToString()</span>
+                                }
+                            }
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    @if (HasSelectedItems())
+    {
+        int _selectionCount = Selection.Count;
+        <CascadingValue Value="_selectionCount">
+            <LgActionPanel CssClass="gridview-action-toolbar" ToolbarButtonSize="Components.ButtonSize.Large">
+                <ActionContent>
+                    <LgLabel CssClass="my-auto" Text="@("GridViewLblNbrLinesSelect".Translate(_selectionCount))" />
+                </ActionContent>
+                <Toolbar>
+                    @ToolbarSelection
+                    <LgToolbarGroup>
+                        @if (Features.HasFlag(GridFeature.Delete) && IsEditable)
+                        {
+                            <LgToolbarButton OnClick="() => CommandClickAsync(LgGridSelectionColumn.DELETE_SELECTION_COMMAND, null)"
+                                             IconName="@IconNames.Delete"
+                                             Kind="@ButtonKind.Error"
+                                             ConfirmationMessage="@("GridViewDeleteConfirmation".Translate())" Text="@("GridViewLblDelete".Translate())"
+                                             PolicyEdit="*" PolicyVisible="*" />
+                        }
+                        <LgToolbarButton OnClick="() => OnRemoveAllSelectionAsync()" Text="@("GridViewLblCancel".Translate())" PolicyEdit="*" PolicyVisible="*" />
+                    </LgToolbarGroup>
+                </Toolbar>
+            </LgActionPanel>
+        </CascadingValue>
+    }
+
+    @if (Features.HasFlag(GridFeature.Paging) && _data != null && PagerOnTop != true)
+    {
+        <LgAuthorizeView PolicyEdit="*" PolicyVisible="*" AllowAnnonymous="true">
+            <LgGridViewPager @key="ColumnsLayoutState" OnChange="OnPagerChangeAsync" OnPageSizeChangeAsync="OnPageSizeChangeAsync" CurrentPage="@PaginationState.CurrentPage"
+                             MaxPagesToDisplay="@PaginationButtonCount" PageSize="@PaginationState.PageSize" PaginationSizeSelector="@PaginationSizeSelector"
+                             TotalPages="@PaginationState.TotalPages" IsTotalPagesUnknown="@PaginationState.IsTotalPagesUnknown" DisableNextButton="@PaginationState.IsLastPage" DisplayInputPager="@((bool)DisplayInputPageSelector)" />
+        </LgAuthorizeView>
+    }
+</div>;
+
+base.BuildRenderTree(__builder);
+
+<LgAuthorizeView PolicyEdit="*" PolicyVisible="*" AllowAnnonymous="true">
+    <LgColumnOptions @ref="_lgColumnOptions" Columns="@ColumnsOptions" DisplayedColumnsByOrder="@DisplayedColumnsByOrder"
+                     AllowFrozen="Features.HasFlag(GridFeature.Freeze)" AllowVisibility="Features.HasFlag(GridFeature.Visibility)"
+                     OnSave="OnSaveColumnsOptionsAsync">
+    </LgColumnOptions>
+    <LgGroupOptions @ref="_lgGroupOptions" Columns="@ColumnsOptions" GroupsByOrder="@GroupsByOrder" OnSave="OnSaveGroupOptionsAsync" />
+    <LgExportOptions @ref="_lgExportOptions" ExportProviderManager=@_exportProviderManager OnExport="ExportDataFromProviderAsync" />
+    <LgModal @ref="_lgModalProfiles" Title="@("GridViewAddProfileTitle".Translate())">
+        <ChildContent>
+            <LgEditForm @ref=_formProfile Model="_addProfileModel">
+                <LgTextBox Label="@("GridViewEnterNameProfile".Translate())" @bind-Value="@_addProfileModel.ProfileName" />
+                @if (SharedProfileManagement)
+                {
+                    <LgCheckBox @bind-Value="@_addProfileModel.IsSharedProfile" Label="@("GridViewIsSharedProfile".Translate())" PolicyVisible="@SharedProfileAdministratorPolicy" />
+                }
+            </LgEditForm>
+        </ChildContent>
+        <FooterContent>
+            <LgButton Text="@("GridViewAddProfileCancelBtn".Translate())" Kind="ButtonKind.Secondary" CssClass="btn-lg" OnClick=@_lgModalProfiles.CloseAsync />
+            <LgButton Text="@("GridViewAddProfileSaveBtn".Translate())" Kind="ButtonKind.Primary" CssClass="btn-lg" OnClick="OnSaveProfilesAsync" />
+        </FooterContent>
+    </LgModal>
+</LgAuthorizeView>
+}

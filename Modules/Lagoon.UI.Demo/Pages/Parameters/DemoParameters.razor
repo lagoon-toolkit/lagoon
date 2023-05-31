@@ -1,0 +1,67 @@
+﻿@inherits LgComponentBase
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <LgEditForm Model=@formData CssClass="content-form">
+        @if (HasText)
+        {
+            <LgTextBox CssClass="col-md-3 col-sm-12"
+            Label="Label"
+            PrefixType="InputLabelType.IconName"
+            SuffixType="InputLabelType.IconName"
+            @bind-Value="@Text"
+            OnChange="OnChangeTextAsync"/>
+         }
+
+        @if (HasDescription)
+        {
+            <LgTextBox CssClass="col-md-3 col-sm-12"
+            Label="Description"
+            PrefixType="InputLabelType.IconName"
+            SuffixType="InputLabelType.IconName"
+            @bind-Value="@Description"
+            OnChange="OnChangeDescriptionAsync"/>
+         }
+
+        @if (IsButtonType)
+        {
+            <LgSelect CssClass="col-md-3 col-sm-12" Label="Button Size" ShowSearchBox=true @bind-Value="ButtonSize" OnChange="OnChangeButtonSizeAsync">
+                <Items>
+                    @foreach (var size in Enum.GetValues(typeof(ButtonSize)))
+                        { <LgOptionListItem Text="@size.ToString()" Value="@((ButtonSize)size)"></LgOptionListItem> }
+                </Items>
+            </LgSelect>
+        }
+
+        @if(IsPagerType)
+        {
+            <LgNumericBox Label="Total number of pages" @bind-Value="Total" OnChange="OnChangeTotalAsync"></LgNumericBox>
+            <LgNumericBox Label="Current page" @bind-Value="Current" OnChange="OnChangeCurrentAsync"></LgNumericBox>
+            <LgNumericBox Label="Max page to display" @bind-Value="MaxPagesToDisplay" OnChange="OnChangeMaxPageToDisplayAsync"></LgNumericBox>
+        }
+
+
+        @if (HasIcons)
+        {
+            <IconParameter CssClass="col-md-3 col-sm-12" Icon="Icon" OnChange="OnChangeIconAsync"/>
+        }
+
+        @if (HasDisable)
+        {
+            <LgCheckBox OnChange="OnChangeDisableAsync" @bind-Value="@Disable" Text="@(Disable ? "Enable" : "Disable")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        }
+
+        @if (HasClosable)
+        {
+            <LgCheckBox OnChange="OnChangeClosableAsync" @bind-Value="@Closable" Text="@(Closable ? "Closable" : "Not closable")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        }
+
+        @if (HasShowable)
+        {
+            <LgCheckBox OnChange="OnChangeShowAsync" @bind-Value="@Show" Text="@(Show ? "Showable" : "Not showable")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        }
+
+        @if (HasReadonly)
+        {
+            <LgCheckBox OnChange="OnChangeReadonlyAsync" @bind-Value="@Readonly" Text="@(Show ? "Readonly" : "not readonly")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        }
+    </LgEditForm>
+</LgFrame>

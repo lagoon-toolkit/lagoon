@@ -1,0 +1,63 @@
+﻿// Breadcrumbs
+
+$breadcrumb-font-size: null;
+$breadcrumb-padding-y: .2rem;
+$breadcrumb-padding-x: .5rem;
+$breadcrumb-item-padding: .4rem;
+$breadcrumb-margin-bottom: 0.5rem;
+$breadcrumb-divider-color: $breadcrumb-text-color;
+$breadcrumb-active-color: null;
+$breadcrumb-divider: quote(" ");
+$breadcrumb-border-radius: 0;
+
+.breadcrumb {
+    color: $breadcrumb-text-color;
+    cursor: default;
+
+    a {
+        color: $breadcrumb-text-color;
+        border-bottom: solid 2px $breadcrumb-bg;
+        text-decoration: none;
+        &:hover {
+            border-bottom: solid 2px $breadcrumb-hover-color
+        }
+    }
+
+}
+
+.breadcrumb-item {
+
+    &.active {
+        color: $breadcrumb-active-text-color;
+    }
+
+    > * {
+        padding: 2px;
+        border: 2px solid $breadcrumb-bg;
+        border-radius: 3px;
+        outline: none;
+        display: inline-block;
+
+        &:focus-visible {
+            border: 2px solid $breadcrumb-focus-border-color;
+        }
+    }
+
+    > a:active {
+        border: 2px solid $breadcrumb-focus-border-color;
+    }
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    background: imageName($breadcrumb-divider-img, $breadcrumb-divider-color) no-repeat left center;
+    width: 1.5em;
+    height: 1.5em;
+    margin-top: 0.2rem;
+    margin-right: 0.5rem;
+}
+
+
+.breadcrumb-icon {
+    margin: -2px 0.3em auto 0;
+    font-size: 1.16em;
+}

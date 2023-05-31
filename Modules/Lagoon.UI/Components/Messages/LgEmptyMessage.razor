@@ -1,0 +1,17 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+
+<div class="@GetClassAttribute()">
+    <div>
+        <LgIcon CssClass="empty-msg-icon" IconName="@IconName" />
+        @if (!string.IsNullOrEmpty(_title))
+        {
+            <LgLabel Text="@_title" CssClass="empty-msg-title" />
+        }
+        @if (!string.IsNullOrEmpty(_description))
+        {
+            <LgLabel Text="@_description" CssClass="empty-msg-desc" />
+        }
+    </div>
+</div>
+

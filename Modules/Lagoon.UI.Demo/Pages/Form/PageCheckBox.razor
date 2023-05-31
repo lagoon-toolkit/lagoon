@@ -1,0 +1,57 @@
+﻿@inherits DemoPageForm
+
+<LgTitle Text="Chekbox & CheckboxList" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgEditForm @ref=formDemo Model=@formData ValidationErrorMessage="#ErrorFormDemo" UseValidationComplexModel="true">
+        <LgCheckBox CssClass="col-md-6 col-sm-12" @bind-Value="@formData.Check" Label="@Label" Text="Text" CheckBoxKind="CheckBoxKind.Check" TextPosition="@CheckBoxTextPosition" ReadOnly="@IsReadOnly" Disabled="@IsDisable" />
+
+        <LgCheckBox CssClass="col-md-6 col-sm-12" @bind-Value="@formData.Check" Label="@Label" Text="Text" CheckBoxKind="CheckBoxKind.Toggle" TextPosition="@CheckBoxTextPosition" ReadOnly="@IsReadOnly" Disabled="@IsDisable" />
+
+        <LgCheckBoxList CssClass="col-md-6 col-sm-12" ReadOnly="@IsReadOnly" Disabled="@IsDisable" Label="@Label"
+                        @bind-Value="formData.CheckBoxSelectedItems"
+                        CheckBoxKind="@CheckBoxType" TextPosition="@CheckBoxTextPosition"
+                        DisplayOrientation="@CheckBoxListOrientation">
+            <Items>
+                @foreach (var item in formData.CheckBoxListData)
+                {
+                    <LgCheckBoxListItem Text="@item.Text" Value="@item.Value" Disabled="@item.Disabled"></LgCheckBoxListItem>
+                }
+            </Items>
+        </LgCheckBoxList>
+    </LgEditForm>
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <CommonParameters CssClass="col-md-6" OnLabelEdition="OnChangeLabel" OnDisableEdition="OnChangeDisable" OnReadOnlyEdition="OnChangeReadOnly"></CommonParameters>
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <CheckboxParameters CssClass="col-md-6" OnCheckboxKindEdition="OnChangeKindCheckbox" OnTextPositionEdition="OnChangeTextPosition"></CheckboxParameters>
+    </section>
+
+    <!-- section checkbox list -->
+    <LgTitle Text="CheckboxList parameters" TitleLevel="TitleLevel.Level2" CssClass="col-md-12" />
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgSelect Label="Checkbox Kind" @bind-Value="CheckBoxType" CssClass="col-md-6">
+            <Items>
+                @foreach (var kind in Enum.GetValues(typeof(CheckBoxKind)))
+                {
+                    <LgOptionListItem Text="@(Enum.GetName(typeof(CheckBoxKind), kind))" Value="@((CheckBoxKind)kind)"></LgOptionListItem>
+                }
+            </Items>
+        </LgSelect>
+
+        <LgSelect Label="Display orientation" @bind-Value="CheckBoxListOrientation" CssClass="col-md-6">
+            <Items>
+                @foreach (var orientation in Enum.GetValues(typeof(DisplayOrientation)))
+                {
+                    <LgOptionListItem Text="@(Enum.GetName(typeof(DisplayOrientation), orientation))" Value="@((DisplayOrientation)orientation)"></LgOptionListItem>
+                }
+            </Items>
+        </LgSelect>
+    </section>
+
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

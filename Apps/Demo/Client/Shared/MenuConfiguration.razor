@@ -1,0 +1,50 @@
+﻿@inherits LgComponentBase
+@using Lagoon.UI.Demo.Pages;
+@using Lagoon.UI.Demo.Pages.BasicElements;
+
+<LgMenuConfiguration>
+    <MenuSetDeclarations>
+        <LgMenuSet Id="grpMain">
+            @if (!Navigation.IsTabbed)
+            {
+                <LgMenuItem Link="Lagoon.UI.Demo.Pages.Index.Link()" />
+            }
+            <LgMenuItem Link="PageShowcase.Link()" />
+            <LgMenuItem Text="#basicTitleHome" Link="LgPageElementBase.Link()" IconName="" />
+        </LgMenuSet>
+        <LgMenuSet Id="grpGlobalLinks">
+            <LgMenuItem Target="_blank" HideRootLevelText="false" Uri="https://lagoon-toolkit.com/" IconName="@(IconNames.All.Globe)" Text="#lgWS" />
+            <LgMenuItem Target="_blank" HideRootLevelText="false" Uri="https://doc.desirade.fr/?p=LagoonH-art~144" IconName="@(IconNames.All.FileText)" Text="#startLagoon" />
+        </LgMenuSet>
+        <LgMenuSet Id="grpTools">
+            <LgMenuItem Text="#current-language" HideRootLevelText="false">
+                <LgMenuItem IconName="@IconNames.All.FlagFr" OnClick=@(() => App.SetLanguage("fr-FR")) />
+                <LgMenuItem IconName="@IconNames.All.FlagEn" OnClick=@(() => App.SetLanguage("en-US")) />
+            </LgMenuItem>
+            <LgParameterMenuItem />
+            <LgAboutMenuItem />
+            <LgConnectMenuItem />
+        </LgMenuSet>
+        <LgMenuSet Id="grpNotifications">
+            <AuthorizeView Policy=@Policies.ContentReader>
+                <Authorized>
+                    <NotificationDemo />
+                </Authorized>
+            </AuthorizeView>
+        </LgMenuSet>
+    </MenuSetDeclarations>
+    <Menu>
+        <LgIncludeMenuSet Id="grpMain" />
+    </Menu>
+    <Sidebar>
+    </Sidebar>
+    <Toolbar>
+        @{#if DEBUG}
+        <LgDebugMenuItem />
+        @{#endif}
+        <LgIncludeMenuSet Id="grpGlobalLinks" />
+        <LgIncludeMenuSet Id="grpNotifications" />
+        <LgIncludeMenuSet Id="grpTools" />
+        @*<LgIncludeMenuSet Id="grpCompanyToolbarMenuSet" />*@
+    </Toolbar>
+</LgMenuConfiguration>

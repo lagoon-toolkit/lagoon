@@ -1,0 +1,129 @@
+﻿.frameRoot {
+    margin-bottom: 0.75rem;
+    margin-top: 0.25rem;
+    border: 1px solid $light1;
+
+    .frameContent {
+        background-color: $frame-bg;
+        padding: 0.5rem 1.3rem;
+        border-radius: 4px;
+    }
+
+    .frameHeader {
+        margin: 0px;
+        padding: 0.2rem 1rem;
+        border-radius: 4px;
+
+        .frame-item-icon {
+            margin-right: 0.6em;
+            width: 1.0rem;
+            height: 1.0rem;
+            color: $frame-text-color;
+        }
+
+        .frameCollapseIcon {
+            width: 1.0rem;
+            height: 1.0rem;
+
+            & .bi {
+                margin-bottom: 0.25rem;
+                color: $frame-text-color;
+            }
+        }
+
+        .frameCollapseIcon {
+            margin-right: auto;
+            color: $frame-text-color;
+        }
+
+        .lblTitle {
+            margin-right: 0.6em;
+            font-size: $frame-title-size;
+            color: $frame-text-color;
+        }
+
+        .headerFrameContent {
+            margin-left: 1.5rem;
+        }
+    }
+
+    .frameSummaryContent {
+        padding: 1rem 2rem;
+        background-color: $frame-bg;
+    }
+
+    .frameFooter {
+        background-color: $gray0;
+        padding: 0.25rem 1.25rem;
+        border-radius: 0 0 4px 4px;
+    }
+}
+
+.frame-primary {
+    .frameHeader {
+        background-color: white;
+        color: $frame-text-color;
+
+        ~ .frameContent {
+            /* styles to be applied to .second if a .first exists at the same node level */
+            padding-top: 0px;
+        }
+    }
+}
+
+.frame-default {
+    .frameHeader {
+        background-color: $secondary;
+        color: $frame-text-color;
+    }
+}
+
+.frame-danger {
+    .frameHeader {
+        background-color: $danger;
+        color: $light0;
+    }
+
+    .lblTitle {
+        color: $light0;
+    }
+}
+
+.frame-info {
+    .frameHeader {
+        background-color: $info;
+        color: $light0;
+    }
+
+    .lblTitle {
+        color: $light0;
+    }
+}
+
+.frame-success {
+    .frameHeader {
+        background-color: $success;
+        color: $light0;
+    }
+
+    .lblTitle {
+        color: $light0;
+    }
+}
+
+.frame-warning {
+    .frameHeader {
+        background-color: $warning;
+        color: $light0;
+    }
+}
+
+.side-tab-container .side-tab-nav {
+    & .frameHeader {
+        & .frameCollapseIcon {
+            position: absolute;
+            right: 1.6rem;
+            margin-left: 0.3rem;
+        }
+    }
+}

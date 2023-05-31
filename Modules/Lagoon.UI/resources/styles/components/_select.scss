@@ -1,0 +1,117 @@
+
+div.select-dropdown {
+    &.disabled {
+        button.dropdown-toggle {
+            cursor: unset;
+            user-select: text;
+        }
+    }
+
+    .dropdown-toggle::after {
+        display: none !important;
+    }
+
+    .dropdown.show {
+        &::after, &::before {
+            display: none;
+        }
+    }
+
+    div.select-dropdown-menu {
+        min-width: 100%;
+        position: fixed !important;
+
+        &.show {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .select-dropdown-search .input-searchbox .form-input > span.form-input-suffix {
+            top: 2px;
+        }
+    }
+
+    button.dropdown-toggle {
+        width: 100%;
+        text-align: left;
+        padding-bottom: 0;
+
+
+        &::after {
+            display: none;
+        }
+
+        .select-dropdown-content {
+            grid-template-columns: 1fr min-content;
+            display: grid;
+
+            .select-dropdown-value {
+                overflow: hidden auto;
+                max-height: $select-dropdown-value-max-height;
+
+                .select-element {
+                    max-width: 100%;
+                }
+
+            }
+
+            .select-element-remove {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .select-option-item {
+        display: flex;
+    }
+
+    .select-option-text, .select-element-text {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        flex: 1;
+    }
+
+    .select-option-tooltip {
+        color: $primary;
+    }
+
+    .select-reset-btn {
+        &:focus {
+            box-shadow: none !important;
+        }
+    }
+}
+
+.select-dropdown-multiple, .select-dropdown-simple {
+    .select-reset-btn {
+        margin-top: 0.35rem;
+        margin-right: 0.8rem;
+    }
+}
+
+
+.select-dropdown-item-list {
+    display: flex;
+    flex-direction: column;
+
+    .select-all {
+        // The "select all" is only visible if they're items in the list
+        display: none !important;
+        // We move it as first item
+        order: -1;
+    }
+    // The "select all" is only visible if they're items in the list
+    .select-option-item ~ .select-all {
+        display: flex !important;
+    }
+    // Messages are only visible when they're is no data found
+    .select-option-item ~ .empty-msg {
+        display: none;
+    }
+}
+
+.select-dropdown-content, .select-dropdown-value, cbo-ro {
+    // Fix svg chrome loading animation problem
+    background: inherit;
+}

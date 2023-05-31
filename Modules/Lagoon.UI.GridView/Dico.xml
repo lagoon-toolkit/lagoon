@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="" id="root">
+		<xsd:element name="string">
+			<xsd:complexType>
+				<xsd:attribute name="key" use="required" type="xsd:string"/>
+				<xsd:attribute id="fr-FR" name="fr" use="required" type="xsd:string"/>
+				<xsd:attribute id="en-US" name="en" type="xsd:string"/>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<!-- Définition des libellés -->
+	<string fr="Bonjour (fr) from Lagoon.UI.GridView" en="Hello (en) from Lagoon.UI.GridView" key="HelloChart"/>
+	<!-- Empty data -->
+	<string key="GridViewNoDataTitle" fr="Aucune donnée trouvée" en="No data found"/>
+	<string key="GridViewEmptyDesc" fr="Essayez de modifier le(s) filtre(s) pour trouver ce que vous recherchez" en="Try adjusting filter(s) to find what you are looking for"/>
+	<!-- Toolbar -->
+	<string key="GridViewColumnMenu" fr="Colonnes" en="Columns"/>
+	<string key="GridViewToogleFilter" fr="Filtres" en="Filters"/>
+	<string key="GridViewClearFilters" fr="Effacer" en="Clear"/>
+	<string key="GridViewClearFiltersLayout" fr="Effacer les filtres" en="Clear filters"/>
+	<string key="GridViewResetLayout" fr="Réinitaliser" en="Reset"/>
+	<string key="GridViewResizeColumns" fr="Ajuster les colonnes" en="Adjust Columns"/>
+	<string key="GridViewGroupOptions" fr="Regroupements" en="Groups"/>
+	<string key="GridViewAdd" fr="Ajouter" en="Add"/>
+	<string key="GridViewAddSave" fr="Ajouter" en="Add"/>
+	<string key="GridViewAddCancel" fr="Annuler" en="Cancel"/>
+	<string key="GridViewEdit" fr="Editer" en="Edit"/>
+	<string key="GridViewEditSave" fr="Sauver" en="Save"/>
+	<string key="GridViewEditCancel" fr="Annuler" en="Cancel"/>
+	<string key="GridViewAddTooltip" fr="Afficher la ligne d'ajout" en="Display add line"/>
+	<string key="GridViewAddSaveTooltip" fr="Ajouter la ligne" en="Add line"/>
+	<string key="GridViewAddCancelAddTooltip" fr="Annuler l'ajout" en="Cancel add"/>
+	<string key="GridViewEditTooltip" fr="Editer la ligne" en="Edit line"/>
+	<string key="GridViewEditSaveTooltip" fr="Sauver les modifications" en="Save modifications"/>
+	<string key="GridViewEditCancelTooltip" fr="Annuler les modifications" en="Cancel modifications"/>
+	<string key="GridViewProfiles" fr="Liste des profils - {0} selectionné" en="Profiles list - {0} selected"/>
+	<string key="GridViewProfileDisplayed" fr="" en=""/>
+	<string key="GridViewProfileDefault" fr="Profil par défaut" en="Default profile"/>
+	<string key="GridViewSharedProfile" fr="Profils partagés" en="Shared Profiles"/>
+	<string key="GridViewMyProfile" fr="Mes profils" en="My Profiles"/>
+	<!--ActionBar-->
+	<string key="GridViewLblNbrLinesSelect" fr="{0} ligne(s) sélectionnée(s)" en="{0} line(s) selected"/>
+	<string key="GridViewLblCancel" fr="Annuler" en="Cancel"/>
+	<string key="GridViewLblDelete" fr="Supprimer" en="Delete"/>
+	<!-- Confirmation -->
+	<string key="GridViewActionConfirmation" fr="Les données non enregistrées seront perdues. Voulez-vous continuer ?" en="Modifications not recorded will be lost. Do you want continue ?"/>
+	<string key="GridViewColumnOptions" fr="Colonnes..." en="Columns..."/>
+	<string key="GridViewDeleteConfirmation" fr="Êtes vous sûr de vouloir supprimer les lignes sélectionnées ?" en="Are you sure you want to delete the selected lines ?"/>
+	<!-- Pager -->
+	<string key="GridViewPageSelectorAria" fr="Nombre de ligne affichée" en="Displayed rows number"/>
+	<string key="GridViewPageSelectorAll" fr="Toutes" en="All"/>
+	<string key="GridViewPageSelectorCurrentPage" fr="Page courante" en="Current page"/>
+	<!-- Error -->
+	<string key="EditFormNullException" fr="La ligne d'ajout ou de mise à jour n'existe pas." en="Add or update line not exists."/>
+	<!-- Aria labels -->
+	<string key="GridViewFooterRow" fr="Pieds de grille" en="Grid footer"/>
+	<string key="GridViewHeaderRow" fr="Entête de grille" en="Grid header"/>
+	<string key="GridViewFilterRow" fr="Ligne des filtres" en="Filters row"/>
+	<string key="GridViewBodyRow" fr="Corps de la grille" en="Grid body"/>
+	<string key="GridViewHeaderGroupRow" fr="Sur-Entête de grille" en="Grid sub header"/>
+	<string key="GridViewCalculationRow" fr="Ligne des opérations de colonnes " en="Columns calculations row"/>
+	<string key="GridViewEditColumnTitle" fr="Edition" en="Edit"/>
+	<string key="GridViewCommandListTitle" fr="Liste de commandes" en="Commands list"/>
+	<string key="GridViewLoadingDataEnd" fr="Données chargées" en="Data loaded"/>
+	<string key="GridViewGroupHeader" fr="Bouton du regroupement de la colonne {0}" en="Group on column {0} button"/>
+	<string key="GridViewGroupLabel" fr="{0} : {1}" en="{0} : {1}"/>
+	<string key="GridViewGroupAriaLabel" fr="Regroupement = {0}" en="Group = {0}"/>
+	<string key="GridViewColumnMenuAria" fr="Gestion des colonnes" en="Columns management"/>
+	<string key="GridViewColumnVisibleAria" fr="Gestion de la position et visibilité" en="Display and position management"/>
+	<string key="GridViewExportOptionsAria" fr="Gestion des options de l'export" en="Export options management"/>
+	<string key="GridViewColumnResizeAria" fr="Ajuster la largeur des colonnes" en="Adjust columns widths"/>
+	<string key="GridViewGroupOptionsAria" fr="Gestion des regroupement de lignes" en="Rows groups management"/>
+	<string key="GridViewColumnResetAria" fr="Réinitialiser les colonnes" en="Reset columns"/>
+	<string key="GridViewToogleFilterOnAria" fr="Masquer la ligne de filtre" en="Hide filters row"/>
+	<string key="GridViewToogleFilterOffAria" fr="Afficher la ligne de filtre" en="Display filters row"/>
+	<string key="GridViewClearFiltersLayoutAria" fr="Réinitialiser les filtres" en="Reset filters"/>
+	<string key="GridViewRowAddedSr" fr="Ligne ajoutée" en="Line added"/>
+	<string key="GridViewRowSavedSr" fr="Ligne mise à jour" en="Line updated"/>
+	<string key="GridViewRowAdded" fr="Ligne ajoutée" en="Line added"/>
+	<string key="GridViewRowSaved" fr="Ligne mise à jour" en="Line updated"/>
+	<string key="GridViewCellSavedSr" fr="Donnée modifiée" en="Data updated."/>
+	<string key="GridViewCellSaved" fr="Donnée modifiée" en="Data updated."/>
+	<string key="GridViewAddLine" fr="Ligne d'ajout" en="Add line"/>
+	<string key="GridViewEditLine" fr="Ligne en édition" en="Update line"/>
+	<string key="GridViewCheckboxChecked" fr="Coché" en="Checked"/>
+	<string key="GridViewCheckboxUnchecked" fr="Décoché" en="Unchecked"/>
+	<string key="GridViewCheckboxIndeterminate" fr="Indéterminé" en="Indeterminate"/>
+	<string key="GridViewSelectionDeletedSr" fr="Ligne(s) supprimée(s)" en="Line(s) deleted"/>
+	<string key="GridViewSelectionDeleted" fr="Ligne(s) supprimée(s)" en="Line(s) deleted"/>
+	<!-- Profiles -->
+	<string key="GridViewAddProfileTitle" fr="Ajouter un nouveau profil" en="Add new profile"/>
+	<string key="GridViewEnterNameProfile" fr="Entrez le nom du nouveau profil" en="Enter the name of the new profile"/>
+	<string key="GridViewAddProfileCancelBtn" fr="Annuler" en="Cancel"/>
+	<string key="GridViewAddProfileSaveBtn" fr="Valider" en="Validate"/>
+	<string key="GridViewDefaultProfileName" fr="Profil par défaut" en="Default profile"/>
+	<string key="GridViewNewProfileBtn" fr="Nouveau profil" en="New profile"/>
+	<string key="GridViewRemoveProfileBtn" fr="Supprimer le profil &quot;{0}&quot;" en="Remove &quot;{0}&quot; profile"/>
+	<string key="GridViewErroAddProfileNameCannotBeNullOrEmpty" fr="Le nom de profil ne peut pas être nul ou vide" en="Profile name cannot be null or empty"/>
+	<string key="GridViewErroAddProfileNameAlreadyExists" fr="Le nom du profil existe déjà" en="Profile name already exists"/>
+	<string key="GridViewIsSharedProfile" fr="Profil partagé" en="Shared profile"/>
+	<string key="GridViewProfileOnRemoveConfirmationMsg" fr="Êtes-vous sûr de vouloir supprimer ce profil ?" en="Are you sure you want to remove this profile?"/>
+	<string key="GridViewProfileRemoveButtonTooltip" fr="Supprimer" en="Remove"/>
+	<string key="GridViewProfileRemoveButtonAria" fr="Supprimer le profil {0}" en="Remove {0} profile"/>
+	<string key="GridViewProfileOnSaveConfirmationMsg" fr="Êtes-vous sûr de vouloir enregistrer ce profil ?" en="Are you sure you want to save this profile?"/>
+	<string key="GridViewProfileSaveButtonTooltip" fr="Enregistrer" en="Save"/>
+	<string key="GridViewProfileSaveButtonAria" fr="Enregistrer dans le profil {0}" en="Save in {0} profile"/>
+	<!-- ExportOptions -->
+	<string key="ExportOptionsTitle" fr="Option d'export" en="Export options"/>
+	<string key="ExportOptionsExportBtn" fr="Exporter" en="Export"/>
+	<string key="ExportOptionsCancelBtn" fr="Annuler" en="Cancel"/>
+	<string key="ExportOptionsColumnsMode" fr="Colonnes" en="Columns"/>
+	<string key="ExportOptionsColumnsDisplayed" fr="Colonnes affichées uniquement" en="Only displayed columns"/>
+	<string key="ExportOptionsAllColumns" fr="Toutes les colonnes disponibles" en="All available columns"/>
+	<string key="ExportOptionsRowMode" fr="Lignes" en="Rows"/>
+	<string key="ExportOptionsFilteredRow" fr="Lignes filtrées uniquement" en="Filtered lines only"/>
+	<string key="ExportOptionsAllRow" fr="Toutes les lignes (sans filtres)" en="All lines (without filter)"/>
+	<string key="ExportOptionsProvider" fr="Type d'export" en="Export type"/>
+	<!-- Group management -->
+	<string key="GridViewGroupMng" fr="Gestion des groupes" en="Group management"/>
+	<string key="GridViewGroupExpand" fr="Déplier" en="Expand"/>
+	<string key="GridViewGroupExpandTooltip" fr="Déplier les groupes" en="Expand groups"/>
+	<string key="GridViewGroupCollapse" fr="Replier" en="Collapse"/>
+	<string key="GridViewGroupCollapseTooltip" fr="Replier les groupes" en="Collapse groups"/>
+	<string key="GridViewGroupClear" fr="Supprimer" en="Remove"/>
+	<string key="GridViewGroupClearTooltip" fr="Supprimer les groupes" en="Remove groups"/>
+</root>

@@ -1,0 +1,34 @@
+@namespace Lagoon.UI.Components.Internal
+@inherits LgFilterEditorBase<TValue, NumericFilter<TValue>>
+@typeparam TValue
+@typeparam TNullableValue
+
+<LgFilterTabContainer>
+    <TabRules>
+        <div class="filter-numeric">
+            @foreach (var numericItem in _filterValues)
+            {
+            <div class="input-group filter-numeric-item mb-1">
+                <div class="input-group-prepend">
+                    <LgButton Kind="ButtonKind.Secondary" ButtonSize="ButtonSize.Small" Text="@numericItem.FilterOperator.GetDisplayName()"
+                              CssClass="btn dropdown-toggle" data-toggle="dropdown" data-boundary="window" 
+                              aria-expanded="false" StopPropagation="true" aria-haspopup="true" role="menuitem" />
+                    <div class="dropdown-menu filter-sublist">
+                        @foreach (FilterNumericOperator valueOp in (numericItem.AllowedOperators?.ToArray() ?? typeof(FilterNumericOperator).GetEnumValues()))
+                        {
+                            <a class="dropdown-item d-flex" href="#" tabindex="-1" role="menuitem"
+                               @onclick="_ => SetOperator(numericItem, valueOp)" @onclick:preventDefault="true">@(LgNumericFilterEditor<TValue, TNullableValue>.GetOperatorLabel(valueOp))</a>
+                        }
+                    </div>
+                </div>
+                <LgNumericBox @bind-Value="@numericItem.Value" CssClass="filter-value" Placeholder="#FilterBoxNumericValuePlaceholder" />
+            </div>
+            }
+        </div>
+    </TabRules>
+    <TabSelection>
+        <LgLoaderView IsLoading="WorkingItems is null">
+            <LgSearchableList @ref="_searchableList" Items="WorkingItems" SelectedItems="_selectedValues" FormatValue="FilterBox.FormatFilterValue" FormatSearchValue="FormatSearchValue" />
+        </LgLoaderView>
+    </TabSelection>
+</LgFilterTabContainer>

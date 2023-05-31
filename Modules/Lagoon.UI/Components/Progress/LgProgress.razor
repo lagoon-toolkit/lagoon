@@ -1,0 +1,21 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgProgressBase
+
+<div class="@GetClassAttribute()">
+    @if (LabelPosition == ProgressLabelPosition.Left)
+    {
+        <span>@LabelRendering</span>
+    }
+    <div class="@GetProgressBarClass()"
+         style="width: @($"{ValuePercent}%")"
+         role="progressbar" aria-valuenow=@Value aria-valuemin=@Min aria-valuemax=@Max>
+        @if (LabelPosition == ProgressLabelPosition.Center)
+        {
+            <span>@LabelRendering</span>
+        }
+    </div>
+    @if (LabelPosition == ProgressLabelPosition.Right)
+    {
+        <span>@LabelRendering</span>
+    }
+</div>

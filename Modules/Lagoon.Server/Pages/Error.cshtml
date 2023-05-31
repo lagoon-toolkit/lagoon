@@ -1,0 +1,41 @@
+﻿@page
+@model Lagoon.Server.Pages.ErrorModel
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Server Error</title>
+    <link href="~/styles.css" rel="stylesheet" asp-append-version="true" />
+</head>
+
+<body>
+    <div id="blazor-error-ui" style="display: block;">
+        <div class="big-msg">
+            <h1 class="lblTitle">An unexpected error has occurred</h1>
+            <h2 class="lblTitle">Please contact an administrator.</h2>
+            @if (!string.IsNullOrEmpty(Model.RequestId))
+            {
+                <p>
+                    <strong>Request ID: </strong>
+                    @if (!string.IsNullOrEmpty(Model.RequestIdLink))
+                    {
+                        <a class="red" href="@Model.RequestIdLink">@Model.RequestId</a>
+                    }
+                    else
+                    {
+                        <span class="red" href="">@Model.RequestId</span>
+                    }
+                </p>
+            }
+            <a id="btnReload" href="@Url.Content("~/")">Reload</a>
+            <a id="btnDetail" href="./" onclick="document.getElementById('app-critical-detail').style.display = 'block';return false">Detail</a>
+            <div id="app-critical-detail">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

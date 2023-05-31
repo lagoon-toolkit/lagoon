@@ -1,0 +1,22 @@
+﻿.empty-msg .empty-msg-icon {
+    width: auto;
+    height: 4rem;
+    color: $color-title-empty-msg;
+    display: block;
+    margin: 0 auto 0.5rem auto;
+}
+
+.empty-msg .empty-msg-title {
+    font-size: $font-size-title-empty-msg;
+    color: $color-title-empty-msg;
+    line-height: $line-height-title-empty-msg;
+    font-weight: 500;
+    display: block;
+}
+
+.empty-msg .empty-msg-desc {
+    font-size: $font-size-base;
+    line-height: $line-height-title-empty-msg;
+    font-weight: 400;
+    display: block;
+}

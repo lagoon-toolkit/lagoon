@@ -1,0 +1,11 @@
+﻿@using Lagoon.UI.Components.Internal
+@namespace Lagoon.UI.Components
+@inherits LgGridBaseNoValueColumn
+
+@{
+#pragma warning disable BL0005 // Component parameter should not be set outside of its component.
+    State.HeaderCellContent = @<LgButton IconName="@IconNames.All.Check2Square" OnClick="HeaderSelectionChangedAsync" Kind="ButtonKind.Secondary" Disabled="DisableSelectAll" tabindex="-1"></LgButton>;
+
+#pragma warning restore BL0005 // Component parameter should not be set outside of its component.
+    base.BuildRenderTree(__builder);
+}

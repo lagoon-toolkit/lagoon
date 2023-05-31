@@ -1,0 +1,33 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgAriaComponentBase
+
+<div class="@GetClassAttribute()" role="group"  aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy">
+    <div class="d-flex header-finder">
+        <div class="mr-auto">
+            <LgTitle Text="@Title" CssClass="@TitleCssClass" TitleLevel="TitleLevel.Level1"/>
+        </div>
+        <div class="ml-auto" @onclick="@ToggleContentAsync">
+            <LgButton Text="@buttonLabel" Kind="ButtonKind.Link" />
+        </div>
+    </div>
+    @if (showFilters)
+    {
+        <div class="content-finder">
+            @FilterContent
+        </div>
+    }
+    else
+    {
+        <div class="d-flex header-results">
+            <div class="mr-auto">
+                <LgTitle Text="XX results /xx" TitleLevel="TitleLevel.Level2" />
+            </div>
+            <div class="ml-auto">
+                <LgButton Text="Select all" Kind="ButtonKind.Link" />
+            </div>
+        </div>
+        <div class="content-finder">
+            @ResultContent
+        </div>
+    }
+</div>

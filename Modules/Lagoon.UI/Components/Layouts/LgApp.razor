@@ -1,0 +1,14 @@
+﻿@using Lagoon.UI.Components.Internal
+@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+
+<CascadingValue Value="this" IsFixed="true">
+    <LgRouter>
+        <CascadingValue Value="@FooterContent">
+            <LgLayout IsTabbed="IsTabbed" ShowHeader="ShowHeader" ShowSidebar="ShowSidebar" ShowFooter="ShowFooter" />
+        </CascadingValue>
+    </LgRouter>
+    <CascadingAuthenticationState>
+        @ChildContent
+    </CascadingAuthenticationState>
+</CascadingValue>

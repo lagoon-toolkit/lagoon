@@ -1,0 +1,37 @@
+﻿@inherits DemoPageForm
+
+<LgTitle Text="DateBox" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgEditForm @ref=formDemo Model=@formData ValidationErrorMessage="#ErrorFormDemo" UseValidationComplexModel="true">
+        <LgTitle Text="Date picker" TitleLevel="TitleLevel.Level2" />
+        <LgDateBox CssClass="col-md-6 col-sm-12" Disabled="@IsDisable" ReadOnly="@IsReadOnly" OnChange="OnDateChange"
+                   Label="@Label" Placeholder="Date" @bind-Value="formData.Date2" Min="@DateMin" Max="@DateMax" />
+
+        <LgTitle Text="Month picker" TitleLevel="TitleLevel.Level2" />
+        <LgDateBox CssClass="col-md-6 col-sm-12" Disabled="@IsDisable" ReadOnly="@IsReadOnly" OnChange="OnDateChange"
+                   Label="@Label" Placeholder="Date" @bind-Value="formData.Date2" Min="@DateMin" Max="@DateMax" DateBoxKind="DateBoxKind.Month" />
+
+        <LgDateBox CssClass="col-md-6 col-sm-12" Label="Week picker" Disabled="@IsDisable" ReadOnly="@IsReadOnly" OnChange="OnDateChangeWeekPicker" @bind-Value="formData.Date2" DateBoxKind="DateBoxKind.Week"></LgDateBox>
+
+        <LgYearBox CssClass="col-md-6 col-sm-12" Label="Year picker" Disabled="@IsDisable" ReadOnly="@IsReadOnly" OnChange="OnDateChangeYearPicker" @bind-Value="formData.Year" />
+    </LgEditForm>
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <CommonParameters CssClass="col-md-6" OnLabelEdition="OnChangeLabel" OnDisableEdition="OnChangeDisable" OnReadOnlyEdition="OnChangeReadOnly"></CommonParameters>
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-3 d-flex justify-content-end" @bind-Value="@HaveMinDate" Text="@(HaveMinDate ? "With min date" : "Without min date")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <LgDateBox CssClass="col-md-6 col-sm-12" Label="Date min" Placeholder="Date" @bind-Value="DateMin" Disabled="@(!HaveMinDate)" />
+    </section>
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-3 d-flex justify-content-end" @bind-Value="@HaveMaxDate" Text="@(HaveMaxDate ? "With max date" : "Without max date")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <LgDateBox CssClass="col-md-6 col-sm-12" Label="Date max" Placeholder="Date" @bind-Value="DateMax" Disabled="@(!HaveMaxDate)" />
+    </section>
+</LgFrame>
+
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />
+

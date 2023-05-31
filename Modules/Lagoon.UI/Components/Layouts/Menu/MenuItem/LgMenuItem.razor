@@ -1,0 +1,67 @@
+﻿@namespace Lagoon.UI.Components
+@using Lagoon.UI.Components.Internal
+@inherits LgCustomMenuItem
+
+@if (HasSeparator && (!MenuRender?.HideSeparatorItems ?? true))
+{
+    <li class="mnu-sep"><div class="dropdown-divider"></div></li>
+}
+
+@{
+    RenderFragment GetItemContent()
+    {
+        if (CustomContent is null)
+        {
+            return @<LgComponentGroup>
+                @if (!string.IsNullOrEmpty(IconNameRendering))
+                {
+                    <div class="nav-item-icon"><LgIcon IconName="@IconNameRendering" /></div>
+                }
+                @if (!string.IsNullOrEmpty(TextRendering))
+                {
+                    <div class="nav-item-lbl"><span>@TextRendering</span></div>
+                }
+                @if (!string.IsNullOrEmpty(TagRendering))
+                {
+                    <div class="nav-item-tag">@TagRendering</div>
+                }
+            </LgComponentGroup>;
+}
+else
+{
+return CustomContent;
+}
+}
+}
+
+@if (ChildContent is null)
+{
+    // Display the item link
+    <li class="@GetNavItemCssClass(false)" role="presentation" @onclick="MenuItemClickAsync">
+        <LgNavLink CssClass="@GetNavLinkCssClass()"
+                   Uri="@UriRendering" Target="@Target"
+                   role="menuitem" aria-label="@AriaLabel.Translate()" tabindex="0"
+                   @attributes="LgComponentBase.GetTooltipAttributes(TextRendering, false, TooltipPosition.Right, !IsTextAsTooltipVisible())">
+            @GetItemContent()
+        </LgNavLink>
+    </li>
+}
+else
+{
+    // Level three or higher render not rendered. Only two level can be rendered
+    if (MenuRender?.IsSupportedLevel(Level) ?? true)
+    {
+        <li class="@GetNavItemCssClass(true)" role="presentation" @ref="ElementRef">
+            <a class="@GetDropdownToggleCssClass()" href="#" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false" aria-label="@AriaLabel.CheckTranslate()" tabindex="0" role="menuitem"
+               @attributes="LgComponentBase.GetTooltipAttributes(TextRendering, false, TooltipPosition.Right, !IsTextAsTooltipVisible())">
+                @GetItemContent()
+            </a>
+            <ul class="@GetDropDownMenuCssClassAttribute()">
+                <CascadingValue Value="this" IsFixed="true">
+                    @ChildContent
+                </CascadingValue>
+            </ul>
+        </li>
+    }
+}

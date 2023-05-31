@@ -1,0 +1,29 @@
+@namespace Lagoon.UI.Components.Internal
+@inherits ComponentBase
+@typeparam TItem
+
+@{
+    bool __isOpen = State.HasChildren && State.Expanded;
+}
+
+<li @onkeydown="OnKeyDown" @onkeydown:stopPropagation="true" class="@NodeClass(__isOpen)">
+    @if (State.HasChildren)
+    {
+        <LgIcon IconName="@(__isOpen ? IconNames.NodeExpanded : IconNames.NodeCollapsed)" OnClick="State.ToggleCollapseState" />
+    }
+    <div @onclick="NodeClickAsync" class="@NodeContentClass()">
+        @TreeView.NodeContent(State)
+    </div>
+    @if (__isOpen)
+    {
+        <ul>
+            @foreach (TreeNode<TItem> childNode in State.Children)
+            {
+                if (!childNode.Hidden)
+                {
+                    <LgTreeViewNode @key="childNode" State="childNode" />
+                }
+            }
+        </ul>
+    }
+</li>

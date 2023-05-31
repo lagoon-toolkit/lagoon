@@ -1,0 +1,51 @@
+@namespace Lagoon.UI.Components
+@using Lagoon.UI.Components.Input.Internal;
+@using Lagoon.UI.Components.Internal;
+@inherits LgInputRenderBase<bool>;
+
+
+@{
+    TextToggle =
+    @<LgComponentGroup>
+        <label class=@($"toggle-text {(IsRequired ? "mandatory" : "optional")}") @attributes=@LgComponentBase.GetTooltipAttributes(Tooltip, TooltipIsHtml) @onclick=OnClickTextAsync @onclick:preventDefault="true" @onclick:stopPropagation="true" for="@ElementId">
+            @Text.CheckTranslate()
+        </label>
+    </LgComponentGroup>;
+
+
+    Toggle = 
+    @<LgComponentGroup>
+        @if (!ReadOnly)
+        {
+            <div class="toggle" >
+                <input @ref="ElementRef" id="@ElementId" type="checkbox" checked="@CurrentValue" @onchange=OnValueChangeAsync @onchange:preventDefault="true" @onchange:stopPropagation="true" disabled="@Disabled" aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy" aria-required="@(IsRequired)" class="custom-control-input">
+                @if (TextPosition == ToggleTextPosition.Left)
+                {
+                    @TextToggle
+                }
+                <label for="@ElementId" class="toggle-inside-lbl">
+                    <span class="toggle-on">@TextOn.CheckTranslate()</span>
+                    <span class="toggle-off">@TextOff.CheckTranslate()</span>
+                </label>
+                @if (TextPosition == ToggleTextPosition.Right)
+                {
+                    @TextToggle
+                }
+            </div>
+        }
+        else
+        {
+            <label class="toggle-inside-lbl">
+            @if (CurrentValue)
+            {
+                @TextOn.CheckTranslate();
+            }
+            else
+            {
+                @TextOff.CheckTranslate();
+            } 
+            </label>
+        }
+    </LgComponentGroup>;
+    base.BuildRenderTree(__builder);
+}

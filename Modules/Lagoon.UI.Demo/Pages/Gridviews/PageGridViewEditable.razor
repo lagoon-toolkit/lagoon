@@ -1,0 +1,25 @@
+﻿@inherits DemoPage
+@using Lagoon.UI.Demo.Pages.Gridviews
+
+<div class="row">
+    <div class="col-10"><LgTitle Text="#grdEditionTitle" /></div>
+    <div class="col-2 text-right"><LgHyperlink Uri="@DocumentationLink()" Target="_blank"><LgButton Text="#lblDoc" /></LgHyperlink></div>
+</div>
+
+<LgGridView StateId="gvDemoEditable" Items="Data" TItem="GridViewData" Features="GridFeature.All" PaginationSizeSelector="@Pagination" EditMode="GridEditMode.Cell" AddItemOnTop="true">
+    <Columns Context="GridViewData">
+        <LgGridNumericColumn @bind-Value="GridViewData.Id" Title="Id" CanAdd="false" CanEdit="false" Resizable="false"></LgGridNumericColumn>
+        <LgGridColumn @bind-Value="GridViewData.Name" Title="#grdNameCol"  CanEdit="true" Resizable="false"></LgGridColumn>
+        <LgGridColumn @bind-Value="GridViewData.Surname" Title="#grdSurnameCol" CanEdit="true" Resizable="false"></LgGridColumn>
+        <LgGridDateColumn @bind-Value="GridViewData.BirthDate" CanAdd="false" Title="#grdBirthDateCol" CanEdit="false" DisplayFormat="dd/MM/yyyy" Resizable="false"></LgGridDateColumn>
+        <LgGridNumericColumn @bind-Value="GridViewData.Weight" Title="#grdWeightCol" CanEdit="true" Resizable="false"></LgGridNumericColumn>
+        <LgGridEnumColumn @bind-Value="GridViewData.HairColor" Title="#grdHairColorCol" CanEdit="true" Resizable="false"></LgGridEnumColumn>
+        <LgGridColumn @bind-Value="GridViewData.Mail" Title="#grdMailCol" CanEdit="true" Resizable="false"></LgGridColumn>
+        <LgGridColorColumn @bind-Value="GridViewData.FavoriteColor" Title="#grdFavColorCol" CanEdit="true" Resizable="false"></LgGridColorColumn>
+        <LgGridBooleanColumn @bind-Value="GridViewData.HasGlasses" Title="#grdGlassesCol" CanEdit="true" Resizable="false"></LgGridBooleanColumn>
+        <LgGridNumericColumn @bind-Value="GridViewData.PrefixSuffixGrid" Resizable="false" Title="#grdNumCol" CanEdit="false" PrefixType="InputLabelType.IconName" Prefix="@IconNames.About" SuffixType="InputLabelType.Text" Suffix="Texte"></LgGridNumericColumn>
+    </Columns>
+</LgGridView>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />
+

@@ -1,0 +1,9 @@
+﻿@inherits LgComponentBase
+<LgSelect CssClass="@CssClass" Label="Icon" ShowSearchBox=true Value="Icon" OnChange="OnChangeIconAsync">
+    <Items>
+        @foreach (var icon in _icons)
+        {
+            <LgOptionListItem @key="icon" Text="@icon.Label" Value="@icon.Value" />
+        }
+    </Items>
+</LgSelect>

@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="" id="root">
+    <xsd:element name="string">
+      <xsd:complexType>
+        <xsd:attribute name="key" use="required" type="xsd:string"/>
+        <xsd:attribute id="fr-FR" name="fr" use="required" type="xsd:string" />
+        <xsd:attribute id="en-US" name="en" type="xsd:string" />
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+
+  <!-- Définition des libellés -->
+  <string key="pgShowCase" fr="Vitrine" en="Showcase" />
+
+  <!-- ShowCase sideNavigation -->
+  <string key="sideTabUiComp" fr="Composants UI" en="UI Components" />
+  <string key="sideTabFormComp" fr="Composants Formulaire" en="Form components" />
+  <string key="calendar" fr="Calendrier" en="Calendar" />
+
+  <!-- Home -->
+  <!-- Components -->
+  <string key="componentTitleHome" fr="Les composants" en="Components" />
+  <string key="basicTitleHome" fr="Les éléments de base" en="Basics elements" />
+  <string key="linksTitleHome" fr="Les liens utiles" en="Useful links" />
+  <string key="sideTabStructureApp" fr="Structurer l'application" en="Structure the application" />
+  <string key="sideTabStructurePage" fr="Structurer les pages" en="Structure the pages" />
+  <string key="sideTabPresentationInfo" fr="Présenter l'information" en="Presenting the information" />
+  <string key="sideTabUserInteraction" fr="Intéragir avec l'utilisateur" en="Interacting with the user" />
+  <string key="sideTabFeedback" fr="Donner du feedback" en="Give feedback" />
+
+  <!-- Basics elements -->
+  <string key="colorPalette" fr="La palette de couleur" en="The color palette" />
+  <string key="TrackingLog" fr="Le journal de suivi" en="Tracking log" />
+  <string key="pgFontBook" fr="Polices" en="Font Book" />
+
+  <!-- Useful links -->
+  <string key="startLagoon" fr="Démarrer avec Lagoon" en="Start with Lagoon" />
+  <string key="releasenote" fr="Note des release" en="Release note" />
+  <string key="lgWS" fr="Le site web Lagoon" en="Lagoon's web site" />
+  <string key="desiradeWS" fr="Le site web Desirade" en="Desirade's web site" />
+  <string key="infotelWS" fr="Le site web Infotel" en="Infotel's web site" />
+
+  <!-- Labels -->
+  <string  key="DtgNoData" fr="Aucune données." en="No data."/>
+  <string  key="DtgFilterText" fr="Saisir une valeur..." en="Enter value..."/>
+  <string  key="DtgLoadingText" fr="Chargement des données..." en="Loading data..."/>
+  <string  key="DtgGroup" fr="Groupe" en="Group"/>
+  <string  key="DtgGroups" fr="Groupes" en="Groups"/>
+  <string  key="DtgPageSize" fr="Taille des pages" en="Page size"/>
+  <string  key="DtgDisplayedPage" fr="Page en cours" en="Current page"/>
+  <string  key="DtgFirstPage" fr="Première" en="First"/>
+  <string  key="DtgFirstPageTooltip" fr="Première page" en="First page"/>
+  <string  key="DtgLastPage" fr="Dernière" en="Last"/>
+  <string  key="DtgLastPageTooltip" fr="Dernière page" en="Last page"/>
+  <string  key="DtgPrevPage" fr="Précédente" en="Previous"/>
+  <string  key="DtgPrevPageTooltip" fr="Précédente page" en="Previous page"/>
+  <string  key="DtgNextPage" fr="Suivante" en="Next"/>
+  <string  key="DtgNextPageTooltip" fr="Page suivante" en="Next page"/>
+  <string  key="DtgClearFiltersLayout" fr="Vider les filtres" en="Clear filters"/>
+  <string  key="DtgAllPage" fr="Toute les pages" en="All pages"/>
+  <string  key="lblSetToReadOnly" fr="Champs en Readonly" en="ReadOnly all controls"/>
+  <string  key="lblSetToDisable" fr="Désactiver les champs" en="Disable all controls"/>
+  <string  key="lblSample" fr="Exemple" en="Sample"/>
+  <string  key="lblParameters" fr="Paramètres" en="Parameters"/>
+  <string  key="DtgSortExpressionExample" fr="Tri par Nom et prénom (SortExpression)" en="Name and surname sort (SortExpression)"/>
+  <string  key="lblDoc" fr="Documentation" en="Documentation"/>
+  <string  key="lblCopyPaste" fr="Boutons Copier / Coller" en="Copy and Paste buttons"/>
+  <string  key="lblCopyInformation" fr="Copie" en="Copy"/>
+  <string  key="lblCopyTextBox" fr="Champ textuel" en="Text value"/>
+  <string  key="lblCopyNumericBox" fr="Champ numérique" en="Numeric value"/>
+  <string  key="lblCopyDateBox" fr="Champ date" en="Date value"/>
+  <string  key="lblPasteTextBox" fr="Coller votre texte ici" en="Paste your text here"/>
+  <string  key="lblPasteInformation" fr="Coller" en="Paste"/>
+  <string  key="lblTitlePageTitle" fr="Exemple d'utilisation du composant Titre" en="Example of Title component"/>
+  <string  key="lblTitlePageActionPanel" fr="Exemple d'utilisation du composant ActionPanel" en="Example of ActionPanel component"/>
+  <string  key="lblTitle" fr="Titre de niveau 1" en="Title level 1"/>
+  <string  key="lblSubTitle" fr="Titre de niveau 2" en="Title level 2"/>
+  <string  key="lblPnlActionCustomTxt" fr="Zone personnalisable" en="Customizable area"/>
+  <string  key="lblSaveTostr" fr="Enregistrement effectué avec succès" en="Successfully registered"/>
+  <string  key="lblDeleteTostr" fr="Supprression effectuée avec succès" en="Successfully deleted"/>
+  <string  key="lblCancelTostr" fr="Annulation des modifications effectué avec succès" en="Successful cancellation of changes"/>
+  <string  key="lblSave" fr="Enregistrer" en="Save"/>
+  <string  key="lblDelete" fr="Supprimer" en="Delete"/>
+  <string  key="lblCancel" fr="Annuler" en="Cancel"/>
+  <string  key="lblDoc" fr="Documentation" en="Documentation"/>
+  <string  key="lblNumericTitleInt" fr="NumericBox avec un integer" en="NumericBox with int"/>
+  <string  key="lblNumericTitleDouble" fr="NumericBox avec un double" en="NumericBox with double"/>
+  <string key="lblNumberDecimal" fr="Nombre de décimales" en="Number of decimals"/>
+  <string key="lblNumberIncrementation" fr="Pas d'incrémentation" en="Increment step"/>
+  <string key="lblIncrementation" fr="Incrémentation" en="Incrementation"/>
+  <string key="lblMinSearchCharactere" fr="Nombre de caratères minimum avant la recherche" en="Number of characters before the search is started"/>
+  <string key="lblMaxItemsInView" fr="Nombre d'items par recherche" en="Number of items per result"/>
+  <string key="lblSeeAllParam" fr="Afficher tous les résultats ?" en="Display all elements?"/>
+  <string key="lblSearchNav" fr="Rechercher une page" en="Search page"/>
+
+  <!-- Progress -->
+  <string  key="frmProgressBarTitle" fr="Progress Bar" en="Progress Bar"/>
+  <string  key="frmProgressCircleTitle" fr="Circle Progress" en="Circle Progress"/>
+  <!-- Loader -->
+  <string  key="loader-title-inderterminated" fr="Chargement inderterminé" en="Indeterminated loader"/>
+  <string  key="loader-title-inderterminated-customrender" fr="Chargement inderterminé customisé" en="Custom indeterminated loader"/>
+  <string  key="loader-title-progression-bar" fr="Chargement progressif avec barre de progression" en="Loader with progression bar"/>
+  <string  key="loader-title-progression-circle" fr="Chargement progressif avec progression circulaire" en="Loader with circle progression"/>
+  <string  key="loader-title-progression-complex" fr="Chargement progressif avec sous taches" en="Loader with sub tasks"/>
+  <string  key="loader-text" fr="Données chargées" en="Data loaded"/>
+  <string  key="loader-label" fr="Données en cours de chargement" en="Wait data are loading"/>
+
+  <!-- Toolbar -->
+  <string  key="DtgToogleFilter" fr="Filtres" en="Filters"/>
+  <string  key="DtgResetLayout" fr="Réinitaliser" en="Reset"/>
+  <string  key="DtgExportCsv" fr="Export Csv" en="Csv export"/>
+
+  <!-- No data -->
+  <string key="DtgNoDataTitle" fr="Aucun résultat" en="No result found"/>
+  <string key="DtgNoDataDescription" fr="Essayez de modifier les filtres pour afficher ce que vous recherchez" en="Try adjusting filter(s) to find what you are looking for"/>
+
+  <!-- Notifications -->
+  <string  key="lblTitlePageNotif" fr="Notifications utilisateur" en="User notification"/>
+  <string  key="lblNotificationDesc" fr="Pour afficher les notifications, vous devez vous connecter à l'application." en="To display the notifications, you must log in to the application."/>
+
+  <!-- Errors labels -->
+  <string key="DtgNoColumns" fr="Aucune colonne n'est définie dans la grille {0}." en="No column in the datagrid {0}."/>
+  <string key="DtgNoField" fr="Un champ KeyField n'est pas définie." en="KeyField property is not defined."/>
+  <string key="DtgNoDataFunction" fr="La fonction de chargement des données GetData n'est pas définie." en="Load data function GetData not defined."/>
+  <string key="DtgRefreshDataLoop" fr="Le chargement des données prend trop de temps." en="Load data is too long."/>
+  <string key="DtgFieldNotDefined" fr="La propriété KeyField n'est définie sur la colonne {0}." en="KeyField property is not defined on column {0}."/>
+  <string key="DtgFieldExists" fr="La propriété KeyField existe déjà." en="KeyField property is already defined."/>
+
+  <!-- Page Forms -->
+  <string  key="lblColorPicker" fr="Couleurs" en="Color"/>
+
+  <!-- GridView -->
+  <string key="grdSimpleTitle" fr="GridView Simple" en="GridView Simple"/>
+  <string key="grdSimpleGridTitle" fr="Titre de la grille" en="The GridView title"/>
+  <string key="grdSelectionTitle" fr="GridView Selection" en="GridView Selection"/>
+  <string key="grdResizeTitle" fr="GridView Resize / Freeze / Move" en="GridView Resize / Freeze / Move"/>
+  <string key="grdPagingTitle" fr="GridView Paging" en="GridView Paging"/>
+  <string key="grdHeadersTitle" fr="GridView Headers" en="GridView Headers"/>
+  <string key="grdGroupingTitle" fr="GridView Grouping" en="GridView Grouping"/>
+  <string key="grdFilterTitle" fr="GridView Filter / Sort" en="GridView Filter / Sort"/>
+  <string key="grdExportTitle" fr="GridView Export" en="GridView Export"/>
+  <string key="grdEditionTitle" fr="GridView Edition" en="GridView Edition"/>
+  <string key="grdCardTitle" fr="GridView Style Card" en="GridView Style Card"/>
+  <string key="grdNameCol" fr="Nom" en="Name"/>
+  <string key="grdSurnameCol" fr="Prénom" en="Surname"/>
+  <string key="grdBirthDateCol" fr="Date de naissance" en="Birth date"/>
+  <string key="grdWeightCol" fr="Poids" en="Weight"/>
+  <string key="grdMailCol" fr="Email" en="Mail"/>
+  <string key="grdHairColorCol" fr="Couleur de cheveux" en="Hair color"/>
+  <string key="grdGlassesCol" fr="Lunettes ?" en="Glasses?"/>
+  <string key="grdNumCol" fr="Numérique" en="Numeric"/>
+  <string key="grdFavColorCol" fr="Couleur préférée" en="Favorite color"/>
+  <string key="grdGrpChar" fr="Caracteristiques" en="Characteristics"/>
+  <string key="grdGrpInfo" fr="Informations" en="Information"/>
+  <string key="grdBtnDelete" fr="Informations" en="Information"/>
+  <string key="grdBtnDone" fr="Marqué comme fait" en="Mark as done"/>
+  <string key="grdLblPage" fr="page(s)" en="page(s)"/>
+  <string key="grdLblRows" fr="Ligne(s) : {1} / {0}" en="Rows(s): {1} / {0}"/>
+  <string key="grdBlond" fr="Blond" en="Blond"/>
+  <string key="grdBrown" fr="Brun" en="Brown"/>
+  <string key="grdGinger" fr="Roux" en="Ginger"/>
+
+  <!--Parameters-->
+  <string key="lblDisabled" fr="Désactivé" en="Disabled"/>
+  <string key="lblReadOnly" fr="En lecture seule" en="Readonly"/>
+  <string key="lblSeparator" fr="Séparateur" en="Separator"/>
+  <string key="lblPrefix" fr="Préfixe" en="Prefix"/>
+  <string key="lblSuffix" fr="Suffixe" en="Suffix"/>
+
+  <!-- Toggle -->
+  <string key="lblParamTxtPos" fr="Position du texte" en="Text position"/>
+  <string key="lblParamTxtOn" fr="Texte on" en="On text"/>
+  <string key="lblParamTxtOff" fr="Text off" en="Off text"/>
+  <string key="lblTxtOn" fr="Actif" en="Active"/>
+  <string key="lblTxtOff" fr="Inactif" en="Inactive"/>
+
+  <!-- Search navigation -->
+  <string key="SearchNavigation" fr="Navigation par recherche" en="Search navigation"/>
+  <string key="lblHighlightText" fr="Surligner le texte trouvé" en="Highlight founded text"/>
+  <string key="lblModeFilterSearch" fr="Mode de recherche" en="Filter mode search"/>
+
+  <!-- LeaftLet -->
+  <string key="PanToNY" fr="Plan de NY" en="Pan To NY"/>
+  <string key="SetMaxBounds" fr="Définir les limites maximales" en="Set max bounds"/>
+  <string key="DisableMaxBounds" fr="Désactiver les limites maximales" en="Disable max bounds"/>
+  <string key="AddSearchControl" fr="Ajout d'une barre de recherche" en="Add Search Control"/>
+  <string key="AddOsrmRoutingControl" fr="Ajout d'un contrôle de routage Osrm" en="Add Osrm Routing Control"/>
+  <string key="AddMapBoxRoutingControl" fr="Ajout d'un contrôle de routage pour la carte" en="Add Map Box Routing Control"/>
+</root>

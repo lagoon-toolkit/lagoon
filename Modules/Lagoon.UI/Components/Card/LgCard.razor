@@ -1,0 +1,6 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+
+<div @ref="@ElementContentRef" class="@GetClassAttribute()" @attributes="GetAdditionalAttributes()" @onclick="OnCardClickAsync" @onclick:stopPropagation="StopPropagation">
+   @ChildContent
+</div>

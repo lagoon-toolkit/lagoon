@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <LagoonPriority>1</LagoonPriority>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    <LangVersion>10.0</LangVersion>
+    <Authors>Lagoon Toolkit team</Authors>
+    <Company>Lagoon Toolkit team</Company>
+    <Description>Lagoon AspNetCore shared module.</Description>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MessagePack.Annotations" Version="2.5.108" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lagoon.Core\Lagoon.Core.csproj" />
+  </ItemGroup>
+
+  <!-- Lagoon pre-build actions -->
+  <Import Project="..\LagoonPreBuild.targets" />
+
+</Project>
+

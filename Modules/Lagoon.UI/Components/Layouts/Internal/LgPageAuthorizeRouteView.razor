@@ -1,0 +1,24 @@
+﻿@namespace Lagoon.UI.Components.Internal
+
+<AuthorizeRouteView RouteData="RouteData" DefaultLayout="typeof(LgPageContext)">
+    <Authorizing>
+        @if (AppComponent?.Authorizing is null)
+        {
+            <DisplayAuthenticationStep Step="#AuthAuthorizing" />
+        }
+        else
+        {
+            @AppComponent.Authorizing
+        }
+    </Authorizing>
+    <NotAuthorized>
+        @if (AppComponent?.NotAuthorized is null)
+        {
+            <DisplayNotAuthorized AuthenticationState="context" />
+        }
+        else
+        {
+            @AppComponent.NotAuthorized(context)
+        }
+    </NotAuthorized>
+</AuthorizeRouteView>

@@ -1,0 +1,9 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@typeparam TItem
+@inherits LgGridRow<TItem>
+
+<div class="@GetClassAttribute() gridview-row-empty" role="row" style="@GetRowStyle()" aria-rowindex="0">
+    <CascadingValue Value="this" IsFixed="true">       
+        @GridView.RenderColumns(Item)
+    </CascadingValue>
+</div>

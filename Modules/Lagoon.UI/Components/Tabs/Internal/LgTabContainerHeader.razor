@@ -1,0 +1,62 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@inherits LgAriaComponentBase
+
+<LgButton IconName="@IconNames.CollapseH" CssClass="scrollTabPrevious" Tooltip="#lgTabPrevTabsTooltip" OnClick="OnClickScrollLeftAsync" />
+<ul @ref="ElementRef" class="nav nav-tabs flex-grow-1" ondragover="event.preventDefault();"
+    role="tablist" aria-label="@TabContainer.AriaLabel.CheckTranslate()" aria-labelledby="@TabContainer.AriaLabelledBy">
+    @{
+        var loaddedTabs = TabContainer.GetLoadedTabs();
+    }
+
+    @foreach (LgTabRenderData tab in loaddedTabs)
+    {
+        <li class="nav-item @tab.GetClassAttribute()" draggable="@IsDraggable(tab).ToString()"
+            @ondragover:preventDefault
+            ondragover="event.preventDefault();"
+            @ondragstart="(e) => HandleDragStart(e, tab.Key)"
+            @ondrop="async (e) => await HandleDropAsync(tab)" role="presentation">
+            <a class="nav-link @(tab.Disabled ? "disabled" :  "")"
+               href="@(tab.Uri ?? "#")"
+               @onclick="async () => await ChangeTabAsync(tab)"
+               @onclick:preventDefault="true" @onclick:stopPropagation="true"
+               onauxclick="event.preventDefault(); if(event.button == 1) $('.lg-tab-close', this).click();"
+               draggable="false" tabindex="0" @attributes="tab.GetButtonAdditionalAttributes(!App.BehaviorConfiguration.RgaaSupport, TabContainer.TooltipPosition)">
+                <LgIcon CssClass="icon-tab" IconName="@tab.IconName" />
+                <span class="lg-tab-text change-indicator">@tab.Title.CheckTranslate()</span>
+                @if (AllowClose && (!tab.Disabled) && tab.Closable)
+                {
+                    <span class="lg-tab-close" @onclick="@(async () => await CloseTabAsync(tab))" @onclick:preventDefault="true" @onclick:stopPropagation="true">
+                        <LgIcon IconName="@IconNames.All.X" />
+                    </span>
+                }
+            </a>
+        </li>
+
+    }
+</ul>
+<LgButton IconName="@IconNames.ExpandH" CssClass="scrollTabNext" Tooltip="#lgTabNextTabsTooltip" OnClick="OnClickScrollRightAsync" />
+@{
+    var _showTabList = ShowTabList && TabContainer.IsLoaded && TabContainer.TabDataList.Count > 0;
+}
+@if (_showTabList || Toolbar is not null)
+{
+    <div class="text-right p-0 pr-2 lg-tab-toolbar">
+        <LgToolbar> 
+            @if (_showTabList)
+            {
+                <LgToolbarMenu Kind="ButtonKind.Custom" Text="@(loaddedTabs.Any() ? loaddedTabs.Count().ToString() : null)" CssClass="lg-tab-toolbar-counter">
+                    @foreach (LgTabRenderData tab in loaddedTabs)
+                    {
+                        <LgToolbarButton Text="@tab.Title" IconName="@tab.IconName" OnClick="@(async () => await ChangeTabAsync(tab))" AriaLabel="@tab.AriaLabel" Tooltip="@tab.Tooltip" TooltipIsHtml="@tab.TooltipIsHtml" CssClass="@(tab.IsActive ? "active" : null)" />
+                    }
+                    @if (AllowClose)
+                    {
+                        <LgToolbarMenuItemSeparator />
+                        <LgToolbarButton Text="#lgTabToolbarCloseAllLbl" IconName="@IconNames.Close" OnClick="@CloseAllTabAsync" AriaLabel="#lgTabToolbarCloseAllTooltip" Tooltip="#lgTabToolbarCloseAllTooltip" />
+                    }
+                </LgToolbarMenu>
+            }
+            @Toolbar
+        </LgToolbar>
+    </div>
+}

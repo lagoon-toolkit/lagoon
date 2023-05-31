@@ -1,0 +1,41 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@inherits LgComponentBase
+@typeparam TValue
+@typeparam TItemValue
+
+@if (Select.Value is not null)
+{
+    @if (_loadState.IsLoading)
+    {
+        <LgSelectButtonLoading />
+    }
+    else if (_loadState.HasLoadingError)
+    {
+        <LgIcon IconName="@IconNames.Error" /><span>Err!</span>
+    }
+    else
+    {
+        if (Select.ReadOnly)
+        {
+            if (ReadOnlyContent is not null)
+            {
+                @ReadOnlyContent
+            }
+            else
+            {
+                @ChildContent
+            }
+        }
+        else
+        {
+            @ChildContent
+        }
+    }
+}
+else if (!String.IsNullOrEmpty(Select.Placeholder) && !Select.ReadOnly)
+{
+    <span class="select-placehoder">@Select.Placeholder</span>
+}else if(Select.Value is null && Select.ReadOnly)
+{
+     <span>@("emptyReadonlyValue".Translate())</span>
+}

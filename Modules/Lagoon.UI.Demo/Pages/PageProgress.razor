@@ -1,0 +1,88 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="Progress" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+
+<LgFrame Title="#lblSample">
+
+    <!-- Progress bar -->
+    <LgTitle Text="#frmProgressBarTitle" TitleLevel="TitleLevel.Level1" />
+
+    <LgTitle Text="With progression label" TitleLevel="TitleLevel.Level2" />
+    <LgProgress Value=Value Min="@MinValue" Max="@MaxValue" Kind=@Kind LabelPosition="@ProgressLabelPosition" Striped="@Stripped" Animated="@Animated"></LgProgress>
+    <br />
+
+    <LgTitle Text="With custom label" TitleLevel="TitleLevel.Level2" />
+    <LgProgress Value=Value Min="@MinValue" Max="@MaxValue" Kind=@Kind LabelPosition="@ProgressLabelPosition" Striped="@Stripped" Animated="@Animated" Label="@Label"></LgProgress>
+    <br />
+
+    <!-- Progress circle -->
+    <LgTitle Text="#frmProgressCircleTitle" TitleLevel="TitleLevel.Level1" />
+
+    <div class="d-flex align-items-start">
+        <div class="d-inline-block mx-3">
+            <LgTitle Text="With progression label" TitleLevel="TitleLevel.Level2" />
+            <LgCircleProgress Value=Value Min="@MinValue" Max="@MaxValue" KindAutoSuccess="@KindAutoSuccess" Kind="@Kind" />
+        </div>
+
+        <div class="d-inline-block mx-3">
+            <LgTitle Text="With custom label" TitleLevel="TitleLevel.Level2" />
+            <LgCircleProgress Value=Value Min="@MinValue" Max="@MaxValue" KindAutoSuccess="@KindAutoSuccess" Kind="@Kind" Label="@Label" />
+        </div>
+
+        <div class="d-inline-block mx-3">
+            <LgTitle Text="Circle Progress with intermediate warning state and final error state" TitleLevel="TitleLevel.Level2" />
+            <LgButton Text="Load progress error" OnClick="MyTaskWithErrorAsync" CssClass="my-3" />
+            <LgCircleProgress Value=ValueError Min="@MinValue" Max="@MaxValue" Kind="@KindError" />
+        </div>
+    </div>
+
+    <br />
+    <LgButton Text="Reload" OnClick="RunAllTasksAsync" CssClass="mt-3" />
+
+</LgFrame>
+
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <!-- section label -->
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgTextBox CssClass="col-md-6 col-sm-6"
+                   Label="Label"
+                   @bind-Value="@Label"
+                   OnInput="OnUpdateLabel" />
+    </section>
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <KindParameter CssClass="col-md-6" OnKindEdition="OnChangeKind"></KindParameter>
+    </section>
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgSelect CssClass="col-md-6" Label="Progress Label Position" @bind-Value="ProgressLabelPosition">
+            <Items>
+                @foreach (var position in Enum.GetValues(typeof(ProgressLabelPosition)))
+                {<LgOptionListItem Text="@(Enum.GetName(typeof(ProgressLabelPosition), position))" Value="@((ProgressLabelPosition)position)"></LgOptionListItem>}
+            </Items>
+        </LgSelect>
+    </section>
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgNumericBox CssClass="col-md-6 col-sm-12" Label="Min progress value" @bind-Value="@MinValue" />
+        <LgNumericBox CssClass="col-md-6 col-sm-12" Label="Max progress value" @bind-Value="@MaxValue" />
+    </section>
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox @bind-Value="@Stripped" Text="@(Stripped ? "Stripped" : "Not stripped")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <LgCheckBox @bind-Value="@Animated" Text="@(Animated ? "Animated" : "Not animated")" CheckBoxKind="@CheckBoxKind.Toggle" />
+    </section>
+
+    <LgTitle Text="LgCircleProgress parameters" TitleLevel="TitleLevel.Level2" CssClass="mt-3" />
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox @bind-Value="@KindAutoSuccess" Text="@(KindAutoSuccess ? "With kindAutoSuccess" : "Without kindAutoSuccess")" CheckBoxKind="@CheckBoxKind.Toggle" />
+    </section>
+</LgFrame>
+
+<LgButton Text="Reload" OnClick="RunAllTasksAsync" />
+
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

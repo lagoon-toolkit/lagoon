@@ -1,0 +1,25 @@
+﻿<section class="d-flex align-items-center col-md-12">
+    <LgSelect CssClass="@CssClass" Label="Orientation" ShowSearchBox=true @bind-Value="Orientation" OnChange="OnChangeOrientationAsync">
+        <Items>
+            @foreach (var orientation in Enum.GetValues(typeof(DisplayOrientation)))
+            {<LgOptionListItem Text="@(Enum.GetName(typeof(DisplayOrientation), orientation))" Value="@((DisplayOrientation)orientation)"></LgOptionListItem>}
+        </Items>
+    </LgSelect>
+</section>
+
+@code {
+
+    public DisplayOrientation Orientation { get; set; } = DisplayOrientation.Vertical;
+
+    [Parameter]
+    public string CssClass { get; set; }
+
+    [Parameter]
+    public EventCallback<DisplayOrientation> OnOrientationEdition { get; set; }
+
+
+    public async Task OnChangeOrientationAsync()
+    {
+        await OnOrientationEdition.InvokeAsync(Orientation);
+    }
+}

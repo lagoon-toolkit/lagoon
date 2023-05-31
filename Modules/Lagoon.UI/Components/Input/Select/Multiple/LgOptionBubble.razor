@@ -1,0 +1,21 @@
+﻿@inherits LgComponentBase
+@namespace Lagoon.UI.Components.Internal
+@typeparam TItemValue
+
+<div class="select-element d-flex" title="@Tooltip" tabindex="-1" aria-selected="true" role="option">
+    @if (!String.IsNullOrEmpty(IconName))
+    {
+        <div class="select-element-icon">
+            <LgIcon IconName="@IconName" />
+        </div>
+    }
+    <!-- todo rgaa -->
+    <div class="select-element-text" @onclick="OnClickAsync" @onclick:stopPropagation="true">
+        @Text
+    </div>
+    @if (!IsReadOnly)
+    {
+        <!-- todo dico + Tooltip + arialabel + rgaa -->
+        <LgButton IconName="@IconNames.Close" CssClass="select-element-remove" Kind="ButtonKind.Custom" OnClick="() => OnRemoveAsync()" tabindex="-1" StopPropagation="true" />
+    }
+</div>

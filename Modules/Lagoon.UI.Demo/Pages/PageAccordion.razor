@@ -1,0 +1,25 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="Accordion" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgAccordion>
+        <LgAccordionPane Title="TITRE 1">
+            <HeaderContent>Subtitle 1</HeaderContent>
+            <ChildContent>Content</ChildContent>
+        </LgAccordionPane>
+
+        <LgAccordionPane Title="TITRE 2">
+            <HeaderContent>Subtitle 2</HeaderContent>
+            <ChildContent>Content</ChildContent>
+        </LgAccordionPane>
+
+        <LgAccordionPane Title="TITRE 3">
+            <HeaderContent>Subtitle 3</HeaderContent>
+            <ChildContent>Content</ChildContent>
+        </LgAccordionPane>
+    </LgAccordion>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

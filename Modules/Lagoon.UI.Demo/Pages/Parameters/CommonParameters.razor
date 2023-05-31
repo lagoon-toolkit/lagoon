@@ -1,0 +1,49 @@
+﻿
+<section class="d-flex align-items-center col-md-12">
+    <LgCheckBox CssClass="col-md-2 d-flex justify-content-end" OnChange="OnUpdateDisable" @bind-Value="@IsDisabled" Text="#lblDisabled" CheckBoxKind="@CheckBoxKind.Toggle" TextPosition="CheckBoxTextPosition.Right" />
+    <LgCheckBox CssClass="col-md-2 d-flex justify-content-end" OnChange="OnUpdateReadOnly" @bind-Value="@IsReadOnly" Text="#lblReadOnly" CheckBoxKind="@CheckBoxKind.Toggle" TextPosition="CheckBoxTextPosition.Right" />
+    <LgTextBox CssClass="@CssClass" Label="Label" PrefixType="InputLabelType.IconName" SuffixType="InputLabelType.IconName" @bind-Value="@Label" OnChange="OnUpdateLabel" />
+</section>
+
+@code {
+
+    #region Parameters
+
+    [Parameter]
+    public string CssClass { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnLabelEdition { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnDisableEdition { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnReadOnlyEdition { get; set; }
+
+    #endregion
+
+
+    #region common Parameters
+
+    public bool IsDisabled { get; set; } = false;
+    public bool IsReadOnly { get; set; } = false;
+    public string Label { get; set; } = "label";
+
+    public async Task OnUpdateLabel()
+    {
+        await OnLabelEdition.InvokeAsync(Label);
+    }
+
+    public async Task OnUpdateDisable()
+    {
+        await OnDisableEdition.InvokeAsync(IsDisabled);
+    }
+
+    public async Task OnUpdateReadOnly()
+    {
+        await OnReadOnlyEdition.InvokeAsync(IsReadOnly);
+    }
+
+    #endregion
+}

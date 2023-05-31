@@ -1,0 +1,31 @@
+﻿@page
+@model Lagoon.Server.Areas.Identity.Pages.Account.LoginWithMfaModel
+
+<div class="login-with-mfa">
+    <h1 class="title-authent">@("lblMfaAuthApp".Translate())</h1>
+    <h1 class="text-center sub-title-authent">@("lblMfaAuthAppCode".Translate())</h1>
+
+    <form method="post" class="form-mfa-submit" asp-route-returnUrl="@Model.ReturnUrl">
+        <input asp-for="RememberMe" type="hidden" />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group input-without-lbl">
+            <label asp-for="Input.TwoFactorCode" class="mfa-verif-code-label">@("lblMfaAuthCodeCheck".Translate())</label>
+            <input asp-for="Input.TwoFactorCode" class="form-control" autocomplete="off" placeholder="@("lblMfaWriteCode".Translate())" />
+            <span asp-validation-for="Input.TwoFactorCode" class="text-danger"></span>
+        </div>
+        @*  We don't want to offer the possibility to remember the browser to bypass the MFA process
+        <div class="form-group">
+            <div class="custom-control  d-block custom-checkbox custom-control-right ">
+                <input asp-for="Input.RememberMachine" class="custom-control-input" />
+                <label asp-for="Input.RememberMachine" class="custom-control-label optional">
+                    @($"lblRememberMe".Translate())
+                </label>
+            </div>
+        </div>
+        *@
+        <div class="text-center form-group">
+            <button type="submit" class="btn btn-secondary">@("lblLogIn".Translate())</button>
+        </div>
+    </form>
+</div>
+

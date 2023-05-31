@@ -1,0 +1,1 @@
+Place in this folder Javascript files that will be minimized to ~/main.min.js

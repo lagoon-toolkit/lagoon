@@ -1,0 +1,69 @@
+﻿@namespace Lagoon.UI.Components.WorkScheduler.Internal.Timelines
+@inherits ComponentBase
+@typeparam TItem
+
+<div style="position:relative;">
+@{
+    DateTime __current = WorkScheduler.From.Value;
+    double __monthLeft = 0;
+    bool __alternanceDay = true;
+    bool __alternanceMonth = true;
+    bool __displayTwoRow = WorkScheduler.TimelineDisplayMode == TimelineDisplayMode.TwoRows;
+    while (__current < WorkScheduler.To.Value)
+    {
+        double __dayLeft = 0;
+        int __currentMonth = __current.Month;
+        int __days = GetDisplayDays(__current.Year, __current.Month);
+        int __weekendCount = LgWorkScheduler<TItem>.NbWeekend(__current.Year, __current.Month);
+        if (!WorkScheduler.ShowWeekend) __days -= __weekendCount; 
+        double __monthWidth = __days * 24 * WorkScheduler.ZoomLevel;
+        <div style=@($"width:{__monthWidth}px; position:absolute; left:{__monthLeft}px") class=@(__alternanceMonth ? "wst-group-primary" : "wst-group-secondary")>
+            @{__monthLeft += __monthWidth;}
+            @if (__displayTwoRow)
+            {
+                <div style="width:100%;" class="wst-group">
+                    <div class="m-0 p-0 d-inline-block">
+                        @if (WorkScheduler.TimelineFirstLevel != null)
+                        {
+                            @WorkScheduler.TimelineFirstLevel(__current)
+                        }
+                        else
+                        {
+                            @($"{"MonthNames".Translate().Split(",")[__current.Month-1]} {__current.Year}")
+                        }
+                    </div>
+                </div>
+            }
+            @do
+            {
+                bool isWeekend = LgWorkScheduler<TItem>.IsWeekend(__current);
+                if (WorkScheduler.ShowWeekend || (!WorkScheduler.ShowWeekend && !isWeekend))
+                {
+                    <div style=@($"position:absolute; width:{24 * WorkScheduler.ZoomLevel}px; height:{(__displayTwoRow ? "auto" : $"{WorkScheduler.TimelineHeight}px")}; left:{__dayLeft}px") class=@($"wst {(IsToday(__current) ? "wst-today" : "")} {(__alternanceDay ? "wst-primary" : "wst-secondary")} {(isWeekend ? "wst-weekend-highlight" : "")}")>
+                        @if (WorkScheduler.TimelineSecondLevel != null)
+                        {
+                            @WorkScheduler.TimelineSecondLevel(__current)
+                        }
+                        else
+                        {
+                            @if (__displayTwoRow)
+                            {
+                                <span class="wks-daynum">@__current.Day</span>
+                            }
+                            else
+                            {
+                                <div class="wks-dayname">@("DayNamesShort".Translate().Split(",")[(int)__current.DayOfWeek]).</div>
+                                <div class="wks-daynum">@__current.Day</div>
+                            }
+                        }
+                    </div>
+                    __dayLeft += 24 * WorkScheduler.ZoomLevel;
+                    __alternanceDay = !__alternanceDay;
+                }
+                __current = __current.AddDays(1);
+            } while (__currentMonth == __current.Month && __current <= WorkScheduler.To.Value);
+        </div>
+        __alternanceMonth = !__alternanceMonth;
+    }
+}
+</div>

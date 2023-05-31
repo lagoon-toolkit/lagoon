@@ -1,0 +1,9 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@inherits LgFilterEditorBase<TValue, SelectFilter<TValue>>
+@typeparam TValue
+
+<LgFilterTabContainer>
+    <LgLoaderView IsLoading="WorkingItems is null">
+        <LgSearchableList @ref="_searchableList" Items="WorkingItems" SelectedItems="_selectedValues" FormatValue="FilterBox.FormatFilterValue" />
+    </LgLoaderView>
+</LgFilterTabContainer>

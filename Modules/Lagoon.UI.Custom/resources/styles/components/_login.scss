@@ -1,0 +1,213 @@
+﻿$linear-bg: linear-gradient(45deg, #17637B, #269FC7) !default;
+.app-loading {
+    background: $linear-bg;
+
+    &:before {
+        color: $light0;
+    }
+}
+
+.authentication-step-container {
+    background: $linear-bg;
+
+    .authentication-step-container {
+        .reconnect-auth {
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.auth-layout {
+    background: $linear-bg;
+    color: $dark1;
+    height: 100vh;
+
+    label {
+        color: $dark1 !important;
+    }
+
+    h1 {
+        color: $primary3 !important;
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+
+    input {
+        height: $input-height !important;
+
+        &:hover {
+            background-color: $input-hover-bg;
+        }
+    }
+}
+
+.login-area {
+    height: 100vh;
+    display: flex;
+
+    .area-appname {
+        background: linear-gradient(45deg, #17637B, #269FC7);
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+
+        #brand-logo {
+            background-repeat: no-repeat;
+            background-image: url(#{$auth-logo});
+            background-size: 100%;
+            width: 7rem;
+            height: 8rem;
+            order: 0;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .app-name-version {
+            order: 1;
+            margin-left: auto;
+            margin-right: auto;
+            color: $light0;
+
+            .app-name {
+                font-size: 2.2rem;
+            }
+
+            .app-version {
+                position: absolute;
+                bottom: 1rem;
+                right: 1.5rem;
+            }
+        }
+    }
+
+    .area-login {
+        background: $page-bg-color;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+
+        .area-form-login {
+            width: 50%;
+        }
+
+        .btn-primary {
+            background-color: $gray1;
+            border: none !important;
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            height: auto !important;
+
+            &:focus, &.focus {
+                + .custom-control-label {
+                    &::before {
+                        border: 2px solid $secondary3;
+                    }
+                }
+            }
+        }
+
+        .auth-layout label, .auth-layout h1 {
+            font-size: 0.6rem;
+        }
+    }
+
+    .area-additional-auth {
+        .btn-additional-auth {
+            border: 1px solid white;
+            margin-top: 0.2rem;
+        }
+    }
+}
+
+
+.group-choice-area {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding-inline: 6.5em;
+    padding-block: 5em;
+
+    input[type="radio"], input[type="checkbox"] {
+        height: auto !important;
+    }
+
+    .btn-primary {
+        background-color: $gray1;
+        border: none !important;
+    }
+
+    .custom-control {
+        padding-bottom: 0.5rem;
+    }
+}
+
+.configure-mfa, .login-with-mfa {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white !important;
+
+    h1 {
+        color: white !important;
+    }
+
+    label {
+        color: white !important;
+    }
+
+    kbd {
+        background: #134A5C;
+    }
+
+    ol {
+        margin-top: 1rem;
+    }
+
+    #qrCode {
+        padding-left: calc(50% - 75px); // Rq: qrCode have a fixed size of 150px/150px
+    }
+
+    .title-authent {
+        font-size: 1.5rem;
+        font-weight: 400;
+        margin-bottom: 0;
+    }
+
+    .sub-title-authent {
+        font-size: 0.9rem;
+        font-weight: 200;
+    }
+
+    .mfa-verif-code-label {
+        margin-bottom: 0;
+        font-weight: 300;
+        font-size: 0.7rem;
+    }
+
+    .mfa-instruction {
+        background: #195E75;
+        margin-top: 4rem;
+        padding: 2rem;
+        border-radius: 8px;
+    }
+
+    .form-mfa-submit {
+        background: #195E75;
+        padding: 2rem 3rem;
+        border-radius: 8px;
+
+        button {
+            min-width: 150px;
+        }
+    }
+}

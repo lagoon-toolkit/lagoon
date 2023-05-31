@@ -1,0 +1,12 @@
+**/.vs/**
+**/.vscode/**
+bin
+obj
+**/node_modules
+**/auto
+**/wwwroot/js/main.min.js
+**/PublishProfiles
+*.user
+**/app.db
+desktop.ini
+LagoonDemoAZ.sln

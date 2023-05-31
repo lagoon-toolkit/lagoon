@@ -1,0 +1,17 @@
+﻿.filter-tab, .no-tab {
+    .form-group input {
+        height: 2.2em !important;
+    }
+
+    .form-group .form-input > span.form-input-suffix {
+        top: 0.3rem;
+    }
+
+    .form-group .lbl:not(.lblActive) {
+        transform: translateY(6px);
+    }
+
+    .form-group .lbl.lblActive {
+        transform: translateY(0px) scale(0.9);
+    }
+}

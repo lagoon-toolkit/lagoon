@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="" id="root">
+    <xsd:element name="string">
+      <xsd:complexType>
+        <xsd:attribute name="key" use="required" type="xsd:string"/>
+        <xsd:attribute id="fr-FR" name="fr" use="required" type="xsd:string" />
+        <xsd:attribute id="en-US" name="en" type="xsd:string" />
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+
+  <string key="ContactAdminException" fr="L'action demandée n'a pas pu aboutir. Merci de contacter l'administrateur." en="The required action failed. Please contact an administrator." />
+  <!-- Boolean format -->
+  <string key="BooleanTrue" fr="Oui" en="Yes" />
+  <string key="BooleanFalse" fr="Non" en="No" />
+  <string key="BooleanIndeterminate" fr="-" en="-" />
+  <!-- Exports -->
+  <string key="ExportDisplayNameCSV" fr="Fichier CSV" en="CSV file"/>
+  <string key="ExportDisplayNameXLSX" fr="Classeur Excel" en="Excel file"/>
+  <!-- Filters -->
+  <string key="FilterEmptyValue" fr="(Vide)" en="(Empty)"/>
+  <string key="FilterTextSearchModeContains" fr="Contient" en="Contains"/>
+  <string key="FilterTextSearchModeStartsWith" fr="Commence par" en="Starts with"/>
+  <string key="FilterTextSearchModeEndsWith" fr="Fini par" en="Ends with"/>
+  <!-- DataValidation messages -->
+  <string key="RequiredAttribute_ValidationError" fr="Le champ &quot;{0}&quot; est obligatoire." en="The &quot;{0}&quot; field is required."/>
+  <string key="RequiredAttribute_ValidationError_Short" fr="Ce champ est obligatoire." en="This field is required."/>
+  <string key="EmailAddressAttribute_Invalid" fr="Le champ &quot;{0}&quot; ne contient pas une adresse e-mail valide." en="The &quot;{0}&quot; field is not a valid e-mail address."/>
+  <string key="EmailAddressAttribute_Invalid_Short" fr="L'adresse e-mail n'est pas valide." en="This is not a valid e-mail address."/>
+
+</root>

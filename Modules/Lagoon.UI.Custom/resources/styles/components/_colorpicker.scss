@@ -1,0 +1,55 @@
+﻿.form-group-colorpicker {
+    margin-bottom: 2.5rem;
+}
+
+.form-group.input-color {
+    margin-bottom: 0 !important;
+}
+
+.colorPickerBox {
+
+    .selected-box {
+        top: 0.3rem;
+        left: 0.3rem;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .input-color {
+        display: inline-block;
+    }
+
+    .input-color.form-group-ro {
+        padding-top: 0.25rem;
+    }
+
+    .color-picker-content {
+        display: flex;
+        width: 320px;
+        border-radius: 3px;
+        flex-wrap: wrap;
+
+        & > div {
+            width: 32px;
+            height: 32px;
+
+            &.selected {
+                border: 1px solid $color-picker-selection-active;
+            }
+
+            &:hover {
+                border: 1px solid $color-picker-selection-hover;
+                cursor: pointer;
+            }
+
+            & > svg {
+                width: inherit;
+                height: inherit;
+            }
+        }
+    }
+}
+
+.form-group-colorpicker {
+    margin-bottom: 2.8rem;
+}

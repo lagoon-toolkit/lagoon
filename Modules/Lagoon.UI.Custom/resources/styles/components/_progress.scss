@@ -1,0 +1,134 @@
+
+// Disable animation if transitions are disabled
+@if $enable-transitions {
+    @keyframes progress-bar-stripes {
+        from {
+            background-position: $progress-height 0;
+        }
+
+        to {
+            background-position: 0 0;
+        }
+    }
+}
+
+$progress-bg: $gray0-50;
+$progress-height: 1rem;
+$progress-font-size: .8rem;
+$progress-text-color: $text-color;
+
+
+.progress {
+    display: flex;
+    height: $progress-height;
+    overflow: hidden; // force rounded corners by cropping it
+    line-height: 0;
+    @include font-size($progress-font-size);
+    background-color: $progress-bg;
+    @include border-radius($progress-border-radius);
+    @include box-shadow($progress-box-shadow);
+    font-weight: 500;
+
+    span {
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 0rem;
+        margin-right: .625rem;
+        color: $progress-text-color;
+    }
+
+    div + span {
+        margin-left: .625rem;
+        margin-right: 0rem;
+    }
+
+    div {
+        margin-top: auto;
+        margin-bottom: auto;
+        height: .5rem;
+    }
+
+
+    div:only-child {
+        height: 1rem;
+    }
+}
+
+.progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    color: $progress-text-color;
+    text-align: center;
+    white-space: nowrap;
+    background-color: $progress-bar-bg;
+    @include transition($progress-bar-transition);
+    border-radius: 0 6.25rem 6.25rem 0;
+
+    span {
+        margin: 0;
+    }
+}
+
+.progress-bar-striped {
+    @include gradient-striped();
+    background-size: $progress-height $progress-height;
+}
+
+@if $enable-transitions {
+    .progress-bar-animated {
+        animation: progress-bar-stripes $progress-bar-animation-timing;
+
+        @if $enable-prefers-reduced-motion-media-query {
+            @media (prefers-reduced-motion: reduce) {
+                animation: none;
+            }
+        }
+    }
+}
+
+.progress {
+    & .bg-success, .bg-secondary, .bg-danger, .bg-info, .bg-primary, .bg-default, .bg-link {
+        & > span {
+            color: $light0;
+        }
+    }
+}
+
+
+/*
+    Circle progess
+*/
+.progress-circle {
+    .progress-circle-inner {
+        position: relative;
+        line-height: 1;
+        background-color: transparent;
+        width: 120px;
+        height: 120px;
+    }
+
+    .progress-circle-trail {
+        stroke: #e1e1e1;
+        transition: stroke-dashoffset 0.3s, stroke-dasharray 0.3s, stroke 0.3s, stroke-width 0.06s 0.3s;
+    }
+
+    .progress-circle-middle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+        transform: translate(-50%,-50%);
+
+        .progress-circle-text {
+            font-size: 1.8em;
+            white-space: normal;
+            text-align: center;
+            display: block;
+        }
+    }
+	
+}

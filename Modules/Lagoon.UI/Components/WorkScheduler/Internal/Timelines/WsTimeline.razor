@@ -1,0 +1,29 @@
+﻿@inherits ComponentBase
+@typeparam TItem
+
+<CascadingValue Value=@this IsFixed=true>
+    @if (WorkScheduler.Timeline == TimelineMode.DayAmPm)
+    {
+        <TLDayAmPm TItem=TItem />
+    }
+    else if (WorkScheduler.Timeline == TimelineMode.DayHour)
+    {
+        <TLDayHour TItem=TItem />
+    }
+    else if (WorkScheduler.Timeline == TimelineMode.MonthDay)
+    {
+        <TLMonthDay TItem=TItem />
+    }
+    else if (WorkScheduler.Timeline == TimelineMode.MonthWeek)
+    {
+        <TLMonthWeek TItem=TItem />
+    }
+    else if (WorkScheduler.Timeline == TimelineMode.YearMonth)
+    {
+        <TLYearMonth TItem=TItem />
+    }
+    else
+    {
+        throw new NotImplementedException();
+    }
+</CascadingValue>

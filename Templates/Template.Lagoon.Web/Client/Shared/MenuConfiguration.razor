@@ -1,0 +1,20 @@
+﻿@using TemplateLagoonWeb.Client.Pages
+@inherits LgComponentBase 
+
+<LgMenuConfiguration>
+    <Menu>
+        <LgMenuItem Link="Pages.Index.Link()" />
+    </Menu>
+    <Toolbar>
+        @{#if DEBUG }
+        <LgDebugMenuItem />
+        @{#endif }
+        <LgMenuItem IconName="@IconNames.Admin" AutoHide="true">
+            <AuthorizeView Policy="@Policies.SettingsAdministrator">
+                <!-- Administration sub menu here -->
+            </AuthorizeView>
+        </LgMenuItem>
+        <LgAboutMenuItem />
+        <LgConnectMenuItem />
+    </Toolbar>
+</LgMenuConfiguration>

@@ -1,0 +1,49 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@inherits LgComponentBase
+
+@if (_isNotifUiSubscribeVisible)
+{
+    <div class="wp-popup">
+        <div class="row">
+            <div class="col-12">
+                @if (_isWebPushAvailable)
+                {
+                    <p><LgLabel Text=@($"{(_hasActiveSubscription ? "#lblWebPushUnsubcribe" : "#lblWebPushSubcribe")}") /></p>
+                    @if (_hasActiveSubscription)
+                    {
+                        <LgButton OnClick="Close" Text="#lblClose" Kind="ButtonKind.Secondary" />
+                        <LgButton OnClick="UnsubscribeToNotifAsync" Text="#lblUnsubcribe" />
+                    }
+                    else
+                    {
+                        <LgButton OnClick="RejectNotifAsync" Text="#lblRefuse" Kind="ButtonKind.Secondary" />
+                        <LgButton OnClick="SubscribeToNotifAsync" Text="#lblSubcribe" />
+                    }
+                }
+                else
+                {
+                    <p><LgLabel Text="#lblWebPushUnvailable" /></p>
+                    <LgButton OnClick="Close" Text="#lblClose" Kind="ButtonKind.Secondary" />
+                }
+            </div>
+        </div>
+        @if (_navigatorBlocked)
+        {
+            <p class="wp-instruction-container">
+                <LgLabel Text="#lblWebPushNavigatorBlocked" CssClass="wp-instruction" />
+            </p>
+            <ul>
+                <li>
+                    <LgLabel Text="#lblWebPushNavigatorInstructionOpenSetting" />
+                </li>
+                <li>
+                    <LgLabel Text="#lblWebPushNavigatorInstructionAcceptNotification" />
+                </li>
+            </ul>
+            <div class="text-center">
+                <img class="wp-help" />
+            </div>
+        }
+    </div>
+}
+

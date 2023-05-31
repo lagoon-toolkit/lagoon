@@ -1,0 +1,63 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgPage
+@{
+    string __ownerLogo = GetOwnerLogo();
+}
+<div class="about-header">
+    @if (!string.IsNullOrEmpty(__ownerLogo))
+    {
+        <div class="about-app-owner-logo">
+            <div>
+                <img src="@__ownerLogo" />
+            </div>
+        </div>
+    }
+    <div class="about-app-info">
+        <div>
+            <LgLabel Text="#pgAboutApp" />
+            <span>@GetApplicationName()</span>
+        </div>
+        <div>
+            <LgLabel Text="#pgAboutVersion" />
+            <span>@GetVersion()</span>
+        </div>
+    </div>
+</div>
+
+@if (AdditionalInformationList.Count > 0)
+{
+    <div class="about-body">
+        <div class="about-app-owner-info">
+        @foreach (AboutAdditionalInformation info in AdditionalInformationList)
+        {
+            <div>
+                <LgLabel Text="@info.Label" />
+                @if (string.IsNullOrEmpty(info.Uri))
+                {
+                    <span>@info.Name</span>
+                }
+                else
+                {
+                    <a href="@info.Uri">@info.Name</a>
+                }
+            </div>
+        }
+        </div>
+    </div>
+}
+
+@{
+    List<string> __developedByLogos = GetDevelopedByLogos();
+}
+<div class="about-footer">
+    <div class="about-app-developer-info">
+        <LgLabel Text="#pgAboutDevelopedBy" />
+        @if (__developedByLogos is not null && __developedByLogos.Any())
+        {
+            @foreach (string logoUri in __developedByLogos)
+            {
+                <img src="@logoUri" class="developedBy-logo" />
+            }  
+        }
+    </div>
+</div>

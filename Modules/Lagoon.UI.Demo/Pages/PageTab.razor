@@ -1,0 +1,16 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="Tab" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgTabContainer @bind-ActiveTabKey="_activeTabKey" @ref="TabContainer2" AllowClose="true" ShowTabList="true" AllowDragDrop="true" OnDropTab="(e)=>ShowInformation(e.Key)">
+        <LgTab Key="home0" Title="Home">HOME</LgTab>
+        <LgTab Key="tab1" Title="Tab1" Closable="true">TAB1</LgTab>
+        <LgTab Key="tab2" Title="Tab2" Closable="true">TAB2</LgTab>
+        <LgTab Key="tab3" Title="Tab3" Closable="true">TAB3</LgTab>
+    </LgTabContainer>
+</LgFrame>
+
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

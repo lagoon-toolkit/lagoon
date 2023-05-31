@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Lagoon.Console</name>
+    </assembly>
+    <members>
+        <member name="T:Lagoon.Console.Application.LgApplication">
+            <summary>
+            Console application manager .
+            </summary>
+        </member>
+        <member name="M:Lagoon.Console.Application.LgApplication.#ctor">
+            <summary>
+            New LgApplication instance
+            </summary>
+        </member>
+        <member name="M:Lagoon.Console.Application.LgApplication.UnhandledExceptionTrapper(System.Object,System.UnhandledExceptionEventArgs)">
+            <summary>
+            Unhandled errors
+            </summary>
+        </member>
+        <member name="M:Lagoon.Console.Application.LgApplication.Init(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Lagoon.Console.Application.LgApplication.Dispose">
+            <summary>
+            Free resources
+            </summary>
+        </member>
+    </members>
+</doc>

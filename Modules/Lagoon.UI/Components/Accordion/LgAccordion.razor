@@ -1,0 +1,8 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+
+<div class="@GetClassAttribute()">
+    <CascadingValue Value="this" IsFixed="true">
+        @ChildContent
+    </CascadingValue>
+</div>

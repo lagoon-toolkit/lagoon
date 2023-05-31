@@ -1,0 +1,8 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgAriaComponentBase
+@if (!String.IsNullOrEmpty(IconNameRendering))
+{
+<svg @attributes="@GetAdditionalAttributes()" class="@GetClassAttribute()" @onclick="OnClickInternalAsync" aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy">
+    @GetSvgUse()
+</svg>
+}

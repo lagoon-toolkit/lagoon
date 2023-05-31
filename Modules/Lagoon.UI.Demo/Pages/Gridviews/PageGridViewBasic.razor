@@ -1,0 +1,24 @@
+﻿@inherits DemoPage
+
+<div class="row">
+    <div class="col-10"><LgTitle Text="#grdSimpleTitle" /></div>
+    <div class="col-2 text-right"> <LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass=""><LgButton Text="#lblDoc" /></LgHyperlink></div>
+</div>
+
+<LgGridView Title="#grdSimpleGridTitle" StateId="gvDemoBasic" Items="Data" TItem="GridViewData" Features="GridFeature.None" EditMode="GridEditMode.None">
+    <Columns Context="GridViewData">
+        <LgGridNumericColumn @bind-Value="GridViewData.Id" Title="Id" Resizable="false"></LgGridNumericColumn>
+        <LgGridColumn @bind-Value="GridViewData.Name" Title="#grdNameCol" Resizable="false"></LgGridColumn>
+        <LgGridColumn @bind-Value="GridViewData.Surname" Title="#grdSurnameCol" Resizable="false"></LgGridColumn>
+        <LgGridDateColumn @bind-Value="GridViewData.BirthDate" Title="#grdBirthDateCol" Resizable="false"></LgGridDateColumn>
+        <LgGridNumericColumn @bind-Value="GridViewData.Weight" Title="#grdWeightCol" Resizable="false"></LgGridNumericColumn>
+        <LgGridColumn @bind-Value="GridViewData.Mail" Title="#grdMailCol" Resizable="false"></LgGridColumn>
+        <LgGridColorColumn @bind-Value="GridViewData.FavoriteColor" Title="#grdFavColorCol" Resizable="false"></LgGridColorColumn>
+        <LgGridEnumColumn @bind-Value="GridViewData.HairColor" Title="#grdHairColorCol" Resizable="false"></LgGridEnumColumn>
+        <LgGridBooleanColumn @bind-Value="GridViewData.HasGlasses" Title="#grdGlassesCol" Resizable="false"></LgGridBooleanColumn>
+        <LgGridNumericColumn @bind-Value="GridViewData.PrefixSuffixGrid" Resizable="false" Title="#grdNumCol" PrefixType="InputLabelType.IconName" Prefix="@IconNames.About" SuffixType="InputLabelType.Text" Suffix="Texte"></LgGridNumericColumn>
+    </Columns>
+</LgGridView>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />
+

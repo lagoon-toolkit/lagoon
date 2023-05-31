@@ -1,0 +1,41 @@
+﻿// Sidebar
+.navbar-vertical-fixed {
+    padding: 0.55rem 0 0 0 !important;
+
+    .dropdown-header {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+}
+/* Sidebar sizes when expanded  */
+.sidebar-expanded {
+    width: $sidebar-width;
+}
+
+.mainSidebar-expanded {
+    padding-left: $sidebar-width;
+}
+/* Sidebar sizes when collapsed  */
+.sidebar-collapsed {
+    width: $sidebar-width-collapsed;
+}
+
+.mainSidebar-collapsed {
+    padding-left: $sidebar-width-collapsed;
+}
+
+.sidebar-submenu {
+    font-size: 0.9rem;
+}
+/* Separators */
+.sidebar-separator-title {
+    color: $sidebar-menuItemTitle-color;
+    height: 35px;
+}
+
+.sidebar-separator {
+    background-color: $sidebar-menuItemSeparator-color;
+    height: 25px;
+}

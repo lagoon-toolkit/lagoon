@@ -1,0 +1,13 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+
+<CascadingValue Value="this" IsFixed="true">
+    @if (IsConnected)
+    {
+        <LgMenuItem IconName="@IconNames.Logout" CommandName="@LOGOUT_COMMAND" Text="#appDisconnect" HideRootLevelText="HideRootLevelText" />
+    }
+    else
+    {
+        <LgMenuItem IconName="@IconNames.Login" CommandName="@LOGIN_COMMAND" Text="#appConnect" HideRootLevelText="HideRootLevelText" />
+    }
+</CascadingValue>

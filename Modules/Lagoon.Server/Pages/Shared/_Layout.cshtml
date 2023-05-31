@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>@(ViewData["ApplicationName"] ?? "Authentication")</title>
+    <link href="~/styles.css" rel="stylesheet" />
+</head>
+
+<body class="auth-layout">
+    <div class="main" role="main">
+        <div class="content">
+            @RenderBody()
+        </div>
+    </div>
+    @RenderSection("Scripts", false)
+</body>
+
+</html>

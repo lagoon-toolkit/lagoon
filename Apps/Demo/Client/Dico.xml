@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="" id="root">
+    <xsd:element name="string">
+      <xsd:complexType>
+        <xsd:attribute name="key" use="required" type="xsd:string"/>
+        <xsd:attribute id="en-US" name="en" use="required" type="xsd:string"/>
+        <xsd:attribute id="fr-FR" name="fr" use="required" type="xsd:string"/>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  
+  <!-- Flags -->
+  <string key="current-flag" fr="i-flag-fr" en="i-flag-en" />
+  <string key="current-language" fr="FR" en="EN" />
+
+  <!-- Menu -->
+  <string key="menuHelp" fr="Aide" en="Help" />
+  <string key="menuAbout" fr="A propos" en="About" />
+  <string key="menuHome" fr="Accueil" en="Home" />
+  <string key="menuSupport" fr="Support" en="Support" />
+  <string key="menuUserGuide" fr="Guides utilisateurs" en="User Guides" />
+  <string key="menuUserGuideInt" fr="Utilisateurs internes" en="Internal users" />
+  <string key="menuUserGuideExt" fr="Utilisateurs externes" en="External users" />
+  <string key="menuComponent" fr="Les composants" en="All components" />
+
+  <!-- Basics elements -->
+  <string key="Fontbook" fr="Le livre de police" en="The font book" />
+  <string key="lblTitleFramePrimary" fr="Primaires et secondaires" en="Primary and Secondary"/>
+  <string key="lblTitleFrameLight" fr="Claires, grises et foncées" en="Light, gray and dark"/>
+  <string key="lblTitleFrameIndic" fr="Indicateurs" en="Indicators"/>
+  <!-- Pages -->
+  <string key="pageHomeTitle" fr="Accueil" en="Home" />
+  <string key="pageFetchDataTitle" fr="Données" en="Fetch data" />
+  <string key="welcomeTitle" fr="Bienvenue sur le showcase Lagoon" en="Welcome to Lagoon" />
+  <string key="welcomeInformation" fr="Vous trouverez ici l'ensemble des composants et des éléments de base de Lagoon que vous pourrez intégrer facilement à vos futures applications." en="Here you will find all the basic Lagoon components and elements that you can easily integrate into your future applications." />
+
+  <string key="ToggleNavigation"  fr="Activer la navigation par onglets" en="Enable tabbed navigation" />
+
+  <string key="Admin"  fr="Administrateur" en="Administrator" />
+  <string key="User"  fr="Utilisateur" en="User" />
+
+</root>

@@ -1,0 +1,67 @@
+﻿<Project>
+
+  <!-- Solve the NU5118 warning when packaging with static contents and multi-target frameworks
+  (For "Lagoon.Server" and "Lagoon.UI*")
+  https://github.com/NuGet/Home/issues/10253#issuecomment-1232988855 -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
+    <RazorLangVersion>3.0</RazorLangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net6.0'">
+    <RazorLangVersion>6.0</RazorLangVersion>
+  </PropertyGroup>
+
+  <!-- Used to update the nuget package with only one instance of resource in the "content" folder
+  https://learn.microsoft.com/en-us/nuget/reference/msbuild-targets#targetsfortfmspecificcontentinpackage -->
+  <PropertyGroup Condition="$(TargetFrameworks.StartsWith('$(TargetFramework)'))">
+    <LagoonIsFirstTarget>true</LagoonIsFirstTarget>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);LagoonNugetContent</TargetsForTfmSpecificContentInPackage>
+  </PropertyGroup>
+
+  <!-- Get all the Lagoon modules used by the current module -->
+  <Target Name="LagoonDependencies"	AfterTargets="ResolveAssemblyReferences">
+    <ItemGroup>
+        <!-- <_LagoonDependencies Include="%(ReferencePath.Identity) - %(ReferencePath.FusionName)" /> -->
+        <_LagoonDependencies Include="$([System.Text.RegularExpressions.Regex]::Match('%(ReferencePath.FusionName)', '^[^,]*').Value)"
+			Condition="$([System.String]::Copy('%(FusionName)').StartsWith('Lagoon.'))" />
+    </ItemGroup>
+    <!-- <Message Importance="High" Text="XXX [$(MSBuildProjectName)]: (_LagoonDependencies)" /> -->
+  </Target>
+
+  <Target Name="LagoonNugetContent" DependsOnTargets="LagoonDependencies">
+    <PropertyGroup>
+      <_LagoonPackageContent>$(IntermediateOutputPath)Lagoon\PackageContent\</_LagoonPackageContent>
+      <_LagoonModuleFile>$(_LagoonPackageContent)LagoonModule.xml</_LagoonModuleFile>
+      <LagoonPriority Condition="'$(LagoonPriority)' == ''">4</LagoonPriority>
+      <HasRootableComponents Condition="'$(HasRootableComponents)' == ''">false</HasRootableComponents>
+    </PropertyGroup>
+    <!-- <Message Importance="High" Text='XXX LagoonNugetContent {TargetFrameworks:"$(TargetFrameworks)", LagoonIsFirstTarget:"$(LagoonIsFirstTarget)", _LagoonPackageContent:"$(_LagoonPackageContent)", LagoonPriority:"$(LagoonPriority)", HasRootableComponents:"$(HasRootableComponents)", _LagoonModuleFile:"$(_LagoonModuleFile)" }' /> -->
+    <Message Importance="High" Text="Lagoon preparation of the nupkg shared content from $(TargetFramework)..." />
+    <ItemGroup>
+        <LagoonModuleLine Include='&lt;%3Fxml version="1.0" encoding="utf-8"%3F&gt;' />
+        <LagoonModuleLine Include='&lt;lagoonModule name="$(MSBuildProjectName)" priority="$(LagoonPriority)" hasRootableComponents="$(HasRootableComponents)"&gt;' />
+        <LagoonModuleLine Include='&lt;dependencies&gt;' />
+        <LagoonModuleLine Include='&lt;![CDATA[' />
+        <LagoonModuleLine Include='@(_LagoonDependencies)' />
+        <LagoonModuleLine Include=']]&gt;' />
+        <LagoonModuleLine Include='&lt;/dependencies&gt;' />
+        <LagoonModuleLine Include='&lt;/lagoonModule&gt;' />
+    </ItemGroup>
+    <WriteLinesToFile
+            File="$(_LagoonModuleFile)"
+            Lines="@(LagoonModuleLine)"
+            Overwrite="true"
+            Encoding="utf-8"/>
+    <ItemGroup>
+      <FileWrites Include="$(_LagoonModuleFile)" />
+      <LagoonPackageFile Include="$(_LagoonPackageContent)**;cots.xml;Dico.xml;resources\update.xml" />
+      <LagoonExistingPackageFile Include="@(LagoonPackageFile)" Condition="Exists('%(RootDir)%(Directory)%(Filename)%(Extension)')" />
+    </ItemGroup>
+    <!-- <Message Importance="High" Text="XXX LagoonPackageFile {@(LagoonPackageFile->Count())}{@(LagoonPackageFile)}..." /> -->
+    <!-- <Message Importance="High" Text="XXX LagoonExistingPackageFile {@(LagoonExistingPackageFile->Count())}{@(LagoonExistingPackageFile)}..." /> -->
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="@(LagoonPackageFile)" PackagePath="content" Condition="Exists('%(RootDir)%(Directory)%(Filename)%(Extension)')" />
+    </ItemGroup>
+  </Target>
+
+</Project>
+

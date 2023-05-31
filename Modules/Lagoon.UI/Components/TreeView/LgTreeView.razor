@@ -1,0 +1,21 @@
+﻿@using Lagoon.UI.Components.Internal
+@namespace Lagoon.UI.Components
+@typeparam TItem
+@inherits LgComponentBase
+
+<div class="@GetClassAttribute()" @ref="_elementReference" @onkeyup="OnKeyUpAsync" @onkeyup:preventDefault="true">
+    <ul>
+        <CascadingValue Value="this" IsFixed="true">
+            @if (Nodes is not null)
+            {
+                @foreach (TreeNode<TItem> node in Nodes)
+                {
+                    if (!node.Hidden)
+                    {
+                        <LgTreeViewNode @key="node" State="node" />
+                    }
+                }
+            }
+        </CascadingValue>
+    </ul>
+</div>

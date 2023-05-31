@@ -1,0 +1,59 @@
+﻿.calendar {
+    background-color: #ffffff;
+    border-bottom: 1px solid $cld-border-color;
+
+    .row {
+        .cal-month {
+            border: 1px solid $cld-border-color;
+        }
+
+        .cal-day {
+            border-right: 1px solid $cld-border-color;
+            border-left: 1px solid $cld-border-color;
+
+            &:hover {
+                .cal-day-number, .cal-day-content {
+                    background-color: $cld-border-color;
+                }
+            }
+
+            .cal-day-number {
+                color: $cld-text-color;
+                padding: 0 0 0 4px;
+            }
+
+            .cal-day-content {
+                padding: 0 0 0 6px;
+            }
+        }
+
+        .cal-day.weekend-day {
+            background-color: $cld-weekend-bg-color;
+        }
+
+        .cal-day.weekend-day + .cal-day.weekend-day {
+            border-bottom: 2px solid $primary1;
+        }
+
+        .cal-month, .cal-year {
+            color: black;
+            font-weight: 500;
+            height: 1.6rem;
+            padding: 2px 4px;
+
+            span {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    .indicator-range-data {
+        border-right: 1px solid #ffffff;
+    }
+
+    .indicator-range-data, .indicator-range-nodata {
+        width: 4px;
+    }
+}

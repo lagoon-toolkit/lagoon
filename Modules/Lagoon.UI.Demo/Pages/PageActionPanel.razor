@@ -1,0 +1,27 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="#lblTitlePageActionPanel" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgActionPanel CssClass="list-view-selectionbar" ToolbarButtonSize="ButtonSize.Large">
+    <ActionContent>
+        <LgLabel CssClass="my-auto" Text="#lblPnlActionCustomTxt" />
+    </ActionContent>
+
+    <Toolbar>
+            <LgToolbarGroup Kind="ToolbarGroupKind.Primary">
+                <LgToolbarButton IconName="@IconNames.Save" OnClick="Save" Text="#lblSave" Kind="ButtonKind.Ghost"/>
+                <LgToolbarButton IconName="@IconNames.Delete" OnClick="Delete" Text="#lblDelete" Kind="ButtonKind.Ghost"/>
+            </LgToolbarGroup>
+
+            <LgToolbarGroup Kind="ToolbarGroupKind.Ghost">
+                <LgToolbarButton IconName="@IconNames.Cancel" OnClick="Cancel" Text="#lblCancel" Kind="ButtonKind.Ghost"/>
+            </LgToolbarGroup>
+    </Toolbar>
+
+</LgActionPanel>
+</LgFrame>
+
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

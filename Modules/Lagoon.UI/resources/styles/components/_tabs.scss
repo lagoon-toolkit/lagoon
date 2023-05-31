@@ -1,0 +1,54 @@
+﻿$lg-tabs-height: 20px;
+$lg-tabs-border-radius: 0px;
+$lg-tabs-container-padding: 1rem;
+$lg-tab-toolbar-max-height: $select-max-height;
+
+div.lg-tab-header {
+    display: flex;
+
+    ul.nav {
+        white-space: nowrap;
+        overflow: hidden;
+        display: inline-block;
+
+        > li.nav-item {
+            display: inline-block;
+        }
+    }
+
+    // Fix the height and add vertical scrollbar
+    .lg-tab-toolbar .lg-tab-toolbar-counter.show .dropdown-menu.show {
+        overflow-y: auto;
+        max-height: $lg-tab-toolbar-max-height;
+    }
+}
+// Fix height of the tab content container
+div.content-page-tabbed {
+    > div {
+        height: 100%;
+        width: 100%;
+        > div.lg-tab-header ~ div.tab-content.lg-tab-cnt {
+            height: calc(100% - #{$lg-tabs-height}) !important;
+            overflow: auto;
+        }
+    }
+}
+
+// Mobile display only active tab
+@media (max-width: 768px) {
+    .scrollTabNext, .scrollTabPrevious{
+        display: none;
+    }
+    .lg-tab-header {
+        ul.nav {
+
+            & > li.nav-item {
+                display: none !important;
+
+                &.active {
+                    display: inline-block !important;
+                }
+            }
+        }
+    }
+}

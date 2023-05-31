@@ -1,0 +1,364 @@
+﻿/***
+    DropoDown & Menu  
+***/
+
+header #brand-logo {
+    margin-left: 1rem;
+    background-size: 90px;
+    background-position: left center;
+}
+
+header {
+    .navbar {
+        background: linear-gradient(to right, $primary3, $primary1);
+    }
+
+    @include media-breakpoint-between(xs, md) {
+
+        .navbar-brand {
+            padding-left: 1.2rem;
+        }
+
+        .navbar-collapse {
+
+            .navbar-nav {
+                height: 100% !important;
+                overflow-y: auto !important;
+                max-height: 25rem !important;
+
+                .nav-item {
+                    &:before, &:after {
+                        display: none !important;
+                    }
+                }
+
+                .dropdown-menu {
+                    position: static !important;
+                }
+            }
+        }
+    }
+
+    a.navbar-brand {
+        &:focus {
+            outline: none;
+        }
+
+        &:focus-visible {
+            border-radius: 3px;
+            box-shadow: 0 0 0 2px $primary3, 0 0 0 4px $secondary3;
+        }
+    }
+
+    .navbar-nav {
+        font-size: 1rem;
+        height: $header-height;
+
+        > .nav-item {
+            display: flex;
+
+            > .nav-link {
+                border: 2px solid transparent;
+                border-radius: 3px;
+            }
+
+            .bi {
+                width: 1rem;
+                height: 1rem;
+            }
+
+
+            &:hover {
+                > .nav-link {
+                    &:hover {
+                        color: $menu-navlink-hover;
+                        background-color: $gray0-50;
+                        border-radius: 0;
+                    }
+                }
+            }
+
+            &:not(.noText) {
+
+                > .nav-link.active {
+                    color: $light0;
+                    background-color: $light1-30;
+                }
+            }
+
+            &.noText {
+
+                > .nav-link.active {
+                    color: $light0;
+
+                    > .nav-item-icon {
+                        background-color: $light1-30;
+                    }
+                }
+            }
+
+            > .nav-link {
+                &:focus-visible {
+                    color: $light0;
+                    border: 2px solid $secondary3;
+                    outline: none;
+                }
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            > .dropdown-toggle::after {
+                width: 0.8em;
+                height: 0.8em;
+                border: none;
+                vertical-align: middle;
+                background: imageName('All.ChevronDown', white) no-repeat center center;
+            }
+        }
+    }
+
+    .dropdown-menu {
+        margin-top: 0.5rem;
+    }
+
+    .dropdown-menu.scrollable {
+        max-height: calc(100vh - #{$header-height + 2 * 0.5rem});
+        overflow-y: auto;
+    }
+}
+
+.nav-item, .dropdown-item {
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    .nav-item-icon {
+        border-radius: 3px;
+        margin-right: 0.1rem;
+        height: 1.4rem;
+        width: 1.5rem;
+        display: flex;
+
+        > .bi {
+            margin: auto;
+        }
+    }
+
+    .nav-item-lbl {
+        padding: 0.2rem 0rem;
+        font-size: $font-size-base;
+    }
+}
+
+.toolbar {
+    
+    .btn {
+        margin: 0 0.5em 0 0;
+    }
+
+    .dropdown-menu {
+        .bi {
+            width: 0.9rem;
+            height: 0.9rem;
+        }
+
+        > .dropdown-item {
+            height: auto;
+            margin-top: 0rem !important;
+            padding: 0.25em 0.7em;
+            font-size: $font-size-base;
+        }
+    }
+
+    .dropdown.show:before, .dropdown.show:after {
+        display: none !important;
+    }
+}
+.toolbar-group {
+    .btn {
+        margin: 0;
+
+        &:last-child {
+            margin: 0 0.5em 0 0;
+        }
+    }
+}
+.dropdown.show::before {
+    display: inline-block;
+    margin-left: $carret-height+ 0.2rem;
+    vertical-align: 0.255em;
+    content: "";
+    border-right: 0.8em solid transparent;
+    border-bottom: 0.7em solid rgba(0,0,0,.25);
+    border-left: 0.65em solid transparent;
+    position: absolute;
+    top: 100%;
+    z-index: 1000;
+}
+
+.dropdown.show::after {
+    display: inline-block;
+    margin-left: $carret-height + 0.3rem;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0;
+    border-right: 0.6em solid transparent;
+    border-bottom: 0.6em solid white;
+    border-left: 0.6em solid transparent;
+    position: absolute;
+    top: 100%;
+    z-index: 1000;
+}
+
+.dropdown-menu {
+    min-width: 4rem !important;
+    background-color: white;
+    border-radius: 3px;
+    padding-top: 0.15rem;
+    padding-bottom: 0.15rem;
+}
+
+.dropdown-submenu {
+
+    &:not(.dropleft) > .dropdown-toggle {
+        &::after {
+            position: absolute;
+            right: .3em;
+            border: none;
+            width: 0.8em;
+            height: 0.8em;
+            margin-top: .7em;
+            background: imageName('All.ChevronRight', $primary) no-repeat center center;
+        }
+
+        & > nav-item-lbl {
+            padding-right: 6px;
+        }
+    }
+
+    &.dropleft > .dropdown-toggle {
+        &::before {
+            position: absolute;
+            left: .3em;
+            border: none;
+            width: 1em;
+            height: 1em;
+            margin-top: .7em;
+            background: imageName('All.ChevronLeft', $primary) no-repeat center center;
+        }
+    }
+}
+
+.dropdown-menu, .dropdown-submenu {
+    margin-top: 0rem;
+    height: auto;
+    font-size: $font-size-base;
+
+    .nav-item {
+        height: auto;
+        margin-top: 0rem !important;
+
+        &:hover {
+            .nav-item-icon {
+                color: $primary !important;
+                background-color: transparent !important;
+            }
+        }
+
+        .nav-link.active {
+            color: $primary1;
+            background-color: white;
+        }
+
+        .nav-link {
+            color: $text-color;
+            padding: 0.3em 0.8em 0.3em 0.8em;
+            background-color: inherit;
+
+            &:hover {
+                background-color: $light3 !important;
+                color: $text-color !important;
+            }
+
+            &:active {
+                color: $primary1 !important;
+                background-color: white;
+            }
+
+            > .nav-item-icon {
+                border: 0;
+                color: $primary;
+                background-color: transparent;
+            }
+
+            > .nav-item-lbl {
+                padding: 0.2em 0.5em 0.2em 0.4em;
+            }
+
+            &:focus {
+                color: $text-color;
+                outline: 2px solid $secondary3;
+            }
+        }
+    }
+
+    .dropdown-item {
+        height: auto;
+        margin-top: 0px !important;
+
+        &:hover {
+            .nav-item-icon {
+                color: $primary !important;
+                background-color: transparent !important;
+            }
+        }
+
+        color: $text-color;
+        padding: 0.3em 0.8em 0.3em 0.8em;
+
+        &:hover {
+            background-color: $light3 !important;
+            color: $text-color !important;
+        }
+
+        &:active, &.active {
+            color: $primary1 !important;
+            background-color: white;
+        }
+
+        > .nav-item-icon {
+            border: 0;
+            color: $primary;
+            background-color: transparent;
+        }
+
+        > .nav-item-lbl {
+            padding: 0.2em 0.5em 0.2em 0.4em;
+        }
+    }
+}
+
+@media (max-width: 991.98px) {
+    header {
+        .navbar-nav {
+            .nav-item {
+                flex-wrap: wrap !important;
+
+                .nav-link {
+                    padding: 0.3rem 0.3rem;
+                }
+
+                .dropdown-menu {
+                    width: 100%;
+                }
+            }
+        }
+
+        .dropdown-menu {
+            margin-top: 0px !important;
+        }
+    }
+}

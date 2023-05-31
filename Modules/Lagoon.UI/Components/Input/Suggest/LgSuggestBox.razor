@@ -1,0 +1,62 @@
+﻿@namespace Lagoon.UI.Components
+@using Lagoon.UI.Components.Input.Internal;
+@using Lagoon.UI.Components.Internal;
+@inherits LgInputRenderBase<string>
+@typeparam TItem
+
+@{
+    Suggest = @<LgComponentGroup>
+        <div class="globalsearch-content form-input" @ref="ElementRef">
+            <LgDropDown @bind-IsOpen="_dropdownVisible" CssClass="globalSearch-dropdown" ReadOnly="ReadOnly" AutoOpen="false">
+                <ControlContent>
+                    <LgTextBox @bind-Value="@CurrentValueAsString" Placeholder="@Placeholder"
+                               @attributes="GetAdditionalAttributes()"
+                               OnChangeDisabled="OnChangeDisabled" OnFocus="FocusAsync" OnInput="SearchAsync" OnKeyUp="ShowDropdownAsync"
+                               PrefixType="InputLabelType.IconName" Prefix="@(!ReadOnly ? IconNames.All.Search : null)"
+                               MaxLength="MaxLength" ClearIncomplete="ClearIncomplete"
+                               InputMask="InputMask" InputMaskKind="InputMaskKind" AutoUnmask="AutoUnmask" InputMaskPlaceholder="InputMaskPlaceholder"
+                               AriaLabel="@AriaLabel" AriaLabelledBy="@AriaLabelledBy"
+                               Required="Required" ReadOnly="ReadOnly" Disabled="Disabled" PolicyEdit="@PolicyEdit" PolicyVisible="@PolicyVisible" />
+                </ControlContent>
+                <DropDownContent>
+                    <LgLoaderView IsLoading="_data is null">
+                        @{
+                            bool any = false;
+                            foreach (TItem item in _data)
+                            {
+                                any = true;
+                                <div class="gs-item-content" @onclick="() => SelectItemAsync(item)" @key="item">
+                                    @if (ItemContent is not null)
+                                    {
+                                        @ItemContent(item)
+                                    }
+                                    else
+                                    {
+                                        <span class="highlightable">@item?.ToString()</span>
+                                    }
+                                </div>
+                            }
+                            if (any && SeeAllData)
+                            {
+                                <LgNavLink CssClass="gs-item-content gs-item-content-seeAll" OnClick="GetAllItemsAsync">
+                                    <ChildContent>
+                                        <LgIcon IconName="@IconNames.All.EyeFill"></LgIcon>
+                                        <LgLabel Text="#lblSeeAll"></LgLabel>
+                                    </ChildContent>
+                                </LgNavLink>
+                            }
+                            if(!any)
+                            {
+                                <LgEmptyMessage IconName="@IconNames.Empty" Title="#FilterBoxNoResult" />
+                            }
+                        }
+                    </LgLoaderView>
+                </DropDownContent>
+            </LgDropDown>
+        </div>
+    </LgComponentGroup>;
+
+base.BuildRenderTree(__builder);
+
+}
+

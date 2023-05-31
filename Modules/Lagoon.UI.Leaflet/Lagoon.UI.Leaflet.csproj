@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    <LangVersion>10.0</LangVersion>
+    <Authors>Lagoon Toolkit team</Authors>
+    <Company>Lagoon Toolkit team</Company>
+    <Description>Lagoon module for Leaflet component.</Description>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GeoJSON.Text" Version="1.0.1" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Remove="wwwroot\js\leaflet_draw\**" />
+    <Compile Remove="wwwroot\js\open-location-code\**" />
+    <Content Remove="wwwroot\js\leaflet_draw\**" />
+    <Content Remove="wwwroot\js\open-location-code\**" />
+    <EmbeddedResource Remove="wwwroot\js\leaflet_draw\**" />
+    <EmbeddedResource Remove="wwwroot\js\open-location-code\**" />
+    <None Remove="wwwroot\js\leaflet_draw\**" />
+    <None Remove="wwwroot\js\open-location-code\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\leaflet-control-geocoder\dist\Control.Geocoder.js" />
+    <None Include="wwwroot\js\leaflet-control-geocoder\dist\Control.Geocoder.js.map" />
+    <None Include="wwwroot\js\leaflet-control-geocoder\dist\Control.Geocoder.min.js" />
+    <None Include="wwwroot\js\leaflet-control-geocoder\dist\Control.Geocoder.min.js.map" />
+    <None Include="wwwroot\js\leaflet-control-geocoder\dist\Control.Geocoder.modern.js" />
+    <None Include="wwwroot\js\leaflet-control-geocoder\dist\Control.Geocoder.modern.js.map" />
+    <None Include="wwwroot\js\leaflet-draw\dist\images\spritesheet.svg" />
+    <None Include="wwwroot\js\leaflet-draw\dist\leaflet.draw-src.js" />
+    <None Include="wwwroot\js\leaflet-draw\dist\leaflet.draw-src.map" />
+    <None Include="wwwroot\js\leaflet-draw\dist\leaflet.draw.js" />
+    <None Include="wwwroot\js\leaflet-overpass-layer\dist\OverPassLayer.bundle.js" />
+    <None Include="wwwroot\js\leaflet-overpass-layer\dist\OverPassLayer.bundle.js.map" />
+    <None Include="wwwroot\js\leaflet-overpass-layer\dist\OverPassLayer.css.map" />
+    <None Include="wwwroot\js\leaflet-routing-machine\dist\leaflet-routing-machine.js" />
+    <None Include="wwwroot\js\leaflet-routing-machine\dist\leaflet-routing-machine.min.js" />
+    <None Include="wwwroot\js\leaflet-routing-machine\dist\leaflet.routing.icons.svg" />
+    <None Include="wwwroot\js\leaflet\dist\leaflet.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lagoon.Core\Lagoon.Core.csproj" />
+    <ProjectReference Include="..\Lagoon.UI\Lagoon.UI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="resources\icons\auto\" />
+  </ItemGroup>
+
+  <!-- Run the Lagoon dotnet tool to consolidate resources -->
+  <Import Project="..\LagoonPreBuild.UI.targets" />
+
+</Project>

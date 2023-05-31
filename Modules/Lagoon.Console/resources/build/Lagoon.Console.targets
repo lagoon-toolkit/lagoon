@@ -1,0 +1,37 @@
+﻿<Project>
+
+  <!-- Save the ProductName to load ApplicationInformations property -->
+  <PropertyGroup>
+    <Product Condition="'$(Product)' == ''">$([System.Text.RegularExpressions.Regex]::Split('$(MSBuildProjectName)', '\.')[0])</Product>
+    <AssemblyName>$(Product.ToLowerInvariant())</AssemblyName>
+    <AssemblyTitle Condition="'$(AssemblyTitle)' == ''">$(Product) Console</AssemblyTitle>
+  </PropertyGroup>
+
+  <!-- Run the Lagoon dotnet tool to consolidate resources. -->
+  <Target Name="LagoonConsolePreBuild" BeforeTargets="BeforeBuild">
+    <ItemGroup>
+      <LgnPkgRefGroup Include="%(PackageReference.Identity)¤%(PackageReference.Version)" />
+    </ItemGroup>
+    <PropertyGroup>
+      <LgnMinVersion>2.0.3</LgnMinVersion>
+      <_LagoonIntermediateOutputPath>$(IntermediateOutputPath)Lagoon</_LagoonIntermediateOutputPath>
+      <LgnPkgRef>@(LgnPkgRefGroup)</LgnPkgRef>
+      <LgnPrjRef>@(ProjectReference)</LgnPrjRef>
+    </PropertyGroup>
+    <PropertyGroup>
+    </PropertyGroup>
+    <Exec Command='lgn build "$(ProjectPath)" "$(ConfigurationName)" --fw "$(TargetFramework)" --obj-path "$(_LagoonIntermediateOutputPath)" --ref-pkg="$(LgnPkgRef)" --ref-prj="$(LgnPrjRef)" --min-version $(LgnMinVersion)' ContinueOnError="true" IgnoreExitCode="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' == '7007'" Text="LGN tool must be updated before build, please update it with the following command : dotnet tool update -g LGN" />
+    <Error Condition="'$(ErrorCode)' == '9009'" Text="LGN tool is required to build this project. To continue, please install it with the following command : dotnet tool install -g LGN" />
+    <Error Condition="'$(ErrorCode)' != '0'" Text="An error occured during Lagoon build. Check output for more details. [$(ErrorCode)]" />
+    <ItemGroup>
+      <EmbeddedResource Include="$(_LagoonIntermediateOutputPath)\Dico.json">
+        <LogicalName>Lagoon.Dico</LogicalName>
+      </EmbeddedResource>
+      <FileWrites Include="$(_LagoonIntermediateOutputPath)\**" />
+    </ItemGroup>
+  </Target>
+
+</Project>

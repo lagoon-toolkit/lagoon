@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Lagoon.UI.Custom</name>
+    </assembly>
+    <members>
+        <member name="T:Lagoon.UI.Application.LgCustomApplication">
+            <summary>
+            Base class for custom applications.
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Application.LgCustomApplication.OnInitCulture(System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Lagoon.UI.Application.LgCustomApplication.LoadConfiguration(Lagoon.UI.Application.LoadConfigurationEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Lagoon.UI.Custom.Pages.LgPageColorsPalette">
+            <summary>
+            Page showing the color palette.
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Custom.Pages.LgPageColorsPalette.ROUTE">
+            <summary>
+            Route to reach the page.
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Custom.Pages.LgPageColorsPalette.Link">
+            <summary>
+            Gets the URL for this page.
+            </summary>
+            <returns>The URL for this page.</returns>
+        </member>
+        <member name="M:Lagoon.UI.Custom.Pages.LgPageColorsPalette.OnInitialized">
+            <inheritdoc/>
+        </member>
+        <member name="T:Lagoon.UI.Components.IconNames.IconAliases">
+            <summary>
+            You can add here alias to icon names from icons library.
+            </summary>
+            <remarks>
+            WARNING :
+            - After changes in this file, you must compile and use constants from <c>IconNames</c> class.
+            - The syntax must be "private const string {MyIcon} = All.{OtherIcon};"
+            </remarks>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.About">
+            <summary>
+            Alias to All.InfoCircleFill
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Add">
+            <summary>
+            Alias to All.Plus
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Admin">
+            <summary>
+            Alias to All.GearFill
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Cancel">
+            <summary>
+            Alias to All.XCircle
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Close">
+            <summary>
+            Alias to All.X
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Collapse">
+            <summary>
+            Alias to All.ChevronUp
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.CollapseH">
+            <summary>
+            Alias to All.ChevronLeft
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Delete">
+            <summary>
+            Alias to All.TrashFill
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Edit">
+            <summary>
+            Alias to All.Pencil
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Empty">
+            <summary>
+            Alias to All.BoxOpen
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Error">
+            <summary>
+            Alias to All.ShieldFillExclamation
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Expand">
+            <summary>
+            Alias to All.ChevronDown
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.ExpandH">
+            <summary>
+            Alias to All.ChevronRight
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Export">
+            <summary>
+            Alias to All.Download
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.ExportCsv">
+            <summary>
+            Alias to All.FileEarmarkCsv
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.ExportExcel">
+            <summary>
+            Alias to All.FileEarmarkExcel
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.ExportImage">
+            <summary>
+            Alias to All.FileEarmarkImage
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.ExportPdf">
+            <summary>
+            Alias to All.FileEarmarkPdf
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.ExportWord">
+            <summary>
+            Alias to All.FileEarmarkWord
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.ExportZip">
+            <summary>
+            Alias to All.FileEarmarkZip
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Home">
+            <summary>
+            Alias to All.HouseFill
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Info">
+            <summary>
+            Alias to All.InfoCircleFill
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Loading">
+            <summary>
+            Alias to All.ArrowClockwise
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Login">
+            <summary>
+            Alias to All.KeyFill
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Logout">
+            <summary>
+            Alias to All.Logout
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Question">
+            <summary>
+            Alias to All.QuestionCircleFill
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Save">
+            <summary>
+            Alias to All.Check
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Success">
+            <summary>
+            Alias to All.Check
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.UploadBoxIcon">
+            <summary>
+            Alias to All.Image
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.View">
+            <summary>
+            Alias to All.EyeFill
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Warning">
+            <summary>
+            Alias to All.ExclamationTriangleFill
+            </summary>
+        </member>
+    </members>
+</doc>

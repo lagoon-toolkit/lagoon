@@ -1,0 +1,32 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="Banner" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <div class="button-group">
+        <LgBanner Kind="Kind.Error" IconName="@IconNames.All.XCircleFill" Closable="@Closable" Show="@Show">
+            No internet connection. You need to be online to perform this task.
+        </LgBanner>
+        <LgBanner Kind="Kind.Warning" IconName="@IconNames.All.ExclamationCircleFill" Closable="@Closable" Show="@Show">
+            We are updating the platform. Your experience can be slower during the next hour.
+        </LgBanner>
+        <LgBanner Kind="Kind.Success" IconName="@IconNames.All.CheckCircleFill" Closable="@Closable" Show="@Show">
+            Your message has been sent. We will come back to you as soon as possible.
+        </LgBanner>
+        <LgBanner Kind="Kind.Info" IconName="@IconNames.About" Closable="@Closable" Show="@Show">
+            In order to give you a better service, This site uses cookies. By continuing to browse the site you are agreeing to use it.
+        </LgBanner>
+    </div>
+</LgFrame>
+
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <!-- section label -->
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox @bind-Value="@Show" Text="@(Show ? "Showable" : "Not showable")" CheckBoxKind="@CheckBoxKind.Toggle" />
+    </section>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />
+

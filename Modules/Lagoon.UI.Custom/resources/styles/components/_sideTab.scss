@@ -1,0 +1,87 @@
+﻿$sidenav-text-color: $dark1;
+$sidenav-tab-text-color: $dark3;
+$sidenav-tab-border-color: $gray1;
+$sidenav-tab-bg-hover-color: $light3;
+$sidenav-tab-bg-active-color: rgba($dark0, 0.05);
+$sidenav-tab-border-active-color: $primary2;
+$sidenav-tab-border-focus-color: $secondary3;
+$sidenav-tab-border-disabled-color: $gray1;
+
+.side-tab-nav {
+    background-color: transparent !important;
+
+    .frameRoot {
+        box-shadow: none;
+        margin-block: 0;
+        margin-bottom: 0;
+
+        .frameHeader {
+            padding-left: 1rem;
+            padding-right: 1rem;
+            background-color: transparent !important;
+
+            &:hover {
+                background-color: $sidenav-tab-bg-hover-color;
+            }
+
+            &:focus-visible {
+                border: 2px solid $sidenav-tab-border-focus-color;
+                border-radius: 3px;
+                outline-color: $sidenav-tab-border-focus-color;
+            }
+
+            .lblTitle {
+                font-weight: 500;
+                font-size: 0.75rem;
+            }
+        }
+
+        .frameContent {
+            padding-left: 0;
+            padding-right: 0;
+            background-color: transparent !important;
+        }
+    }
+
+    .lg-side-tab {
+        color: $sidenav-tab-text-color !important;
+        background-color: transparent !important;
+        border-radius: 0;
+        font-weight: 400;
+        font-size: 0.75rem;
+        line-height: 0.85rem;
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+        margin-left: 1.5rem !important;
+        padding-right: .5rem !important;
+        margin-right: 0.5rem;
+        content: "";
+        border-left: 2px solid $sidenav-tab-border-color;
+        padding-top: 1.125rem;
+        padding-bottom: 1.125rem;
+
+
+        &:hover {
+            background-color: $sidenav-tab-bg-hover-color !important;
+        }
+
+        &.active, &:active {
+            border-left: 2px solid $sidenav-tab-border-active-color;
+            background-color: $sidenav-tab-bg-active-color !important;
+        }
+
+        &:focus-visible {
+            border: 2px solid $sidenav-tab-border-focus-color;
+            outline: none;
+        }
+
+        &.disabled {
+            border-left: 2px solid $sidenav-tab-border-disabled-color;
+            color: $sidenav-tab-border-disabled-color !important;
+        }
+
+        &.disabled:focus-visible {
+            outline: none;
+        }
+    }
+}

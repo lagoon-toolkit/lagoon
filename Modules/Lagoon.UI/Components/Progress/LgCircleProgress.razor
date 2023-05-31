@@ -1,0 +1,31 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgProgressBase
+
+<div class="@GetClassAttribute()">
+
+    <div class="progress-circle-inner">
+        <svg xmlns="http://www.w3.org/2000/svg" class="svg-progress-circle" viewBox="0 0 100 100">
+            <path class="progress-circle-trail"
+                  style=@($"stroke-dasharray: {CircleDash}px, {CircleDash}px;")
+                  fill-opacity="0" stroke-linecap="round" stroke-width="6" d="M 50 50 m 0 -47 a 47 47 0 1 1 0 94 a 47 47 0 1 1 0 -94" />
+            @if (ValuePercent > 0)
+            {
+                <path class=@($"progress-circle-path")
+                      style=@($"transition:stroke-dashoffset 0.3s, stroke-dasharray 0.3s, stroke 0.3s, stroke-width 0.06s 0.3s; stroke-dasharray: {ValueCirclePath}px, {CircleDash}px; stroke-dashoffset: 0px;")
+                      opacity="1" fill-opacity="0" stroke="" stroke-linecap="round" stroke-width="6" d="M 50 50 m 0 -47 a 47 47 0 1 1 0 94 a 47 47 0 1 1 0 -94" />
+            }
+        </svg>
+        <div class="progress-circle-middle">
+            @if (HasAutoLabel && IsDone || (Kind == Kind.Error))
+            {
+                <span class="progress-circle-text text-center">
+                    <LgIcon IconName="@GetDoneIconName()" />
+                </span>
+            }
+            else
+            {
+                <span class="progress-circle-text">@LabelRendering</span>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+﻿div.accordion {
+    div.accordion-item {
+        div.frameRoot {
+            margin: 0px;
+        }
+        div.frameTitle {
+            border-top-left-radius: 0px;
+            border-top-right-radius: 0px;
+        }
+        &:first-child > div.frameTitle {
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+        }
+    }
+}

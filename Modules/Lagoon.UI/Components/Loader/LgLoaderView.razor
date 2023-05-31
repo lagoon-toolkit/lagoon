@@ -1,0 +1,59 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+
+@if (IsError)
+{
+    <LgBigMessage IconName="@IconNames.Error" Title="@ErrorTitle" Description="ErrorDescription" />
+}
+else
+{
+    if (IsLoading)
+    {
+        <div class="@GetClassAttribute()">
+            <div class="lg-loader-content">
+                @if (CustomTemplate is null)
+                {
+                    @if (ProgressType == ProgressType.Bar)
+                    {
+                        @if (_hasProgression)
+                        {
+                            <LgProgress Min="_progress.StartPosition" Max="_progress.EndPosition" Value="_progress.Position" />
+                        }
+                        else
+                        {
+                            <LgProgress Min="0" Max="0" Value="0" Animated="true" Striped="true" />
+                        }
+                    }
+                    else
+                    {
+                        @if (_hasProgression)
+                        {
+                            <LgCircleProgress Min="_progress.StartPosition" Max="_progress.EndPosition" Value="_progress.Position" />
+                        }
+                        else
+                        {
+                            <div class="lg-loader-default-icon">
+                                <img src="@_loaderImgUri" alt=@("#RgaaIndeterminateLoading".CheckTranslate()) />
+                            </div>
+                            <div class="lg-loader-default-border">
+                                <div class="lg-loader-default-circle"></div>
+                            </div>
+                        }
+                    }
+                }
+                else
+                {
+                    @CustomTemplate(_progress)
+                }
+            </div>
+            <div class="text-center">
+                <LgLabel CssClass="lg-loader-label" Text="@(Label ?? _progress?.Message)" />
+            </div>
+        </div>
+    }
+    else
+    {
+        @ChildContent
+    }
+}
+

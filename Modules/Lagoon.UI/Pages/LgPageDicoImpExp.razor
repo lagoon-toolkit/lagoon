@@ -1,0 +1,22 @@
+﻿@using Lagoon.Internal
+@using Microsoft.AspNetCore.Components.Forms
+@inherits LgPage
+
+@if (App.IsDebugEnabled)
+{
+    <LgFrame ChildCssClass="text-center" Title="#pgDicoExportTitle">
+        <LgButton Text="#pgDicoExport" OnClick="ExportDicoAsync" />
+        <hr />
+        <EditForm Model="this">
+            <LgCheckBox Text="#pgDicoBackup" @bind-Value="@_createBackup" />
+        </EditForm>
+        <LgInputFile UploadMode="UploadMode.Button" UploadUri=@($"{Routes.DICO_UPDATE_URI}?backup={_createBackup}")
+                     ActionMessage="#pgDicoSelectXml"
+                     AllowMultipleFiles="false" AllowedFileExtensions="@(new List<string>() {".csv"})" />
+    </LgFrame>
+}
+else
+{
+    <LgTitle Text="#pgDicoOnlyDebug" />
+}
+

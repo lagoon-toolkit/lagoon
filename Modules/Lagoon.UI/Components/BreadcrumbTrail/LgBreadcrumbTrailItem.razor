@@ -1,0 +1,40 @@
+﻿@using Lagoon.UI.Components.Internal
+@namespace Lagoon.UI.Components
+@inherits LgAriaComponentBase
+
+@{
+    RenderFragment _itemContent = @<LgComponentGroup>
+        @if (!string.IsNullOrEmpty(IconNameRendering))
+        {
+            <LgIcon IconName="@IconNameRendering" CssClass="breadcrumb-icon" />
+        }
+        @if (!string.IsNullOrEmpty(TextRendering))
+        {
+            <span class="breadcrumb-text">@(TextRendering)</span>
+        }
+    </LgComponentGroup>;
+}
+
+<li @attributes="GetAdditionalAttributes()" class="@GetClassAttribute()" aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy">
+    @if (IsActive)
+    {
+        <div aria-current="@("lgBreadcrumbCurrent".Translate())" tabindex="0">
+            @_itemContent
+        </div>
+    }
+    else
+    {
+        @if (!OnClick.HasDelegate && string.IsNullOrEmpty(UriRendering))
+        {
+            <div tabindex="0">
+                @_itemContent
+            </div>
+        }
+        else
+        {
+            <LgHyperlink Uri="@UriRendering" OnClick="OnClick" Target="@Target" ConfirmationMessage="@ConfirmationMessage">
+                @_itemContent
+            </LgHyperlink>
+        }
+    }
+</li>

@@ -1,0 +1,23 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="Toolbar" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgToolbar>
+        <LgToolbarGroup>
+            <LgToolbarMenu Text="Dropdown avec groupe">
+                <LgToolbarButton Link=PageToastr.Link() />
+                <LgToolbarButton Link=PageToastr.Link() />
+                <LgToolbarButton IconName="@IconNames.All.GearFill" Text="Item 1" />
+                <LgToolbarButton Text="Item 2" />
+                <LgToolbarMenuItemSeparator />
+                <LgToolbarMenuItemTitle Text="Menu item title" />
+                <LgToolbarButton Text="Item 3" />
+                <LgToolbarButton Text="Item 4" />
+            </LgToolbarMenu>
+        </LgToolbarGroup>
+    </LgToolbar>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

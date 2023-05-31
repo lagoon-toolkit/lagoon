@@ -1,0 +1,60 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgAriaComponentBase
+
+@if (Visible)
+{
+    var _bodyRender = RenderBodyContent();
+    var _footerRender = RenderFooterContent();
+    <CascadingValue Value=this IsFixed=true>
+        <div @attributes="AdditionalAttributes" class="@GetClassAttribute()" tabindex="-1" role="dialog" aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy" id="@_id" @ref="_modalRef">
+            <div class="@GetDialogClassAttribute()" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title change-indicator" id="@_headerId">
+                            <LgIcon IconName="@GetRenderIconName()" CssClass="modal-header-icon" />
+                            @GetRenderTitle()
+                        </h5>
+
+                        <div class="modal-toolbar-container">
+                            <LgToolbar ButtonKind="ButtonKind.Custom">
+                                @if (Toolbar is not null)
+                                {
+                                    @Toolbar
+                                    @*<LgToolbarSeparator />*@
+                                }
+                                @if (Draggable)
+                                {
+                                    <LgToolbarButton IconName="@_iconDrag" OnClick="SwitchDragAsync" CssClass="btn-modal-dragr"
+                                                     Tooltip="@(_allowDragLeave ? "lblModalDisallowDragLeave".Translate() : "lblModalAllowDragLeave".Translate())"
+                                                     PolicyEdit="*" PolicyVisible="*"
+                                                     AriaLabel=@("lblModalSwitchDragLeave".Translate()) />
+                                }
+                                @if (Closable)
+                                {
+                                    <LgToolbarButton IconName="@IconNames.Close" OnClick="CloseAsync" CssClass="btn-modal-close" data-dismiss="modal"
+                                                     PolicyEdit="*" PolicyVisible="*"
+                                                     AriaLabel=@("lblModalClose".Translate()) />
+                                }
+                            </LgToolbar>
+                        </div>
+                    </div>
+                    @if (!String.IsNullOrEmpty(Summary))
+                    {
+                        <div class="modal-summary">
+                            <span>@Summary</span>
+                        </div>
+                    }
+                    <div class="modal-body">
+                        @_bodyRender
+                    </div>
+                    @if (_footerRender is not null)
+                    {
+                        <div class="modal-footer">
+                            @_footerRender
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </CascadingValue>
+}

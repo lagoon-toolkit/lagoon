@@ -1,0 +1,35 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@inherits LgAriaComponentBase
+
+<LgModal @ref="_lgModal" Title="#ExportOptionsTitle"
+         CssClass="export-options-modal" ModalSize="ModalSize.Small">
+    <ChildContent>
+        <div class="export-options-content" role="tabpanel" tabindex="-1" data-is-scrollable="true">
+            <LgInputRadioGroup Label="#ExportOptionsColumnsMode" @bind-Value="@_exportOption.ExportColumnsMode">
+                <Items>
+                    <LgInputRadio Value="ExportColumnsMode.AllColumns" Text="#ExportOptionsAllColumns" />
+                    <LgInputRadio Value="ExportColumnsMode.DisplayedColumns" Text="#ExportOptionsColumnsDisplayed" />
+                </Items>
+            </LgInputRadioGroup>
+            <LgInputRadioGroup Label="#ExportOptionsRowMode" @bind-Value="@_exportOption.ExportRowMode">
+                <Items>
+                    <LgInputRadio Value="ExportRowMode.AllRows" Text="#ExportOptionsAllRow" />
+                    <LgInputRadio Value="ExportRowMode.FilteredRows" Text="#ExportOptionsFilteredRow" />
+                </Items>
+            </LgInputRadioGroup>
+            <LgInputRadioGroup Label="#ExportOptionsProvider" OnChange=SetProvider @bind-Value="_exportOption.ExportProviderId">
+                <Items>
+                     @foreach (IExportProvider export in ExportProviderManager)
+                    {
+                        <LgInputRadio Text="@export.DisplayName.CheckTranslate()" Value="@export.Id" />
+                    }
+                </Items>
+            </LgInputRadioGroup>
+        </div>
+    </ChildContent>
+    <FooterContent>
+        <LgButton Text="#ExportOptionsCancelBtn" Kind="ButtonKind.Secondary" OnClick=@_lgModal.CloseAsync />
+        <LgButton Text="#ExportOptionsExportBtn" Kind="ButtonKind.Primary" OnClick="ExportAsync" />
+    </FooterContent>
+</LgModal>
+

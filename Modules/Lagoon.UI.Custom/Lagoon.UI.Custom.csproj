@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <LagoonPriority>5</LagoonPriority>
+    <HasRootableComponents>True</HasRootableComponents>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    <LangVersion>10.0</LangVersion>
+    <RootNamespace>Lagoon.UI</RootNamespace>
+    <Authors>Lagoon Toolkit team</Authors>
+    <Company>Lagoon Toolkit team</Company>
+    <Description>Lagoon module for custom WebAssembly components.</Description>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\js\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lagoon.Core\Lagoon.Core.csproj" />
+    <ProjectReference Include="..\Lagoon.UI\Lagoon.UI.csproj" />
+  </ItemGroup>
+
+  <!-- Run the Lagoon dotnet tool to consolidate resources -->
+  <Import Project="..\LagoonPreBuild.UI.targets" />
+
+</Project>

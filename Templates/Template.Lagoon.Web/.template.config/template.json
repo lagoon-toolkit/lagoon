@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "DESIRADE",
+  "classifications": [
+    "Web",
+    "Blazor",
+    "WebAssembly",
+    "Lagoon"
+  ],
+  "name": "Lagoon WebAssembly App",
+  "guids": [
+    "84F9565F-6AC1-49C7-AF29-24981CAAB2C9", //CSPROJ Batch
+    "AF85F7F6-5E16-4DE0-9B20-D24EE2CA0798", //CSPROJ Client
+    "B54CB003-E07F-464A-B1C5-891D079EA1FD", //CSPROJ Model
+    "5DE42374-EDDA-43ED-9C3F-CE7C4F859E8C", //CSPROJ Server
+    "63C9B531-126F-4782-9C00-77D6F032670C", //CSPROJ Services
+    "12B245DF-4E42-4019-A0B9-A2CA5A17FBB7", //CSPROJ Shared
+    "36B0EA0D-0FB3-4381-BA3B-F5F889638DCE" //Solution
+  ],
+  "identity": "Desirade.Lagoon.Web.Blazor.Wasm.CSharp",
+  "groupIdentity": "Desirade.Lagoon.Web.Blazor.Wasm",
+  "shortName": "lgnweb",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "TemplateLagoonWeb",
+  "preferNameDirectory": true,
+  "sources": [{
+      "exclude": [
+        ".*/**",
+        "**/_vroot/**",
+        "**/auto/**"
+      ]
+    }
+  ],
+  "symbols": {
+    "Title": {
+      "type": "parameter",
+      "description": "The name of the application that will be displayed to the end user.",
+      "datatype": "string",
+	  "isRequired": true
+    },
+    "TitleReplacer": {
+      "type": "generated",
+      "generator": "coalesce",
+      "parameters": {
+        "sourceVariableName": "Title",
+        "fallbackVariableName": "DBMS"
+      },
+      "replaces": "TemplateApplicationTitle"
+    },
+    "Description": {
+      "type": "parameter",
+      "description": "Project description used to initialize the README.md file.",
+      "datatype": "string",
+      "replaces": "TemplateDescription",
+      "defaultValue": ""
+    },
+    "HttpPortGenerated": {
+      "type": "generated",
+      "generator": "port",
+      "replaces": "8080"
+    },
+    "HttpsPortGenerated": {
+      "type": "generated",
+      "generator": "port",
+      "parameters": {
+        "low": 44300,
+        "high": 44399
+      },
+      "replaces": "44300"
+    }
+  },
+  "primaryOutputs": [{
+      "path": "Server/TemplateLagoonWeb.Server.csproj"
+    }, {
+      "path": "Shared/TemplateLagoonWeb.Shared.csproj"
+    }, {
+      "path": "Model/TemplateLagoonWeb.Model.csproj"
+    }, {
+      "path": "Client/TemplateLagoonWeb.Client.csproj"
+    }, {
+      "path": "Services/TemplateLagoonWeb.Services.csproj"
+    }, {
+      "path": "Batch/TemplateLagoonWeb.Batch.csproj"
+    }
+  ],
+  "postActions": [{
+      "description": "Add projects to solution",
+      "manualInstructions": [{
+          "text": "Add generated project to solution manually."
+        }
+      ],
+      "actionId": "D396686C-DE0E-4DE6-906D-291CD29FC5DE",
+      "continueOnError": true
+    }, {
+      "description": "Restore NuGet packages required by projects.",
+      "manualInstructions": [{
+          "text": "Run 'dotnet restore'"
+        }
+      ],
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "continueOnError": true
+    }
+  ]
+}

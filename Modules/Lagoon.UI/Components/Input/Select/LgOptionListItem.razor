@@ -1,0 +1,38 @@
+﻿@inherits LgAriaComponentBase
+@namespace Lagoon.UI.Components
+@typeparam TItemValue
+
+@if (IsVisible())
+{
+    <a class="@GetClassAttribute()" role="option" id="@OptionId" aria-selected="@(IsSelected ? "true" : "false")"
+              @onclick="OnSelectOptionAsync" @onclick:preventDefault="true" @onclick:stopPropagation="true" 
+                aria-checked="@(ILgSelect.HasCheckBoxes ? (_isItemSelected ? "true" : "false") : null)">
+        @if (ChildContent is not null)
+        {
+            @ChildContent
+        }
+        else
+        {
+            if (ILgSelect.HasCheckBoxes)
+            {
+                if (_isItemSelected)
+                {
+                    <LgIcon CssClass="select-option-selected-icon my-auto" IconName="@IconNames.All.CheckSquareFill" />
+                }
+                else
+                {
+                    <LgIcon CssClass="select-option-unselected-icon my-auto" IconName="@IconNames.All.Square" />
+                }
+            }
+            @if (!String.IsNullOrEmpty(IconName))
+            {
+                <LgIcon CssClass="select-option-icon my-auto" IconName="@IconName" />
+            }
+            <div class="select-option-text my-auto "><span>@Text</span></div>
+            if (!string.IsNullOrEmpty(Tooltip))
+            {
+                <LgIcon CssClass="select-option-tooltip" IconName="@IconNames.Info" Tooltip="@Tooltip" TooltipIsHtml="TooltipIsHtml" />
+            }
+        }
+    </a>
+}

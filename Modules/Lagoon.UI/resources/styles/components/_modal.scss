@@ -1,0 +1,45 @@
+﻿
+.modal-xxl {
+    max-width: $modal-xxl;
+}
+
+.modal {
+
+    .modal-content {
+        position: absolute;
+    }
+
+    .modal-content[draggable="true"] {
+        .modal-header {
+            cursor: move;
+        }
+    }
+}
+
+.modal-header .btn {
+    padding: 0.5rem 0.5rem;
+
+    > .bi {
+        color: #063B9E;
+        width: 2rem;
+        height: 2rem;
+    }
+
+    > .i-move-restricted {
+        color: $success;
+    }
+}
+
+.modal-header .btn:not(:disabled):not(.disabled) {
+    &:hover, &:focus {
+        opacity: .75;
+    }
+}
+
+.btn-modal-dragr {
+    display: none; // Will be show when the window hit a border
+}
+
+.modal-toolbar-container {
+    margin: -0.5rem -1rem -0.5rem 0;
+}

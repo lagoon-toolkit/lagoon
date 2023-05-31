@@ -1,0 +1,25 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+@typeparam TItem
+
+
+<div class="@GetClassAttribute()" role="row" @onclick="ChangeCollapse"
+     aria-expanded="@(IsCollapsed ? "false" : "true")">
+    <div role="gridcell" class="gridview-cell gridcell-group-title" aria-colindex="0" tabindex="-1" style="grid-column: @(GroupData.Level + 1) / -1">
+        <LgIcon CssClass="gridview-group-collapse" IconName="@(IsCollapsed ? IconNames.All.ChevronRight : IconNames.All.ChevronDown)"
+                AriaLabel="@("GridViewGroupAriaLabel".Translate(_groupNames))" />
+        @if (GridView.GroupHeaderContent != null)
+        {
+            @GridView.GroupHeaderContent(GroupContext)
+        }
+        else
+        {
+            @GroupNameRender
+        }
+    </div>
+    <!-- Create cells for screen readers -->
+    @for (int i = 1; i < GridView.ColumnList.Count(); i++)
+    {
+        <div role="gridcell" class="sr-only gridview-cell" aria-colindex="@i">@GroupNameRender</div>
+    }
+</div>

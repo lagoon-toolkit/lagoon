@@ -1,0 +1,81 @@
+﻿/*
+    Circle progess
+*/
+.progress-circle {
+
+    .bi {
+        width: 100%;
+        height: 100%;
+    }
+
+    &.primary {
+        .bi {
+            color: $primary;
+        }
+
+        .progress-circle-path {
+            stroke: $primary;
+        }
+    }
+
+    &.default {
+        .bi {
+            color: #ffffff;
+        }
+
+        .progress-circle-path {
+            stroke: #ffffff;
+        }
+    }
+
+    &.secondary {
+        .bi {
+            color: $secondary;
+        }
+
+        .progress-circle-path {
+            stroke: $secondary;
+        }
+    }
+
+    &.danger {
+        .bi {
+            color: $danger;
+        }
+
+        .progress-circle-path {
+            stroke: $danger;
+        }
+    }
+
+    &.info {
+        .bi {
+            color: $info;
+        }
+
+        .progress-circle-path {
+            stroke: $info;
+        }
+    }
+
+    &.success {
+        .bi {
+            color: $success;
+        }
+
+        .progress-circle-path {
+            stroke: $success;
+        }
+    }
+
+    &.warning {
+        .bi {
+            color: $warning;
+        }
+
+        .progress-circle-path {
+            stroke: $warning;
+        }
+    }
+
+}

@@ -1,0 +1,71 @@
+﻿@using Lagoon.UI.Demo.Pages.Gridviews
+@inherits LgPage
+
+<LgSideTabContainer DefaultLayout="@typeof(Template.RightPanelLayout)" @bind-ActiveTabKey="@ActiveTab">
+    <LgSideTab Link="PageListComponents.Link()" />
+    <LgFrame Title="#sideTabStructureApp" Collapsable="true">
+        <LgSideTab Link="PageBreadcrumb.Link()" Key="Breadcrumb" />
+        <LgSideTab Link="PageTab.Link()" Key="Tab" />
+        <LgSideTab Link="PageSearchNavigation.Link()" Key="SearchNavigation" />
+    </LgFrame>
+    <LgFrame Title="#sideTabStructurePage" Collapsable="true">
+        <LgSideTab Link="PageAccordion.Link()" Key="Accordion" />
+        <LgSideTab Link="PageCard.Link()" Key="Card" />
+        <LgSideTab Link="PageFinder.Link()" Key="Finder" />
+        <LgSideTab Link="PageFrame.Link()" Key="Frame" />
+        <LgSideTab Link="PagePager.Link()" Key="Pager" />
+    </LgFrame>
+    <LgFrame Title="#sideTabUserInteraction" Collapsable="true">
+        <LgSideTab Link="PageButton.Link()" Key="Button" />
+        <LgSideTab Link="PageCheckBox.Link()" Key="CheckBox" />
+        <LgSideTab Link="PageColorPickerBox.Link()" Key="ColorPicker" />
+        <LgSideTab Link="PageCopyPaste.Link()" Key="CopyPaste" />
+        <LgSideTab Link="PageDateBox.Link()" Key="DateBox" />
+        <LgSideTab Link="PageHtmlEditor.Link()" Key="HtmlEditor" />
+        <LgSideTab Link="PageInputFile.Link()" Key="InputFile" />
+        <LgSideTab Link="PageNavHyperLink.Link()" Key="NavHyperLink" />
+        <LgSideTab Link="PageNumericBox.Link()" Key="NumericBox" />
+        <LgSideTab Link="PageRadioButton.Link()" Key="RadioButton" />
+        <LgSideTab Link="PageSelect.Link()" Key="Select" />
+        <LgSideTab Link="PageSuggestBox.Link()" Key="suggestBox" />
+        <LgSideTab Link="PageSummaryBox.Link()" Key="summarybox" />
+        <LgSideTab Link="PageTagBox.Link()" Key="TagBox" />
+        <LgSideTab Link="PageTextBox.Link()" Key="TextBox" />
+        <LgSideTab Link="PageTimeBox.Link()" Key="TimeBox" />
+        <LgSideTab Link="PageToastr.Link()" Key="Toastr" />
+        <LgSideTab Link="PageToggle.Link()" Key="Toggle" />
+        <LgSideTab Link="PageToolbar.Link()" Key="Toolbar" />
+        <LgSideTab Link="PageTooltip.Link()" Key="Tooltip" />
+    </LgFrame>
+    <LgFrame Title="#sideTabPresentationInfo" Collapsable="true">
+        <LgSideTab Link="PageActionPanel.Link()" Key="ActionPanel" />
+        <LgSideTab Link="PageBigMessage.Link()" Key="BigMessage" />
+        <LgSideTab Link="PageEmptyMessage.Link()" Key="EmptyMessage" />
+        <LgSideTab Link="PageCalendar.Link()" Key="Calendar" />
+        <LgSideTab Link="PageModal.Link()" Key="Modal" />
+        <LgSideTab Link="PageLeaflet.Link()" Key="Leaflet"/>
+        <LgSideTab Link="PageListView.Link()" Key="ListView" />
+        <LgSideTab Link="PageTitle.Link()" Key="Title" />
+        <LgSideTab Link="PageTreeview.Link()" Key="Treeview" />
+        <LgSideTab Link="PageWorkScheduler.Link()" Key="WorkScheduler" />
+        <LgSideTab Link="PageTimeline.Link()" Key="Timeline" />
+        <LgFrame Title="Gridview" Collapsable="true">
+            <LgSideTab Link="PageGridViewBasic.Link()" Key="GridViewBasic" />
+            <LgSideTab Link="PageGridViewHeaders.Link()" Key="GridViewHeaders" />
+            <LgSideTab Link="PageGridViewGrouping.Link()" Key="GridViewGrouping" />
+            <LgSideTab Link="PageGridViewPaging.Link()" Key="GridViewPaging" />
+            <LgSideTab Link="PageGridViewEditable.Link()" Key="GridViewEditable" />
+            <LgSideTab Link="PageGridViewCard.Link()" Key="GridViewCard" />
+            <LgSideTab Link="PageGridViewSelection.Link()" Key="GridViewSelection" />
+            <LgSideTab Link="PageGridViewFilterSort.Link()" Key="GridViewFlterSort" />
+            <LgSideTab Link="PageGridViewResize.Link()" Key="GridViewResize" />
+            <LgSideTab Link="PageGridViewExport.Link()" Key="GridViewExport" />
+        </LgFrame>
+    </LgFrame>
+    <LgFrame Title="#sideTabFeedback" Collapsable="true">
+        <LgSideTab Link="PageBanner.Link()" Key="Banner" />
+        <LgSideTab Link="PageLoader.Link()" Key="Loader" />
+        <LgSideTab Link="PageNotification.Link()" Key="notification" />
+        <LgSideTab Link="PageProgress.Link()" Key="Progress" />
+    </LgFrame>
+</LgSideTabContainer>

@@ -1,0 +1,18 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@typeparam TItem
+@inherits LgComponentBase
+
+<div class="@GetClassAttribute()" role="row" style="@GetRowStyle()" @ref="_rowReference" aria-rowindex="@Index">
+    <CascadingValue Value="this" IsFixed="true">
+        <div class="sr-only" role="rowheader" tabindex="-1">
+            @if (RowEditing || IsAddRow)
+            {
+                @(IsAddRow ? "GridViewAddLine".Translate() : "GridViewEditLine".Translate())
+            }
+        </div>
+        <LgEditForm Model="Item" @ref="_editForm" UseValidationComplexModel="true"
+                    ErrorsDisplayOptions="EditFormErrorsDisplayOptions.ToastrAllMessages | EditFormErrorsDisplayOptions.ToastrOnBlur" role="presentation">
+            @GridView.RenderColumns(Item)
+        </LgEditForm>
+    </CascadingValue>
+</div>

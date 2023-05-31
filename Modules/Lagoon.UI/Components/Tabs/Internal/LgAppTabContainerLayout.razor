@@ -1,0 +1,9 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@inherits LgTabContainer
+
+<LgFullScreenPageContainer @ref="_fullScreenPageContainer" />
+@{
+    BeforeHeaderContent = LoadStartupPages();
+    AfterHeaderContent =@<LgMenuTabContainerRender />;
+    base.BuildRenderTree(__builder);
+}

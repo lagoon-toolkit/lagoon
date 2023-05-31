@@ -1,0 +1,94 @@
+﻿@inherits LgComponentBase
+@namespace Lagoon.UI.Components
+
+
+<div class="@GetClassAttribute()" id="@Id" aria-hidden="true">
+    <div class="calendar">
+        <div class="row no-gutters">
+            @{
+                int startDay = StartDate.Day;
+                int startYear = StartDate.Year;
+                int endYear = EndDate.Year;
+                int? prevYear = null;
+                var _months = MonthsBetween(StartDate, EndDate);
+                // Display year becose not same for the datres range
+                if (startYear != endYear)
+                {
+                    prevYear = startDay;
+                }
+            }
+            @{DateTime lastDay;}
+            @foreach (var month in _months)
+            {
+                int loopMonth = month.Item2;
+                int loopYear = month.Item3;
+                string dayCssClass = "";
+                <div class="col-sm">
+                    @*@if (prevYear is null || prevYear != loopYear)
+                    {*@
+                    @*Diplay year*@
+                        <div class="row no-gutters cal-year text-center">
+                            @if (prevYear is null || prevYear != loopYear)
+                            {
+                                prevYear = loopYear;
+                                <span>@($"{prevYear}")</span>
+                            }
+                        </div>
+                    @*}
+                    else
+                    {
+                        <div class="row no-gutters cal-year text-center">
+                        </div>
+                    }*@
+                    <div class="row no-gutters cal-month text-center">
+                        <span>@($"{month.Item1}")</span>
+                    </div>
+                    @if (EndDate.Month == loopMonth && EndDate.Year == loopYear)
+                    {
+                        lastDay = EndDate;
+                    }
+                    else
+                    {
+                        lastDay = new DateTime(loopYear, loopMonth, DateTime.DaysInMonth(loopYear, loopMonth));
+                    }
+                    @for (var date = new DateTime(loopYear, loopMonth, startDay); date <= lastDay; date = date.AddDays(1))
+                    {
+                        DateTime loopDte = date;
+                        dayCssClass = (date.DayOfWeek == DayOfWeek.Sunday || date.DayOfWeek == DayOfWeek.Saturday ? "weekend-day" : "");
+
+                        <div class="row no-gutters cal-day d-flex @dayCssClass" @onclick="@(() => CellClickAsync(loopDte))" style="cursor:pointer;">
+                            @if (DayContent is null)
+                            {
+                                <div class="col-6 cal-day-number d-flex">
+                                    <div class="mr-auto">@date.ToString("dddd").Substring(0, 1).ToUpper()</div>
+                                    <div class="ml-auto">@date.Day.ToString()</div>
+                                    @*@($"{@date.ToString("dddd").Substring(0, 1).ToUpper()} {date.Day.ToString()}")*@
+                                </div>
+                                <div class="col-6 cal-day-content d-flex">
+                                    @foreach (var rangeType in Indicators)
+                                    {
+                                        List<CalendarIndicatorRange> ranges = rangeType.Ranges;
+                                        @if (rangeType.Ranges.Where(itenaryModel => (date >= itenaryModel.StartDate.Date && date <= itenaryModel.EndDate.Date)).Count() > 0)
+                                        {
+                                            // Date found into current rangety
+                                            <div class="indicator-range-data @rangeType.CssClass" style="@(!String.IsNullOrEmpty(rangeType.Color) ? $"background-color:{rangeType.Color};" : "")" title="@rangeType.Label"></div>
+                                        }
+                                        else
+                                        {
+                                            <div class="indicator-range-nodata"></div>
+                                        }
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                @DayContent(date)
+                            }
+                        </div>
+                    }
+                </div>
+                startDay = 1;
+            }
+        </div>
+    </div>
+</div>

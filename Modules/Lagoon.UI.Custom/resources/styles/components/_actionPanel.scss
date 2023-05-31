@@ -1,0 +1,28 @@
+﻿.action-pnl {
+    background-color: $primary1;
+    padding-left: 0.75rem;
+    height: 2.2rem;
+    border-radius: 2px;
+
+    .action-pnl-content {
+        .lbl {
+            font-weight: 400;
+            color: white;
+            padding-left: 0.75rem;
+        }
+    }
+
+    .action-pnl-toolbar {
+        height: 100%;
+
+        .toolbar-group {
+            height: 100%;
+
+            .btn {
+                margin-inline: 4px;
+                margin-block: 0px;
+                padding-block: 0px;
+            }
+        }
+    }
+}

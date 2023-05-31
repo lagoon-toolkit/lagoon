@@ -1,0 +1,61 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgAriaComponentBase
+@typeparam TItem
+
+<div class="globalsearch-content @GetClassAttribute()" @ref="ElementRef">
+    <LgDropDown @bind-IsOpen="_dropdownVisible" CssClass="globalSearch-dropdown" AutoOpen="false">
+        <ControlContent>
+            <LgTextBox @bind-Value="@_searchText" Placeholder="@Placeholder"
+                       @attributes="GetAdditionalAttributes()" OnFocus="FocusAsync"
+                       OnInput="SearchAsync" OnKeyUp="ShowDropdownAsync"
+                       PrefixType="InputLabelType.IconName" Prefix="@IconNames.All.Search"
+                       AriaLabel="@AriaLabel" AriaLabelledBy="@AriaLabelledBy" />
+        </ControlContent>
+        <DropDownContent>
+            <LgLoaderView IsLoading="_data is null">
+                @{
+                    bool any = false;
+                    foreach (TItem item in _data)
+                    {
+                        any = true;
+                        <LgNavLink CssClass="gs-item-content" OnClick="() => Navigate(item.Uri)" @key="item">
+                            <ChildContent>
+                                @if (ItemContent is null)
+                                {
+                                    <LgIcon IconName="@item.IconName" CssClass="my-auto"></LgIcon>
+                                    <div class="gs-item-text my-auto"><span class="highlightable">@item.Title.CheckTranslate()</span></div>
+                                }
+                                else
+                                {
+                                    @ItemContent(item)
+                                }
+                            </ChildContent>
+                        </LgNavLink>
+                    }
+
+                    if (any && SeeAllData)
+                    {
+                        <LgNavLink CssClass="gs-item-content gs-item-content-seeAll" OnClick="GetAllItemsAsync">
+                            <ChildContent>
+                                <LgIcon IconName="@IconNames.All.EyeFill"></LgIcon>
+                                <LgLabel Text="#lblSeeAll"></LgLabel>
+                            </ChildContent>
+                        </LgNavLink>
+                    }
+
+                    @if (ChildContent is not null)
+                    {
+                        <div class="gs-item-content">
+                            @ChildContent
+                        </div>
+                    }
+
+                    if (!any)
+                    {
+                        <LgEmptyMessage IconName="@IconNames.Empty" Title="#FilterBoxNoResult" />
+                    }
+                }
+            </LgLoaderView>
+        </DropDownContent>
+    </LgDropDown>
+</div>

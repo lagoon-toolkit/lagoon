@@ -1,0 +1,97 @@
+﻿$toast-success-text: $toast-text;
+$toast-error-text: $toast-text;
+$toast-info-text: $toast-text;
+$toast-warning-text: $toast-text;
+$toast-success-bg: $toast-success;
+$toast-error-bg: $toast-error;
+$toast-info-bg: $toast-info;
+$toast-warning-bg: $toast-warning;
+
+#toast-container {
+    & > .toastr {
+        color: $toast-text;
+        padding: 0.45rem 0.4rem 0.45rem 0.4rem;
+        border-radius: 4px;
+        opacity: 1;
+        border: 1px solid $light1;
+        box-shadow: none;
+
+        &:hover {
+            box-shadow: none;
+        }
+
+        & > .toast-message, .toast-title {
+            padding: 0 0.75rem;
+        }
+
+        & > .toast-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        & > .toast-message {
+            font-size: 0.75rem;
+        }
+
+        & > .toast-close-button {
+            right: -0.1em;
+            top: -0.5em;
+            font-weight: 200;
+        }
+    }
+
+    & .toast-error {
+        background-image: none;
+        background-color: $toast-error-bg;
+        color: $toast-error-text;
+
+        .toast-close-button {
+            color: $toast-error-text;
+        }
+    }
+
+    & .toast-info {
+        background-image: none;
+        background-color: $toast-info-bg;
+        color: $toast-info-text;
+
+        .toast-close-button {
+            color: $toast-info-text;
+        }
+    }
+
+    & .toast-success {
+        background-image: none;
+        background-color: $toast-success-bg;
+        color: $toast-success-text;
+
+        .toast-close-button {
+            color: $toast-success-text;
+        }
+    }
+
+    & .toast-warning {
+        background-image: none;
+        background-color: $toast-warning-bg;
+        color: $toast-warning-text;
+
+        .toast-close-button {
+            color: $toast-warning-text;
+        }
+    }
+
+    & .toast-close-button {
+        text-shadow: none;
+        color: $toast-text;
+    }
+}
+
+.toast-top-left {
+    top: $header-height + 0.8rem;
+    left: 12px;
+}
+
+.toast-top-right {
+    top: $header-height + 0.8rem;
+    right: 12px;
+}

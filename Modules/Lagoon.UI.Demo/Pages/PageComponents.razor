@@ -1,0 +1,52 @@
+﻿@inherits LgPage
+
+<LgSideTabContainer DefaultLayout="@typeof(Template.RightPanelLayout)">
+    <LgFrame Title="Tous les composants">
+        @*<LgSideTab Link="PageListComponents.Link()" />*@
+    </LgFrame>
+
+    <LgFrame Title="#sideTabStructureApp" Collapsable="true" Collapsed="false">
+        <LgSideTab Link="PageTab.Link()" />
+    </LgFrame>
+
+    <LgFrame Title="#sideTabStructurePage" Collapsable="true" Collapsed="false">
+        <LgSideTab Link="PageAccordion.Link()" />
+        <LgSideTab Link="PageBanner.Link()" />
+        <LgSideTab Link="PageCard.Link()" />
+        <LgSideTab Link="PageFrame.Link()" />
+        <LgSideTab Link="PageModal.Link()" />
+        <LgSideTab Link="PagePager.Link()" />
+    </LgFrame>
+
+    <LgFrame Title="#sideTabPresentationInfo" Collapsable="true" Collapsed="false">
+        <LgSideTab Link="PageBreadcrumb.Link()" />
+        <LgSideTab Link="PageBigMessage.Link()" />
+        <LgSideTab Link="PageCalendar.Link()" />
+        <LgSideTab Link="PageFinder.Link()" />
+        <LgSideTab Link="PageLeaflet.Link()" />
+        <LgSideTab Link="PageListView.Link()" />
+        <LgSideTab Link="PageNavHyperLink.Link()" />
+        <LgSideTab Link="PageProgress.Link()" />
+        <LgSideTab Link="PageToastr.Link()" />
+        <LgSideTab Link="PageWorkScheduler.Link()" />
+    </LgFrame>
+    <LgFrame Title="#sideTabUserInteraction" Collapsable="true" Collapsed="false">
+        <LgSideTab Link="PageButton.Link()" />
+        <LgSideTab Link="PageCheckBox.Link()"></LgSideTab>
+        <LgSideTab Link="PageColorPickerBox.Link()"></LgSideTab>
+        <LgSideTab Link="PageDateBox.Link()"></LgSideTab>
+        <LgSideTab Link="PageInputFile.Link()" />
+        <LgSideTab Link="PageNumericBox.Link()"></LgSideTab>
+        <LgSideTab Link="PageHtmlEditor.Link()"></LgSideTab>
+        <LgSideTab Link="PageRadioButton.Link()"></LgSideTab>
+        <LgSideTab Link="PageSelect.Link()"></LgSideTab>
+        <LgSideTab Link="PageTextBox.Link()"></LgSideTab>
+        <LgSideTab Link="PageTimeBox.Link()"></LgSideTab>
+        <LgSideTab Link="PageTagBox.Link()" />
+        <LgSideTab Link="PageToolbar.Link()" />
+        <LgSideTab Link="PageSummaryBox.Link()" />
+    </LgFrame>
+    <LgFrame Title="#sideTabFeedback" Collapsable="true" Collapsed="false">
+
+    </LgFrame>
+</LgSideTabContainer>

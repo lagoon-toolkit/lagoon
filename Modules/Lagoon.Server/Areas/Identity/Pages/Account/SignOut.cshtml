@@ -1,0 +1,21 @@
+﻿@page
+@using Lagoon.Server.Areas.Identity.Pages.Account
+@model SignOutModel
+
+@(await Component.InvokeAsync<Lagoon.Server.Areas.Identity.Pages.Components.SignOutComponent>(Model))
+
+<div class="authentication-step-container">
+    <div class="authentication-step" role="alert" aria-live="assertive">
+        <div>
+            @if (string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                @("AuthLogOutSucceeded".Translate())
+            }
+            else
+            {
+                <p class="text-danger">@Model.ErrorMessage</p>
+            }
+        </div>
+        <button autofocus class="btn btn-primary" onclick="location.href='@Url.Content("~/")'">Se reconnecter</button>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+﻿:root {
+    // ButtonTextColor {
+    --timebox-bt-color: #{$text-color};
+    // ClockFaceColor {
+    --timebox-cf-color: #EEEEEE;
+    // ClockInnerCircleTextColor {
+    --timebox-cict-color: #{$text-color};
+    // ClockInnerCircleUnselectableTextColor
+    --timebox-cicut-color: #{$text-color};
+    // ClockOuterCircleTextColor
+    --timebox-coct-color: #{$text-color};
+    // ClockOuterCircleUnselectableTextColor
+    --timebox-cocut-color: #{$text-color};
+    // HoverCircleColor
+    --timebox-hc-color: #DDDDDD;
+    // PopupBackgroundColor
+    --timebox-pb-color: #FFFFFF;
+    // PopupHeaderBackgroundColor
+    --timebox-phb-color: #{$primary};
+    // PopupHeaderTextColor
+    --timebox-pht-color: #FFFFFF;
+    // SelectorColor
+    --timebox-s-color: #{$primary};
+    // SelectorNumberColor
+    --timebox-sn-color: #FFFFFF;
+    // SignButtonColor
+    --timebox-sbu-color: #FFFFFF;
+    // SignButtonBackgroundColor
+    --timebox-sba-color: #0797FF;
+}
+
+.clock-timepicker {
+    width: 100%;
+
+    > input {
+        // Override library js calculated width
+        min-width: auto !important;
+        max-width: 100%;
+    }
+
+    .clock-timepicker-popup {
+        left: auto !important; //Popup set to left
+    }
+
+
+    span.form-input-suffix {
+        z-index: 99999;
+    }
+}

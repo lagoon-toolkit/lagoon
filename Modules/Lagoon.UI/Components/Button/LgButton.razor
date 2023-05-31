@@ -1,0 +1,19 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgAriaComponentBase
+
+@if (_policyState.Visible)
+{
+    <button type="@(IsSubmit ? "submit" : "button")" @attributes="GetAdditionalAttributes()" class="@GetClassAttribute()" id="@ElementId"
+            @onclick="OnClickInternalAsync" @onclick:preventDefault="PreventDefault" @onclick:stopPropagation="StopPropagation" @onkeypress=OnKeyPressAsync
+            disabled=@IsDisabled() aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy" @ref="ElementRef">
+        @if (!string.IsNullOrEmpty(IconNameRendering))
+        {
+            <LgIcon IconName="@IconNameRendering"/>
+        }
+        @if (!string.IsNullOrEmpty(TextRendering))
+        {
+            <span>@TextRendering</span>
+        }
+        @ChildContent
+    </button>
+}

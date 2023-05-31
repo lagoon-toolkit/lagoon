@@ -1,0 +1,66 @@
+﻿.form-input.fixed-height > .bootstrap-tagsinput {
+    overflow-x: scroll;
+    white-space: nowrap;
+    height: 4.3rem;
+}
+
+.bootstrap-tagsinput {
+    box-shadow: none;
+    height: auto;
+    overflow-x: auto;
+    padding-top: 1.3rem;
+    cursor: auto;
+
+    .tag {
+        display: inline-block;
+        background-color: $select-bg-color-multiple;
+        color: $select-text-color-multiple;
+        border: 0;
+        border-radius: 12px;
+        padding: 0px 2px 1px 8px;
+        cursor: default;
+        margin-top: 0.3rem;
+        font-size: $font-size-text;
+        line-height: 22px;
+        font-weight: $font-weight-label;
+
+        [data-role="remove"] {
+            background-color: transparent;
+            border: none;
+            border-right: 0;
+            border-radius: 10px;
+            color: $gray3;
+            cursor: pointer;
+            font-size: 1.3em;
+            float: right;
+            padding: 0px 0.2rem 0px 0.2rem;
+            margin: 0px;
+            line-height: 1;
+            font-weight: normal;
+            margin-left: 0.35rem;
+            margin-top: 0.15rem;
+
+            &:after {
+                font-size: 14px;
+                padding: 1px 2px;
+                display: block;
+            }
+        }
+    }
+
+    input:hover {
+        background-color: transparent;
+        padding-inline: 0.6rem;
+    }
+}
+
+.form-input .bootstrap-tagsinput input {
+    padding-top: 0 !important;
+    height: auto !important;
+}
+
+@if $custom-label-outside {
+    .bootstrap-tagsinput {
+        padding-top: 4px;
+    }
+}

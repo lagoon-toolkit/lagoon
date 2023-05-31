@@ -1,0 +1,12 @@
+﻿global using TemplateLagoonWeb.Shared;
+global using Lagoon.Helpers;
+global using Lagoon.Shared.Authorization;
+global using Microsoft.AspNetCore.Authorization;
+global using System;
+global using System.Collections.Generic;
+global using System.ComponentModel.DataAnnotations;
+global using System.Linq;
+global using System.Text;
+global using System.Threading;
+global using System.Threading.Tasks;
+global using KeyAttribute = MessagePack.KeyAttribute;

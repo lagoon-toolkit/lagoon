@@ -1,0 +1,9 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+
+<div class="@GetClassAttribute()">
+    <LgIcon IconName="@IconName" />
+    <LgTitle Text="@Title" />
+    <LgTitle Text="@Description" TitleLevel="TitleLevel.Level2" />
+    @ChildContent
+</div>

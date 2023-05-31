@@ -1,0 +1,124 @@
+﻿@page
+@model Lagoon.Server.Areas.Identity.Account.LoginModel
+@using Lagoon.Helpers
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+
+<div class="login-area row">
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <p style="color: red">@Model.ErrorMessage</p>
+    }
+
+    @if (Model.ShowLogin || Model.ShowPassword)
+    {
+        <div class="area-appname col-xl-6 col-12">
+            <div class="app-name-version">
+                <span class="app-name">@Model.ApplicationName</span>
+                @if (@Model.ApplicationVersion != null)
+                {
+                    <span class="app-version">v @Model.ApplicationVersion</span>
+                }
+            </div>
+            <div id="brand-logo"></div>
+        </div>
+        <div class="area-login col-xl-6 col-12">
+            <div class="area-form-login">
+                <h1 class="title-authent">@("lblWelcome".Translate())</h1>
+
+                <form id="account" method="post" asp-route-returnUrl="@Model.ReturnUrl"
+                      asp-route-showPassword="@Model.ShowPassword" asp-route-userLogin="@Model.UserLogin">
+
+                    @if (!Model.ModelState.IsValid)
+                    {
+                        <div class="text-danger" aria-label=@("lblLoginErrors".Translate())>
+                            <ul>
+                                @foreach (KeyValuePair<string, ModelStateEntry> state in Model.ModelState)
+                                {
+                                    @foreach (var error in state.Value.Errors)
+                                    {
+                                        <li role="alert">@error.ErrorMessage</li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    }
+
+                    @if (Model.ShowLogin)
+                    {
+                        <div class="form-group input-without-lbl">
+                            <input asp-for="@Model.UserLogin" class="form-control" aria-required="true" placeholder="@($"lblLoginField".Translate())" />
+                            <span asp-validation-for="@Model.UserLogin" class="text-danger"></span>
+                        </div>
+                    }
+                    @if (Model.ShowPassword)
+                    {
+                        <div class="form-group input-without-lbl">
+                            <div>
+                                <input asp-for="@Model.UserPassword" class="form-control" aria-required="true" placeholder="@($"lblPwdField".Translate())" />
+                                <span asp-validation-for="@Model.UserPassword" class="text-danger"></span>
+                            </div>
+                            @if (!string.IsNullOrWhiteSpace(Model.ForgotPasswordUrl))
+                            {
+                                <div class="mt-1 ml-1">
+                                    <a href="@Model.ForgotPasswordUrl">@("lblForgotPassword".Translate())</a>
+                                </div>
+                            }
+                        </div>
+                    }
+                    @if (Model.ShowRememberMe)
+                    {
+                        <div class="form-group">
+                            <div class="custom-control  d-block custom-checkbox custom-control-right ">
+                                <input asp-for="@Model.RememberMe" class="custom-control-input" />
+                                <label asp-for="@Model.RememberMe" class="custom-control-label optional">
+                                    @($"lblRememberMe".Translate())
+                                </label>
+                            </div>
+                        </div>
+                    }
+                    <button type="submit" class="btn btn-primary">
+                        @(!Model.ShowPassword ? "lblNext".Translate() : "lblLogIn".Translate())
+                    </button>
+                </form>
+
+                @if (Model.ShowWindowsAuth || Model.DirectExternalSSOProvider.Count() > 0)
+                {
+                    @if (Model.ShowPassword)
+                    {
+                        <hr />
+                    }
+                    <div class="area-additional-auth">
+                        @if (Model.ShowWindowsAuth)
+                        {
+                            <form id="external-account" asp-page="./WindowsLogin" asp-route-returnUrl="@Model.ReturnUrl" method="get" class="form-horizontal btnShowWindowsAuth">
+                                <button type="submit" class="btn btn-primary btn-additional-auth" name="provider" value="Windows" title=@("lblBnWindowConnect".Translate())>@("lblBnWindowConnect".Translate())</button>
+                            </form>
+                        }
+
+                        @if (Model.DirectExternalSSOProvider.Count() > 0)
+                        {
+                            <form id="external-account" asp-page-handler="ExternalAuthentication" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal btnDirectExternalSSOProvider">
+                                <div>
+                                    <p>
+                                        @foreach (var provider in Model.DirectExternalSSOProvider)
+                                        {
+                                            <button type="submit" class="btn btn-primary btn-additional-auth" name="provider" value="@provider.Name" title="@("lblBtnSSOConnect".Translate(provider.Name))">@provider.Name</button>
+                                        }
+                                    </p>
+                                </div>
+                            </form>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(Model.RegisterUrl))
+        {
+            <form action="@Model.RegisterUrl" method="get" class="form-register form-horizontal">
+                <button type="submit" class="btn btn-primary" style="border: 1px solid white;">@("lblRegister".Translate())</button>
+            </form>
+        }
+    }
+
+</div>

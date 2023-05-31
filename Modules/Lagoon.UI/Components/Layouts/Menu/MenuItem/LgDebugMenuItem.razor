@@ -1,0 +1,9 @@
+﻿@namespace Lagoon.UI.Components
+
+<LgMenuItem Text="Debug" IconName="@IconNames.All.BugFill">
+    <LgMenuItem Link="Lagoon.UI.Pages.LgPageIcons.Link()" />
+    <LgMenuItem Link="Lagoon.UI.Pages.LgPageLogs.Link()" />
+    <LgMenuItem Link="Lagoon.UI.Pages.LgPageDicoImpExp.Link()" />
+    <LgMenuItem Text="Reload CSS" IconName="@IconNames.All.BootstrapReboot" OnClick="ReloadCss" />
+    @ChildContent
+</LgMenuItem>

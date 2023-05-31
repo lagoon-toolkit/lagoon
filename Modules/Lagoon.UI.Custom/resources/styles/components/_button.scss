@@ -1,0 +1,336 @@
+$border-focus-color: $secondary3;
+$btn-primary-text-color: #FFFFFF;
+
+.btn-primary {
+    @include button-variant($secondary1, $secondary1, $secondary2, $secondary2, $secondary3, $secondary3);
+    font-weight: 500;
+    color: $btn-primary-text-color;
+
+    &:not(:disabled):not(.disabled):hover {
+        color: $btn-primary-text-color;
+    }
+
+    &:focus, &.focus {
+        box-shadow: none;
+        color: $btn-primary-text-color;
+    }
+
+    &:focus-visible {
+        box-shadow: 0 0 0 2px $border-focus-color;
+        color: $btn-primary-text-color;
+    }
+
+    &:not(:disabled):not(.disabled):active, &:not(:disabled):not(.disabled).active {
+        box-shadow: none;
+    }
+
+    &:disabled {
+        background-color: $gray1;
+        color: $light1;
+        border: 0;
+    }
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: none !important;
+}
+
+.btn-secondary {
+    @include button-variant($light0, $secondary1, $light0, $secondary2, $light0, $secondary3);
+    font-weight: 500;
+    color: $secondary1;
+
+    &:not(:disabled):not(.disabled):hover {
+        color: $secondary2;
+        border-color: $secondary2;
+
+        span {
+            color: $secondary2;
+        }
+    }
+
+    &:not(:disabled):not(.disabled):active {
+        box-shadow: none !important;
+        color: $secondary3;
+
+        span {
+            color: $secondary3;
+        }
+    }
+
+    &:focus-visible {
+        color: $secondary1;
+        box-shadow: 0 0 0 2px $border-focus-color;
+    }
+
+    &:focus {
+        color: $secondary1;
+    }
+
+    &:disabled {
+        border: 1px solid $gray1;
+        color: $gray1;
+    }
+}
+
+//
+// Button Sizes
+//
+
+$btn-padding-y: 0rem;
+$btn-padding-x: 0.3rem;
+$btn-font-size: 0.8rem;
+$btn-line-height: 1.5rem;
+$btn-border-radius: 5px;
+
+.btn {
+    @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-line-height, $btn-border-radius);
+
+    svg + span {
+        margin-right: 0.6rem;
+        margin-left: 4px;
+    }
+
+    svg {
+        margin-left: 0.6rem;
+        font-size: $btn-font-size;
+    }
+
+    svg:only-child {
+        margin: 0px;
+        font-size: $btn-font-size;
+    }
+
+    span:only-child {
+        margin-right: 0.6rem;
+        margin-left: 0.6rem;
+    }
+}
+
+$btn-padding-y-sm: 0px;
+$btn-padding-x-sm: 0.4rem;
+$btn-font-size-sm: 0.7rem;
+$btn-line-height-sm: 1.2rem;
+$btn-border-radius-sm: 5px;
+
+.btn-sm {
+    @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $btn-font-size-sm, $btn-line-height-sm, $btn-border-radius-sm);
+
+    svg + span {
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+    }
+
+    svg {
+        margin-left: 0.25rem;
+        font-size: $btn-font-size-sm;
+    }
+
+    svg:only-child {
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
+        margin-left: 0rem;
+        margin-right: 0rem;
+        font-size: $btn-font-size-sm;
+    }
+
+    span:only-child {
+        margin-right: 0.25rem;
+        margin-left: 0.25rem;
+    }
+}
+
+$btn-padding-y-lg: 0.15rem;
+$btn-padding-x-lg: 0.4rem;
+$btn-font-size-lg: 0.8rem;
+$btn-line-height-lg: 1.5rem;
+$btn-border-radius-lg: 5px;
+
+.btn-lg {
+    @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $btn-font-size-lg, $btn-line-height-lg, $btn-border-radius-lg);
+
+    svg + span {
+        margin-right: 0.6rem;
+        margin-left: 0.25rem;
+    }
+
+    svg {
+        margin-left: 0.6rem;
+        font-size: $btn-font-size-lg;
+    }
+
+    svg:only-child {
+        margin: 0px;
+        font-size: $btn-font-size-lg;
+    }
+
+    span:only-child {
+        margin-right: 0.6rem;
+        margin-left: 0.6rem;
+    }
+}
+
+.btn-link {
+    font-weight: 400;
+    color: $secondary1;
+
+    span {
+        text-decoration: underline;
+    }
+
+    &:not(:disabled):not(.disabled):hover, &:hover {
+        color: $secondary2;
+
+        span {
+            text-decoration: underline;
+        }
+    }
+
+
+    &:active, &.active {
+        color: $secondary3;
+
+        span {
+            text-decoration: underline;
+        }
+    }
+
+    &:focus-visible, &:focus {
+        color: $secondary1;
+        box-shadow: 0 0 0 2px $border-focus-color;
+
+        span {
+            text-decoration: underline;
+        }
+    }
+
+    &:disabled, &.disabled {
+        color: $gray1;
+    }
+}
+
+.btn-link:hover {
+    text-decoration: none;
+}
+
+.btn-danger, .btn-success, .btn-info, .btn-warning {
+    &:focus,
+    &.focus {
+        box-shadow: none;
+    }
+
+    &:focus-visible {
+        box-shadow: 0 0 0 2px $border-focus-color;
+    }
+
+    &:active:focus {
+        box-shadow: none;
+    }
+
+    &:not(:disabled):not(.disabled):active:focus {
+        box-shadow: none;
+    }
+}
+
+.btn-success {
+    background-color: $success;
+    border-color: $success;
+
+    &:hover {
+        background-color: $success;
+        border-color: $success;
+    }
+
+    &:active {
+        background-color: $success;
+        border-color: $success;
+    }
+}
+
+.btn-danger {
+    background-color: $danger;
+    border-color: $danger;
+
+    &:hover {
+        background-color: $danger;
+        border-color: $danger;
+    }
+
+    &:active {
+        background-color: $danger;
+        border-color: $danger;
+    }
+}
+
+.btn-warning {
+    background-color: $warning;
+    border-color: $warning;
+
+    &:hover {
+        background-color: $warning;
+        border-color: $warning;
+    }
+
+    &:active {
+        background-color: $warning;
+        border-color: $warning;
+    }
+}
+
+.btn-info {
+    background-color: $info;
+    border-color: $info;
+
+    &:hover {
+        background-color: $info;
+        border-color: $info;
+    }
+
+    &:active {
+        background-color: $info;
+        border-color: $info;
+    }
+}
+
+.btn-ghost {
+    @include button-variant($ghost-default, $ghost-default, $ghost-hover, $ghost-hover, $ghost-active, $ghost-active);
+    font-weight: 500;
+    color: $ghost-text-color;
+
+    &:focus,
+    &.focus {
+        box-shadow: none;
+        color: $ghost-text-color;
+        background-color: transparent;
+    }
+
+    &:not(:disabled):not(.disabled):hover {
+        border-color: transparent;
+        color: $ghost-text-color;
+    }
+
+    &:active,
+    &.active {
+        border: none;
+        color: $ghost-text-color;
+    }
+
+    &:focus-visible {
+        box-shadow: 0 0 0 2px $border-focus-color;
+        outline: none;
+        color: $ghost-text-color;
+    }
+
+    &:not(:disabled):not(.disabled):active, &:not(:disabled):not(.disabled).active {
+        box-shadow: none;
+        color: $ghost-text-color;
+    }
+
+    &:not(:disabled):not(.disabled):active:focus {
+        box-shadow: none;
+    }
+
+    &:disabled {
+        color: $gray1;
+    }
+}

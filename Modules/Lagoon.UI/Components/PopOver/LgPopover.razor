@@ -1,0 +1,9 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+
+@if (Visible)
+{
+    <div @attributes="@AdditionalAttributes" id="@Id" @onblur="OnBlurInternalAsync" tabindex="0">
+        @ChildContent
+    </div>
+}

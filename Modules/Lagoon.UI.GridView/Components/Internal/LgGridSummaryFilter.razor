@@ -1,0 +1,23 @@
+﻿@using Lagoon.UI.Components
+@inherits LgComponentBase
+
+@if (_summaryFilters is not null)
+{
+    <div class="gridview-filtersSummary">
+        @foreach (GridViewSummaryFilter summaryFilter in _summaryFilters.Take(NUMBER_SUMMARY_FILTERS_DISPLAYED))
+        {
+            <div class="gridview-filtersSummary-elt" @attributes="GetAdditionalAttributes(summaryFilter.Value)">
+                <span class="gridview-filtersSummary-name">@($"{summaryFilter.Name} :") </span>
+                <span class="gridview-filtersSummary-value">@summaryFilter.Value</span>
+            </div>
+        }
+        @if (_summaryFilters.Count > NUMBER_SUMMARY_FILTERS_DISPLAYED)
+        {
+            <div class="gridview-filtersSummary-elt" @attributes="GetAdditionalAttributes(GetHiddenFiltersSummary())">
+                <div class="gridview-filtersSummary-value">
+                    +@(_summaryFilters.Count - NUMBER_SUMMARY_FILTERS_DISPLAYED)
+                </div>
+            </div>
+        }
+    </div>
+}

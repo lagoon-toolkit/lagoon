@@ -1,0 +1,40 @@
+﻿<LgSelect CssClass="@CssClass" Label="Button Size" ShowSearchBox=true @bind-Value="Size" OnChange="OnChangeButtonSizeAsync">
+    <Items>
+        @foreach (var size in Enum.GetValues(typeof(ButtonSize)))
+        {<LgOptionListItem Text="@(Enum.GetName(typeof(ButtonSize), size))" Value="@((ButtonSize)size)"></LgOptionListItem>}
+    </Items>
+</LgSelect>
+
+@*<LgSelect CssClass="@CssClass" Label="Button Kind" ShowSearchBox=true @bind-Value="Kind" OnChange="OnChangeButtonKindAsync">
+    <Items>
+        @foreach (var size in Enum.GetValues(typeof(ButtonKind)))
+        {<LgOptionListItem Text="@(Enum.GetName(typeof(ButtonKind), size))" Value="@((ButtonKind)size)"></LgOptionListItem>}
+    </Items>
+</LgSelect>*@
+
+@code {
+
+    public ButtonSize Size { get; set; } = ButtonSize.Medium;
+    public ButtonKind Kind { get; set; } = ButtonKind.Primary;
+
+    [Parameter]
+    public string CssClass { get; set; }
+
+    [Parameter]
+    public EventCallback<ButtonSize> OnButtonSizeEdition { get; set; }
+
+    [Parameter]
+    public EventCallback<ButtonKind> OnButtonKindEdition { get; set; }
+
+
+    public async Task OnChangeButtonSizeAsync()
+    {
+        await OnButtonSizeEdition.InvokeAsync(Size);
+    }
+
+    public async Task OnChangeButtonKindAsync()
+    {
+        await OnButtonKindEdition.InvokeAsync(Kind);
+    }
+
+}

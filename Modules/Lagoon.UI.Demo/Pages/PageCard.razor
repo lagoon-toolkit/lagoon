@@ -1,0 +1,75 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="Card" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    @if (IsClickable)
+    {
+        <LgCard Tooltip="#lblCardTooltip" OnClick="@(() => { if (IsClickable) ShowInformation("Card clicked","My card");})">
+            @if (HaveColor)
+            {<LgColorBar IconName="@GetIcon()" Color="@Color" />}
+            @if (HaveSeparator)
+            {
+                <div class="card-body">
+                    <LgTitle Text="Card title" TitleLevel="TitleLevel.Level2" CssClass="text-nowrap" />
+                    <p class="mb-0">Lagoon</p>
+                    <p class="mb-0">@DateTime.Now</p>
+                </div>
+                <LgCardSeparator />}
+            <div class="card-body">
+                <LgTitle Text="My content" TitleLevel="TitleLevel.Level2" />
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+        </LgCard>
+    }
+    else
+    {
+        <LgCard Tooltip="#lblCardTooltip">
+            @if (HaveColor)
+            {<LgColorBar IconName="@GetIcon()" Color="@Color" />}
+            @if (HaveSeparator)
+            {
+                <div class="card-body">
+                    <LgTitle Text="Card title" TitleLevel="TitleLevel.Level2" CssClass="text-nowrap" />
+                    <p class="mb-0">Lagoon</p>
+                    <p class="mb-0">@DateTime.Now</p>
+                </div>
+                <LgCardSeparator />}
+            <div class="card-body">
+                <LgTitle Text="My content" TitleLevel="TitleLevel.Level2" />
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+        </LgCard>
+    }
+
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+
+    <!-- section LgColorBar Color -->
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-3 d-flex justify-content-end" @bind-Value="@HaveColor" Text="@(HaveColor ? "With color" : "Without color")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <LgColorPickerBox CssClass="col-md-9" @bind-Value="@Color" Label="Couleur" ShowInput="true" />
+    </section>
+
+    <!-- section Icon -->
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-3 d-flex justify-content-end" @bind-Value="@HaveIcon" Text="@(HaveIcon ? "With icon" : "Without icon")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <IconParameter CssClass="col-md-9" @bind-Icon="Icon" />
+    </section>
+
+    <!-- section separator -->
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-3 d-flex justify-content-end" @bind-Value="@HaveSeparator" Text="@(HaveSeparator ? "With separator" : "Without separator")" CheckBoxKind="@CheckBoxKind.Toggle" />
+    </section>
+
+    <!-- section clickable -->
+    <section class="d-flex align-items-center col-md-6 col-sm-12 mt-3">
+        <LgCheckBox CssClass="col-md-3 d-flex justify-content-end" @bind-Value="@IsClickable" Text="@(IsClickable ? "Clickable" : "Readonly")" CheckBoxKind="@CheckBoxKind.Toggle" />
+    </section>
+
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />
+

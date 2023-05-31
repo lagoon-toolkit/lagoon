@@ -1,0 +1,76 @@
+﻿.navbar .globalsearch-content {
+    .globalSearch-dropdown div.dropdown-menu.show {
+        top: $header-height !important;
+    }
+}
+.global-search, .suggest-box {
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+
+    &.scrollable .dropdown-menu {
+        max-height: calc(100vh - #{$header-height}) !important;
+        overflow-y: auto;
+    }
+
+    & > span {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    & > span.global-search-prefix {
+        left: 0.6rem;
+    }
+
+    & > span.global-search-suffix {
+        right: 0.6rem;
+    }
+
+    & > input {
+        padding-block: 0.3rem;
+        padding-right: 2rem;
+        padding-left: 2rem;
+    }
+
+    .nav-item > & {
+        margin: 0 .5rem;
+    }
+}
+
+.globalsearch-content {
+    .form-group {
+        margin-bottom: 0;
+    }
+
+    .globalSearch-dropdown {
+        .gs-item-content {
+            display: flex;
+
+            &:hover, &.gs-item-content.selected {
+                background-color: $light;
+                cursor: pointer;
+            }
+
+            .gs-item-text {
+                flex: 1;
+            }
+        }
+
+        .empty-msg {
+            max-height: 10vh;
+
+            svg {
+                margin-left: auto;
+                margin-right: auto;
+                height: 2rem;
+            }
+
+            label {
+                font-size: 0.75rem;
+                line-height: 0.8rem;
+            }
+        }
+    }
+}

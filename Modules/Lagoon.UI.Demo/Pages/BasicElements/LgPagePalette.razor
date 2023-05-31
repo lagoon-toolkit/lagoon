@@ -1,0 +1,130 @@
+﻿@namespace Lagoon.UI.Demo.Pages
+@attribute [Microsoft.AspNetCore.Components.RouteAttribute(ROUTE)]
+@inherits DemoPage
+
+<style>
+    .color-group {
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .color-pal {
+        height: 6rem;
+        width: 6rem;
+        text-align: center;
+        line-height: 6rem;
+    }
+
+    .color-pal ~ .color-pal {
+        margin-left: 0.7rem;
+    }
+</style>
+
+
+
+<LgTitle Text="@Link().Title" CssClass="d-inline-block" />
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblTitleFramePrimary" Collapsable="true">
+    <div class="row">
+        <div class="color-group row">
+            <div class="color-pal color-pal-pr1 text-white">
+                Primary 1
+            </div>
+            <div class="color-pal color-pal-pr2 text-white">
+                Primary 2
+            </div>
+            <div class="color-pal color-pal-pr3 text-white">
+                Primary 3
+            </div>
+        </div>
+        <div class="color-group row">
+            <div class="color-pal color-pal-se1 text-white">
+                Secondary 1
+            </div>
+            <div class="color-pal color-pal-se2 text-white">
+                Secondary 2
+            </div>
+            <div class="color-pal color-pal-se3 text-white">
+                Secondary 3
+            </div>
+        </div>
+    </div>
+</LgFrame>
+
+<LgFrame Title="#lblTitleFrameLight" Collapsable="true">
+    <div class="row">
+        <div class="color-group row">
+            <div class="color-pal color-pal-light1">
+                Light 1
+            </div>
+            <div class="color-pal color-pal-light1-3">
+                Light 1 - 30%
+            </div>
+            <div class="color-pal color-pal-light2">
+                Light 2
+            </div>
+            <div class="color-pal color-pal-light3">
+                Light 3
+            </div>
+        </div>
+
+        <div class="color-group row">
+            <div class="color-pal color-pal-dark3 text-white">
+                Dark 3
+            </div>
+            <div class="color-pal color-pal-dark2 text-white">
+                Dark 2
+            </div>
+            <div class="color-pal color-pal-dark1 text-white">
+                Dark 1
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="color-group row">
+            <div class="color-pal color-pal-gray3 text-white">
+                Gray 3
+            </div>
+            <div class="color-pal color-pal-gray2 text-white">
+                Gray 2
+            </div>
+            <div class="color-pal color-pal-gray1 text-white">
+                Gray 1
+            </div>
+            <div class="color-pal color-pal-gray0">
+                Gray 0
+            </div>
+            <div class="color-pal color-pal-gray0-50">
+                Gray 0 - 50%
+            </div>
+        </div>
+    </div>
+</LgFrame>
+
+<LgFrame Title="#lblTitleFrameIndic" Collapsable="true">
+    <div class="row">
+        <div class="color-group row">
+            <div class="color-pal color-pal-info text-white">
+                Information
+            </div>
+            <div class="color-pal color-pal-success text-white">
+                Success
+            </div>
+            <div class="color-pal color-pal-success-10">
+                Success - 10%
+            </div>
+            <div class="color-pal color-pal-warning text-white">
+                Warning
+            </div>
+            <div class="color-pal color-pal-error text-white">
+                Error
+            </div>
+            <div class="color-pal color-pal-error-10">
+                Error - 10%
+            </div>
+        </div>
+    </div>
+</LgFrame>

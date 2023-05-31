@@ -1,0 +1,29 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="Card" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample" CssClass="demo-treeview">
+    <LgTreeView Nodes="_nodes" Kind="@Kind" OnNodeClick="(TreeNode<int> node) => NodeSelected(node)">
+        <NodeContent>
+            <div style="display:flex;align-items:center;height:100%;">@context.Item</div>
+        </NodeContent>
+    </LgTreeView>
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+
+    <!-- section Style -->
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgSelect @bind-Value="@Kind" Label="Treeview style" ShowSearchBox="false" style="width:100px">
+            <Items>
+                <LgOptionListItem Text="Nestable" Value="TreeviewKind.Card"></LgOptionListItem>
+                <LgOptionListItem Text="Default" Value="TreeviewKind.None"></LgOptionListItem>
+            </Items>
+        </LgSelect>
+    </section>
+
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />
+

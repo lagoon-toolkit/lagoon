@@ -1,0 +1,343 @@
+@inherits DemoPage
+@*<style>
+        .wk-bar{
+            background: lightblue;
+        }
+        .wk-row {
+            background: #e6e6fa38;
+        }
+        .wk-row-group {
+            background: lightgray;
+        }
+        .wk-row-group:hover {
+            background: lightgray!important;
+        }
+    </style>*@
+
+<style>
+    .custom-milestone-circle {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: yellow;
+        border: 1px solid black;
+    }
+
+    .arrow-red {
+        border-bottom-color: red;
+    }
+    /** Pour masquer les lignes de séparation horizontale
+    .wk-row {
+        border-bottom: none;
+    }
+    */
+    .w-49 {
+        width: 49% !important;
+    }
+
+    .wk-toolbar {
+        text-align: center;
+    }
+</style>
+@if (_groupCustomStyle)
+{
+    <style>
+        /** Customize the defaut group view */
+        .wk-group-level-0 {
+            color: white;
+            background: dodgerblue !important;
+        }
+
+        .wk-group-level-1 {
+            color: white;
+            background: lightblue !important;
+        }
+
+        .bg-task {
+            background: #41a0a0;
+        }
+    </style>
+}
+@if (_groupAsFixedColumn)
+{
+    <style>
+        .wk-column-mode {
+            grid-template-columns: 100px auto !important;
+        }
+    </style>
+}
+@if (_overflowWkrRow)
+{
+    <style>
+        .wk-row {
+            overflow: inherit !important;
+        }
+    </style>
+}
+@if (_highlightWeekend)
+{
+    <style>
+        .wst-weekend-highlight {
+            background: #ff00002e;
+            border-radius: 0px !important;
+        }
+    </style>
+}
+<div class=@($"row") style="height: calc(100vh - 180px)">
+    <div class=@($"h-100 {(_toolbarCollapsed ? "d-none" : "col-2")}") style="overflow: scroll">
+        <LgLabel Text=@($"Style zoom:{_zoomLevel}") CssClass="w-100" />
+        <LgButton Text="ScroolToday" OnClick=@ScrollToToday CssClass="w-100 mb-1" />
+
+        <LgButton Text="Timeline -" OnClick=@zoomOut CssClass="w-49 mb-1" />
+        <LgButton Text="Timeline +" OnClick=@zoomIn CssClass="w-49 mb-1" />
+        <LgButton Text="Row -" OnClick=@rowDecrease CssClass="w-49 mb-1" />
+        <LgButton Text="Row +" OnClick=@rowIncrease CssClass="w-49 mb-1" />
+        <LgButton Text="Padding -" OnClick=@paddingRowDecrease CssClass="w-49 mb-1" />
+        <LgButton Text="Padding +" OnClick=@paddingRowIncrease CssClass="w-49 mb-1" />
+        <LgButton Text="Goup +" OnClick=@groupIncrease CssClass="w-49 mb-1" />
+        <LgButton Text="Group -" OnClick=@groupDecrease CssClass="w-49 mb-1" />
+
+        <LgLabel Text="Display" CssClass="w-100" />
+        <LgButton Text="Timeline" CssClass="w-49 mb-1" OnClick="@(() => SetDisplayMode(DisplayMode.Timeline))" Disabled=@(_displayMode == DisplayMode.Timeline) />
+        <LgButton Text="Agenda" CssClass="w-49 mb-1" OnClick="@(() => SetDisplayMode(DisplayMode.Agenda))" Disabled=@(_displayMode == DisplayMode.Agenda) />
+
+
+        <LgLabel Text="Timeline" />
+        <LgButton Text="Year / Month" CssClass="w-100 mb-1" OnClick=@(() => {_timelineMode = TimelineMode.YearMonth; _zoomLevel=2;}) Disabled=@(_displayMode == DisplayMode.Agenda) />
+        <LgButton Text="Month / Week" OnClick=@(() => {_timelineMode = TimelineMode.MonthWeek; _zoomLevel=3;}) CssClass="w-100 mb-1" Disabled=@(_displayMode == DisplayMode.Agenda) />
+        <LgButton Text="Month / Day" OnClick=@(() => {_timelineMode = TimelineMode.MonthDay; _zoomLevel=2;}) CssClass="w-100 mb-1" />
+        <LgButton Text="Day / AmPm" OnClick=@(() => {_timelineMode = TimelineMode.DayAmPm; _zoomLevel=5;}) CssClass="w-100 mb-1" Disabled=@(_displayMode == DisplayMode.Agenda) />
+        <LgButton Text="Day / Hour" OnClick=@(() => {_timelineMode = TimelineMode.DayHour; _zoomLevel=10;}) CssClass="w-100 mb-1" Disabled=@(_displayMode == DisplayMode.Agenda) />
+        <LgSelect @bind-Value="@_timelineDisplayMode" Label="Timline display mode" TextPosition=CheckBoxTextPosition.Right CssClass="w-100 mb-1">
+            <Items>
+                <LgOptionListItem Text="Two rows" Value=@TimelineDisplayMode.TwoRows></LgOptionListItem>
+                <LgOptionListItem Text="One row" Value=@TimelineDisplayMode.OneRow></LgOptionListItem>
+            </Items>
+        </LgSelect>
+        <LgLabel Text="Options" />
+        <LgEditForm Model=@this>
+            <div class="row">
+                <LgDateBox @bind-Value=_from Label="From" CssClass="col-6" />
+                <LgDateBox @bind-Value=_to Label="To" CssClass="col-6" />
+                <LgTextBox @bind-Value=_filterText Label="Filter" OnChange="OnTextFilterChanged" CssClass="col-12" />
+                @if (_displayMode == DisplayMode.Agenda)
+                {
+                    <LgNumericBox @bind-Value=_agendaRowStep Label="Agenda Row Step" CssClass="col-12" />
+                    <LgTimeBox @bind-Value=_agendaHourFrom Label="Agenda Hour From" CssClass="col-6" />
+                    <LgTimeBox @bind-Value=_agendaHourTo Label="Agenda Hour To" CssClass="col-6" />
+                    <LgTimeBox @bind-Value=_agendaHlHourFrom Label="Agenda Hour From" CssClass="col-6" />
+                    <LgTimeBox @bind-Value=_agendaHlHourTo Label="Agenda Hour To" CssClass="col-6" />
+                }
+                else
+                {
+                    <LgNumericBox @bind-Value=_count Label="Row count" OnChange=@(() => ForceReloadSchedulerAsync(new ChangeEventArgs() { Value = _virtualScrolling })) CssClass="col-12" />
+                    <LgCheckBox @bind-Value=@_showJoinMilestone Text="Show LineJoin Milestone" Label=" " TextPosition=CheckBoxTextPosition.Right CheckBoxKind="@CheckBoxKind.Toggle" CssClass="col-12" />
+                    <LgCheckBox @bind-Value=@_activeGroupName Text="GroupBy 'GroupName'" Label=" " CheckBoxKind="@CheckBoxKind.Toggle" TextPosition=CheckBoxTextPosition.Right CssClass="col-12" OnChange=UpdateGroupBy />
+                    <LgCheckBox @bind-Value=@_activeSubGroupName Text="GroupBy 'SubGroupName'" Label=" " CheckBoxKind="@CheckBoxKind.Toggle" TextPosition=CheckBoxTextPosition.Right CssClass="col-12" OnChange=UpdateGroupBy />
+                    <LgCheckBox @bind-Value=@_groupAsColumn Text="Group As Column" Label=" " CheckBoxKind="@CheckBoxKind.Toggle" TextPosition=CheckBoxTextPosition.Right CssClass="col-12" OnChange=UpdateGroupBy />
+                    <LgCheckBox @bind-Value=@_groupAsFixedColumn Text="Group As Column (fixed)" Label=" " CheckBoxKind="@CheckBoxKind.Toggle" TextPosition=CheckBoxTextPosition.Right CssClass="col-12" OnChange=UpdateGroupBy />
+                    <LgCheckBox @bind-Value=@_groupCustomStyle Text="Group custom style" Label=" " CheckBoxKind="@CheckBoxKind.Toggle" TextPosition=CheckBoxTextPosition.Right CssClass="col-12" OnChange=UpdateGroupBy />
+                }
+                <LgCheckBox @bind-Value=@_createTaskOnClick Text="Create Task Click" Label=" " TextPosition=CheckBoxTextPosition.Right CheckBoxKind="@CheckBoxKind.Toggle" CssClass="col-12" />
+                <LgCheckBox @bind-Value=@_cancelLastDragAndDrop Text="Confirm move" Label=" " TextPosition=CheckBoxTextPosition.Right CheckBoxKind="@CheckBoxKind.Toggle" CssClass="col-12" />
+                <LgCheckBox @bind-Value=@_showWeekend Text="Show Weekend" Label=" " TextPosition=CheckBoxTextPosition.Right CheckBoxKind="@CheckBoxKind.Toggle" CssClass="col-12" />
+                <LgCheckBox @bind-Value=@_highlightWeekend Text="Highlight Weekend" Label=" " TextPosition=CheckBoxTextPosition.Right CheckBoxKind="@CheckBoxKind.Toggle" CssClass="col-12" />
+                <LgCheckBox @bind-Value=@_virtualScrolling Text="VirtualScrolling" Label=" " TextPosition=CheckBoxTextPosition.Right CheckBoxKind="@CheckBoxKind.Toggle" OnChange=ForceReloadSchedulerAsync Disabled=@(_displayMode == DisplayMode.Agenda) CssClass="col-12" />
+                <LgCheckBox @bind-Value=@_projectResize Text="Project resize" Label=" " TextPosition=CheckBoxTextPosition.Right CheckBoxKind="@CheckBoxKind.Toggle" CssClass="col-12" />
+                <LgCheckBox @bind-Value=@_showMouseIndicator Text="Mouse helper" Label=" " TextPosition=CheckBoxTextPosition.Right CheckBoxKind="@CheckBoxKind.Toggle" OnChange=ForceReloadSchedulerAsync CssClass="col-12" />
+                <LgCheckBox @bind-Value=@_overflowWkrRow Text="Overflow wk-row" Label=" " TextPosition=CheckBoxTextPosition.Right CheckBoxKind="@CheckBoxKind.Toggle" CssClass="col-12" />
+                <LgSelect @bind-Value="@_dragStepType" Label="Drag step constraint" TextPosition=CheckBoxTextPosition.Right CssClass="col-12">
+                    <Items>
+                        <LgOptionListItem Text="Free" Value=@DragStepType.Free></LgOptionListItem>
+                        <LgOptionListItem Text="Hour" Value=@DragStepType.Hour></LgOptionListItem>
+                        <LgOptionListItem Text="Day" Value=@DragStepType.Day></LgOptionListItem>
+                        <LgOptionListItem Text="Manual (15min)" Value=@DragStepType.Manual></LgOptionListItem>
+                    </Items>
+                </LgSelect>
+                @if (_workScheduler != null && _externalDraggableItems.Count() > 0)
+                {
+                    <div style="user-select: none!important;" class="col-12">
+                        <LgLabel Text="Drag me: " CssClass="mt-1 ml-3 mb-2" />
+                        @foreach (var id in _externalDraggableItems)
+                        {
+                            <div class="col-12 mb-3">
+                                @if (_displayMode == DisplayMode.Agenda)
+                                {
+                                    <LgWorkSchedulerDraggableItem WorkScheduler="@_workScheduler" TItem=TestData
+                                                                  Duration=@(new TimeSpan(0,30,0))
+                                                                  Id=@id Text=@($"Task {@id} (30 min)") CssClass="bg-task" />
+                                }
+                                else
+                                {
+                                    <LgWorkSchedulerDraggableItem WorkScheduler="@_workScheduler" TItem=TestData
+                                                                  Duration=@(new TimeSpan(4,0,0,0))
+                                                                  Id=@id Text=@($"Task {@id} (4 days)") CssClass="bg-task" />
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </LgEditForm>
+
+        <LgLabel Text="Actions " CssClass="mt-1 ml-1" />
+        <LgButton Text="Update data" OnClick=@UpdateData CssClass="w-100 mb-1" />
+        <LgButton Text="Force reload" OnClick=@(() => ForceReloadSchedulerAsync(new ChangeEventArgs() { Value = _virtualScrolling})) CssClass="w-100 mb-1" />
+        <LgButton Text="Save changes" OnClick=SaveWkChanges CssClass="w-100 mb-1" />
+    </div>
+    <div class=@($"{(_toolbarCollapsed ? "col-12" : "col-10")}") style="height: 100%">
+        @if (_show)
+        {
+            <LgFormTracker @bind-HasModification=_hasModification>
+                @*VirtualScrolling=_virtualScrolling *@
+                <LgWorkScheduler @ref=_workScheduler TItem=TestData Items=_data From=_from To=_to
+                                 JoinMilestone=@_showJoinMilestone DragStepType=_dragStepType DragStepSize=@(new TimeSpan(0,15,0))
+                                 OnDragCompleted=@WksDragCompleted OnItemClick=OnItemClick OnEmptyClick=OnEmptyClick
+                                 Timeline=_timelineMode DisplayMode=_displayMode TimelineDisplayMode="_timelineDisplayMode" 
+                                 ShowProjectResizing=_projectResize ShowMouseIndicator=_showMouseIndicator ShowWeekend=_showWeekend
+                                 ZoomLevel=_zoomLevel RowHeight=_rowHeight PaddingRow=_paddingRowHeight GroupMargin=_groupMargin ProjectListWidth=_projectListWidth DefaultGroupsState=GroupState.Open
+                                 AgendaRowStep=_agendaRowStep AgendaHoursFrom=_agendaHourFrom AgendaHoursTo=_agendaHourTo AgendaHoursFromHighlight=_agendaHlHourFromTS AgendaHoursToHighlight=_agendaHlHourTo
+                                 RowField=@(e => e.RowId) GroupBy=_groupBy GroupDisplayMode=@(_groupAsColumn ? GroupDisplayMode.Column : GroupDisplayMode.Row)>
+
+                    @*Project list header (top left area)*@
+                    <ProjectHeader>
+                        <LgButton ButtonSize=ButtonSize.Small Kind=ButtonKind.Secondary OnClick=ToggleToolbar Text="Toggle toolbar" />
+                    </ProjectHeader>
+
+                    @* Project list *@
+                    <ProjectItems Context="item">
+                        <div class="w-100 h-100 pl-1" style=@($"background-color:{item.ProjectBackground}")>
+                            <span style=@($"color:{item.ProjectColor};")>
+                                @($"{item.ProjectName} (Items:{@_data.Where(x => x.RowId == item.RowId).Count()})")
+                            </span>
+                            <span style="position:absolute; right:10px">
+                                <LgIcon role="button" IconName="@IconNames.Edit" OnClick=@(() => OpenEditModal(item)) />
+                                <LgIcon role="button" IconName="@IconNames.All.Check" CssClass="ml-2 text-success" OnClick=@(() => ValidateItem(item)) />
+                                @if (item.CanDelete)
+                                {
+                                    <LgIcon role="button" IconName="@IconNames.Delete" CssClass="ml-2 text-danger" OnClick=@(() => RemoveItem(item)) />
+                                }
+                            </span>
+                        </div>
+                    </ProjectItems>
+
+                    @*  Project list group render *@
+                    <ProjectItemsGroup Context="group">
+                        <span>@($"{group.Key} - {group.Items.Count()} - {group.Closed} - {group.GroupLevel}")</span>
+                    </ProjectItemsGroup>
+
+                    @* Scheduler area *@
+                    <SchedulerItems Context="item">
+                        <div class=@item.CssClass() style=@($"cursor:pointer;width:100%; height:100%; text-align:center; {(item.To.HasValue ? $"background:{item.Background};" : (item.CssClass() != "wk-milestone-arrow-up arrow-red" ? $"background:{item.Background};" : ""))} {(_displayMode == DisplayMode.Agenda ? "box-shadow: 0px 0px 1px 1px #00000033;" : "")}")>
+                            @if (item.IsExternal)
+                            {
+                                @($"Task {item.ProjectBarInfo}")
+                            }
+                            else if (item.To.HasValue)
+                            {
+                                @($"Task {item}")
+                            }
+                        </div>
+                        @if (item.CssClass() == "custom-milestone-circle")
+                        {
+                            <div style="position: absolute;white-space: nowrap;">test de contenu @item.RowId</div>
+                        }
+                    </SchedulerItems>
+
+                    @*  Scheduler area group render *@
+                    <SchedulerItemsGroup Context="group">
+                        <span>@($"{group.Key} - {group.Items.Count()} - {group.Closed}")</span>
+                    </SchedulerItemsGroup>
+
+                    @* Custom Hours render (only for for DisplayMode.Agenda)
+                        <AgendaHoursRender Context="hour">
+                            <div class="text-right h6 p-0 m-0 mr-2 font-weight-bold" style="line-height: inherit;">@hour.ToShortTimeString()</div>
+                        </AgendaHoursRender> *@
+
+                    @*                <TimelineFirstLevel Context="date">
+                            @("MonthNames".Translate().Split(",")[date.Month-1])
+                        </TimelineFirstLevel>
+
+                        <TimelineSecondLevel Context="date">
+                            @if (date.Day < 10)
+                            {
+                                <span>@($"0{date.Day}")</span>
+                            }
+                            else
+                            {
+                                 <span>@date.Day</span>
+                            }
+                        </TimelineSecondLevel>*@
+                </LgWorkScheduler>
+            </LgFormTracker>
+
+        }
+        else
+        {
+            <LgLoaderView IsLoading=true />
+        }
+    </div>
+</div>
+
+@* Modal d'édition de la liste projet *@
+<LgModal @bind-Visible=_showEditModal Title="Edit" CssClass="FixColorPicker">
+    <ChildContent>
+        @if (_editedItem != null)
+        {
+            <LgEditForm Model=_editedItem>
+                <LgTextBox @bind-Value=_editedItem.ProjectName Label="Project Name" />
+                <LgTextBox @bind-Value=_editedItem.GroupName Label="Group Name" OnChange=@OnGroupChange />
+                <LgTextBox @bind-Value=_editedItem.SubGroupName Label="SubGroup Name" OnChange=@OnSubGroupChange />
+                <LgColorPickerBox @bind-Value=_editedItem.ProjectColor Label="Project Color" />
+                <LgColorPickerBox @bind-Value=_editedItem.ProjectBackground Label="Project Background" />
+            </LgEditForm>
+        }
+    </ChildContent>
+    <FooterContent>
+        <LgButton Text="Close" OnClick=@CloseEditModal />
+    </FooterContent>
+</LgModal>
+
+@* Modal d'édition d'une barre ou jalon d'un projet *@
+<LgModal @bind-Visible=_showEditProjectModal Title="Edit" CssClass="FixColorPicker">
+    <ChildContent>
+        @if (_editedItem != null)
+        {
+            <LgEditForm Model=_editedItem>
+                <div class="row">
+                    <div class="col-12">
+                        <LgTextBox @bind-Value=_editedItem.ProjectBarInfo Label="Info" />
+                    </div>
+                    <div class="col-6">
+                        <LgDateBox @bind-Value=_editedItem.From Label="From" />
+                    </div>
+                    @if (true || _displayMode == DisplayMode.Agenda)
+                    {
+                        <div class="col-6">
+                            <LgTimeBox @bind-Value=_editedItem.From Label="Start" />
+                        </div>
+                    }
+                    <div class="col-6">
+                        <LgDateBox @bind-Value=_editedItem.To Label="To" />
+                    </div>
+                    @if ((true && _editedItem.To.HasValue) || _displayMode == DisplayMode.Agenda)
+                    {
+                        <div class="col-6">
+                            <LgTimeBox @bind-Value=_editedItem.To Label="End" />
+                        </div>
+                    }
+                    <LgCheckBox CssClass="col-6" @bind-Value=_editedItem.AllowHorizontalMove Text="Horizontal move" />
+                    <LgCheckBox CssClass="col-6" @bind-Value=_editedItem.AllowVerticalMove Text="Vertical move" />
+                    <div class="col-12">
+                        <LgColorPickerBox @bind-Value=_editedItem.Background Label="Background" OnChange="SetModified" />
+                    </div>
+                </div>
+            </LgEditForm>
+        }
+    </ChildContent>
+    <FooterContent>
+        <LgButton Text="Close" OnClick=@CloseEditBarModal />
+    </FooterContent>
+</LgModal>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

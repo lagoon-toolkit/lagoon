@@ -1,0 +1,103 @@
+﻿@namespace Lagoon.UI.Components.WorkScheduler.Internal
+@inherits ComponentBase
+@typeparam TItem
+
+@if (WorkScheduler.GroupBy != null && WorkScheduler.GroupBy.Count() > 0)
+{
+    if (GroupByLevel < WorkScheduler.GroupBy.Count())
+    {
+        @* Groups Level *@
+        IEnumerable<TItem> __currentGroup = (IEnumerable<TItem>)CurrentGroup ?? WorkScheduler.GetVisibleItems();
+        foreach (var __group in __currentGroup.GroupBy(WorkScheduler.GroupBy.Skip(GroupByLevel).First()))
+        {
+            var __groupKey = GroupKey + "¤" + __group.Key.ToString();
+            var __isGroupOpen = WorkScheduler.IsGroupOpen(__groupKey);
+            @if (WorkScheduler.GroupDisplayMode == GroupDisplayMode.Row)
+            {
+                <div style=@($"height:{RowHeight}px; line-height:{RowHeight}px; padding-left:{GroupByLevel*GroupMargin}px") class=@($"wk-row wk-row-group wk-group-level-{GroupByLevel}") @onclick=@(() => WorkScheduler.CollapseGroup(__groupKey))>
+                    <span class="pr-1">
+                        <LgIcon IconName=@($"{(__isGroupOpen ? IconNames.Expand : IconNames.ExpandH)}") CssClass="ml-2" />
+                    </span>
+                    @if (WorkScheduler.ProjectItemsGroup != null)
+                    {
+                        <!-- Custom group view  -->
+                        @WorkScheduler.ProjectItemsGroup(new GroupItem<TItem>() { Key = @__group.Key.ToString(), Closed = !__isGroupOpen, GroupLevel = GroupByLevel, Items = __group })
+                    }
+                    else
+                    {
+                        <!-- Default group view  -->
+                        <span class="wk-group-default">@__group.Key.ToString()</span>
+                    }
+                </div>
+                if (__isGroupOpen)
+                {
+                    <ProjectViewGroup TItem=TItem GroupByLevel=GroupByLevel+1 CurrentGroup=__group GroupKey=@__groupKey />
+                }
+            }
+            else if (WorkScheduler.GroupDisplayMode == GroupDisplayMode.Column)
+            {
+                string __borderStyle = ";border-bottom:1px solid #00000014;";
+                <div class="wk-column-mode" style=@($"grid-template-columns: {(__isGroupOpen ? $"{GroupMargin}% {100-GroupMargin}%" : "100%")}; min-height:{WorkScheduler.RowHeight}px; {(!__isGroupOpen ? @__borderStyle : "")}")>
+                    <div class=@($"wk-column-groupContent wk-group-level-{GroupByLevel}") style=@($"{(__isGroupOpen ? @__borderStyle : "")}") @onclick=@(() => WorkScheduler.CollapseGroup(__groupKey))>
+                        <span class="pr-1">
+                            <LgIcon IconName=@($"{(__isGroupOpen ? IconNames.Expand : IconNames.ExpandH)}") CssClass="ml-2" />
+                        </span>
+                        @if (WorkScheduler.ProjectItemsGroup != null)
+                        {
+                            <!-- Custom group view  -->
+                            @WorkScheduler.ProjectItemsGroup(new GroupItem<TItem>() { Key = @__group.Key.ToString(), Closed = !__isGroupOpen, GroupLevel = GroupByLevel, Items = __group })
+                        }
+                        else
+                        {
+                            <!-- Default group view  -->
+                            <span class="wk-group-default">@__group.Key.ToString()</span>
+                        }
+                    </div>
+                    @if (__isGroupOpen)
+                    {
+                        <div style="grid-column: 2">
+                            <ProjectViewGroup TItem=TItem GroupByLevel=GroupByLevel+1 CurrentGroup=__group GroupKey=@__groupKey />
+                        </div>
+                    }
+                </div>
+            }
+        }
+    }
+    else if (GroupByLevel == WorkScheduler.GroupBy.Count())
+    {
+        @* Items Level *@
+        if (WorkScheduler.IsGroupOpen(GroupKey))
+        {
+            foreach (var __item in CurrentGroup.GroupBy(WorkScheduler.RowField).Select(e => e.First()))
+            {
+                <div style=@($"height:{RowHeight}px; line-height:{RowHeight}px; padding-left:{(WorkScheduler.GroupDisplayMode == GroupDisplayMode.Column ? 0 : GroupByLevel*GroupMargin)}px") class="wk-row">
+                    @if (WorkScheduler.ProjectItems != null)
+                    {
+                        @WorkScheduler.ProjectItems(__item)
+                    }
+                    else
+                    {
+                        @__item.ToString()
+                    }
+                </div>
+            }
+        }
+    }
+}
+else
+{
+    @* No GroupBy *@
+    @foreach (TItem __item in WorkScheduler.GetVisibleItems())
+    {
+        <div style=@($"height:{RowHeight}px; line-height:{RowHeight}px;") class="wk-row">
+            @if (WorkScheduler.ProjectItems != null)
+            {
+                @WorkScheduler.ProjectItems(__item)
+            }
+            else
+            {
+                @__item.ToString()
+            }
+        </div>
+    }
+}

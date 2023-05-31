@@ -1,0 +1,8 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+
+<div class="stepContainer" style=@($"grid-template-columns:{"auto ".Repeat((_childrens.Count()*2)-1)}")>
+    <CascadingValue Value=this>
+        @ChildContent
+    </CascadingValue>
+</div>

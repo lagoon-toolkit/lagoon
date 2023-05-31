@@ -1,0 +1,39 @@
+@inherits LgComponentBase
+
+<section class="d-flex align-items-center col-md-6 col-sm-12">
+    <LgCheckBox CssClass="col-md-5 d-flex justify-content-end" TextPosition="CheckBoxTextPosition.Right" @bind-Value="PrefixSuffix.PrefixEnabled" Text="#lblPrefix" CheckBoxKind="@CheckBoxKind.Toggle" OnChange="OnChangeAsync" />
+    @if (PrefixSuffix.PrefixEnabled)
+    {
+        <LgSelect  CssClass="col-md-4"@bind-Value="PrefixSuffix.PrefixType" OnChange="OnChangeAsync" Label="Type" ShowSearchBox="false">
+            <LgOptionListItem Value="InputLabelType.Text" Text="Text" />
+            <LgOptionListItem Value="InputLabelType.IconName" Text="IconName" />
+        </LgSelect>
+        if (PrefixSuffix.PrefixType == InputLabelType.IconName)
+        {
+            <IconParameter CssClass="col-md-5" @bind-Icon="PrefixSuffix.IconPrefix" OnChange="OnChangeAsync" />
+        }
+        else
+        {
+            <LgTextBox Label="Text" CssClass="col-md-5" @bind-Value="PrefixSuffix.TextPrefix" OnChange="OnChangeAsync" />
+        }
+    }
+</section>
+
+<section class="d-flex align-items-center col-md-6 col-sm-12">
+    <LgCheckBox CssClass="col-md-5 d-flex justify-content-end" TextPosition="CheckBoxTextPosition.Right" @bind-Value="PrefixSuffix.SuffixEnabled" Text="#lblSuffix" CheckBoxKind="@CheckBoxKind.Toggle" OnChange="OnChangeAsync" />
+    @if (PrefixSuffix.SuffixEnabled)
+    {
+        <LgSelect CssClass="col-md-4" @bind-Value="PrefixSuffix.SuffixType" OnChange="OnChangeAsync" Label="Type" ShowSearchBox="false">
+            <LgOptionListItem Value="InputLabelType.Text" Text="Text" />
+            <LgOptionListItem Value="InputLabelType.IconName" Text="IconName" />
+        </LgSelect>
+        if (PrefixSuffix.SuffixType == InputLabelType.IconName)
+        {
+            <IconParameter CssClass="col-md-5" @bind-Icon="PrefixSuffix.IconSuffix" OnChange="OnChangeAsync" />
+        }
+        else
+        {
+            <LgTextBox Label="Text" CssClass="col-md-5" @bind-Value="PrefixSuffix.TextSuffix" OnChange="OnChangeAsync" />
+        }
+    }
+</section>

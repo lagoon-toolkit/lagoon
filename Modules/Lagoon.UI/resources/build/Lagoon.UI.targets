@@ -1,0 +1,84 @@
+﻿<Project>
+
+  <!-- Check resources update -->
+  <ItemGroup>
+    <UpToDateCheckInput Include="resources\main-js\**" />
+    <UpToDateCheckInput Include="resources\icons\sprites\**" />
+    <UpToDateCheckInput Include="resources\icons\svg\**" />
+    <UpToDateCheckInput Include="resources\styles\**" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+  </PropertyGroup>
+
+  <!-- Check if the offline mode is used -->
+  <PropertyGroup Condition="'$(ServiceWorkerEnabled)' == 'true' OR '$(ServiceWorkerEnabled)' == '$(Configuration)'">
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+    <LgnServiceWorkerArgs>--service-worker</LgnServiceWorkerArgs>
+    <LagoonPatchLoadResource>true</LagoonPatchLoadResource>
+  </PropertyGroup>
+
+  <!-- Define shared properties -->
+  <Target Name="_LagoonProperties">
+    <PropertyGroup>
+      <_LagoonIntermediateOutputPath>$(IntermediateOutputPath)Lagoon\</_LagoonIntermediateOutputPath>
+      <_LagoonConfigFile>$(_LagoonIntermediateOutputPath)LagoonPreBuild.config</_LagoonConfigFile>
+      <_LagoonWebAssemblyJS>$(_LagoonIntermediateOutputPath)blazor.webassembly.js</_LagoonWebAssemblyJS>
+    </PropertyGroup>
+  </Target>
+
+  <!-- Include service worker resources -->
+  <Target Name="LagoonServiceWorker" Condition="'$(LgnServiceWorkerArgs)' != ''"
+      BeforeTargets="_OmitServiceWorkerContent;_ComputeServiceWorkerAssetsManifestInputs" DependsOnTargets="_LagoonProperties">
+    <ItemGroup>
+      <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="$(_LagoonIntermediateOutputPath)service-worker.published.js" />
+    </ItemGroup>
+  </Target>
+
+  <!-- Intercepting boot ressource downloading -->
+  <Target Name="LagoonResolveBlazorOutputs" Condition="Exists('$(_LagoonWebAssemblyJS)')"
+      BeforeTargets="_ResolveBlazorOutputs" DependsOnTargets="_LagoonProperties">
+    <PropertyGroup >
+      <_BlazorJSPath>$(_LagoonWebAssemblyJS)</_BlazorJSPath>
+    </PropertyGroup>
+  </Target>
+
+  <!-- Run the Lagoon dotnet tool to consolidate resources -->
+  <Target Name="LagoonPreBuild" BeforeTargets="BeforeBuild" DependsOnTargets="_LagoonProperties">
+    <PropertyGroup Condition="'$(LagoonPatchLoadResource)' == 'true'">
+      <LgnPatchLoadResourceArgs>--blazor-js $(_BlazorJSPath) --patch-load-resource</LgnPatchLoadResourceArgs>
+    </PropertyGroup>
+    <ItemGroup>
+      <LagoonCompileFile Include="resources\icons\auto\IconNames.auto.cs;$(_LagoonIntermediateOutputPath)ServiceWorkerEnabled.cs" />
+      <LagoonContentFile Include="wwwroot\_vroot\**" />
+      <LgnPkgRefGroup Include="%(PackageReference.Identity)¤%(PackageReference.Version)" />
+    </ItemGroup>
+    <PropertyGroup>
+      <LgnMinVersion>2.0.7</LgnMinVersion>
+      <LgnPkgRef>@(LgnPkgRefGroup)</LgnPkgRef>
+      <LgnPrjRef>@(ProjectReference)</LgnPrjRef>
+    </PropertyGroup>
+    <!-- <Message Importance="High" Text='build "$(ProjectPath)" "$(ConfigurationName)" "$(_LagoonConfigFile)" -fw "$(TargetFramework)" -ref-pkg="$(LgnPkgRef)" -ref-prj="$(LgnPrjRef)" -min-version $(LgnMinVersion) $(LgnServiceWorkerArgs) $(LgnPatchLoadResourceArgs)' /> -->
+    <Exec Command='lgn build "$(ProjectPath)" "$(ConfigurationName)" "$(_LagoonConfigFile)" --fw "$(TargetFramework)" --ref-pkg="$(LgnPkgRef)" --ref-prj="$(LgnPrjRef)" --min-version $(LgnMinVersion) $(LgnServiceWorkerArgs) $(LgnPatchLoadResourceArgs)' ContinueOnError="true" IgnoreExitCode="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' == '7007'" Text="LGN tool must be updated before build, please update it with the following command : dotnet tool update -g LGN" />
+    <Error Condition="'$(ErrorCode)' == '9009'" Text="LGN tool is required to build this project. To continue, please install it with the following command : dotnet tool install -g LGN" />
+    <Error Condition="'$(ErrorCode)' != '0'" Text="An error occured during Lagoon build. Check output for more details. [$(ErrorCode)]" />
+    <ItemGroup>
+      <EmbeddedResource Include="$(_LagoonIntermediateOutputPath)Dico.json">
+        <LogicalName>Lagoon.Dico</LogicalName>
+      </EmbeddedResource>
+      <EmbeddedResource Include="$(_LagoonIntermediateOutputPath)RoutableComponents.txt">
+        <LogicalName>Lagoon.RoutableComponents</LogicalName>
+      </EmbeddedResource>
+      <Compile Remove="@(LagoonCompileFile)" />
+      <Compile Include="@(LagoonCompileFile)" />
+      <Content Remove="@(LagoonContentFile)" />
+      <Content Include="@(LagoonContentFile)" />
+      <FileWrites Include="$(_LagoonIntermediateOutputPath)**" />
+    </ItemGroup>
+  </Target>
+
+</Project>

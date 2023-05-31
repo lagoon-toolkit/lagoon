@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Demo.Batch": {
+      "commandName": "Project",
+      "commandLineArgs": "status --log",
+      "workingDirectory": "..//Server",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

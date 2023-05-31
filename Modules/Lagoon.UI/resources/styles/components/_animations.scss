@@ -1,0 +1,15 @@
+﻿@keyframes lagoon-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+//Loading icon rotation
+.i-a-Loading {
+    animation: lagoon-spin 2s infinite linear;
+    background: inherit; //When it's transparent, the animation is flickering on chrome
+}

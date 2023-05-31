@@ -1,0 +1,82 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgAriaComponentBase
+
+@{var _bodyRender = RenderBodyContent(); }
+@{var _summaryRender = RenderSummaryContent(); }
+@{var _footerRender = RenderFooterContent(); }
+<div @attributes="AdditionalAttributes" class="@GetClassAttribute()" role="group">
+    @if (ShowHeader)
+    {
+        var _toolbarContent = RenderToolbarContent();
+        <div class="frameHeader @HeaderCssClass @(Collapsed ? "collapsed" : "")" aria-expanded="@(Collapsed ? "false" : "true")"
+             @onclick="@ToggleFrameAsync" @onclick:stopPropagation="true" @onclick:preventDefault="true"
+             tabindex="@(Collapsable ? "0" : "-1")">
+            <div class=@($"d-flex frameTitle {_cssCursor}")>
+                <!-- Icon -->
+                @if (!String.IsNullOrEmpty(IconName))
+                {
+                    <LgIcon IconName="@IconName" CssClass="my-auto frame-item-icon" />
+                }
+                <div class="d-flex">
+                    <!-- Title -->
+                    @{ 
+                        string __title = GetRenderTitle();
+                    }
+                    @if (!String.IsNullOrEmpty(__title))
+                    {
+                        <LgTitle Text="@__title" CssClass="my-auto" TitleLevel="TitleLevel.Level2" AriaLabel="@AriaLabel" AriaLabelledBy="@AriaLabelledBy" />
+                    }
+                    <!-- Icon collapse / expand -->
+                    @if (Collapsable)
+                    {
+                        <div @attributes="GetTooltipAttributes(_tooltipTitle, false)" class="frameCollapseIcon my-auto">
+                            <LgIcon IconName="@_collapseIcon" />
+                        </div>
+                    }
+                </div>
+                <!-- HeaderContent -->
+                @if (HeaderContent != null)
+                {
+                    <div class="headerFrameContent my-auto mr-auto" @ref="@ElementHeaderContentRef" role="heading">
+                        @HeaderContent
+                    </div>
+                }
+
+                <!-- Toolbar -->
+                @if (_toolbarContent != null)
+                {
+                    <div class="d-flex ml-auto">
+                        <CascadingValue Value="this" IsFixed="true">
+                            <LgToolbar ButtonSize="_toolbarButtonSize">
+                                @_toolbarContent
+                            </LgToolbar>
+                        </CascadingValue>
+                    </div>
+                }
+            </div>
+
+        </div>
+    }
+    @if (_bodyRender != null)
+    {
+        <div class="frameContent collapse @ChildCssClass @(Collapsed ? "" : "show")">
+            @_bodyRender
+        </div>
+    }
+    @if (_summaryRender != null && Collapsed && Collapsable)
+    {
+        <div class="frameSummaryContent ">
+            @_summaryRender
+        </div>
+    }
+    @if (_footerRender != null)
+    {
+        <div class="frameFooter collapse @(Collapsed ? "" : "show")">
+            @_footerRender
+        </div>
+    }
+</div>
+
+
+
+

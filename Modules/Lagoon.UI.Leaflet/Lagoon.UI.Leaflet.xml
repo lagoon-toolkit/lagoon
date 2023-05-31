@@ -1,0 +1,612 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Lagoon.UI.Leaflet</name>
+    </assembly>
+    <members>
+        <member name="T:Lagoon.UI.Leaflet.Components.LgLeafletMap">
+            <summary>
+            Component Map.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.LgLeafletMap.CssClass">
+            <summary>
+            Gets or sets css class of the container
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.LgLeafletMap.Map">
+            <summary>
+            Gets or sets the Map 
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LgLeafletMap.OnBuildClassAttribute(Lagoon.UI.Components.LgCssClassBuilder)">
+            <summary>
+            Add CSS classes to the "class" attribute.
+            </summary>
+            <param name="builder">CSS class builder.</param>
+        </member>
+        <member name="T:Lagoon.UI.Leaflet.Components.GeoJsonObject">
+            <summary>
+            Geo Json Object
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.GeoJsonObject.type">
+            <summary>
+            Type
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.GeoJsonObject.properties">
+            <summary>
+            Properties
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.GeoJsonObject.geometry">
+            <summary>
+            Geometry
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Leaflet.Components.Properties">
+            <summary>
+            Properties
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.Properties.layerType">
+            <summary>
+            Layer type
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.Properties.radius">
+            <summary>
+            Radius
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Leaflet.Components.LeafletMap">
+            <summary>
+            Leaflet Map
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.#ctor(Microsoft.JSInterop.IJSRuntime)">
+            <summary>
+            Leaflet Map
+            </summary>
+            <param name="jsRuntime"></param>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.Locate(System.Boolean,System.Boolean,System.Nullable{System.Single},System.Single,System.Single,System.Boolean)">
+            <summary>
+            Tries to locate the user using the Geolocation API, firing a locationfound event with location data on success or a locationerror event on failure, and optionally sets the map view to the user's location with respect to detection accuracy (or to the world view if geolocation failed). Note that, if your page doesn't use HTTPS, this method will fail in modern browsers (Chrome 50 and newer) See Locate options for more details.
+            </summary>
+            <param name="watch">If true, starts continuous watching of location changes (instead of detecting it once) using W3C watchPosition method. You can later stop watching using map.stopLocate() method.</param>
+            <param name="setView">If true, automatically sets the map view to the user location with respect to detection accuracy, or to world view if geolocation failed.</param>
+            <param name="maxZoom">The maximum zoom for automatic view setting when using setView option.</param>
+            <param name="timeout">Number of milliseconds to wait for a response from geolocation before firing a locationerror event.</param>
+            <param name="maximumAge">Maximum age of detected location. If less than this amount of milliseconds passed since last geolocation response, locate will return a cached location.</param>
+            <param name="enableHighAccuracy">Enables high accuracy, see description in the W3C spec.</param>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.StopLocate">
+            <summary>
+            Stops watching location previously initiated by map.locate({watch: true}) and aborts resetting the map view if map.locate was called with {setView: true}.
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.AddDrawControl">
+            <summary>
+            To add the draw toolbar.
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.AddSearchControl">
+            <summary>
+            To add search control.
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.AddOsrmRoutingControl(Lagoon.UI.Leaflet.Components.Models.RoutingControlOptions)">
+            <summary>
+            To add Osrm routing control.
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.AddMapBoxRoutingControl(System.String,Lagoon.UI.Leaflet.Components.Models.RoutingControlOptions)">
+            <summary>
+            To add MapBox routing control.
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.ToGeoJSON(System.String)">
+            <summary>
+            Returns a GeoJSON representation of the layer
+            </summary>
+            <param name="layerId">layer id</param>
+            <returns>return geo json</returns>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.SetMaxBounds(System.Tuple{BlazorLeaflet.Models.LatLng,BlazorLeaflet.Models.LatLng})">
+            <summary>
+            Restricts the map view to the given bounds (see the maxBounds option).
+            </summary>
+            <param name="bounds">max Bounds</param>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.AddBaseLayer(System.String,System.String)">
+            <summary>
+            Adds a base layer (radio button entry) with the given name to the control.
+            </summary>
+            <param name="layerId">layer Id</param>
+            <param name="name">name</param>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.AddOverlay(System.String,System.String)">
+            <summary>
+            Adds an overlay (checkbox entry) with the given name to the control.
+            </summary>
+            <param name="layerId">layer Id</param>
+            <param name="name">name</param>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.AddOverPassLayer(System.String,System.String)">
+            <summary>
+            Add over pass layer.
+            </summary>
+            <param name="query">query</param>
+            <param name="endPoint">by default : https://overpass-api.de/api/</param>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.GetDataFromOverpassAPI(System.String)">
+            <summary>
+            Send a query to the Overpass API and gets back the data set that corresponds to the query
+            </summary>
+            <param name="query">query</param>
+            <returns>return json string</returns>
+        </member>
+        <member name="T:Lagoon.UI.Leaflet.Components.LeafletMap.LocationEventHandler">
+            <summary>
+            Fired when geolocation (using the locate method) went successfully.
+            </summary>
+            <param name="sender">sender</param>
+            <param name="e">event</param>
+        </member>
+        <member name="E:Lagoon.UI.Leaflet.Components.LeafletMap.OnLocationFound">
+            <summary>
+            Location Event Handler
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.NotifyLocationFound(Lagoon.UI.Leaflet.Components.LocationEvent)">
+            <summary>
+            Notify when Location Found
+            </summary>
+            <param name="eventArgs">Event args</param>
+        </member>
+        <member name="T:Lagoon.UI.Leaflet.Components.LeafletMap.DrawCreatedEventHandler">
+            <summary>
+            Fired when a new vector or marker has been created.
+            </summary>
+            <param name="sender">sender</param>
+            <param name="createdLayer">created layer</param>
+        </member>
+        <member name="E:Lagoon.UI.Leaflet.Components.LeafletMap.OnDrawCreated">
+            <summary>
+            DrawCreated Event Handler
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.NotifyDrawCreated(System.String)">
+            <summary>
+            Notify when draw created
+            </summary>
+            <param name="eventArgs">event Args</param>
+        </member>
+        <member name="T:Lagoon.UI.Leaflet.Components.LeafletMap.DrawEditedEventHandler">
+            <summary>
+            Fired when a new vector or marker has been edited.
+            </summary>
+            <param name="sender">sender</param>
+            <param name="editedLayers">event</param>
+            <returns>edited layers</returns>
+        </member>
+        <member name="E:Lagoon.UI.Leaflet.Components.LeafletMap.OnDrawEdited">
+            <summary>
+            DrawEdited Event Handler
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.NotifyDrawEdited(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Notify when draw edited
+            </summary>
+            <param name="eventArgs"></param>
+        </member>
+        <member name="T:Lagoon.UI.Leaflet.Components.LeafletMap.DrawDeletedEventHandler">
+            <summary>
+            Fired when a new vector or marker has been deleted.
+            </summary>
+            <param name="sender">sender</param>
+            <param name="deletedLayers">event</param>
+        </member>
+        <member name="E:Lagoon.UI.Leaflet.Components.LeafletMap.OnDrawDeleted">
+            <summary>
+            DrawDeleted Event Handler
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.NotifyDrawDeleted(System.Collections.Generic.List{System.String})">
+            <summary>
+            Notify when draw deleted
+            </summary>
+            <param name="eventArgs"></param>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.OnDrawDeletedHandler(Lagoon.UI.Leaflet.Components.LeafletMap,System.Collections.Generic.List{System.String})">
+            <summary>
+            Delete selected draw
+            </summary>
+            <param name="sender">sender</param>
+            <param name="removedLayersIds">List of Layers Ids to remove</param>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.OnDrawEditedHandler(Lagoon.UI.Leaflet.Components.LeafletMap,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Edit selected draw
+            </summary>
+            <param name="sender">sender</param>
+            <param name="editedLayers">List of edited Layers</param>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LeafletMap.OnDrawCreatedHandler(Lagoon.UI.Leaflet.Components.LeafletMap,System.String)">
+            <summary>
+            Create layer from draw control 
+            </summary>
+            <param name="sender">sender</param>
+            <param name="geoJson">geo Json</param>
+        </member>
+        <member name="T:Lagoon.UI.Leaflet.Components.LgLeafletInterops">
+            <summary>
+            Lg Leaflet Interops
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LgLeafletInterops.Locate(Microsoft.JSInterop.IJSRuntime,System.String,System.Boolean,System.Boolean,System.Nullable{System.Single},System.Single,System.Single,System.Boolean)">
+            <summary>
+            Tries to locate the user using the Geolocation API, firing a locationfound event with location data on success or a locationerror event on failure, and optionally sets the map view to the user's location with respect to detection accuracy (or to the world view if geolocation failed). Note that, if your page doesn't use HTTPS, this method will fail in modern browsers (Chrome 50 and newer) See Locate options for more details.
+            </summary>
+            <param name="jsRuntime">IJSRuntime</param>
+            <param name="mapId">Map Id</param>
+            <param name="watch">If true, starts continuous watching of location changes (instead of detecting it once) using W3C watchPosition method. You can later stop watching using map.stopLocate() method.</param>
+            <param name="setView">If true, automatically sets the map view to the user location with respect to detection accuracy, or to world view if geolocation failed.</param>
+            <param name="maxZoom">The maximum zoom for automatic view setting when using setView option.</param>
+            <param name="timeout">Number of milliseconds to wait for a response from geolocation before firing a locationerror event.</param>
+            <param name="maximumAge">Maximum age of detected location. If less than this amount of milliseconds passed since last geolocation response, locate will return a cached location.</param>
+            <param name="enableHighAccuracy">Enables high accuracy, see description in the W3C spec.</param>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LgLeafletInterops.StopLocate(Microsoft.JSInterop.IJSRuntime,System.String)">
+            <summary>
+            Stops watching location previously initiated by map.locate({watch: true}) and aborts resetting the map view if map.locate was called with {setView: true}.
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LgLeafletInterops.AddDrawControl(Microsoft.JSInterop.IJSRuntime,System.String)">
+            <summary>
+            To add the draw toolbar.
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LgLeafletInterops.ToGeoJSON(Microsoft.JSInterop.IJSRuntime,System.String,System.String)">
+            <summary>
+            Returns a GeoJSON representation of the layer
+            </summary>
+            <param name="jsRuntime">IJSRuntime</param>
+            <param name="mapId">Map Id</param>
+            <param name="layerId">layer id</param>
+            <returns>return geo json</returns>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LgLeafletInterops.AddSearchControl(Microsoft.JSInterop.IJSRuntime,System.String)">
+            <summary>
+            To add search control.
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LgLeafletInterops.AddOsrmRoutingControl(Microsoft.JSInterop.IJSRuntime,System.String,Lagoon.UI.Leaflet.Components.Models.RoutingControlOptions)">
+            <summary>
+            To add Osrm routing control.
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LgLeafletInterops.AddMapBoxRoutingControl(Microsoft.JSInterop.IJSRuntime,System.String,System.String,Lagoon.UI.Leaflet.Components.Models.RoutingControlOptions)">
+            <summary>
+            To add MapBox routing control.
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LgLeafletInterops.SetMaxBounds(Microsoft.JSInterop.IJSRuntime,System.String,System.Tuple{BlazorLeaflet.Models.LatLng,BlazorLeaflet.Models.LatLng})">
+            <summary>
+            Restricts the map view to the given bounds (see the maxBounds option).
+            </summary>
+            <param name="jsRuntime">IJSRuntime</param>
+            <param name="mapId">Map Id</param>
+            <param name="bounds">max Bounds</param>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LgLeafletInterops.AddBaseLayer(Microsoft.JSInterop.IJSRuntime,System.String,System.String,System.String)">
+            <summary>
+            Adds a base layer (radio button entry) with the given name to the control.
+            </summary>
+            <param name="jsRuntime">IJSRuntime</param>
+            <param name="mapId">Map Id</param>
+            <param name="layerId">layer Id</param>
+            <param name="name">name</param>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LgLeafletInterops.AddOverPassLayer(Microsoft.JSInterop.IJSRuntime,System.String,System.String,System.String)">
+            <summary>
+            Add over pass layer.
+            </summary>
+            <param name="jsRuntime">IJSRuntime</param>
+            <param name="mapId">Map Id</param>
+            <param name="query">query</param>
+            <param name="endPoint">End point</param>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Components.LgLeafletInterops.AddOverlay(Microsoft.JSInterop.IJSRuntime,System.String,System.String,System.String)">
+            <summary>
+            Adds an overlay (checkbox entry) with the given name to the control.
+            </summary>
+            <param name="jsRuntime">IJSRuntime</param>
+            <param name="mapId">Map Id</param>
+            <param name="layerId">layer Id</param>
+            <param name="name">name</param>
+        </member>
+        <member name="T:Lagoon.UI.Leaflet.Components.LocationEvent">
+            <summary>
+            Location Event
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.LocationEvent.LatLng">
+            <summary>
+            Detected geographical location of the user.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.LocationEvent.Accuracy">
+            <summary>
+            Accuracy of location in meters.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.LocationEvent.Altitude">
+            <summary>
+            Height of the position above the WGS84 ellipsoid in meters.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.LocationEvent.AltitudeAccuracy">
+            <summary>
+            Accuracy of altitude in meters.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.LocationEvent.Heading">
+            <summary>
+            The direction of travel in degrees counting clockwise from true North.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.LocationEvent.Speed">
+            <summary>
+            Current velocity in meters per second.
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.LocationEvent.Timestamp">
+            <summary>
+            The time when the position was acquired.
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Leaflet.Components.Models.Router">
+            <summary>
+            OSRM Options
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.Models.Router.ServiceUrl">
+            <summary>
+            Router service URL
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.Models.Router.Timeout">
+            <summary>
+            Number of milliseconds before a route calculation times out, returning an error to the routing callback
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.Models.Router.Profile">
+            <summary>
+            The OSRM profile to use in requests
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.Models.Router.PolylinePrecision">
+            <summary>
+            The precision to use when decoding polylines in responses from OSRM
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.Models.Router.UseHints">
+            <summary>
+            Whether hints should be included in server requests
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Leaflet.Components.Models.RoutingControlOptions">
+            <summary>
+            Routing control options
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.Models.RoutingControlOptions.Waypoints">
+            <summary>
+            Initial waypoints for the control
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.Models.RoutingControlOptions.Router">
+            <summary>
+            The router to use to calculate routes between waypoints
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.Models.RoutingControlOptions.Collapsible">
+            <summary>
+            If true, a collapse button is added, if false, no button is added, if undefined, a button is added if the screen width is small (typically mobile devices)
+            </summary>
+        </member>
+        <member name="P:Lagoon.UI.Leaflet.Components.Models.RoutingControlOptions.ShowAlternatives">
+            <summary>
+            If true, alternative polyline[s] will be shown on the map when available at the same time as the primary polyline
+            </summary>
+        </member>
+        <member name="T:Lagoon.UI.Leaflet.Helpers.GeoJsonHelper">
+            <summary>
+            GeoJson helper
+            </summary>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Helpers.GeoJsonHelper.GetLayerFromGeoJsonObject(Lagoon.UI.Leaflet.Components.GeoJsonObject)">
+            <summary>
+            Convert GeoJson to layer
+            </summary>
+            <param name="geoJson">geoJson</param>
+            <returns>return layer from geojson</returns>
+        </member>
+        <member name="M:Lagoon.UI.Leaflet.Helpers.GeoJsonHelper.UpdateLayerFromGeoJsonObject(BlazorLeaflet.Models.Layer,Lagoon.UI.Leaflet.Components.GeoJsonObject)">
+            <summary>
+            Update layer From GeoJson Object
+            </summary>
+            <param name="layer">layer to update</param>
+            <param name="geoJson">geoJson</param>
+        </member>
+        <member name="T:Lagoon.UI.Components.IconNames.IconAliases">
+            <summary>
+            You can add here alias to icon names from icons library.
+            </summary>
+            <remarks>
+            WARNING :
+            - After changes in this file, you must compile and use constants from <c>IconNames</c> class.
+            - The syntax must be "private const string {MyAlias} = All.{OtherIcon};"
+            </remarks>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.About">
+            <summary>
+            Alias to All.InfoCircleFill
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Add">
+            <summary>
+            Alias to All.Plus
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Admin">
+            <summary>
+            Alias to All.GearFill
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Cancel">
+            <summary>
+            Alias to All.XCircle
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Close">
+            <summary>
+            Alias to All.X
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Collapse">
+            <summary>
+            Alias to All.ChevronUp
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.CollapseH">
+            <summary>
+            Alias to All.ChevronLeft
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Delete">
+            <summary>
+            Alias to All.TrashFill
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Edit">
+            <summary>
+            Alias to All.Pencil
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Empty">
+            <summary>
+            Alias to All.BoxOpen
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Error">
+            <summary>
+            Alias to All.ShieldFillExclamation
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Expand">
+            <summary>
+            Alias to All.ChevronDown
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.ExpandH">
+            <summary>
+            Alias to All.ChevronRight
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Export">
+            <summary>
+            Alias to All.Download
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.ExportCsv">
+            <summary>
+            Alias to All.FileEarmarkCsv
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.ExportExcel">
+            <summary>
+            Alias to All.FileEarmarkExcel
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.ExportImage">
+            <summary>
+            Alias to All.FileEarmarkImage
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.ExportPdf">
+            <summary>
+            Alias to All.FileEarmarkPdf
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.ExportWord">
+            <summary>
+            Alias to All.FileEarmarkWord
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.ExportZip">
+            <summary>
+            Alias to All.FileEarmarkZip
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Home">
+            <summary>
+            Alias to All.HouseFill
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Info">
+            <summary>
+            Alias to All.InfoCircleFill
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Loading">
+            <summary>
+            Alias to All.ArrowClockwise
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Login">
+            <summary>
+            Alias to All.KeyFill
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Logout">
+            <summary>
+            Alias to All.Logout
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Question">
+            <summary>
+            Alias to All.QuestionCircleFill
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Save">
+            <summary>
+            Alias to All.Check
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Success">
+            <summary>
+            Alias to All.Check
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.UploadBoxIcon">
+            <summary>
+            Alias to All.Image
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.View">
+            <summary>
+            Alias to All.EyeFill
+            </summary>
+        </member>
+        <member name="F:Lagoon.UI.Components.IconNames.Warning">
+            <summary>
+            Alias to All.ExclamationTriangleFill
+            </summary>
+        </member>
+    </members>
+</doc>

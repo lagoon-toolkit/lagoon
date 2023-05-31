@@ -1,0 +1,81 @@
+﻿@namespace Lagoon.UI.Components.Internal
+@using Lagoon.UI.Components.Input.Internal;
+@typeparam TValue
+@typeparam TItemValue
+@inherits LgInputRenderBase<TValue>
+
+@{
+    Select = @<LgComponentGroup>
+        @if (ReadOnly)
+            {
+                <div class="form-input cbo-ro" aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy" tabindex="0"
+             aria-describedby="@($"select-{ElementId}-label")" id="@ElementId">
+                    <CascadingValue Value="(ILgSelect<TItemValue>)this" IsFixed="true">
+                        @if (Items is not null)
+                    {
+                        <CascadingValue Value="GetSelectionGuid(true)">
+                            <LgSelectItemsLoader Select="this" />
+                        </CascadingValue>
+                    }
+                    @ButtonContent
+                </CascadingValue>
+            </div>
+        }
+        else
+        {
+            <div class="form-input dropdown cbo" tabindex="0" @onkeydown="OnKeyDownAsync" id="@ElementId" @ref="ElementRef"
+                    @onfocusin="KeepListOpen" role="combobox"
+                    aria-controls="@($"select-{ElementId}")" aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy"
+                    aria-haspopup="listbox" aria-expanded="@(_showList ? "true" : "false")" aria-describedby="@($"select-{ElementId}-label")"
+                    aria-disabled="@(Disabled ? "true" : "false")">
+                <div class="dropdown-menu select-dropdown-menu @(ShowList ? "" : "hide")"
+                        id=@($"select-{ElementId}") role="listbox" tabindex="-1"
+                        aria-multiselectable="@(Multiple ? "true" : "false")"
+                        aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy">
+                    <!-- Search Field -->
+                    @if (ShowSearchBox)
+                    {
+                        <div class="dropdown-item select-dropdown-search">
+                            <LgTextBox InputMask="@InputMask" InputMaskPlaceholder="@InputMaskPlaceholder" InputMaskKind="@InputMaskKind" @bind-Value="_searchText"
+                                        OnInput="OnSearchAsync" CssClass="@($"input-searchbox {SearchBoxCssClass}")" IsValidatorEnabled="false"
+                                        AriaLabel="#lgSelectSearch" />
+                        </div>
+                    }
+                    <div class="select-dropdown-item-list" tabindex="-1">
+                        <CascadingValue Value="(ILgSelect<TItemValue>)this" IsFixed="true">                               
+                            <LgSelectTray TValue="TValue" TItemValue="TItemValue" IsOpen="_showList" SearchText="@_searchText" SelectionGuid="GetSelectionGuid(false)" />
+                        </CascadingValue>
+                    </div>
+                </div>
+                <LgButton CssClass="form-control dropdown-toggle dropdown-toggle-multiple"
+                            Tooltip="@Tooltip.CheckTranslate()" OnClick="ToggleListAsync"
+                            tabindex="-1" Kind="ButtonKind.Custom" aria-hidden="true">
+                <div class="select-dropdown-content">
+                    <div class="select-dropdown-value">
+                        <CascadingValue Value="(ILgSelect<TItemValue>)this" IsFixed="true">
+                            @ButtonContent
+                        </CascadingValue>
+                    </div>
+                    <div class="ml-auto select-dropdown-chevron-reset">
+                        @if (ShowResetButton())
+                        {
+                            <LgResetButtonComponent ResetButtonText="@_resetButtonText" ResetButtonAriaLabel="@_resetButtonAriaLabel" OnClickReset="OnResetAsync" CssClass="reset-btn"></LgResetButtonComponent>
+                        }
+                        @if (!Disabled)
+                        {
+                            <div class="select-dropdown-icon btn">
+                                <LgIcon IconName="@IconNames.All.ChevronDown" />
+                            </div>
+                        }
+                    </div>
+                </div>
+                <!-- screen reader label -->
+                <span id="@($"select-{ElementId}-label")" class="sr-only">@GetSelectedItemsText()</span>
+                    </LgButton>
+                </div>
+            }
+        </LgComponentGroup>;
+    base.BuildRenderTree(__builder);
+}
+
+

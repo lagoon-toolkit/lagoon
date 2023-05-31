@@ -1,0 +1,28 @@
+@namespace Lagoon.UI.Components.Internal
+@inherits LgComponentBase
+
+@if (FilterEditor.Tabs is null)
+{
+    <div class="no-tab">
+        @ChildContent
+    </div>
+}
+else
+{
+    <div class="lg-tab-header">
+        <ul class="nav nav-tabs flex-grow-1" @ref="FocusElementRef">
+            @foreach (FilterTab tab in FilterEditor.Tabs)
+            {
+                <li @key="tab" class="nav-item">
+                    <a class="@GetTabButtonCssClass(tab)" tabindex="0" @onclick="_ => ShowTab(tab)" @onkeyup="(args) => OnKeyUp(args, tab)" @onkeyup:stopPropagation="true">@GetTabButtonTitle(tab)</a>
+                </li>
+            }
+        </ul>
+    </div>
+    @foreach (FilterTab tab in FilterEditor.Tabs)
+    {
+        <div @key="tab" class="@GetTabBodyCssClass(tab)">
+            @GetTabContent(tab)
+        </div>
+    }
+}

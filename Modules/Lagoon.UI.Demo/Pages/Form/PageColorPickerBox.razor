@@ -1,0 +1,18 @@
+﻿@inherits DemoPageForm
+
+<LgTitle Text="Color picker" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+
+<LgFrame Title="#lblSample">
+    <LgEditForm @ref=formDemo Model=@formData ValidationErrorMessage="#ErrorFormDemo" UseValidationComplexModel="true">
+        <LgColorPickerBox CssClass="col-md-6 col-sm-12" @bind-Value="@formData.ColorText" Label="@Label" ShowInput="@ShowInput" Disabled="@IsDisable" ReadOnly="@IsReadOnly" />
+    </LgEditForm>
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <CommonParameters CssClass="col-md-6" OnLabelEdition="OnChangeLabel" OnDisableEdition="OnChangeDisable" OnReadOnlyEdition="OnChangeReadOnly"></CommonParameters>
+    <LgCheckBox CssClass="col-md-3" @bind-Value="@ShowInput" Text="@(ShowInput ? "Show Input" : "Hide Input")" CheckBoxKind="@CheckBoxKind.Toggle" />
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

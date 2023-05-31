@@ -1,0 +1,9 @@
+﻿.frameRoot {
+    overflow: unset;
+ }
+
+.frameTitle {
+    &.cursorPointer {
+        cursor: pointer;
+    }
+}

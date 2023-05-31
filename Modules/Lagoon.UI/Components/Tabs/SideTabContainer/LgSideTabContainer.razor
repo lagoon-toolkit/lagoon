@@ -1,0 +1,18 @@
+﻿@namespace Lagoon.UI.Components
+@using Lagoon.UI.Components.Internal
+@inherits LgCustomTabContainer
+
+<div class="@GetClassAttribute()">
+    <div class="@GetSidePanelCssClass()">
+        <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical" aria-label="@AriaLabel.CheckTranslate()" aria-labelledby="@AriaLabelledBy">
+            <CascadingValue Value="this" IsFixed="true">
+                <LgTabContainerLoader>@ChildContent</LgTabContainerLoader>
+            </CascadingValue>
+        </div>
+    </div>
+    <div class="@GetContentPanelCssClass()">
+        @{ base.BuildRenderTree(__builder); }
+    </div>
+</div>
+
+

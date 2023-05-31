@@ -1,0 +1,47 @@
+﻿@namespace Lagoon.UI.Components
+@typeparam TValue
+@inherits LgSelectBase<TValue, TValue>
+@using Lagoon.UI.Components.Internal
+
+@{
+    ButtonContent = 
+    @<LgSelectButton TValue="TValue" TItemValue="TValue">
+        <ChildContent>
+            @{
+                var item = GetRenderingSelectedItemData();
+                }
+                @if (item is null)
+                {
+                    <LgSelectButtonLoading />
+                }
+                else
+                {
+                    <div class="d-flex" title="@item.Tooltip">
+                        @if (!String.IsNullOrEmpty(item.IconName))
+                        {
+                            <div class="select-option-icon">
+                                <LgIcon IconName="@item.IconName" />
+                            </div>
+                        }
+                        <div class="select-option-text">@item.Text</div>
+                    </div>
+
+                }
+            </ChildContent>
+            <ReadOnlyContent>
+                @{
+                    var item = GetRenderingSelectedItemData();
+                    @if (item is null)
+                    {
+                        <LgSelectButtonLoading />
+                    }
+                    else
+                    {
+                        <span>@item.Text</span>
+                    }
+                }
+            </ReadOnlyContent>
+        </LgSelectButton>;
+
+    base.BuildRenderTree(__builder);
+}

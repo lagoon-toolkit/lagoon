@@ -1,0 +1,65 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="InputFile" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+
+    <div class="row align-items-end">
+        <div class="form-group col-4">
+            <LgTitle Text="Simple InputFile" TitleLevel="TitleLevel.Level2" />
+            <LgInputFile Label="Input file label" UploadUri="@_uploadUri" LinkedFilesUri=@_linkedFileListUrl Authenticate="false"
+                         UploadMode="@UploadMode" AllowMultipleFiles="@AllowMultipleFiles" AllowDirectories="@AllowDirectories"
+                         ShowFileList="@ShowFileList" ShowUpload="@ShowUpload" ShowUploadSpeed="@ShowUploadSpeed"
+                         UploadIconName="@IconNames.About" ActionMessage="test custom label" />
+        </div>
+
+        <div class="form-group col-4">
+            <LgTitle Text=".docx only" TitleLevel="TitleLevel.Level2" />
+            <LgInputFile Label="Input file label" UploadUri="@_uploadUri" LinkedFilesUri=@_linkedFileListUrl Authenticate="false"
+                         UploadMode="@UploadMode" AllowMultipleFiles="@AllowMultipleFiles" AllowDirectories="@AllowDirectories"
+                         ShowFileList="@ShowFileList" ShowUpload="@ShowUpload" ShowUploadSpeed="@ShowUploadSpeed" ActionMessage="test custom label"
+                         AllowedFileExtensions="@(new List<string> { ".docx" })" />
+        </div>
+
+        <div class="form-group col-4">
+            <LgTitle Text="image only" TitleLevel="TitleLevel.Level2" />
+            <LgInputFile Label="Input file label" UploadUri="@_uploadUri" LinkedFilesUri=@_linkedFileListUrl Authenticate="false"
+                         UploadMode="@UploadMode" AllowMultipleFiles="@AllowMultipleFiles" AllowDirectories="@AllowDirectories"
+                         ShowFileList="@ShowFileList" ShowUpload="@ShowUpload" ShowUploadSpeed="@ShowUploadSpeed"
+                         AllowedFileTypes="@(new List<string> { "image/*" })" />
+        </div>
+        <div class="form-group col-4">
+            <LgTitle Text="Horizontal display" TitleLevel="TitleLevel.Level2" />
+            <LgInputFile Label="Input file label" UploadUri="@_uploadUri" LinkedFilesUri=@_linkedFileListUrl VerticalDisplay="false" Authenticate="false"
+                         UploadMode="@UploadMode" AllowMultipleFiles="@AllowMultipleFiles" AllowDirectories="@AllowDirectories"
+                         ShowFileList="@ShowFileList" ShowUpload="@ShowUpload" ShowUploadSpeed="@ShowUploadSpeed"
+                         AllowedFileTypes="@(new List<string> { "image/*" })" />
+        </div>
+    </div>
+</LgFrame>
+
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgSelect Label="Upload mode" @bind-Value="UploadMode" CssClass="col-md-6">
+            <Items>
+                @foreach (var uploadMode in Enum.GetValues(typeof(UploadMode)))
+                {<LgOptionListItem Text="@(Enum.GetName(typeof(UploadMode), uploadMode))" Value="@((UploadMode)uploadMode)"></LgOptionListItem>}
+            </Items>
+        </LgSelect>
+    </section>
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-6 col-sm-12 d-flex justify-content-end" @bind-Value="@AllowMultipleFiles" Text="@(AllowMultipleFiles ? "Allow multiple files" : "Allow single file")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <LgCheckBox CssClass="col-md-6 col-sm-12 d-flex justify-content-end" @bind-Value="@AllowDirectories" Text="@(AllowDirectories ? "Allow directories" : "Don't allow diectories")" CheckBoxKind="@CheckBoxKind.Toggle" />
+    </section>
+
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-6 col-sm-12 d-flex justify-content-end" @bind-Value="@ShowFileList" Text="@(ShowFileList ? "Show file list" : "Hide file list")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <LgCheckBox CssClass="col-md-6 col-sm-12 d-flex justify-content-end" @bind-Value="@ShowUpload" Text="@(ShowUpload ? "Show upload" : "Hide upload")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <LgCheckBox CssClass="col-md-6 col-sm-12 d-flex justify-content-end" @bind-Value="@ShowUploadSpeed" Text="@(ShowUploadSpeed ? "Show upload speed" : "Hide upload speed")" CheckBoxKind="@CheckBoxKind.Toggle" />
+    </section>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

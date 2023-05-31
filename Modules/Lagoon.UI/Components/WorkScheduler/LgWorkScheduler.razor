@@ -1,0 +1,75 @@
+﻿@using Lagoon.UI.Components.WorkScheduler.Internal
+@using Lagoon.UI.Components.WorkScheduler.Internal.Timelines
+@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+@typeparam TItem
+
+<CascadingValue Value=this>
+    <div @ref=_mainContainer class="mainContainer w-100 h-100">
+        <div @ref=_projectOuterContainer class="projectOuterContainer" style=@($"width:{ProjectListWidth}px;")>
+            <!-- Toolbar area -->
+            <div style=@($"height:{TimelineHeight}px;") class="wk-toolbar">
+                @if (_debug)
+                {
+                    <span>toolbar area: @_scrollPosition / @_paddingScroll / @_rowVisible</span>
+                }
+                @if (ShowProjectResizing)
+                {
+                    <div @ref=_resizeProjectGripper class="wk-toolbar-gripper"></div>
+                }
+                <div class="wk-scrollToday" @onclick=@ScrollToTodayAsync>
+                    <LgNavLink>@("WksScrollToToday".Translate())</LgNavLink>
+                </div>
+                @if (ProjectHeader != null)
+                {
+                    @ProjectHeader
+                }
+            </div>
+            <!-- div used to hide the space used by the  horitontal scrollbar from _schedulerContainer -->
+            <div class="horizontalScrollSpace">&nbsp;</div>
+            <!-- Project list rq: 11=scrollbar -->
+            <div @ref=_projectInnerContainer class="projectInnerContainer" style=@($"height: calc(100% - {TimelineHeight}px - 11px);")>
+                <div style=@($"height:{TotalHeight}; padding-top:{_paddingScroll}px;")>
+                    @if (DisplayMode == DisplayMode.Timeline)
+                    {
+                        <ProjectViewGroup TItem=TItem />
+                    }
+                    else
+                    {
+                        <AgendaProjectTimeline TItem=TItem />
+                    }
+                </div>
+            </div>
+        </div>
+        <div @ref=_timelineAndScheduleContainer class="timelineAndScheduleContainer">
+            <div @ref=_timelineContainer class="timelineContainer" style=@($"height:{TimelineHeight}px; line-height:{TimelineHeight/2}px")>
+                <!-- +11px pour la scrollbar de scheduleContainer -->
+                <div style=@($"width:{TotalTimelineWidth+11}px")>
+                    <WsTimeline TItem=TItem />
+                </div>
+            </div>
+            <!-- div used to hide the space used by the vertical scrollbar from _schedulerContainer -->
+            <div class="verticalScrollSpace" style=@($"height:{TimelineHeight}px")>&nbsp;</div>
+            <!-- Scrollable scheduler -->
+            <div @ref=_schedulerContainer class="scheduleContainer">
+                <BackgroundArea TItem=TItem />
+                <!-- Scheduler draw area -->
+                <div style=@($"width:{TotalTimelineWidth}px; height:{TotalHeight}; padding-top:{_paddingScroll}px;") class="schedule-draw-area">
+                    @if (DisplayMode == DisplayMode.Timeline && Items != null)
+                    {
+                        <SchedulerViewGroup TItem=TItem />
+                    }
+                    else if (DisplayMode == DisplayMode.Agenda)
+                    {
+                        <BackgroundArea TItem=TItem AgendaMode="true" />
+                    }
+                </div>
+                <!-- Agenda draw area -->
+                @if (DisplayMode == DisplayMode.Agenda)
+                {
+                    <AgendaProjectView TItem=TItem />
+                }
+            </div>
+        </div>
+    </div>
+</CascadingValue>

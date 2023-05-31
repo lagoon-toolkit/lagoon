@@ -1,0 +1,40 @@
+﻿@namespace Lagoon.UI.Components
+@page "/authentication/{action}"
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+<!-- Display states of the authentication & login workflow -->
+<RemoteAuthenticatorView Action="@Action">
+
+    <LoggingIn>
+        <DisplayAuthenticationStep Step="#AuthRedirectToLogin" />
+    </LoggingIn>
+
+    <CompletingLoggingIn>
+        <DisplayAuthenticationStep Step="#AuthUserInfo" />
+    </CompletingLoggingIn>
+
+    <LogInFailed>
+        <DisplayAuthenticationStep Step="#AuthLoginFail" />
+    </LogInFailed>
+
+    <LogOut>
+        <DisplayAuthenticationStep Step="#AuthLogOut" />
+    </LogOut>
+
+    <CompletingLogOut>
+        <DisplayAuthenticationStep Step="#AuthLogOutInProgress" />
+    </CompletingLogOut>
+
+    <LogOutSucceeded>
+        <DisplayAuthenticationStep Step="#AuthLogOutSucceeded" ShowReconnect="true"/>
+    </LogOutSucceeded>
+
+    <LogOutFailed>
+        <DisplayAuthenticationStep Step="#AuthLogOutFailed" />
+    </LogOutFailed>
+
+    @*<Registering>
+            <DisplayAuthenticationStep Step="Registering ..." />
+        </Registering>*@
+
+</RemoteAuthenticatorView>

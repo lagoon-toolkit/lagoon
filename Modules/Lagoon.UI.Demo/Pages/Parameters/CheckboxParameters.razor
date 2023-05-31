@@ -1,0 +1,40 @@
+﻿@*<LgSelect CssClass="@CssClass" Label="Checkbox Kind" ShowSearchBox=true @bind-Value="Kind" OnChange="OnChangeCheckboxKindAsync">
+    <Items>
+        @foreach (var kind in Enum.GetValues(typeof(CheckBoxKind)))
+        {<LgOptionListItem Text="@(Enum.GetName(typeof(CheckBoxKind), kind))" Value="@((CheckBoxKind)kind)"></LgOptionListItem>}
+    </Items>
+</LgSelect>*@
+
+<LgSelect CssClass="@CssClass" Label="Text position" ShowSearchBox=true @bind-Value="TextPosition" OnChange="OnChangeTextPositionAsync">
+    <Items>
+        @foreach (var position in Enum.GetValues(typeof(CheckBoxTextPosition)))
+        {<LgOptionListItem Text="@(Enum.GetName(typeof(CheckBoxTextPosition), position))" Value="@((CheckBoxTextPosition)position)"></LgOptionListItem>}
+    </Items>
+</LgSelect>
+
+@code {
+
+    public CheckBoxKind Kind { get; set; } = CheckBoxKind.Check;
+    public CheckBoxTextPosition TextPosition { get; set; } = CheckBoxTextPosition.Left;
+
+    [Parameter]
+    public string CssClass { get; set; }
+
+    [Parameter]
+    public EventCallback<CheckBoxKind> OnCheckboxKindEdition { get; set; }
+    
+    [Parameter]
+    public EventCallback<CheckBoxTextPosition> OnTextPositionEdition { get; set; }
+
+
+    public async Task OnChangeTextPositionAsync()
+    {
+        await OnTextPositionEdition.InvokeAsync(TextPosition);
+    }
+
+    public async Task OnChangeCheckboxKindAsync()
+    {
+        await OnCheckboxKindEdition.InvokeAsync(Kind);
+    }
+
+}

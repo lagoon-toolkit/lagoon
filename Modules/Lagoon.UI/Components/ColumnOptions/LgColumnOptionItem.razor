@@ -1,0 +1,40 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgAriaComponentBase
+
+<li @key="@DisplayedColumn.ElementId" class="column"
+    data-draggable="true"
+    role="presentation" data-index="@DisplayedColumn.ElementId">
+    <div id="@DisplayedColumn.ElementId" class="row row-container"
+            role="listitem">        
+        <LgIcon IconName="@IconNames.All.GripVertical" CssClass="icon drag-icon"></LgIcon>
+        <LgSelect CssClass="dropdown" Disabled="!DisplayedColumn.IsRemovable"
+                  OnChange="(e) => ColumnOptions.OnColumnChange(e, DisplayedColumn)" ResetButton=false ShowSearchBox=true
+                  Value="DisplayedColumn.Key" MinSearchCharacter="-1" Placeholder='@("ColumnOptionsSelectColumn".Translate())'>
+            <Items>
+                @foreach (var column in ColumnOptions.GetAvailableColumns(DisplayedColumn))
+                {
+                    <LgOptionListItem Text="@column.Title" Value="@column.Key"></LgOptionListItem>
+                }
+            </Items>
+        </LgSelect>
+        @if (AllowVisibility && DisplayedColumn.IsRemovable)
+        {
+            var tooltip = "ColumnOptionsRemoveTooltip".Translate();
+            <LgIcon IconName="@IconNames.All.X" CssClass="icon remove-icon" @onkeyup="e => ColumnOptions.KeyPressDelete(e, DisplayedColumn)" 
+                    OnClick="@(() => ColumnOptions.RemoveColumn(DisplayedColumn))" 
+                    title="@tooltip" tabindex="0" AriaLabel="@tooltip" role="button" />
+        }
+        else
+        {
+            var label = "ColumnOptionsIrremovableTooltip".Translate();
+            <LgIcon IconName="@IconNames.Info" CssClass="icon" title="@label" AriaLabel="@label" tabindex="0" role="img" />
+        }
+        @if (AllowFrozen)
+        {
+            <LgIcon IconName="@(DisplayedColumn.IsFrozen?IconNames.All.PinFill:IconNames.All.PinAngle)" CssClass="icon freeze-icon" 
+                    OnClick="@(() => ColumnOptions.FreezeColumn(DisplayedColumn))" 
+                    title="@((DisplayedColumn.IsFrozen?"ColumnOptionsUnpinTooltip":"ColumnOptionsPinTooltip").Translate())" tabindex="0" />
+        }
+
+    </div>
+</li>   

@@ -1,0 +1,7 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgComponentBase;
+
+<label  @attributes="@GetAdditionalAttributes()" for="@For" class="@GetClassAttribute()">
+    @Text.CheckTranslate() @ChildContent
+</label>
+

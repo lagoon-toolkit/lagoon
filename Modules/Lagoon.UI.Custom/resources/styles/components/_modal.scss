@@ -1,0 +1,55 @@
+﻿$modal-layout-bg: rgba(0, 0, 0, 0.32);
+$modal-close-color: $heading1-color;
+
+.modal-dialog {
+    overflow-y: initial !important
+}
+
+.modal {
+    background-color: $modal-layout-bg;
+
+    .modal-content {
+        max-height: 84vh;
+        border: none;
+        box-shadow: 0px 3px 50px 10px rgba(0,0,0,.20);
+        border-radius: 0.25rem;
+    }
+
+    .modal-header {
+        padding: 1rem 1.5rem 0rem 1.5rem;
+        border: 0;
+
+        .modal-title {
+            font-size: $font-size-heading1;
+            color: $heading1-color;
+            font-weight: $font-size-base;
+            line-height: $line-height-heading1;
+        }
+
+        ~ .modal-desc {
+            padding-top: 0.5rem !important;
+        }
+
+    }
+
+    .modal-summary {
+        padding: 1rem 2rem 0rem 2rem;
+        font-size: 0.75rem;
+    }
+
+    .modal-body {
+        padding: 1rem 1.5rem;
+        overflow-y: auto;
+        font-size: 0.75rem;
+    }
+
+    .modal-footer {
+        border: 0;
+        padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+        justify-content: center;
+
+        & > * {
+            margin: 0.5 rem;
+        }
+    }
+}

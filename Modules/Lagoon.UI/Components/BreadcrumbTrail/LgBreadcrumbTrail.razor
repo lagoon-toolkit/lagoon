@@ -1,0 +1,17 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgAriaComponentBase
+
+<nav class="@GetClassAttribute()" aria-label="@AriaLabel" aria-labelledby="@AriaLabelledBy">
+    <ol class="breadcrumb">
+        @ChildContent
+        @if (Items is not null)
+        {
+            var active = Items.LastOrDefault();
+            foreach (BreadcrumbTrailItem item in Items)
+            {
+                <LgBreadcrumbTrailItem Link="item.Link" Text="@item.Text" IconName="@item.IconName" Uri="@item.Uri"
+                                       OnClick="item.OnClick" IsActive="item == active" />
+            }
+        }
+    </ol>
+</nav>

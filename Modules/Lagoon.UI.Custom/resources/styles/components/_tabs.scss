@@ -1,0 +1,145 @@
+﻿
+$lg-tabs-border-radius: 0rem;
+$tab-text-color: $text-color;
+$tab-bottom-border-color: $primary3;
+
+div.lg-tab-header {
+	background-color: rgba(0, 0, 0, 0.1);
+	height: $lg-tabs-height;
+
+
+	.lg-tab-toolbar {
+		.lg-tab-toolbar-counter > button > span {
+			border: 1px solid $primary;
+			padding: 0.1rem 0.2rem;
+			border-radius: 0.4em;
+		}
+
+		.dropdown-toggle {
+			color: $primary;
+			margin: 0.6em 0.8em 0 0;
+
+			&::after {
+				width: 1em;
+				height: 1em;
+				border: none;
+				vertical-align: middle;
+				background: imageName('All.ChevronDown', $primary) no-repeat center center;
+			}
+
+			span {
+				margin-right: 0px;
+				margin-left: 5px;
+			}
+		}
+	}
+	// Navigation button : scroll tabs list
+	.scrollTabPrevious, .scrollTabNext {
+		background-color: $light0;
+		color: $dark0;
+		border: none;
+		box-shadow: 0px 2px 6px #00000029;
+		margin: 0.25rem 0.35rem;
+
+		&:hover, &:focus, &:active {
+			background: $primary3 !important;
+		}
+	}
+
+	ul.nav {
+		height: $lg-tabs-height;
+		padding-top: 0.55rem;
+
+		& > li.nav-item {
+			margin-bottom: 0rem;
+			font-size: $font-size-base;
+			margin-left: 0.25em;
+			height: 100%;
+
+			&:focus {
+				outline: none;
+			}
+
+			&.active .nav-link {
+				border-bottom: 2px solid $tab-bottom-border-color;
+				background-color: white;
+
+				span.lg-tab-close {
+					visibility: visible;
+				}
+			}
+
+			> a.nav-link {
+				color: $tab-text-color;
+				background-color: transparent;
+				border: 2px solid transparent;
+				border-radius: 3px;
+
+				&:hover {
+					background-color: $light3;
+
+					& span.lg-tab-close {
+						visibility: visible;
+					}
+				}
+
+				&:focus {
+					outline: none;
+				}
+
+				&:focus-visible {
+					border: 2px solid $secondary3;
+				}
+
+				.icon-tab {
+					margin-right: 0.35em;
+				}
+
+				.lg-tab-close {
+					margin-left: 0.35em;
+
+					> .bi {
+						font-size: 1.1rem;
+					}
+				}
+
+				&.disabled {
+					user-select: none;
+					cursor: not-allowed;
+					color: $gray1;
+				}
+
+				& span.lg-tab-close {
+					visibility: hidden;
+				}
+			}
+		}
+	}
+
+	& div.lg-tab-toolbar {
+
+		.toolbar {
+			.btn {
+				border: 0 !important;
+
+				&:after {
+					margin: 0 !important;
+				}
+			}
+		}
+	}
+
+	& ~ div.lg-tab-cnt, &-side ~ div.lg-tab-cnt {
+		padding: 1rem;
+		overflow: auto;
+	}
+}
+
+
+.tab-content {
+	background: $page-bg-color;
+
+	> .active {
+		padding: 1px;
+	}
+}

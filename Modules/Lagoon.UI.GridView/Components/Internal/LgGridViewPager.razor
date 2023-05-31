@@ -1,0 +1,34 @@
+﻿@namespace Lagoon.UI.GridView.Components.Internal
+@using Lagoon.UI.Components
+@inherits LgPager
+
+<div class="gridview-row gridview-footer" role="row" tabindex="-1">
+    <div class="sr-only" role="rowheader" tabindex="-1">@("GridViewFooterRow".Translate())</div>
+    <div class="gridview-cell" tabindex="-1">
+        @if (PaginationSizeSelector.Count() > 0 && _isInitialized)
+        {
+            <LgSelect TValue="int" Value="PageSize" OnChange="OnPageSizeChangeAsync" CssClass="cbo gv-paging-cbo" AriaLabel="@("GridViewPageSelectorAria".Translate())"
+                      ShowSearchBox="false">
+                <Items>
+                    @foreach (var size in PaginationSizeSelector)
+                    {
+                        <LgOptionListItem Value="@size" Text="@(size > 0 ? size.ToString() : "GridViewPageSelectorAll".Translate())"></LgOptionListItem>
+                    }
+                </Items>                               
+            </LgSelect>
+        }
+    </div>
+    <div class="gridview-cell gridview-pager" tabindex="-1">
+        @if (PageSize > 0 && _isInitialized)
+        {
+            base.BuildRenderTree(__builder);
+        }
+    </div>
+    <div class="gridview-cell" tabindex="1">
+        @if (PaginationSizeSelector.Count() > 0 && _isInitialized && (bool)DisplayInputPager)
+        {
+            <LgNumericBox @bind-Value="SetCurrentPage" AriaLabel="@("GridViewPageSelectorCurrentPage".Translate())" CssClass="gv-paging-numeric"
+                          OnKey="ChangeCurrentPageAsync" Placeholder="N°" SuffixType="InputLabelType.IconName" Suffix="@IconNames.All.Search"></LgNumericBox>
+        }
+    </div>
+</div>

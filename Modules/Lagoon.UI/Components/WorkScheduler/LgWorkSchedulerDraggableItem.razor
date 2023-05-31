@@ -1,0 +1,8 @@
+﻿@namespace Lagoon.UI.Components
+@inherits ComponentBase
+@typeparam TItem
+
+<div @key="@Id" class="wk-ext-draggable text-truncate @CssClass">
+    <span wks-drag-id=@WorkScheduler.Id wks-task-id=@Id data-wks-duration=@GetHoursDuration() class="wk-grag-grip" onmousedown="Lagoon.LgWorkScheduler.OnGrabbing(event)"><LgIcon IconName=@IconNames.All.GripVertical /></span>
+    <span class="wk-ext-draggable-text">@Text</span>
+</div>

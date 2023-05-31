@@ -1,0 +1,11 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+
+<LgPopover Visible="Visible" class="@($"{GetClassAttribute()} color-picker-container dropdown-menu show")" role="dialog" OnBlur="(e) => OnCloseClickAsync(null)">
+    <div class="color-picker-content">
+        @foreach (string color in _colors)
+        {
+            <div style="@(string.IsNullOrEmpty(color) ? null : $"background-color: {@color}")" @onclick="(e) => OnCloseClickAsync(color)" class="@(color == SelectedColor ? "selected" : null)" />
+        }
+    </div>
+</LgPopover>

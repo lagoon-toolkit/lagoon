@@ -1,0 +1,30 @@
+.authentication-step-container {
+    position: absolute;
+    background: $primary;
+    top: 0px;
+    left: 0px;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    color: white;
+    text-align: center;
+}
+
+.authentication-step-container > .authentication-step {
+    position: relative;
+    top: 45%;
+    font-size: 30pt;
+}
+
+.auth-layout {
+    /*background: $primary;*/
+    color: white;
+
+    label, h1 {
+        color: white !important;
+    }
+
+    #qrCode {
+        padding-left: calc(50% - 75px);
+    }
+}

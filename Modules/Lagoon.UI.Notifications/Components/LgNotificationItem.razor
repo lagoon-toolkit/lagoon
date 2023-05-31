@@ -1,0 +1,56 @@
+﻿@namespace Lagoon.UI.Components
+@inherits LgComponentBase
+@typeparam TItem
+
+<div class="@GetClassAttribute()">
+    @if (LgNotificationMenuItem.NotificationTemplate != null)
+    {
+        @LgNotificationMenuItem.NotificationTemplate(Item)
+    }
+    else
+    {
+        <LgCard OnClick="ClickItemAsync">
+            <LgColorBar Color="" />
+            <div class="card-body">
+                <div class="lg-notif-itemtpl-title">
+                    <div class="row no-gutters">
+                        <div class="col-1">
+                            @if (!String.IsNullOrEmpty(IconName))
+                            {
+                                <LgIcon IconName="@IconName" CssClass="lg-notif-icon" />
+                            }
+                        </div>
+                        <div class="col-11 lg-notif-title" title="@Item.Title.CheckTranslate()">
+                            @Item.Title.CheckTranslate()
+                        </div>
+                    </div>
+                </div>
+                <div class="lg-notif-itemtpl-date">
+                    <div class="row no-gutters">
+                        <div class="col-1">
+                        </div>
+                        <div class="col-8">
+                            <div class="lg-notif-itemtpl-date-lbl">
+                                @Item.CreationDate.ToShortDateString() | @Item.CreationDate.ToString("HH:mm")
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <LgButton OnClick="async () => await SetReadUnReadItemAsync(!Item.IsRead)" IconName="@(Item.IsRead ? @IconNames.All.EyeFill : @IconNames.All.EyeSlashFill)" Kind="ButtonKind.Secondary" ButtonSize="ButtonSize.Small" Tooltip="@(Item.IsRead ? "#NotificationBtnMarkAsRead" : "#NotificationBtnMarkAsUnread")" />
+                            <LgButton OnClick="DeleteItemAsync" IconName="@IconNames.All.Trash" Kind="ButtonKind.Secondary" ButtonSize="ButtonSize.Small" Tooltip="#NotificationBtnDelete" />
+                        </div>
+                    </div>
+                </div>
+                <div class="lg-notif-itemtpl-desc">
+                    <div class="row no-gutters">
+                        <div class="col-1">
+                        </div>
+                        <div class="col-11 lg-notif-desc" title="@Item.Description.CheckTranslate()">
+                            @Item.Description.CheckTranslate()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </LgCard>
+    }
+</div>
+

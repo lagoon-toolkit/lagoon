@@ -1,0 +1,214 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
+
+namespace Lagoon.UI.Helpers.Route;
+
+/// <summary>
+/// Shared logic for parsing tokens from route values and querystring values.
+/// </summary>
+internal abstract class UrlValueConstraint
+{
+
+    public delegate bool TryParseDelegate<T>(ReadOnlySpan<char> str, [MaybeNullWhen(false)] out T result);
+
+    private static readonly ConcurrentDictionary<Type, UrlValueConstraint> _cachedInstances = new();
+
+#if !ORIGINAL_CODE
+
+    internal int TypeRank { get; }
+
+#endif
+
+    public static bool TryGetByTargetType(Type targetType, [MaybeNullWhen(false)] out UrlValueConstraint result)
+    {
+        if (!_cachedInstances.TryGetValue(targetType, out result))
+        {
+            result = Create(targetType);
+            if (result is null)
+            {
+                return false;
+            }
+
+            _cachedInstances.TryAdd(targetType, result);
+        }
+
+        return true;
+    }
+
+    private static bool TryParse(ReadOnlySpan<char> str, out string result)
+    {
+        result = str.ToString();
+        return true;
+    }
+
+    private static bool TryParse(ReadOnlySpan<char> str, out DateTime result)
+    {
+        return DateTime.TryParse(str, CultureInfo.InvariantCulture, DateTimeStyles.None, out result);
+    }
+
+    private static bool TryParse(ReadOnlySpan<char> str, out DateOnly result)
+    {
+        return DateOnly.TryParse(str, CultureInfo.InvariantCulture, DateTimeStyles.None, out result);
+    }
+
+    private static bool TryParse(ReadOnlySpan<char> str, out TimeOnly result)
+    {
+        return TimeOnly.TryParse(str, CultureInfo.InvariantCulture, DateTimeStyles.None, out result);
+    }
+
+    private static bool TryParse(ReadOnlySpan<char> str, out decimal result)
+    {
+        return decimal.TryParse(str, NumberStyles.Number, CultureInfo.InvariantCulture, out result);
+    }
+
+    private static bool TryParse(ReadOnlySpan<char> str, out double result)
+    {
+        return double.TryParse(str, NumberStyles.Number, CultureInfo.InvariantCulture, out result);
+    }
+
+    private static bool TryParse(ReadOnlySpan<char> str, out float result)
+    {
+        return float.TryParse(str, NumberStyles.Number, CultureInfo.InvariantCulture, out result);
+    }
+
+    private static bool TryParse(ReadOnlySpan<char> str, out int result)
+    {
+        return int.TryParse(str, NumberStyles.Integer, CultureInfo.InvariantCulture, out result);
+    }
+
+    private static bool TryParse(ReadOnlySpan<char> str, out long result)
+    {
+        return long.TryParse(str, NumberStyles.Integer, CultureInfo.InvariantCulture, out result);
+    }
+
+    private static UrlValueConstraint Create(Type targetType)
+    {
+        return targetType switch
+        {
+            var x when x == typeof(string) => new TypedUrlValueConstraint<string>(2, TryParse),
+            var x when x == typeof(bool) => new TypedUrlValueConstraint<bool>(1, bool.TryParse),
+            var x when x == typeof(bool?) => new NullableTypedUrlValueConstraint<bool>(1, bool.TryParse),
+            var x when x == typeof(DateTime) => new TypedUrlValueConstraint<DateTime>(1, TryParse),
+            var x when x == typeof(DateTime?) => new NullableTypedUrlValueConstraint<DateTime>(1, TryParse),
+            var x when x == typeof(DateOnly) => new TypedUrlValueConstraint<DateOnly>(1, TryParse),
+            var x when x == typeof(DateOnly?) => new NullableTypedUrlValueConstraint<DateOnly>(1, TryParse),
+            var x when x == typeof(TimeOnly) => new TypedUrlValueConstraint<TimeOnly>(1, TryParse),
+            var x when x == typeof(TimeOnly?) => new NullableTypedUrlValueConstraint<TimeOnly>(1, TryParse),
+            var x when x == typeof(decimal) => new TypedUrlValueConstraint<decimal>(1, TryParse),
+            var x when x == typeof(decimal?) => new NullableTypedUrlValueConstraint<decimal>(1, TryParse),
+            var x when x == typeof(double) => new TypedUrlValueConstraint<double>(1, TryParse),
+            var x when x == typeof(double?) => new NullableTypedUrlValueConstraint<double>(1, TryParse),
+            var x when x == typeof(float) => new TypedUrlValueConstraint<float>(1, TryParse),
+            var x when x == typeof(float?) => new NullableTypedUrlValueConstraint<float>(1, TryParse),
+            var x when x == typeof(Guid) => new TypedUrlValueConstraint<Guid>(0, Guid.TryParse),
+            var x when x == typeof(Guid?) => new NullableTypedUrlValueConstraint<Guid>(0, Guid.TryParse),
+            var x when x == typeof(int) => new TypedUrlValueConstraint<int>(1, TryParse),
+            var x when x == typeof(int?) => new NullableTypedUrlValueConstraint<int>(1, TryParse),
+            var x when x == typeof(long) => new TypedUrlValueConstraint<long>(1, TryParse),
+            var x when x == typeof(long?) => new NullableTypedUrlValueConstraint<long>(1, TryParse),
+            var x => null
+        };
+    }
+
+#if !ORIGINAL_CODE
+    protected UrlValueConstraint(int typeRank)
+    {
+        TypeRank= typeRank;
+    }
+
+#endif
+
+    public abstract bool TryParse(ReadOnlySpan<char> value, [MaybeNullWhen(false)] out object result);
+
+    public abstract object Parse(ReadOnlySpan<char> value, string destinationNameForMessage);
+
+    public abstract Array ParseMultiple(StringSegmentAccumulator values, string destinationNameForMessage);
+
+    internal class TypedUrlValueConstraint<T> : UrlValueConstraint
+    {
+        private readonly TryParseDelegate<T> _parser;
+
+        public TypedUrlValueConstraint(int typeRank, TryParseDelegate<T> parser)
+            : base(typeRank)
+        {
+            _parser = parser;
+        }
+
+        public override bool TryParse(ReadOnlySpan<char> value, [MaybeNullWhen(false)] out object result)
+        {
+            if (_parser(value, out T typedResult))
+            {
+                result = typedResult!;
+                return true;
+            }
+            else
+            {
+                result = null;
+                return false;
+            }
+        }
+
+        public override object Parse(ReadOnlySpan<char> value, string destinationNameForMessage)
+        {
+            return !_parser(value, out T parsedValue)
+                ? throw new InvalidOperationException($"Cannot parse the value '{value.ToString()}' as type '{typeof(T)}' for '{destinationNameForMessage}'.")
+                : (object)parsedValue;
+        }
+
+        public override Array ParseMultiple(StringSegmentAccumulator values, string destinationNameForMessage)
+        {
+            int count = values.Count;
+            if (count == 0)
+            {
+                return Array.Empty<T>();
+            }
+
+            T[] result = new T[count];
+
+            for (int i = 0; i < count; i++)
+            {
+                if (!_parser(values[i].Span, out result[i]))
+                {
+                    throw new InvalidOperationException($"Cannot parse the value '{values[i]}' as type '{typeof(T)}' for '{destinationNameForMessage}'.");
+                }
+            }
+
+            return result;
+        }
+    }
+
+    private sealed class NullableTypedUrlValueConstraint<T> : TypedUrlValueConstraint<T?> where T : struct
+    {
+        public NullableTypedUrlValueConstraint(int typeRank, TryParseDelegate<T> parser)
+            : base(typeRank, SupportNullable(parser))
+        {
+        }
+
+        private static TryParseDelegate<T?> SupportNullable(TryParseDelegate<T> parser)
+        {
+            return TryParseNullable;
+
+            bool TryParseNullable(ReadOnlySpan<char> value, [MaybeNullWhen(false)] out T? result)
+            {
+                if (value.IsEmpty)
+                {
+                    result = default;
+                    return true;
+                }
+                else if (parser(value, out T parsedValue))
+                {
+                    result = parsedValue;
+                    return true;
+                }
+                else
+                {
+                    result = default;
+                    return false;
+                }
+            }
+        }
+    }
+}

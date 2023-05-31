@@ -1,0 +1,463 @@
+﻿<!--
+- Actions
+	* "replace"
+	* "delete"
+- Simple text replacement syntax :
+MyOldText ¤ MyNewText
+- RegEx replacement syntax (https://regexr.com/):
+regex/gims=<MyOldText([^>]*)> ¤ <MyNewTag$1>
+
+Remark when using the multiline option with $ -> replace by /r?$ : The $ match only the \n, not the \r\n.
+-->
+<Updates LgnMinVersion="1.0.0">
+	<Version From="2.99.99">
+	<Action Type="Replace" File="*index.html;index.*.html">
+			<![CDATA[
+regex/g=(\s*<script\s*src="_content\/)Lagoon\.UI\..*
+		]]>
+		</Action>
+		<Action Type="Replace" File="Main.cs">
+			<![CDATA[
+regex/g=(override\s*void\s*)LoadConfiguration\([^)]*\) ¤ $1OnConfigureBehavior(ApplicationBehavior app)
+regex/g=e\.Configuration ¤ app
+identitySource.UserLogin ¤ context.UserLogin
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.cs;*.razor">
+			<![CDATA[
+LgBehaviorConfiguration ¤ ApplicationBehavior
+LoadConfigurationEventArgs ¤ ApplicationBehavior
+TryGetFromJsonAsync ¤ TryGetAsync
+TryPostAsJsonAsync ¤ TryPostAsync
+TryPutAsJsonAsync ¤ TryPutAsync
+TryPatchAsJsonAsync ¤ TryPatchAsync
+		]]>
+		</Action>
+	</Version>
+	<Version From="2.5.1">
+		<Action Type="Replace" File="*.cs">
+			<![CDATA[
+regex/g=(await\s*.*\.Refresh)(\(\);)¤ $1Async$2
+		]]>
+		</Action>
+	</Version>
+	<Version From="2.2.9">
+		<Action Type="Replace" File="Program.cs">
+			<![CDATA[
+.Build().RunAsync() ¤ .BuildAndRunAsync()
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.razor">
+			<![CDATA[
+regex/gi=(<Lg[a-z]*Column[^>]*?)\s*Movable=[^\s>]* ¤ $1
+		]]>
+		</Action>
+	</Version>
+	<Version From="2.1.9">
+		<Action Type="Replace" File="../.gitignore">
+			<![CDATA[
+regex/m=(csharp_style_unused_value_expression_statement_preference\s*=\s*).*$ ¤ $1discard_variable
+		]]>
+		</Action>
+		<Action Type="Replace" File="Program.cs">
+			<![CDATA[
+regex/g=\.Add[^<]*<ClientNotificationService<([^>]*)> ¤ .AddNotification<$1
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.cs">
+			<![CDATA[
+regex/g=ClientNotificationService<([^>]*)> ¤ INotificationService<$1>
+		]]>
+		</Action>
+	</Version>
+	<Version From="2.1.0">
+		<Action Type="Replace" File="../.editorconfig">
+			<![CDATA[
+regex=(root\s*=\s*true)(\r?\n) ¤ $1$2$2[{*.csproj,Dico.xml}]$2indent_size = 2$2indent_style = space$2tab_width = 2$2
+		]]>
+		</Action>
+		<Action Type="Replace" File="Program.cs">
+			<![CDATA[
+regex=(\.AddLagoonAsync\(\s*new\sMain\(\),[^,;]*),\s*[truefals]*\) ¤ $1)
+regex=(\.AddLagoonAsync\(\s*new\sMain\(\),[^,;]*),\s*[truefals]*(,\s*[truefals]*\)) ¤ $1$2
+regex=(\.AddLagoonAsync)\(\s*new\sMain\(\),\s* ¤ $1<Main>(
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.23.9">
+		<Action Type="Replace" File="../.gitignore">
+			<![CDATA[
+regex=(\s*)(\*\*\/auto) ¤ $1$2$1**/*.auto.*
+regex/s=\s*(\*\*\/\*\.auto\.\*)(.*)(\*\*\/\*\.auto\.\*) ¤ $2$3
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.22.9">
+		<Action Type="Replace" File="*.razor">
+			<![CDATA[
+regex/g=(<LgGridView[^>]*)@bind-(Items=) ¤ $1$2
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.21.0">
+		<Action Type="Replace" File="*index.html;index.*.html">
+			<![CDATA[
+regex/s=<head>([^<]*)< ¤ <head>$1<meta http-equiv="Cache-control" content="no-store">$1<
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.razor">
+			<![CDATA[
+regex/g=(<LgDataGrid[^>]*\s)OnCommand(=) ¤ $1OnItemCommand$2
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.18.9">
+		<Action Type="Replace" File="Main.cs">
+			<![CDATA[
+public override void LoadConfiguration( ¤ protected override void LoadConfiguration(
+public override void OnInitCulture( ¤ protected override void OnInitCulture(
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.razor">
+			<![CDATA[
+regex/g=(<LgWorkScheduler\s[^>]*)@bind-(Items=) ¤ $1$2
+regex/gms=(<LgButton[^>]*\s)Url= ¤ $1Uri=
+regex/gms=(<LgMenuItem[^>]*\s)Url= ¤ $1Uri=
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.17.9">
+		<Action Type="Replace" File="*index.html;index.*.html">
+			<![CDATA[
+regex/g=(_content\/Lagoon\.UI\/js\/app-init\.js[^>]*)(>) ¤ $1 version="{APP_VERSION}"$2
+regex/gi=(<script[^>]*src="[^"]*\.js)(") ¤ $1?v={APP_VERSION}$2
+regex/gi=(<link[^>]*href="[^"]*\.css)(") ¤ $1?v={APP_VERSION}$2
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.razor;*.cs">
+			<![CDATA[
+GridEditMode.Inline ¤ GridEditMode.Cell
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.14.0">
+		<Action Type="Replace" File="*.csproj">
+			<![CDATA[
+regex/g=\s*<PackageReference Include="Lagoon\.UI\.DataGrid".*
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.13.1">
+		<Action Type="Replace" File="*.cs">
+			<![CDATA[
+ClientRemoteTasksService ¤ RemoteTaskService
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.12.0">
+		<Action Type="Replace" File="*.razor">
+			<![CDATA[
+regex/g=(<\/?Toolbar)Action(>) ¤ $1$2
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.10.3">
+		<Action Type="Replace" File="*.razor;*.cs">
+			<![CDATA[
+GridViewValueAddEventArgs ¤ GridViewItemActionEventArgs
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.10.1">
+		<Action Type="Replace" File="*.razor;*.cs">
+			<![CDATA[
+IsUserAuthenticateAsync ¤ IsUserAuthenticatedAsync
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.razor">
+			<![CDATA[
+=> ¤ ~$~~$~$~~$~
+regex/g=(<Lg(Dynamic)?GridView)([^>]*>) ¤ $1 KeyField="Id"$3
+regex/g=(<Lg(Dynamic)?GridView[^>]*)(\sKeyField="[^"]*")([^>]*\sKeyField="[^"]*") ¤ $1$4
+~$~~$~$~~$~ ¤ =>
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.8.9">
+		<Action Type="Replace" File="*.razor">
+			<![CDATA[
+regex/g=(<LgGrid[A-Za-z]*Column[^>]*\s)(Visible=) ¤ $1Default$2
+regex/g=(<LgGrid[A-Za-z]*Column[^>]*\s)(Width=) ¤ $1Default$2
+regex/g=(<LgGrid[A-Za-z]*Column[^>]*\s)(DefaultFilterValue=) ¤ $1DefaultFilter=
+regex/g=(<LgGrid[A-Za-z]*Column[^>]*\s)(HasHeaderFilter=) ¤ $1AllowFilter=
+regex/g=(<LgGrid[A-Za-z]*Column[^>]*\s)(HeaderSort=) ¤ $1AllowSort=
+regex/g=(<LgGrid[A-Za-z]*Column[^>]*\s@bind-)Field= ¤ $1Value=
+regex/g=(<LgGrid[A-Za-z]*Column[^>]*\s)Field= ¤ $1Value=
+regex/g=(<LgGrid[A-Za-z]*Column[^>]*\s)FieldChanged= ¤ $1ValueChanged=
+regex/g=(<LgGrid[A-Za-z]*Column[^>]*\s)FieldExpression= ¤ $1ValueExpression=
+regex/g=(<LgGrid[A-Za-z]*Column[^>]*\s)FieldName= ¤ $1Key=
+regex/g=(<LgGrid[A-Za-z]*Column[^>]*\s)MovableColumns="false" ¤ $1Features="GridFeature.Default ^ GridFeature.Move"
+regex/g=(<LgGrid[A-Za-z]*Column[^>]*\s)ResizableColumns="false" ¤ $1Features="GridFeature.Default ^ GridFeature.Resize"
+regex/gs=(<LgGridView.*)OnRowClick ¤ $1OnCellClick
+regex/gs=(<LgGridView.*)\sResizableColumns="true" ¤ $1
+regex/gs=(<LgGridView.*)\sMovableColumns="true" ¤ $1
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.razor;*.cs">
+			<![CDATA[
+GridViewCellClickEventArgs<object> ¤ GridViewCellClickEventArgs
+GridViewRowClickEventArgs ¤ GridViewCellClickEventArgs
+SharedProfilePolicyVisible ¤ SharedProfileAdministratorPolicy
+IDictionary<string, ObjectWrapper> ¤ Dictionary<string, ObjectWrapper>
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.7.9">
+		<Action Type="Replace" File="*.csproj">
+			<![CDATA[
+regex/g=\s*<PackageReference\sInclude="BlazorInputFile"\sVersion="0\.2\.0"\s\/>
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.razor">
+			<![CDATA[
+regex/gms=<LgInputFile([^>]*\s)UploadUrl= ¤ <LgInputFile$1UploadUri=
+regex/gms=<LgInputFile([^>]*\s)MaxFileSize= ¤ <LgInputFile$1MaxUploadSize=
+		]]>
+		</Action>
+		<Action Type="Replace" File="_Imports.razor">
+			<![CDATA[
+@using BlazorInputFile
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.7.0">
+		<Action Type="Replace" File="*.cs">
+			<![CDATA[
+BuildOdataQuery ¤ GetRemoteQuery
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.4.9">
+		<Action Type="Replace" File="*.csproj">
+			<![CDATA[
+regex/g=\s*<PackageReference\sInclude="Microsoft\.OData\.Client"\sVersion="7[^"]*"\s\/>
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.razor">
+			<![CDATA[
+regex/gms=<(\/?)LgLoader([\s>]) ¤ <$1LgLoaderView$2
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.3.9">
+		<Action Type="Replace" File="*.razor;*.cs">
+			<![CDATA[
+regex/gms=BreadcrumbTrailData ¤ BreadcrumbTrailItemList
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.razor">
+			<![CDATA[
+regex/gms=<(\/?)LgMenuSets> ¤ <$1MenuSetDeclarations>
+regex/gms=<LgMenuLayout>(.*)<\/LgMenuLayout>.*<\/LgMenuConfiguration> ¤ $1</LgMenuConfiguration>
+		]]>
+		</Action>
+		<Action Type="Replace" File="App.razor">
+			<![CDATA[
+regex/gms=\sShowToolbar="true"
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.0.18">
+		<Action Type="Replace" File="*.csproj">
+			<![CDATA[
+regex/gms=^\s*<Target\sName="LagoonBuild".*<\/Target>
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.cs">
+			<![CDATA[
+using Lagoon.Helpers; ¤ using System;
+		]]>
+		</Action>
+		<Action Type="Replace" File="Main.cs">
+			<![CDATA[
+regex/gm=(SyncErrorDelay.*)(000)(.*$) ¤ $1$3
+regex/gm=[\r\n]^.*<param name="ssf".*$
+regex/gm=\s*:\sbase\(typeof\(Program\),\sssf\)
+IServiceScopeFactory ssf, IOptions<ActiveDirectorySettings> activeDirectorySettings ¤ IOptions<ActiveDirectorySettings> activeDirectorySettings
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.0.17">
+		<Action Type="Replace" File="*.csproj">
+			<![CDATA[
+"Microsoft.OData.Client" Version="7.8.1" ¤ "Microsoft.OData.Client" Version="7.9.0"
+		]]>
+		</Action>
+		<Action Type="Replace" File="Program.cs">
+			<![CDATA[
+regex/s={(\s*)[^{]*DEFAULT_CULTURE\s=\s("[^"]*").*AddLagoonAsync\(.*?\); ¤ {$1// Create and configure WebAssembly host$1WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);$1// Language used if the user has not explicitly chosen a language$1builder.SetCulture($2);$1// Add Lagoon required services$1await builder.AddLagoonAsync(new Main(), options => options.AddAppPolicies(), true);$1// Set the target DOM element for root component$1builder.RootComponents.Add<App>("app");
+		]]>
+		</Action>
+		<Action Type="Replace" File="*.razor">
+			<![CDATA[
+regex/gms=<LgNavLink([^>]*\s)class= ¤ <LgNavLink$1CssClass=
+regex/gms=<LgNavLink([^>]*\s)onclick= ¤ <LgNavLink$1OnClick=
+			]]>
+		</Action>
+		<Action Type="Replace" File="*.razor;*.cs">
+			<![CDATA[
+MouseEventArgs ¤ ActionEventArgs
+ShowSrInformation ¤ ShowScreenReaderInformation
+			]]>
+		</Action>
+		<Action Type="Replace" File="*index.html;index.*.html">
+			<![CDATA[
+<div id="blazor-error-ui"> ¤ <div id="blazor-error-ui" style="display:none">
+			]]>
+		</Action>
+	</Version>
+	<Version From="1.0.14">
+		<Action Type="Replace" File="index.html;index.*.html">
+			<![CDATA[
+blazor-error-ui-removed ¤ blazor-error-ui
+		]]>
+		</Action>
+	</Version>
+	<Version From="1.0.13">
+		<Action Type="Replace" File="Dico.xml">
+			<![CDATA[
+"flag- ¤ "i-flag-
+			]]>
+		</Action>
+		<Action Type="Replace" File="App.razor">
+			<![CDATA[
+regex=(<LgApp)[^>\/]*?(\ ?\/?>) ¤ $1 DefaultLayout="typeof(MainLayout)" ShowHeader="true" ShowSidebar="false" ShowToolbar="true"$2
+			]]>
+		</Action>
+		<Action Type="Replace" File="MainLayout.razor">
+			<![CDATA[
+regex/ms=<LgLayout.*<AddonContent>(.*)<\/AddonContent>.*<\/LgLayout> ¤ @Body$1
+			]]>
+		</Action>
+		<Action Type="Replace" File="Program.cs">
+			<![CDATA[
+regex=AddLagoonHttpClient\(.*\) ¤ AddLagoonHttpClient(builder.HostEnvironment.BaseAddress, true)
+regex/m=builder\.Services\.AddLagoon\(.*$ ¤ await builder.AddLagoonAsync(new Main());
+			]]>
+		</Action>
+		<Action Type="Replace" File="Main.cs">
+			<![CDATA[
+regex/s=\s*public Main\(Type\ .*?}
+regex/m=^.*\.AppName\ =.*$
+			]]>
+		</Action>
+		<Action Type="Replace" File="*.razor;*.cs">
+			<![CDATA[
+DefaultCollapsable ¤ Collapsable
+OnRemoveTab ¤ OnCloseTab
+			]]>
+		</Action>
+		<Action Type="Replace" File="index.html;index.*.html">
+			<![CDATA[
+regex/im=^.*<!-- Blazor WebAssembly framework-->.*?$
+regex/im=<script src="_content\/Microsoft\.AspNetCore\.Components\.WebAssembly\.Authentication\/AuthenticationService\.js"><\/script>
+regex/im=<script src="_framework\/blazor\.webassembly\.js"><\/script>         
+			]]>
+		</Action>
+	</Version>
+	<Version From="1.0.11">
+		<Action Type="Replace" File="*.cs">
+			<![CDATA[
+TryPostFromJsonAsync ¤ TryPostAsJsonAsync
+regex/gms=<LgButton([^>]*\s)Url= ¤ <LgButton$1Uri=
+			]]>
+		</Action>
+	</Version>
+	<Version From="1.0.10">
+		<Action Type="Replace" File="*.cs;*.razor">
+			<![CDATA[
+CollapseSidebar ¤ Collapsed
+			]]>
+		</Action>
+	</Version>
+	<Version From="1.0.7">
+		<Action Type="Replace" File="*.cs;*.razor">
+			<![CDATA[
+ButtonKind.Default ¤ ButtonKind.Custom
+			]]>
+		</Action>
+	</Version>
+	<Version From="1.0.6">
+		<Action Type="Replace" File="*index.html;index.*.html">
+			<![CDATA[
+regex/gims=<app.*\/app> ¤ <app><div class="app-loading"></div></app>
+regex/gm=^.*<div id="tooltip-container"><\/div>.*$
+navigator.serviceWorker.register("service-worker.js") ¤ Lagoon.InitServiceWorker();
+			]]>
+		</Action>
+		<Action Type="Replace" File="*.cs">
+			<![CDATA[
+Href ¤ Uri
+OnUnknowUser ¤ OnUnknownUser
+services.AddEmailSender ¤ services.AddSmtp
+			]]>
+		</Action>
+		<Action Type="Replace" File="*.razor">
+			<![CDATA[
+regex/gims=<Lg([^>]*\s)class= ¤ <Lg$1CssClass=
+regex/gms=<LgButton([^>]*\s)Label= ¤ <LgButton$1Text=
+regex/gms=<LgCheckBox(\s[^>]*)Label= ¤ <LgCheckBox$1Text=
+regex/gms=<LgCheckBox(\s[^>]*)LabelPosition= ¤ <LgCheckBox$1TextPosition=
+regex/gms=<LgCheckBox(\s[^>]*)LabelPosition ¤ <LgCheckBox$1CheckBoxTextPosition
+regex/gms=<LgCheckBoxList([^>]*\s)Title= ¤ <LgCheckBoxList$1Label=
+regex/gms=<LgColorPickerModal([^>]*\s)Show= ¤ <LgColorPickerModal$1Visible=
+regex/gms=<LgColorPickerModal([^>]*\s)@bind-Show= ¤ <LgColorPickerModal$1@bind-Visible=
+regex/gms=<LgDateBox([^>]*\s)Title= ¤ <LgDateBox$1Label=
+regex/gms=<LgHtmlEditor([^>]*\s)Title= ¤ <LgHtmlEditor$1Label=
+regex/gms=<LgInputRadio(\s[^>]*)Label= ¤ <LgInputRadio$1Text=
+regex/gms=<LgInputRadioGroup([^>]*\s)Title= ¤ <LgInputRadioGroup$1Label=
+regex/gms=<LgLabel([^>]*\s)for= ¤ <LgLabel$1For=
+regex/gms=<LgModal([^>]*\s)Show= ¤ <LgModal$1Visible=
+regex/gms=<LgModal([^>]*\s)@bind-Show= ¤ <LgModal$1@bind-Visible=
+regex/gms=<LgNumericBox([^>]*\s)Title= ¤ <LgNumericBox$1Label=
+regex/gms=<LgOptionListItem([^>]*\s)Label= ¤ <LgOptionListItem$1Text=
+regex/gms=<LgProgress([^>]*\s)Label= ¤ <LgProgress$1Text=
+regex/gms=<LgProgress([^>]*\s)LabelPosition= ¤ <LgProgress$1TextPosition=
+regex/gms=<LgSelect([^>]*\s)Title= ¤ <LgSelect$1Label=
+regex/gms=<LgSelect([^>]*\s)EmptyLabel= ¤ <LgSelect$1EmptyText=
+regex/gms=<LgSelectMultiple([^>]*\s)Title= ¤ <LgSelectMultiple$1Label=
+regex/gms=<LgSideTab([^>]*\s)Href= ¤ <LgSideTab$1Uri=
+regex/gms=<LgTab([^>]*\s)Href= ¤ <LgTab$1Uri=
+regex/gms=<LgTextBox([^>]*\s)Title= ¤ <LgTextBox$1Label=
+regex/gms=<LgTimeBox([^>]*\s)Title= ¤ <LgTimeBox$1Label=
+regex/gms=<LgToolbar([^>]*\s)Label= ¤ <LgToolbar$1Text=
+regex/gms=<LgToolbarButton([^>]*\s)Label= ¤ <LgToolbarButton$1Text=
+regex/gms=<LgToolbarMenu([^>]*\s)Label= ¤ <LgToolbarMenu$1Text=
+regex/gms=<LgToolbarMenuItemTitle([^>]*\s)Label= ¤ <LgToolbarMenuItemTitle$1Text=
+regex/gms=<Lg([^>]*\s)title=("[^"]*") ¤ <Lg$1Tooltip=$2
+regex/gms=<(\/?)BodyContent> ¤ <$1ChildContent>
+regex/gms=<(\/?)LgCustomFrame> ¤ <$1LgFrame>
+regex/gms=<(\/?)LgLabelCaption> ¤ <$1LgLabelAction>
+regex/gms=<(\/?)TitleZone> ¤ <$1LabelContent>
+			]]>
+		</Action>
+		<Action Type="Replace" File="*.cs;*.razor">
+			<![CDATA[
+DisplayOrientationEnum ¤ DisplayOrientation
+DisplayKindEnum ¤ DisplayKind
+CheckType ¤ CheckBoxKind
+AddonArea ¤ AddonContent
+			]]>
+		</Action>
+		<Action Type="Replace" File="App.razor">
+			<![CDATA[
+regex/gs=^.*$ ¤ <LgApp AppAssembly="@typeof(Program).Assembly" DefaultLayout="@typeof(MainLayout)" />
+			]]>
+		</Action>
+		<Action Type="Replace" File="Startup.cs">
+			<![CDATA[
+services.AddControllersWithViews()
+			]]>
+		</Action>
+	</Version>
+</Updates>

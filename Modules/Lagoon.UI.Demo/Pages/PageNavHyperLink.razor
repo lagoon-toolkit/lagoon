@@ -1,0 +1,15 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="HyperLink" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+
+<LgFrame Title="#lblSample">
+    <LgHyperlink ConfirmationMessage="Confirmation message"
+                 CssClass="text-bread-crumb" Uri="./"
+                 OnClick="@(() => { ShowInformation("Ok"); })">
+        Mon lien
+    </LgHyperlink>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

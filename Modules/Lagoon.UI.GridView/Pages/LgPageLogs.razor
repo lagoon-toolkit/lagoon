@@ -1,0 +1,84 @@
+﻿@using Lagoon.Core.Exceptions
+@using Lagoon.Core.Application.Logging
+@using Lagoon.UI.Components
+@inherits LgPage
+
+<style>
+    .log-detail {
+        padding-left: 0;
+        height: 100%;
+    }
+        .log-detail .frameRoot {
+            border-bottom: 0;
+        }
+        .log-detail .frameContent {
+            padding: 0;
+        }
+</style>
+
+<LgLoaderView IsLoading="_isLoading">
+
+    <div class="row">
+        <div class="col-12 col-sm-4">
+            <LgSelect @bind-Value="_minimumLevel" OnChange="MinimumLevelChangeAsync" Label="Minimum level" ResetButton="false" ShowSearchBox="false">
+                <Items>
+                    <LgOptionListItem Text="Trace" Value='"TDIWEC"' />
+                    <LgOptionListItem Text="Debug" Value='"DIWEC"' />
+                    <LgOptionListItem Text="Information" Value='"IWEC"' />
+                    <LgOptionListItem Text="Warning" Value='"WEC"' />
+                    <LgOptionListItem Text="Error" Value='"EC"' />
+                    <LgOptionListItem Text="Critical" Value='"C"' />
+                </Items>
+            </LgSelect>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-7">
+            <LgGridView StateId="gvDemoServerLog" Title="Trace" TItem="LogDataItem" Items="_entries" Exportable="false"
+                        WrapContent="true" SelectableRows="true" OnRowSelection="ShowLogDetails">
+                <Toolbar>
+                    <LgToolbarButton IconName="@IconNames.All.Download" Text="#lblDownload" OnClick="DownloadServerLogAsync" />
+                </Toolbar>
+                <Columns Context="LogData">
+                    <LgGridDateColumn @bind-Value="LogData.Time" Title="DateTime" DisplayFormat="dd/MM/yyyy HH:mm:ss" DefaultWidth="2fr" DefaultSortDirection="DataSortDirection.Desc" />
+                    <LgGridEnumColumn @bind-Value="LogData.LogLevel" Title="Level" />
+                    <LgGridEnumColumn @bind-Value="LogData.Side" Title="Side" />
+                    <LgGridColumn @bind-Value="LogData.Category" Title="Category" DefaultWidth="2fr" DefaultVisible="false" />
+                    <LgGridColumn @bind-Value="LogData.Message" Title="Message" DefaultWidth="10fr" FilterDisableSelection="true" />
+                </Columns>
+            </LgGridView>
+        </div>
+        <div class="col-12 col-md-5 log-detail">
+            <LgFrame>
+                @if (_selectedLog is null)
+                {
+                    <LgLabel Text="☚ Select a line in the list..." />
+                }
+                else
+                {
+                    string color = GetLevelColor(_selectedLog.LogLevel);
+                    <div>
+                        <b>Date</b> : @_selectedLog.Time
+                    </div>
+                    <div>
+                        <b>Level</b> : @_selectedLog.LogLevel
+                    </div>
+                    @if (_selectedLog.Category is not null)
+                    {
+                        <div>
+                            <b>Category</b> : @_selectedLog.Category
+                        </div>
+                    }
+                    <div style="white-space: pre-line">
+                        <b>Message</b> : <span style="@color">@_selectedLog.Message</span>
+                    </div>
+                    @if (_selectedLog.StackTrace is not null)
+                    {
+                        <b>Stack Trace</b><br />
+                        @LgErrorBoundary.RenderStackTrace(_selectedLog.StackTrace, color)
+                    }
+                }
+            </LgFrame>
+        </div>
+    </div>
+</LgLoaderView>

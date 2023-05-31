@@ -1,0 +1,576 @@
+﻿$custom-checkbox-indicator-icon-hover: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'><path fill='#{$secondary1}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/></svg>");
+
+$dtg-group-toolbar-bg: #e0eaec;
+
+.gridview {
+    // Group toolbar
+    .gridview-group {
+        button.btn {
+            &:not(:hover) {
+                border: 1px solid $dtg-group-toolbar-bg !important;
+                background: $dtg-group-toolbar-bg !important;
+            }
+        }
+    }
+
+    .frameTitle {
+        flex-wrap: wrap;
+    }
+    // Filter summary
+    .headerFrameContent {
+        order: 3;
+        min-width: 100%;
+        margin-left: unset !important;
+
+        .gridview-filtersSummary {
+            display: flex;
+
+            div:first-child {
+                order: 1;
+            }
+
+            div:last-child {
+                order: 2;
+            }
+
+            .gridview-filtersSummary-elt {
+                display: flex;
+                background-color: $dtg-filter-bg;
+                margin-right: 0.5rem;
+                overflow-x: hidden;
+                white-space: nowrap;
+                max-width: 45%;
+
+                .gridview-filtersSummary-name {
+                    color: $primary3;
+                    padding: 0.2rem 0 0.2rem 0.4rem;
+                    white-space: nowrap;
+                }
+
+                .gridview-filtersSummary-value {
+                    padding: 0.2rem;
+                    color: $primary3;
+                    overflow-x: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+    // buttons
+    .frameHeader .toolbar {
+        // add button
+        span > button {
+            &:hover {
+                background-color: $primary1;
+                color: $light0;
+
+                span {
+                    color: $light0;
+                }
+            }
+
+            &:active {
+                border: 1px solid $primary1;
+            }
+        }
+        // all others button
+        .btn-group > button {
+            &:hover {
+                background-color: $secondary1;
+                color: $light0;
+
+                span {
+                    color: $light0;
+                }
+            }
+
+            &:active {
+                background-color: $secondary1;
+                color: $light0;
+                border: 1px solid $primary1;
+            }
+        }
+        // filters and clear buttons
+        .btn-group.toolbar-group button {
+            background-color: $light0;
+            color: $primary1;
+            border: 1px solid $primary1;
+
+            &:hover {
+                background-color: $primary1;
+                color: $light0;
+
+                span {
+                    color: $light0;
+                }
+            }
+
+            &:active {
+                background-color: $light3;
+                color: $primary3;
+            }
+        }
+        // dropdown btn delete (profile)
+        .dropdown-menu .dropdown-item .nav-item-icon .btn {
+            line-height: 1rem;
+        }
+    }
+
+    .add-toolbar-style {
+        background-color: $primary1;
+        color: $light0;
+    }
+
+    .filter-toolbar-style {
+        background-color: $dtg-filter-bg;
+        color: $dtg-accent-text-color;
+        border-color: $primary1;
+    }
+
+    .gridview-container {
+        .gridview-row {
+            margin: 0;
+            color: $dark3;
+            // headers
+            &.gridview-header-group {
+                .gridview-cell:not(.empty-cell) {
+                    font-size: 0.8rem;
+                    background-color: $gdv-header-grp-bg;
+                    color: $primary3;
+                    border: none;
+                    padding: 0.2rem 0.3rem;
+
+                    span {
+                        text-align: center;
+                    }
+
+                    &:hover {
+                        background-color: rgba(11, 120, 184, 0.15);
+                    }
+                }
+            }
+
+            &.gridview-header {
+                width: fit-content;
+
+                .gridview-cell {
+                    &:hover {
+                        background-color: $light1;
+                        border-right: 3px solid #b5bec4;
+                    }
+                }
+            }
+
+            &.gridview-filter {
+                border-bottom: 1px solid $dtg-border-bottom-filter;
+                border-top: 1px solid $dtg-border-bottom-filter;
+
+                .gridview-cell {
+                    border-right: 2px solid $dtg-filter-bg;
+                    padding: unset;
+
+                    div.filterbox {
+                        &.filterbox-filled {
+                            .dropdown-control {
+                                > .form-control {
+                                    color: $dtg-filter-filled-color;
+                                }
+                            }
+                        }
+
+                        .dropdown-control {
+                            > .form-control {
+                                height: 1.4rem;
+                                padding: 0.0rem 0.3rem 0;
+                                background-color: $dtg-filter-bg;
+                                color: #00205B66;
+                                border: none;
+                                font-size: 0.75rem;
+
+                                > div {
+                                    margin-top: 0.2rem;
+                                    width: 100%;
+                                }
+                            }
+
+                            &:focus-visible {
+                                border: 2px solid $secondary3;
+                            }
+                        }
+                    }
+                }
+
+                .form-control.dropdown-toggle {
+                    padding-block: 0;
+                }
+            }
+            // body
+            &.gridview-body {
+                &:nth-child(odd) {
+                    background-color: $dtg-line-odd-background;
+
+                    &:hover {
+                        background-color: $dtg-line-hover-background;
+                    }
+                }
+
+                &:nth-child(even) {
+                    background-color: $dtg-line-even-background;
+
+                    &:hover {
+                        background-color: $dtg-line-hover-background;
+                    }
+                }
+
+                &:hover {
+                    .gridview-col-sel {
+                        .custom-checkbox .custom-control-input {
+
+                            & ~ .custom-control-label::after {
+                                background: imageName('Success', $secondary1) no-repeat;
+                                filter: unset;
+                            }
+                        }
+                    }
+                }
+
+                &.gridview-group-header {
+                    background: $dtg-group-row-bg;
+                    text-transform: uppercase;
+                }
+
+                &.gridview-row-selected {
+                    &:nth-child(odd) {
+                        background-color: $dtg-line-active-background;
+
+                        &:hover {
+                            background-color: $dtg-line-hover-background;
+                        }
+                    }
+
+                    &:nth-child(even) {
+                        background-color: $dtg-line-active-background;
+
+                        &:hover {
+                            background-color: $dtg-line-hover-background;
+                        }
+                    }
+
+                    &:hover {
+                        .gridview-col-sel {
+                            .custom-checkbox .custom-control-input {
+
+                                & ~ .custom-control-label::after {
+                                    background: imageName('Success', $light0) no-repeat;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &.gridview-row-add {
+                    margin-bottom: 0.2rem;
+
+                    form > div {
+                        margin: 0rem 0.1rem;
+                    }
+
+                    .gridview-cell {
+                        background-color: $light0;
+                        color: $dtg-filter-text-color;
+                        padding: 0 0.3rem;
+                        border-radius: 0.25rem;
+
+                        &:not(.gridview-col-command) {
+                            border: 1px solid $input-border-color;
+                        }
+
+                        input {
+                            min-height: 1.5rem;
+                        }
+
+                        &:focus:not(.gridview-col-command),
+                        &:focus-within:not(.gridview-col-command),
+                        &:hover:not(.gridview-col-command) {
+                            border: 1px solid $primary !important;
+                            box-shadow: none;
+                        }
+                    }
+
+                    .gridview-col-command.gridview-col-edit-command {
+                        border: none;
+
+                        .btn {
+                            border: 1px solid $dtg-add-line-defaut-border;
+                        }
+
+                        &:focus, &:hover {
+                            border: none !important;
+                        }
+
+                        &:focus-within {
+                            box-shadow: none;
+                        }
+                    }
+                }
+
+                &.gridview-row-edit {
+                    padding: 1px 0;
+
+                    &:hover {
+                        background-color: $light0;
+                    }
+
+                    .gridview-cell {
+                        background-color: $light0;
+                        color: $dtg-filter-text-color;
+                        border: 1px solid $dtg-add-line-defaut-border;
+                        border-radius: 0.25rem;
+                        padding: 0 0.3rem;
+                        margin: 0 1px;
+
+                        &:hover {
+                            background-color: $light0;
+                        }
+
+
+
+                        &.gridview-cell-edit:focus:not(.gridview-col-command),
+                        &.gridview-cell-edit:focus-within:not(.gridview-col-command),
+                        &.gridview-cell-edit:hover:not(.gridview-col-command) {
+                            border: 1px solid $primary !important;
+                            box-shadow: none;
+                        }
+
+                        .gridview-col-command, &:not(.gridview-cell-edit) {
+                            border: none;
+
+                            .btn {
+                                border: 1px solid $dtg-add-line-defaut-border;
+                            }
+
+                            &:focus, &:hover {
+                                border: none !important;
+                            }
+
+                            &:focus-within {
+                                box-shadow: none;
+                            }
+                        }
+                    }
+                }
+            }
+            // content
+            .gridview-cell {
+                border-right: 2px solid white;
+                padding: 0.2rem 0.3rem;
+
+                > .form-group {
+                    // remove "38px !important" from form ($input-height)
+                    input[type='checkbox'] {
+                        height: 100% !important;
+                    }
+                }
+
+                &.gridview-col-sel {
+                    .custom-checkbox .custom-control-input ~ .custom-control-label::before {
+                        background-color: unset;
+                        border: none;
+                    }
+
+                    .custom-checkbox .custom-control-input:checked ~ .custom-control-label {
+                        &::before {
+                            background-color: $secondary1;
+                            border: none;
+                        }
+
+                        &::after {
+                            background: imageName('Success', $light0) no-repeat;
+                        }
+                    }
+
+                    &:hover {
+                        .custom-checkbox .custom-control-input {
+
+                            & ~ .custom-control-label::after {
+                                background: imageName('Success', $secondary1) no-repeat;
+                                filter: unset;
+                            }
+
+                            &:checked ~ .custom-control-label::after {
+                                background: imageName('Success', $light0) no-repeat;
+                            }
+                        }
+                    }
+                }
+
+                &.gridview-cell-inline-editable {
+                    background-color: $light0;
+                    color: $dtg-filter-text-color;
+                    border: 1px solid $input-border-color;
+                    box-shadow: none;
+                    margin: 0 0.1rem;
+                    border-radius: 0.25rem;
+
+                    &:focus:not(.gridview-col-command),
+                    &:focus-within:not(.gridview-col-command),
+                    &:hover:not(.gridview-col-command) {
+                        border: 1px solid $primary !important;
+                        box-shadow: none;
+                    }
+                }
+
+                &.gridview-col-enum {
+                    padding: 0.2rem 0.3rem;
+                }
+
+                &.gridview-col-command {
+                    padding: 0.2rem 0.3rem;
+                }
+
+                .form-group-colorpicker, .colorPickerBox {
+                    margin-bottom: 0;
+                }
+
+                .colorPickerBox, .colorPickerBox-dropdown .selected-box {
+                    width: 1.5rem;
+                    height: 1.2rem;
+                }
+
+                .form-group-colorpicker, .colorPickerBox {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                .colorPickerBox {
+                    .btn:focus {
+                        box-shadow: none;
+                    }
+                }
+
+                .colorPickerBox-dropdown .selected-box {
+                    margin-left: 0;
+                }
+            }
+
+            .gridview-cell.gridview-cell-inline-editable, .gridview-cell-edit.gridview-cell-inline-editable, .gridview-cell-edit:not(.gridview-cell-inline-editable), .gridview-row-add {
+
+                &.gridview-col-enum, .form-group.select-dropdown {
+                    padding: 0;
+                    margin: 0;
+
+                    .form-control.dropdown-toggle {
+                        min-height: unset;
+
+                        .select-dropdown-content {
+                            min-height: unset;
+                            padding-bottom: 0;
+                            padding-top: 0;
+
+                            .select-dropdown-value {
+                                margin-right: 0.2rem;
+                                margin-left: 0.75rem;
+                                padding-top: 0.1rem;
+                            }
+
+                            .select-dropdown-value, .select-dropdown-icon {
+                                line-height: 1.1rem;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .gridview-cell-edit {
+                &.gridview-col-command, &.gridview-col-sel {
+                    border: none;
+                }
+                /*&:focus {
+                    box-shadow: inset 0 0 0 1px $primary;
+                }*/
+            }
+
+            &.gridview-footer {
+                .gv-paging-numeric .form-input > span.form-input-suffix {
+                    top: 0.4rem;
+                }
+            }
+        }
+        // footer
+        &.gridview-footer {
+            .gridview-cell {
+                .gv-paging-cbo {
+                    height: 80%;
+                    border: none;
+                    border-bottom: 1px solid $dark1;
+                    background-color: $light1;
+
+
+                    &:focus-visible {
+                        outline: initial;
+                    }
+                }
+            }
+        }
+    }
+
+    .gridview-body-container {
+        // No data render
+        .big-msg {
+            .bi {
+                height: 3rem;
+                margin: 0.25rem 0rem;
+            }
+
+            h1.lblTitle {
+                font-size: $font-size-base;
+                line-height: 0.8rem;
+            }
+
+            h2.lblTitle {
+                font-size: 0.7rem;
+                line-height: 0.8rem;
+            }
+        }
+    }
+}
+
+.gridview-card {
+    // remove color from _grid.scss
+    .frameHeader {
+        background-color: $light0;
+    }
+    // remove color from _grid.scss
+    .frameContent {
+        background-color: $light0;
+    }
+
+    .gridview-container {
+        background-color: $light0;
+
+        .gridview-row.gridview-header {
+            .gridview-cell {
+                background-color: $light0;
+            }
+        }
+
+        .gridview-row {
+            margin-top: 0.3rem;
+            margin-right: 0.3rem;
+            margin-left: 0.2rem;
+
+            &.gridview-body {
+                background-color: $light0;
+
+                &:nth-child(odd) {
+                    background-color: $light0;
+                }
+
+                &:nth-child(even) {
+                    background-color: $light0;
+                }
+            }
+        }
+    }
+}

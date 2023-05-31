@@ -1,0 +1,91 @@
+﻿.summarybox {
+    width: 100% !important;
+
+    .dropdown-control, &.summarybox-modal, &.summarybox-modal-wrap {
+        > .form-input, > .txtb-ro {
+            display: flex;
+            flex-wrap: nowrap;
+
+            .summarybox-value {
+                width: 100%;
+                cursor: pointer;
+                white-space: pre-wrap;
+            }
+
+        }
+    }
+
+    .dropdown-control, &.summarybox-modal {
+        .summarybox-value {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    &.summarybox-modal-wrap {
+        .summarybox-value {
+            height: auto;
+        }
+    }
+
+    &.summarybox-modal, &.summarybox-modal-wrap {
+        order: 2;
+    }
+
+    .dropdown-menu {
+        overflow: auto;
+    }
+
+    .form-group {
+        margin-bottom: unset;
+        height: 100%;
+
+        &.form-group-ro {
+            border: none;
+            margin: 0;
+            padding: 0.2rem;
+            overflow: auto;
+        }
+
+        .form-input-textarea {
+            height: 100%;
+        }
+    }
+
+    .form-group & {
+
+        .form-input > .form-input-prefix ~ .summarybox-value {
+            padding-left: 1.8rem !important;
+        }
+
+        .form-input > span.form-input-suffix ~ .summarybox-value,
+        .txtb-ro span.form-input-suffix ~ .summarybox-value,
+        .ntb-ro span.form-input-suffix ~ .summarybox-value {
+            padding-right: 1.8rem !important;
+        }
+    }
+
+
+    textarea {
+        min-height: 100%;
+        min-width: 100%;
+        resize: none;
+        overflow-y: auto;
+    }
+
+    .summarybox-buttons {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+        margin-top: 0.2rem;
+        padding: 0.2rem;
+
+        button:first-child {
+            margin-right: 0.2rem;
+        }
+    }
+}

@@ -1,0 +1,21 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="Toaster" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+<LgFrame Title="#lblSample">
+    <LgButton Text="Display my Toastr" OnClick="@(() => GetOnClickEvent())" />
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgSelect Label="Toastr type" @bind-Value="ToastrKind">
+            <Items>
+                @foreach (var kind in Enum.GetValues(typeof(ToastrKind)))
+                {<LgOptionListItem Text="@(Enum.GetName(typeof(ToastrKind), kind))" Value="@((ToastrKind)kind)"></LgOptionListItem>}
+            </Items>
+        </LgSelect>
+    </section>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />

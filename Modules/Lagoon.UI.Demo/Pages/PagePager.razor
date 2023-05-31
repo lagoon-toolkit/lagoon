@@ -1,0 +1,22 @@
+﻿@inherits DemoPage
+
+<LgTitle Text="Pager" CssClass="d-inline-block"></LgTitle>
+<LgHyperlink Uri="@DocumentationLink()" Target="_blank" CssClass="mb-2 d-inline-block float-right"><LgButton Text="#lblDoc" /></LgHyperlink>
+
+
+<LgFrame Title="#lblSample">
+    <LgPager DisplayText="DisplayText" TotalPages="@TotalPages" CurrentPage="@CurrentPage" MaxPagesToDisplay="@MaxPageToDisplay"></LgPager>
+</LgFrame>
+
+<LgFrame Title="#lblParameters" Collapsable="true">
+
+    <!-- section header -->
+    <section class="d-flex align-items-center col-md-6 col-sm-12">
+        <LgCheckBox CssClass="col-md-3 d-flex justify-content-end" @bind-Value="@DisplayText" Text="@(DisplayText ? "With text" : "Without text")" CheckBoxKind="@CheckBoxKind.Toggle" />
+        <LgNumericBox CssClass="col-md-3" Label="Total pages" @bind-Value="TotalPages"></LgNumericBox>
+        <LgNumericBox CssClass="col-md-3" Label="Current page" @bind-Value="CurrentPage"></LgNumericBox>
+        <LgNumericBox CssClass="col-md-3" Label="Max page to display" @bind-Value="MaxPageToDisplay"></LgNumericBox>
+    </section>
+</LgFrame>
+
+<SourceCode SourceCodeProvider="GetSourceCodeProvider()" />
